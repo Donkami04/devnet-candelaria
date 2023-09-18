@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getIndicators } from "../../../utils/Api-candelaria/api";
+import { getMeshIndicators } from "../../../utils/Api-candelaria/api";
 import "./dashmesh.css";
 
 export function DashMesh() {
@@ -8,8 +8,8 @@ export function DashMesh() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const indicators = await getIndicators();
-        setIndicatorsMesh(indicators.mesh); // Assuming indicators.mesh is the correct property
+        const indicators = await getMeshIndicators();
+        setIndicatorsMesh(indicators); // Assuming indicators.mesh is the correct property
       } catch (error) {
         console.error("Error al obtener el listado de indicadores MESH:", error);
       }

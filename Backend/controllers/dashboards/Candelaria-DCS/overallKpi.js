@@ -1,8 +1,8 @@
-const { getRedClienteServidor_1 } = require("../../services/overall/RCS1");
-const { getRedClienteServidor_2 } = require("../../services/overall/RCS2");
-const { getRedControl_1 } = require("../../services/overall/RC1");
-const { getRedControl_2 } = require("../../services/overall/RC2");
-const { getRed_HSE } = require("../../services/overall/RHSE");
+const { getRedClienteServidor_1 } = require("../../../services/overall/RCS1");
+const { getRedClienteServidor_2 } = require("../../../services/overall/RCS2");
+const { getRedControl_1 } = require("../../../services/overall/RC1");
+const { getRedControl_2 } = require("../../../services/overall/RC2");
+const { getRed_HSE } = require("../../../services/overall/RHSE");
 
 // Filtramos por aquellos clientes que incluyan en estado "Down" o "Paused (paused)"
 const getDownClients = (listAllClients) => {

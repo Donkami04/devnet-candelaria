@@ -5,21 +5,36 @@ import "./adminhome.css";
 
 export const AdminHome = () => {
   const iconos = ["", "", "", "", "", "", ""];
-  const linksTables = ["/admin/clients", "/admin/switches", "/admin/ups", "/admin/devices", "/admin/wan", "/admin/mesh", "/admin/firewalls"];
-  const titles = ["DCS Clientes Candelaria",  "DCS Switches Candelaria", "UPS", "Camaras", "WAN", "MESH", "Firewalls - Canales Internet"];
+  const linksTables = [
+    "/admin/clients",
+    "/admin/switches",
+    "/admin/ups",
+    "/admin/devices",
+    "/admin/wan",
+    "/admin/mesh",
+    "/admin/firewalls",
+  ];
+  const titles = [
+    "DCS Clientes Candelaria",
+    "DCS Switches Candelaria",
+    "UPS",
+    "Camaras",
+    "WAN",
+    "MESH",
+    "Firewalls - Canales Internet",
+  ];
 
   return (
     <>
-      <Navbar />
+      <Navbar title={'Admin Devnet'}/>
       <div className="main-admin-home">
-        <div className="contenedor" >
+        <div className="contenedor">
           {iconos.map((icono, index) => (
-            <div key={index} className="icono-contenedor">
-              <Link to={linksTables[index]} style={{textDecoration: "none"}}>
-                {icono}
+            <Link to={linksTables[index]} style={{ textDecoration: "none" }}>
+              <div key={index} className="icono-contenedor">
                 <h2>{titles[index]}</h2>
-              </Link>
-            </div>
+              </div>
+            </Link>
           ))}
         </div>
       </div>

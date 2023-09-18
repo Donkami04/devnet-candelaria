@@ -13,7 +13,6 @@ async function getFirewalls() {
 
 async function getNumberFw() {
   const listFw = await DataFirewalls.findAll();
-  console.log(listFw);
   const numFw = listFw.length;
   return numFw;
 }

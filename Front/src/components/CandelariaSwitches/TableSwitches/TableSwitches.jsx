@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getSwitches } from "../../utils/Api-candelaria/api";
+import { getSwitches } from "../../../utils/Api-candelaria/api";
 import "./TableSwitches.css";
 
 export function TableSwitches() {

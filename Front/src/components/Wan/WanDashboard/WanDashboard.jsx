@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
-import { getIndicators } from "../../../utils/Api-candelaria/api";
+import { getWanIndicators } from "../../../utils/Api-candelaria/api";
 import "./wandashboard.css";
 
-export function WanDashboard({ nombreMesAnterior, nombreMesActual }) {
+export function WanDashboard({ previousMonthName }) {
   const [wanKpi, setWanKpi] = useState(0.0);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const kpi = await getIndicators();
+        const kpi = await getWanIndicators();
         setWanKpi(kpi);
       } catch (error) {
         console.error("Error al obtener el listado de firewalls:", error);
@@ -18,7 +18,7 @@ export function WanDashboard({ nombreMesAnterior, nombreMesActual }) {
     fetchData();
   }, []);
 
-  const kpiMesAnterior = wanKpi ? wanKpi.wan.kpiWan : "0.0";
+  const kpiMesAnterior = wanKpi ? wanKpi.kpiWan : "0.0";
   const claassNameKpi = wanKpi
     ? kpiMesAnterior >= 99.85
       ? "kpi-green"
@@ -28,7 +28,7 @@ export function WanDashboard({ nombreMesAnterior, nombreMesActual }) {
   return (
     <div className="wan-kpi-container">
       <h2>
-        KPI {nombreMesAnterior}:{" "}
+        KPI {previousMonthName}:{" "}
         <span className={claassNameKpi}>{kpiMesAnterior}%</span>
       </h2>
     </div>

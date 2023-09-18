@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { SectionDash } from "../SectionDash/SectionDash";
-import { Status_System } from "../Status_System/Status_System";
+import { Status_System } from "../../Status_System/Status_System";
+import PropTypes from "prop-types";
 import "./upsdashboard.css";
 
 export function UpsDashboard({ allUps }) {
@@ -16,19 +16,6 @@ export function UpsDashboard({ allUps }) {
     let otro = 0;
     let changeBateria = 0;
 
-    
-    // allUps.forEach((ups) => {
-    //   if (ups.status_ups === 2 && ups.status_prtg && !ups.status_prtg.includes('Paused')) {
-    //     enLinea++;
-    //   } if (ups.status_ups === 3 && ups.status_prtg && !ups.status_prtg.includes('Paused')) {
-    //     usandoBateria++;
-    //   } if (ups.status_ups !== 3 && ups.status_ups !== 2 && ups.status_prtg && !ups.status_prtg.includes('Paused')){
-    //     otro++;
-    //   } if (ups.batery === 2) {
-    //     changeBateria++;
-    //   }
-    // }
-    // );
     allUps.forEach((ups) => {
       if (ups.status_ups === 2) {
         enLinea++;
@@ -82,3 +69,18 @@ export function UpsDashboard({ allUps }) {
     </>
   );
 }
+
+UpsDashboard.propTypes = {
+  allUps: PropTypes.arrayOf(
+    PropTypes.shape({
+      ip: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      status_prtg: PropTypes.string.isRequired,
+      status_ups: PropTypes.number.isRequired,
+      batery: PropTypes.number.isRequired,
+      id_ups: PropTypes.string.isRequired,
+      uptime: PropTypes.number.isRequired,
+      ubication: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+};

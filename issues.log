@@ -1,0 +1,18 @@
+2023-09-18 12:54:07,014 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Camaras/main.py", line 100, in get_devices_data
+    prtg_name_device = prtg_data.get('prtg_name_device', 'Not Found')
+AttributeError: 'NoneType' object has no attribute 'get'
+
+2023-09-18 12:54:07,014 - ERROR - 10.225.1.78
+2023-09-18 12:55:46,625 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Camaras/main.py", line 100, in get_devices_data
+    prtg_name_device = prtg_data.get('prtg_name_device', 'Not Found')
+AttributeError: 'NoneType' object has no attribute 'get'
+
+2023-09-18 12:55:46,625 - ERROR - 10.225.1.78
+2023-09-18 12:56:28,371 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Camaras/main.py", line 100, in get_devices_data
+    prtg_name_device = prtg_data.get('prtg_name_device', 'Not Found')
+AttributeError: 'NoneType' object has no attribute 'get'
+
+2023-09-18 12:56:28,371 - ERROR - 10.225.1.78

@@ -1,9 +1,8 @@
-import React from "react";
 import { useEffect, useState } from "react";
 import { SectionDash } from "../SectionDash/SectionDash";
-import { getIndicators } from "../../utils/Api-candelaria/api";
-
+import { getDcsCandelariaIndicators } from "../../../utils/Api-candelaria/api";
 import "./dashboard.css";
+
 
 export function Dashboard() {
   const [indicators, setIndicators] = useState();
@@ -11,7 +10,8 @@ export function Dashboard() {
   useEffect(() => {
     const dataIndicators = async () => {
       try {
-        const allIndicators = await getIndicators();
+        const allIndicators = await getDcsCandelariaIndicators();
+        console.log(allIndicators)
         setIndicators(allIndicators);
       } catch (error) {
         console.error("Error al obtener los indicadores del sistema", error);
@@ -178,4 +178,4 @@ export function Dashboard() {
       </div>
     </div>
   );
-};
+}

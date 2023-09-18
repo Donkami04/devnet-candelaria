@@ -1,37 +1,43 @@
+/* adminhome.css */
 
-
+/* Estilo para el contenedor principal */
 .main-admin-home {
-
-  position: absolute;
-  top: 50%; 
-  left: 50%; 
-  transform: translate(-50%, -50%); 
+  padding: 20px;
+  min-height: 87vh;
   display: flex;
-  flex-direction: column; 
-  align-items: center; 
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
 }
 
+/* Estilo para el contenedor de iconos */
 .contenedor {
-
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 5rem; 
-  justify-items: center; 
-  align-items: center; 
-  
+  display: grid; /* Cambiamos el display a grid */
+  grid-template-columns: repeat(2, 1fr); /* Dos columnas de igual tamaño */
+  gap: 20px; /* Espacio entre las columnas */
+  max-width: 800px;
+  text-align: center; /* Centra el contenido dentro de las columnas */
 }
 
+/* Estilo para cada icono-contenedor */
 .icono-contenedor {
-  text-align: center;
-  width: 14rem;
-  height: 5rem;
-  display: flex;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
+  background-color: #7b00b948; /* Cambia el color de fondo */
+  border-radius: 8px;
+  padding: 20px;
+  display: grid;
+  place-items: center;
+  transition: background-color 0.3s ease-in-out;
+  border: 2px solid black;
+  height: 4rem;
 }
 
-.icono-contenedor a {
-  color: #bd0b21;
+/* Estilo para el título (h2) dentro de cada icono-contenedor */
+.icono-contenedor h2 {
+
+  font-size: 18px;
+  color: black; 
 }
 
+/* Cambiar el color de fondo al pasar el mouse sobre un icono-contenedor */
+.icono-contenedor:hover {
+  background-color: #5f00f740;
+}

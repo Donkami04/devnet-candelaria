@@ -51,7 +51,7 @@ def switches():
         for switch in allSwitches:
             ip = switch['ip']
             group = switch['group']
-            print(switch['dispositivo'] + ' ' + ip)
+            print(ip)
             
             # Inicia bloque de consulta a la API PRTG
             URL_PRTG_IP = os.getenv('URL_PRTG_IP').format(ip=ip)

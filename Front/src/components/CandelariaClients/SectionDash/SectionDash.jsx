@@ -1,4 +1,3 @@
-import React from "react";
 import "./sectionDash.css";
 
 export function SectionDash({ children }) {

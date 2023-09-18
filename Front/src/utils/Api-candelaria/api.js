@@ -28,7 +28,7 @@ export const getStatusSystem = async () => {
 
 export const getIndicators = async () => {
   return axios
-    .get(`${BASE_API_URL}/indicators`)
+    .get(`${BASE_API_URL}/indicators/`)
     .then((response) => response.data)
     .catch((error) => console.error('INDICADORES: Error del API REST Candealaria : ',error));
 };
@@ -87,4 +87,39 @@ export const getWan = async () => {
     .get(`${BASE_API_URL}/wan`)
     .then((response) => response.data)
     .catch((error) => console.error('WAN: Error del API REST Candealaria : ',error));
+};
+
+export const getDcsCandelariaIndicators = async () => {
+  return axios
+    .get(`${BASE_API_URL}/indicators/dcs-candelaria`)
+    .then((response) => response.data)
+    .catch((error) => console.error('INDICADOR DCS CANDELARIA: Error del API REST Candealaria : ',error));
+};
+
+export const getDevicesIndicators = async () => {
+  return axios
+    .get(`${BASE_API_URL}/indicators/devices`)
+    .then((response) => response.data)
+    .catch((error) => console.error('INDICADOR DEVICES: Error del API REST Candealaria : ',error));
+};
+
+export const getFirewallsIndicators = async () => {
+  return axios
+    .get(`${BASE_API_URL}/indicators/firewalls`)
+    .then((response) => response.data)
+    .catch((error) => console.error('INDICADOR FIREWALLS: Error del API REST Candealaria : ',error));
+};
+
+export const getWanIndicators = async () => {
+  return axios
+    .get(`${BASE_API_URL}/indicators/wan`)
+    .then((response) => response.data)
+    .catch((error) => console.error('INDICADOR WAN: Error del API REST Candealaria : ',error));
+};
+
+export const getMeshIndicators = async () => {
+  return axios
+    .get(`${BASE_API_URL}/indicators/mesh`)
+    .then((response) => response.data)
+    .catch((error) => console.error('INDICADOR MESH: Error del API REST Candealaria : ',error));
 };

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getIndicators } from "../../../utils/Api-candelaria/api";
+import { getFirewallsIndicators } from "../../../utils/Api-candelaria/api";
 import "./dashfirewalls.css";
 
 export function DashFirewalls() {
@@ -9,7 +9,7 @@ export function DashFirewalls() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const dataFirewalls = await getIndicators();
+        const dataFirewalls = await getFirewallsIndicators();
         setFwIndicators(dataFirewalls);
       } catch (error) {
         console.error("Error al obtener el listado de firewalls:", error);
@@ -19,10 +19,10 @@ export function DashFirewalls() {
     fetchData();
   }, []);
 
-  const numCorpoAlive = fwIndicators ? fwIndicators.firewalls.numFwCorpAlive : 0;
-  const numCommuniAlive = fwIndicators ? fwIndicators.firewalls.numFwCommuniAlive : 0;
-  const numCorpoDown = fwIndicators ? fwIndicators.firewalls.numFwCorpDown : 0;
-  const numCommuniDown = fwIndicators ? fwIndicators.firewalls.numFwCommuniDown : 0;
+  const numCorpoAlive = fwIndicators ? fwIndicators.numFwCorpAlive : 0;
+  const numCommuniAlive = fwIndicators ? fwIndicators.numFwCommuniAlive : 0;
+  const numCorpoDown = fwIndicators ? fwIndicators.numFwCorpDown : 0;
+  const numCommuniDown = fwIndicators ? fwIndicators.numFwCommuniDown : 0;
 
 
   const currentTab = document.title;

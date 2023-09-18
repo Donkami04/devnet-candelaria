@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { getClients } from "../../utils/Api-candelaria/api";
-import { PRTG_URL, CISCO_URL } from "../../utils/Api-candelaria/api";
+import { getClients } from "../../../utils/Api-candelaria/api";
+import { PRTG_URL, CISCO_URL } from "../../../utils/Api-candelaria/api";
 import "./TableClients.css";
 
 export function TableClients() {
