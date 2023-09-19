@@ -35,13 +35,15 @@ def vdom_connection(host, vdom, username, password):
     output = ""
     while channel.recv_ready():
         output += channel.recv(1024).decode('utf-8')
-
+    print(f"OUTPUT VDOM: {output}")
     # Cerrar el canal y la conexión
     channel.close()
     client.close()
     
     # Analizar la salida con regex
-    pattern = r'Seq\(\d+ ([^\s]+)\): state\(([^)]+)\), packet-loss\(([^)]+)\) latency\(([^)]+)\), jitter\(([^)]+)\)'
+    # pattern = r'Seq\(\d+ ([^\s]+)\): state\(([^)]+)\), packet-loss\(([^)]+)\) latency\(([^)]+)\), jitter\(([^)]+)\)'
+    pattern = r'Seq\(\d+ ([^\)]+)\): state\(([^)]+)\), packet-loss\(([^)]+)\)(?: latency\(([^)]+)\), jitter\(([^)]+)\))?.*'
+
     matches = re.findall(pattern, output)
     
     result = []
@@ -52,20 +54,18 @@ def vdom_connection(host, vdom, username, password):
             state = match[1]
             packet_loss = match[2]
             packet_loss = packet_loss.replace("%", "")
-            latency = match[3]
-            jitter = match[4]
+            latency = match[3] if match[3] else "Not Found"
+            jitter = match[4] if match[4] else "Not Found"
 
-            
             result.append((canal, state, packet_loss, latency, jitter))
-            # print(f"Canal: {canal}, State: {state}, Packet Loss: {packet_loss}%, Latency: {latency}, Jitter: {jitter}")
-            print(result)
             
         except IndexError:
             continue
 
+
     if not result:
         result = [('Not Found', 'Not Found', 'Not Found', 'Not Found', 'Not Found')]
-        print(result)
+
     return result
 
 #vdom_connection(host='10.224.113.129', vdom ='root', username='roadmin', password='C4nd3*2023')
