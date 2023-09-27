@@ -1,4 +1,4 @@
-import warnings, requests, os, time, traceback, re, sched, datetime
+import warnings, requests, os, time, traceback, re, sched, datetime, logging
 import mysql.connector
 from dotenv import load_dotenv
 from config import database
@@ -6,11 +6,15 @@ from config import database
 # Esto evita que las respuestas de las API tengan warnings.
 warnings.filterwarnings('ignore', message='Unverified HTTPS request')
 
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s: %(message)s')
+file_handler = logging.FileHandler('issues.log')
+file_handler.setLevel(logging.WARNING)
+file_handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s: %(message)s'))
+logging.getLogger().addHandler(file_handler)
+load_dotenv()
+
 def switches():
-    
-    load_dotenv()
     env = os.getenv('ENVIRONMENT')
-    
     if env == 'local':
         mydb = mysql.connector.connect(
         host=database['local']['DB_HOST'],
@@ -45,58 +49,25 @@ def switches():
         allSwitches.append(row_dict)
         
 
-    print('Inicia bucle de consulta de Switches')
     try:
-        load_dotenv()
         for switch in allSwitches:
             ip = switch['ip']
             group = switch['group']
-            print(ip)
-            
-            # Inicia bloque de consulta a la API PRTG
-            URL_PRTG_IP = os.getenv('URL_PRTG_IP').format(ip=ip)
-            prtg_ip_response = requests.get(URL_PRTG_IP, verify=False).json()
-            if len(prtg_ip_response['devices']) == 0:
-                ip=ip,
-                name=switch['dispositivo'],
-                status='Not Found',
-                last_up='Not Found',
-                last_down='Not Found',
-                
-            else:
-                id_device_prtg = prtg_ip_response['devices'][0]['objid']
-                #! Pendiente definir URL para UPS
-                URL_PRTG_ID = os.getenv('URL_PRTG_ID').format(id_device=id_device_prtg)
-                prtg_data = requests.get(URL_PRTG_ID, verify=False).json()
-                sensor = prtg_data['sensors'][0]
-                status = sensor['status']
-                name = sensor['device']
-                last_up = sensor['lastup']
-                last_down = sensor['lastdown']
-                
-                patron = re.compile(r'<.*?>') # Se usa para formatear el last_up y last_down
-                last_up =  re.sub(patron, '', last_up)
-                last_down =  re.sub(patron, '', last_down)
+            name=switch['dispositivo']
+            logging.info(ip)
 
-            # Inicia bloque para consultar datos a la API CISCO PRIME
-            # Si no hay ID se define status_cisco_device como Not Found.
-            URL_CISCO_IP_DEVICE = os.getenv('URL_CISCO_IP_DEVICE').format(ip=ip)
-            cisco_ip_response = requests.get(URL_CISCO_IP_DEVICE, verify=False).json()
-            if cisco_ip_response['queryResponse']['@count'] == 0:
-                status_cisco_device='Not Found'
-                
-            else:
-                cisco_id_client = cisco_ip_response['queryResponse']['entityId'][0]['$']
-                URL_CISCO_ID_DEVICE = os.getenv('URL_CISCO_ID_DEVICE').format(id_device=cisco_id_client)
-                cisco_data_device = requests.get(URL_CISCO_ID_DEVICE, verify=False).json()
-                status_cisco_device = cisco_data_device['queryResponse']['entity'][0]['devicesDTO']['reachability']
+            prtg_data = get_prtg_data(ip)
+            name = prtg_data['name']
+            status = prtg_data['status']
+            last_up = prtg_data['last_up']
+            last_down = prtg_data['last_down']
+            
+            status_cisco_device = get_cisco_data(ip)
                 
             sql = f"INSERT INTO switches (dispositivo, ip, tipo, status_prtg, lastup_prtg, lastdown_prtg, reachability, ups1, ups2, status_ups1, status_ups2, `group`)"
             val = f"VALUES ('{name}', '{ip}', 'Switch', '{status}', '{last_up}', '{last_down}', '{status_cisco_device}', 'NA', 'NA', 'NA', 'NA', '{group}')"
-            # val = (name, ip, 'Switch', status, last_up, last_down, status_cisco_device, 'NA', 'NA', 'NA', 'NA', group)
             consulta = f"{sql} {val}"
             cursor.execute(consulta)
-
             mydb.commit()
             
         now = datetime.datetime.now()
@@ -106,13 +77,9 @@ def switches():
         sql_datetime = f"INSERT INTO fechas_consultas_switches (ultima_consulta, estado) VALUES ('{fecha_y_hora}', 'OK')"
         cursor.execute(sql_datetime)
         mydb.commit()   
-        
         cursor.close()
-        mydb.close()
-        
-        # with open("/app/DCS-Candelaria/Services/Switches/logs.txt", "a") as archivo:
-        with open("/app/logs.txt", "a") as archivo:
-            archivo.write(str(fecha_y_hora) + '\n')
+
+        logging.info('Terminado')
             
     except Exception:
         now = datetime.datetime.now()
@@ -121,14 +88,71 @@ def switches():
         sql_datetime = f"INSERT INTO fechas_consultas_switches (ultima_consulta, estado) VALUES ('{fecha_y_hora}', 'ERROR')"
         cursor.execute(sql_datetime)
         mydb.commit()
-        
-        # with open("/home/donkami/Sona/APIS/DCS-Candelaria/Services/Switches/logs.txt", "a") as archivo:
-        with open("/app/logs.txt", "a") as archivo:
-            archivo.write('Fecha y hora del error: ' + str(fecha_y_hora) + ' Dispositivo del error ---> ' + str(ip) + '\n')
-            archivo.write(traceback.format_exc())
-            archivo.write("\n")
-        
+        cursor.close()
 
+
+def get_prtg_data(ip):
+    prtg_data = {
+        'name': 'Not Found',
+        'status': 'Not Found',
+        'last_up': 'Not Found',
+        'last_down': 'Not Found'
+    }
+    
+    try:
+        URL_PRTG_IP = os.getenv('URL_PRTG_IP').format(ip=ip)
+        prtg_ip_response = requests.get(URL_PRTG_IP, verify=False).json()
+        
+        if len(prtg_ip_response['devices']) == 0:
+            return prtg_data    
+        else:
+            id_device_prtg = prtg_ip_response['devices'][0]['objid']
+            URL_PRTG_ID = os.getenv('URL_PRTG_ID').format(id_device=id_device_prtg)
+            prtg_data = requests.get(URL_PRTG_ID, verify=False).json()
+            sensor = prtg_data['sensors'][0]
+            status = sensor['status']
+            name = sensor['device']
+            last_up = sensor['lastup']
+            last_down = sensor['lastdown']
+            
+            patron = re.compile(r'<.*?>') # Se usa para formatear el last_up y last_down
+            last_up =  re.sub(patron, '', last_up)
+            last_down =  re.sub(patron, '', last_down)
+            
+            prtg_data['name'] = name
+            prtg_data['status'] = status
+            prtg_data['last_up'] = last_up
+            prtg_data['last_down'] = last_down
+            
+            return prtg_data
+    
+    except Exception as e:
+        logging.error(f"Error con el IP en Funcion 'get_prtg_data'  {ip}")
+        logging.error(traceback.format_exc())
+        logging.error(e)
+        
+        return prtg_data
+
+def get_cisco_data(ip):
+    try:
+        URL_CISCO_IP_DEVICE = os.getenv('URL_CISCO_IP_DEVICE').format(ip=ip)
+        cisco_ip_response = requests.get(URL_CISCO_IP_DEVICE, verify=False).json()
+        if cisco_ip_response['queryResponse']['@count'] == 0:
+            return 'Not Found'
+        
+        else:
+            cisco_id_client = cisco_ip_response.get('queryResponse', 'Not Found').get('entityId', [])[0].get('$', 'Not Found')
+            URL_CISCO_ID_DEVICE = os.getenv('URL_CISCO_ID_DEVICE').format(id_device=cisco_id_client)
+            cisco_data_device = requests.get(URL_CISCO_ID_DEVICE, verify=False).json()
+            status_cisco_device = cisco_data_device.get('queryResponse', 'Not Found').get('entity', [])[0].get('devicesDTO', 'Not Found').get('reachability', 'Not Found')
+            return status_cisco_device
+    
+    except Exception as e:
+        logging.error(f"Error con el IP en Funcion 'get_cisco_data' {ip}")
+        logging.error(traceback.format_exc())
+        logging.error(e)
+        return 'Not Found'
+    
 
 def bucle(scheduler):
     switches()

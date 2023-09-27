@@ -62,14 +62,14 @@ services:
   #   environment:
   #     - ENVIRONMENT=production
       
-  mesh:
-    build:
-      context: Services/Mesh
-    restart: always
-    depends_on:
-      - db
-    environment:
-      - ENVIRONMENT=production
+  # mesh:
+  #   build:
+  #     context: Services/Mesh
+  #   restart: always
+  #   depends_on:
+  #     - db
+  #   environment:
+  #     - ENVIRONMENT=production
       
   # camaras:
   #   build:

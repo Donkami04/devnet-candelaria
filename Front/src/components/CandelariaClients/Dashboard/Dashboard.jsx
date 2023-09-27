@@ -11,7 +11,6 @@ export function Dashboard() {
     const dataIndicators = async () => {
       try {
         const allIndicators = await getDcsCandelariaIndicators();
-        console.log(allIndicators)
         setIndicators(allIndicators);
       } catch (error) {
         console.error("Error al obtener los indicadores del sistema", error);
@@ -21,13 +20,14 @@ export function Dashboard() {
     dataIndicators();
   }, []);
 
-  const overallIndicator = indicators && indicators.overallKpi.indicador;
+  const overallIndicator = indicators?.overallKpi?.indicador;
 
-  const disponibilidadIndicator = indicators && indicators.disponibilidad.indicador;
-  const clients = indicators && indicators.disponibilidad.clientsStatus;
-
-  const infraSolucionIndicator = indicators && indicators.infra_solucion.indicador
-  const switches = indicators && indicators.infra_solucion.switchesStatus;
+  const disponibilidadIndicator = indicators?.disponibilidad?.indicador;
+  const clients = indicators?.disponibilidad?.clientsStatus;
+  
+  const infraSolucionIndicator = indicators?.infra_solucion?.indicador;
+  const switches = indicators?.infra_solucion?.switchesStatus;
+  
 
   return (
     <div className="main-dashboard-container">

@@ -33,29 +33,20 @@ async function getOneFirewall(ip) {
 
 async function createFirewall(data) {
   try {
-    const firewallDoesExist = await DataFirewalls.findOne({
-      where: { ip: data.ip },
+    const newFirewall = await DataFirewalls.create({
+      name: data.name,
+      channel: data.channel,
+      ip: data.ip,
+      link: data.link,
+      vdom: data.vdom,
+      gateway: data.gateway,
+      ubication: data.ubication,
     });
-    if (firewallDoesExist === null) {
-      const newFirewall = await DataFirewalls.create({
-        name: data.name,
-        channel: data.channel,
-        ip: data.ip,
-        link: data.link,
-        vdom: data.vdom,
-        gateway: data.gateway,
-        ubication: data.ubication,
-      });
-      return {
-        status: 201,
-        message:
-          "El Firewall - Canal de Internet ha sido creado exitosamente, espere unos minutos para que el sistema actualice los datos.",
-        data: newFirewall,
-      };
-    }
     return {
-      status: 409,
-      message: "El Firewall - Canal de Internet ya existe en la base de datos.",
+      status: 201,
+      message:
+        "El Firewall - Canal de Internet ha sido creado exitosamente, espere unos minutos para que el sistema actualice los datos.",
+      data: newFirewall,
     };
   } catch (error) {
     console.error(error);
