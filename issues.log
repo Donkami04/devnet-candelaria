@@ -16,3 +16,15 @@ AttributeError: 'NoneType' object has no attribute 'get'
 AttributeError: 'NoneType' object has no attribute 'get'
 
 2023-09-18 12:56:28,371 - ERROR - 10.225.1.78
+2023-09-29 08:32:55,371 - ERROR: Error Controladora Device 10.117.115.181
+2023-09-29 08:32:55,371 - ERROR: Error Controladora Device 10.117.115.181
+2023-09-29 08:32:55,371 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/controladora.py", line 38, in get_data_controladora
+    output = net_connect.send_command("sh wireless client mac-address " + data_pala.split()[0] + " detail")
+IndexError: list index out of range
+
+2023-09-29 08:32:55,371 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/controladora.py", line 38, in get_data_controladora
+    output = net_connect.send_command("sh wireless client mac-address " + data_pala.split()[0] + " detail")
+IndexError: list index out of range
+
