@@ -1,43 +1,56 @@
-/* adminhome.css */
 
-/* Estilo para el contenedor principal */
-.main-admin-home {
+
+.admin-panel {
   padding: 20px;
-  min-height: 87vh;
+
   display: flex;
-  justify-content: center; /* Centra horizontalmente */
-  align-items: center; /* Centra verticalmente */
+  justify-content: center;
+  align-items: center;
 }
 
-/* Estilo para el contenedor de iconos */
-.contenedor {
-  display: grid; /* Cambiamos el display a grid */
-  grid-template-columns: repeat(2, 1fr); /* Dos columnas de igual tamaño */
-  gap: 20px; /* Espacio entre las columnas */
-  max-width: 800px;
-  text-align: center; /* Centra el contenido dentro de las columnas */
-}
-
-/* Estilo para cada icono-contenedor */
-.icono-contenedor {
-  background-color: #7b00b948; /* Cambia el color de fondo */
-  border-radius: 8px;
-  padding: 20px;
+.buttons-admin-home-container {
   display: grid;
-  place-items: center;
-  transition: background-color 0.3s ease-in-out;
-  border: 2px solid black;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  max-width: 800px;
+  text-align: center;
+}
+
+.buttons-admin-home {
+  background-color: #007bff;
+  display: flex;
+  align-items: center;
+  color: white;
+  font-size: 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.25);
+  text-decoration: none;
   height: 4rem;
+  width: 15rem;
+  align-items: center;
+  justify-content: center;
+  border: solid 2px #020202;
 }
 
-/* Estilo para el título (h2) dentro de cada icono-contenedor */
-.icono-contenedor h2 {
-
+.buttons-admin-home h2 {
   font-size: 18px;
-  color: black; 
+  color: white;
 }
 
-/* Cambiar el color de fondo al pasar el mouse sobre un icono-contenedor */
-.icono-contenedor:hover {
+.buttons-admin-home:hover {
   background-color: #5f00f740;
+}
+
+.main-admin-home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 87vh;
+}
+
+.info-admin-home {
+  text-align: center;
+  margin-bottom: 20px; /* Agregamos un margen inferior para separarlo del admin-panel */
 }

@@ -25,6 +25,7 @@ import { AdminWan } from './components/AdminPanel/AdminViews/AdminWan';
 import { AdminSwitches } from './components/AdminPanel/AdminViews/AdminSwitches';
 import { AdminMesh } from './components/AdminPanel/AdminViews/AdminMesh';
 import { AdminFirewalls } from './components/AdminPanel/AdminViews/AdminFirewalls';
+import { AdminUsers} from './components/AdminPanel/AdminViews/AdminUsers';
 import { AdminHome } from './components/AdminPanel/AdminHome/AdminHome';
 import './app.css';
 
@@ -61,6 +62,7 @@ function App() {
         <Route path="/admin/switches" element={<AdminSwitches />} />
         <Route path="/admin/mesh" element={<AdminMesh />} />
         <Route path="/admin/firewalls" element={<AdminFirewalls />} />
+        <Route path="/admin/users" element={<AdminUsers />} />
       </Routes>
       <div className="refresh-button-container">
         <button
