@@ -42,7 +42,7 @@ router.get("/:ip", async (req, res, next) => {
 router.post(
   "/new",
   passport.authenticate("jwt", { session: false }),
-  checkRoles("admin"),
+  checkRoles("admin", "staff"),
   validateData(createDevicesSchema),
   async (req, res, next) => {
     try {
@@ -64,7 +64,7 @@ router.post(
 router.put(
   "/edit/:id",
   passport.authenticate("jwt", { session: false }),
-  checkRoles("admin"),
+  checkRoles("admin", "staff"),
   validateData(editDevicesSchema),
   async (req, res, next) => {
     try {
@@ -87,7 +87,7 @@ router.put(
 router.delete(
   "/remove/:id",
   passport.authenticate("jwt", { session: false }),
-  checkRoles("admin"),
+  checkRoles("admin", "staff"),
   async (req, res, next) => {
     try {
       const id = req.params.id;

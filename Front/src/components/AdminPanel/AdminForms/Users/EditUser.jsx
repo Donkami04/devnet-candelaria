@@ -33,7 +33,11 @@ export const EditUser = () => {
       return error;
     }
   };
-
+  
+  const getJWTFromLocalStorage = () => {
+    return localStorage.getItem("jwtToken"); // Adjust the key as per your application
+  };
+  
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setEditedUser({
@@ -61,7 +65,13 @@ export const EditUser = () => {
         rol,
       };
 
-      await axios.put(`${BASE_API_URL}/users/edit/${selectedUserId}`, editData);
+      const jwtToken = getJWTFromLocalStorage();
+      const headers = {
+        Authorization: `Bearer ${jwtToken}`,
+      };
+      await axios.put(`${BASE_API_URL}/users/edit/${selectedUserId}`, editData, {
+        headers,
+      });
       await fetchData();
       setEditedUser({
         name: "",
@@ -84,9 +94,15 @@ export const EditUser = () => {
   };
 
   const handleConfirmDelete = async () => {
+    const jwtToken = getJWTFromLocalStorage();
+    const headers = {
+      Authorization: `Bearer ${jwtToken}`,
+    };
     try {
       const { id } = userToDelete;
-      await axios.delete(`${BASE_API_URL}/users/remove/${id}`);
+      await axios.delete(`${BASE_API_URL}/users/remove/${id}`, {
+        headers
+      });
       await fetchData();
       setIsDeleteModalOpen(false);
     } catch (error) {
@@ -114,10 +130,10 @@ export const EditUser = () => {
               <td >
                 <div className="td-icons-container">
                   <div onClick={() => handleEditClick(user)}>
-                    <FaEdit /> {/* Utiliza el ícono de edición */}
+                    <FaEdit />
                   </div>
                   <div onClick={() => handleDeleteClick(user.id, user.name)}>
-                    <FaTrash /> {/* Utiliza el ícono de eliminación */}
+                    <FaTrash />
                   </div>
                 </div>
               </td>

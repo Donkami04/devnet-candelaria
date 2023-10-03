@@ -10,7 +10,7 @@ export function AdminUsers() {
 
   const buttons = [
     { id: "CreateUser", className: "green-button", label: "Registrar" },
-    { id: "EditUser", className: "blue-button", label: "Editar" },
+    { id: "EditUser", className: "blue-button", label: "Ver usuarios" },
     // { id: "DeleteUser", className: "red-button", label: "Eliminar" },
   ];
 

@@ -27,8 +27,8 @@ router.get(
 
 router.post(
   "/new",
-  // passport.authenticate("jwt", { session: false }),
-  // checkRoles("admin"),
+  passport.authenticate("jwt", { session: false }),
+  checkRoles("admin"),
   validateData(createUserSchema),
   async (req, res, next) => {
     try {
@@ -42,6 +42,7 @@ router.post(
       });
     } catch (error) {
       console.error(error);
+      console.error("error");
       next(error);
     }
   }
@@ -49,8 +50,8 @@ router.post(
 
 router.put(
   "/edit/:id",
-  // passport.authenticate("jwt", { session: false }),
-  // checkRoles("admin"),
+  passport.authenticate("jwt", { session: false }),
+  checkRoles("admin"),
   validateData(editUserSchema),
   async (req, res, next) => {
     try {
@@ -72,8 +73,8 @@ router.put(
 
 router.delete(
   "/remove/:id",
-  // passport.authenticate("jwt", { session: false }),
-  // checkRoles("admin"),
+  passport.authenticate("jwt", { session: false }),
+  checkRoles("admin"),
   async (req, res, next) => {
     try {
       const id = req.params.id;

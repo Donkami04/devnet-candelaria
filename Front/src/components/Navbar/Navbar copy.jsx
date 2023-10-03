@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./navbar.css";
 
 export function Navbar(props) {
   const [jwtToken, setJwtToken] = useState(null);
-  const navigate = useNavigate();
+
   const getJwtTokenFromLocalStorage = () => {
     const token = localStorage.getItem("jwtToken");
     setJwtToken(token || null);
@@ -13,7 +13,6 @@ export function Navbar(props) {
   const logout = () => {
     localStorage.removeItem("jwtToken");
     setJwtToken(null);
-    navigate(`/monitoreo/home?logout=ok`);
   };
 
   useEffect(() => {
@@ -45,13 +44,14 @@ export function Navbar(props) {
           >
             Admin
           </Link>
-          <div
+          <Link
             onClick={logout}
+            to="/monitoreo/home"
             className="admin-link"
             style={{ color: "white" }}
           >
             Log Out
-          </div>
+          </Link>
         </div>
       ) : (
         <div className="box-buttons-navbar">

@@ -27,8 +27,8 @@ allRoutes(app);
 
 app.use(logErrors);
 app.use(boomErrorHandler);
-app.use(errorHandler);
 app.use(ormErrorHandler);
+app.use(errorHandler);
 require('./utils/auth')
 
 

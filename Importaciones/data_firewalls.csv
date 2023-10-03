@@ -16,4 +16,4 @@
 16,FW-Admin,port8,10.224.126.89,MOVISTAR / CONC - SN DWF225274,N/A,181.212.120.17,corporate
 17,FW-Copiapo,wan2,10.224.21.1,MOVISTAR / SN VPF1880276,Villa,190.171.175.145,community
 18,FW-Ralun,wan1,10.224.113.161,MOVISTAR / SN VPF2296108,Comunitario,200.54.55.233,community
-19,FW-Chamonate,wan2,10.224.113.129,STARLINK,Comunitario,200.54.55.225,community
+19,FW-Chamonate,wan2,10.224.113.129,MOVISTAR / SN VPF1558163,Comunitario,200.54.55.225,community

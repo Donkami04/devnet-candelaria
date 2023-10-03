@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { BASE_API_URL } from "../../../../utils/Api-candelaria/api"
-import "../form.css"
+import { BASE_API_URL } from "../../../../utils/Api-candelaria/api";
+import "../form.css";
 
 export const CreateWan = () => {
   const [ip, setIp] = useState("");
@@ -14,11 +14,23 @@ export const CreateWan = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    const token = localStorage.getItem("jwtToken"); // Obtener el token JWT del LocalStorage
+
+    if (!token) {
+      setMensaje("No autorizado, por favor inicie sesión.");
+      return; 
+    }
+
     try {
       const response = await axios.post(
         `${BASE_API_URL}/wan/new`,
         {
           ip,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          },
         }
       );
       setMensaje(response.data.message);
@@ -31,10 +43,9 @@ export const CreateWan = () => {
       ) {
         const errorMessage = error.response.data.message;
         setMensaje(errorMessage);
-        // Ahora puedes trabajar con el mensaje de error, por ejemplo, mostrarlo en la interfaz de usuario o tomar decisiones basadas en él.
       } else {
         console.error("Error desconocido:", error);
-        setMensaje("Error desconocido: ", error);
+        setMensaje("Error desconocido: " + error.message); // Cambia esta línea para mostrar el mensaje de error correctamente
       }
     }
   };
@@ -45,7 +56,9 @@ export const CreateWan = () => {
         <h2 className="form-title">Registrar WAN</h2>
         <form onSubmit={handleSubmit}>
           <div>
-            <label className="form-label" htmlFor="ip">IP:</label>
+            <label className="form-label" htmlFor="ip">
+              IP:
+            </label>
             <input
               className="form-input"
               type="text"

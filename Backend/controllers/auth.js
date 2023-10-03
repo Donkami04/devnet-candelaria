@@ -8,11 +8,11 @@ async function getUser(email, password) {
   try {
     const user = await Users.findOne({ where: { email: email } });
     if (!user) {
-      return { status: 401, message: "Email no encontrado" };
+      return { status: 401, message: "Email o password incorrecto" };
     }
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return { status: 401, message: "Contraseña incorrecta" };
+      return { status: 401, message: "Email o password incorrecto" };
     }
     delete user.dataValues.password;
     return { status: 200, message: "Inicio de sesión exitoso", data: user };
@@ -28,7 +28,6 @@ function signToken(user) {
   };
   const token = jwt.sign(payload, SECRET);
   return {
-    user,
     token,
   };
 }

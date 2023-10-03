@@ -22,11 +22,7 @@ export function Home() {
   const [changeBatery, setChangeBatery] = useState(0);
   const [numberUps, setNumberUps] = useState(0);
   const { vpn1Users, vpn2Users, vpn3Users } = useVpnCounter();
-  const [homeMessage, setHomeMessage] = useState("");
-  const [showMessage, setShowMessage] = useState(false);
-
-  const queryParams = new URLSearchParams(location.search);
-  const logoutParam = queryParams.get("logout");
+  const [homeMessage, setHomeMessage] = useState("")
 
   useEffect(() => {
     const fetchData = async () => {
@@ -73,19 +69,6 @@ export function Home() {
     fetchData();
   }, []);
 
-  // Mostrar el mensaje si logoutParam está presente
-  useEffect(() => {
-    if (logoutParam) {
-      setHomeMessage("Has cerrado sesión.");
-      setShowMessage(true);
-
-      // Ocultar el mensaje después de 3 segundos
-      setTimeout(() => {
-        setShowMessage(false);
-      }, 3000);
-    }
-  }, [logoutParam]);
-
   const overAll = dcsCandeIndicators?.overallKpi?.indicador;
   const disponibilidad = dcsCandeIndicators?.disponibilidad?.indicador;
   const infra_solucion = dcsCandeIndicators?.infra_solucion?.indicador;
@@ -94,11 +77,7 @@ export function Home() {
     <>
       <Navbar title={"Home"} />
       <div>
-        {showMessage && (
-          <div className="home-message-container">
-            <p>{homeMessage}</p>
-          </div>
-        )}
+        <p>{homeMessage}</p>
       </div>
       <div className="home-container">
         <section className="system-container">

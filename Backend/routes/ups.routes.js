@@ -39,7 +39,7 @@ router.get("/:ip", async (req, res, next) => {
 router.post(
   "/new",
   passport.authenticate("jwt", { session: false }),
-  checkRoles("admin"),
+  checkRoles("admin", "staff"),
   validateData(createUpsSchema),
   async (req, res, next) => {
     try {
@@ -61,7 +61,7 @@ router.post(
 router.put(
   "/edit/:id",
   passport.authenticate("jwt", { session: false }),
-  checkRoles("admin"),
+  checkRoles("admin", "staff"),
   validateData(editUpsSchema),
   async (req, res, next) => {
     try {
@@ -84,7 +84,7 @@ router.put(
 router.delete(
   "/remove/:ip",
   passport.authenticate("jwt", { session: false }),
-  checkRoles("admin"),
+  checkRoles("admin", "staff"),
   async (req, res, next) => {
     try {
       const ip = req.params.ip;

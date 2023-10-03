@@ -16,17 +16,24 @@ router.post(
     try {
       const user = req.user;
       if (user.status === 401) {
-        return res.status(user.status).json({
+        res.status(user.status).json({
           status: user.status,
           message: user.message,
           error: user.error,
           data: user.data,
         });
+      } else {
+        const tokenData = signToken(user.data.dataValues); // Genera el token
+        res.status(user.status).json({
+          status: user.status,
+          message: user.message,
+          error: user.error,
+          data: {
+            user: user.data,
+            token: tokenData.token // Agrega el token generado
+          }
+        });
       }
-      const rta = signToken(user.data.dataValues);
-      // const decodedToken = jwt.verify(rta.token, SECRET);
-      // console.log(decodedToken)
-      res.json(rta);
     } catch (error) {
       next(error);
     }

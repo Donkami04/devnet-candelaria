@@ -4,7 +4,6 @@ import { Status_System } from "../Status_System/Status_System";
 import { DevicesDash } from "./DevicesDash/DevicesDash";
 import { getDevices } from "../../utils/Api-candelaria/api";
 import { PRTG_URL, CISCO_URL_IT, CISCO_URL } from "../../utils/Api-candelaria/api";
-import { Spinner } from "../Spinner/Spinner"
 import "./devices.css";
 
 export function Devices() {
@@ -12,23 +11,14 @@ export function Devices() {
   const [searchTerm, setSearchTerm] = useState("");
   const [filterDownPaused, setFilterDownPaused] = useState(true);
   const [loading, setLoading] = useState(true);
-
-  // Probar Spinner
-  // useEffect(() => {
-  //   const fakeLoading = setTimeout(() => {
-  //     setLoading(false);
-  //   }, 21000);
-  //   return () => {
-  //     clearTimeout(fakeLoading);
-  //   };
-  // }, []);
+  
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const devicesList = await getDevices();
         setDevices(devicesList);
-        setLoading(false);
+        setLoading(false); // Indica que la carga ha terminado
       } catch (error) {
         console.error("Error al obtener el listado de Devices:", error);
         return error;
@@ -156,7 +146,11 @@ export function Devices() {
         Down
       </label>
 
-      {loading ? <Spinner /> : (
+      {loading ? (
+        <div className="loading-overlay">
+          <div className="loader"></div>
+        </div>
+      ) : (
         <div className="devices-container">
           <table>
             <thead>

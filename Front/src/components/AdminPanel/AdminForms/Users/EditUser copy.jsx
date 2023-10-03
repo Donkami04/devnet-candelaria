@@ -1,16 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { BASE_API_URL, getUsers } from '../../../../utils/Api-candelaria/api';
-import './users.css';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Modal from "react-modal";
+import { BASE_API_URL, getUsers } from "../../../../utils/Api-candelaria/api";
+import "./users.css";
+import { FaEdit, FaTrash } from "react-icons/fa";
 
 export const EditUser = () => {
   const [users, setUsers] = useState([]);
   const [editedUser, setEditedUser] = useState({
-    name: '',
-    email: '',
-    rol: '',
+    name: "",
+    email: "",
+    rol: "",
   });
   const [selectedUserId, setSelectedUserId] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [userToDelete, setUserToDelete] = useState({
+    id: null,
+    name: "",
+  });
 
   useEffect(() => {
     fetchData();
@@ -21,11 +29,15 @@ export const EditUser = () => {
       const usersList = await getUsers();
       setUsers(usersList);
     } catch (error) {
-      console.error('Error al obtener el listado de Usuarios:', error);
+      console.error("Error al obtener el listado de Usuarios:", error);
       return error;
     }
   };
-
+  
+  const getJWTFromLocalStorage = () => {
+    return localStorage.getItem("jwt"); // Adjust the key as per your application
+  };
+  
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setEditedUser({
@@ -41,6 +53,7 @@ export const EditUser = () => {
       email: user.email,
       rol: user.rol,
     });
+    setIsModalOpen(true);
   };
 
   const handleEditSubmit = async () => {
@@ -55,19 +68,38 @@ export const EditUser = () => {
       await axios.put(`${BASE_API_URL}/users/edit/${selectedUserId}`, editData);
       await fetchData();
       setEditedUser({
-        name: '',
-        email: '',
-        rol: '',
+        name: "",
+        email: "",
+        rol: "",
       });
       setSelectedUserId(null);
+      setIsModalOpen(false);
     } catch (error) {
-      console.error('Error al editar usuario:', error);
+      console.error("Error al editar usuario:", error);
+    }
+  };
+
+  const handleDeleteClick = (userId, email) => {
+    setUserToDelete({
+      id: userId,
+      email: email,
+    });
+    setIsDeleteModalOpen(true);
+  };
+
+  const handleConfirmDelete = async () => {
+    try {
+      const { id } = userToDelete;
+      await axios.delete(`${BASE_API_URL}/users/remove/${id}`);
+      await fetchData();
+      setIsDeleteModalOpen(false);
+    } catch (error) {
+      console.error("Error al eliminar usuario:", error);
     }
   };
 
   return (
-    <div>
-      <h2>Tabla de Usuarios</h2>
+    <div className="users-main-container">
       <table>
         <thead>
           <tr>
@@ -82,53 +114,125 @@ export const EditUser = () => {
             <tr key={user.id}>
               <td>{user.name}</td>
               <td>{user.email}</td>
-              <td>{user.rol}</td>
-              <td>
-                <button onClick={() => handleEditClick(user)}>Editar</button>
+              <td>{user.rol.toUpperCase()}</td>
+              <td >
+                <div className="td-icons-container">
+                  <div onClick={() => handleEditClick(user)}>
+                    <FaEdit /> {/* Utiliza el ícono de edición */}
+                  </div>
+                  <div onClick={() => handleDeleteClick(user.id, user.name)}>
+                    <FaTrash /> {/* Utiliza el ícono de eliminación */}
+                  </div>
+                </div>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
 
-      <h2>Editar Usuario</h2>
-      <form>
-        <div>
-          <label htmlFor="name">Nombre:</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={editedUser.name}
-            onChange={handleInputChange}
-          />
+      <Modal
+        isOpen={isModalOpen}
+        onRequestClose={() => setIsModalOpen(false)}
+        contentLabel="Editar Usuario"
+        ariaHideApp={false}
+        className="custom-modal"
+        overlayClassName="custom-modal-overlay"
+      >
+        <div className="modal-content">
+          <h2 className="form-title form-title-users">Editar Usuario</h2>
+          <form>
+            <div>
+              <label className="form-users-label" htmlFor="name">
+                Nombre:
+              </label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={editedUser.name}
+                onChange={handleInputChange}
+                className="form-input"
+              />
+            </div>
+            <div>
+              <label className="form-users-label" htmlFor="email">
+                Email:
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={editedUser.email}
+                onChange={handleInputChange}
+                className="form-input"
+              />
+            </div>
+            <div>
+              <label className="form-users-label" htmlFor="rol">
+                Rol:
+              </label>
+              <select
+                type="text"
+                id="rol"
+                name="rol"
+                value={editedUser.rol}
+                onChange={handleInputChange}
+                className="form-select"
+              >
+                <option value=""></option>
+                <option value="admin">Admin</option>
+                <option value="staff">Staff</option>
+              </select>
+            </div>
+            <div className="button-form-container">
+              <button
+                className="form-button"
+                type="button"
+                onClick={handleEditSubmit}
+              >
+                Editar
+              </button>
+
+              <button
+                className="form-button cancel-button"
+                onClick={() => setIsModalOpen(false)}
+              >
+                Cancelar
+              </button>
+            </div>
+          </form>
         </div>
-        <div>
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={editedUser.email}
-            onChange={handleInputChange}
-          />
+      </Modal>
+
+      <Modal
+        isOpen={isDeleteModalOpen}
+        onRequestClose={() => setIsDeleteModalOpen(false)}
+        contentLabel="Confirmar Eliminación"
+        ariaHideApp={false}
+        className="custom-modal"
+        overlayClassName="custom-modal-overlay"
+      >
+        <div className="modal-content">
+          <h2 className="form-title form-title-users">Confirmar Eliminación</h2>
+          <p className="confirm-delete-message">Desea realmente eliminar al usuario {userToDelete.name}?</p>
+          <div className="button-form-container">
+              <button
+                className="form-button cancel-button"
+                type="button"
+                onClick={handleConfirmDelete}
+              >
+                Eliminar
+              </button>
+
+              <button
+                className="form-button "
+                onClick={() => setIsDeleteModalOpen(false)}
+              >
+                Cancelar
+              </button>
+            </div>
         </div>
-        <div>
-          <label htmlFor="rol">Rol:</label>
-          <input
-            type="text"
-            id="rol"
-            name="rol"
-            value={editedUser.rol}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div>
-          <button type="button" onClick={handleEditSubmit}>
-            Editar Usuario
-          </button>
-        </div>
-      </form>
+      </Modal>
     </div>
   );
 };

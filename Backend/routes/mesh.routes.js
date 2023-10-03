@@ -39,7 +39,7 @@ router.get("/:ip", async (req, res, next) => {
 router.post(
   "/new",
   passport.authenticate("jwt", { session: false }),
-  checkRoles("admin"),
+  checkRoles("admin", "staff"),
   validateData(createMeshSchema),
   async (req, res, next) => {
     try {
@@ -61,7 +61,7 @@ router.post(
 router.put(
   "/edit/:id",
   passport.authenticate("jwt", { session: false }),
-  checkRoles("admin"),
+  checkRoles("admin", "staff"),
   validateData(editMeshSchema),
   async (req, res, next) => {
     try {
@@ -84,7 +84,7 @@ router.put(
 router.delete(
   "/remove/:ip",
   passport.authenticate("jwt", { session: false }),
-  checkRoles("admin"),
+  checkRoles("admin", "staff"),
   validateData(createMeshSchema),
   async (req, res, next) => {
     try {

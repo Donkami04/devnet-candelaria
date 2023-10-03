@@ -6,15 +6,18 @@ const loginSchema = Joi.object({
     "any.required": "El email es requerido",
   }),
   password: Joi.string()
-    .required()
-    .allow("")
-    .empty("")
-    .max(100)
-    .pattern(/^(?=.*[0-9])(?=.*[!@#$%^&*])/, 'password')
-    .messages({
-      "any.required": "El password es requerido",
-      "string.pattern.base": "El password debe contener al menos un número y un carácter especial",
-    }),
+  .required()
+  .allow("")
+  .empty("")
+  .min(8)
+  .max(100)
+  .regex(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]+$/)
+  .messages({
+    "any.required": "El password es requerido",
+    "string.pattern.base":
+      "Email o password incorrecto",
+    "string.min": "El password debe tener al menos 8 caracteres",
+  })
 });
 
 module.exports = { loginSchema };

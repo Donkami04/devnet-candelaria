@@ -149,7 +149,7 @@ export function Firewalls() {
       </div>
 
       <div className="firewalls-container">
-        <h2>FW - Canales Comunitarios</h2>
+        <h2>FW - Canales Comunitarios / Villa</h2>
         <table>
           <thead>
             <tr>

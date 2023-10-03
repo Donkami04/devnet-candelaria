@@ -28,3 +28,113 @@ IndexError: list index out of range
     output = net_connect.send_command("sh wireless client mac-address " + data_pala.split()[0] + " detail")
 IndexError: list index out of range
 
+2023-10-02 09:13:00,258 - ERROR - Error con la data en la funcion xml_to_dict <Element 'historicdata' at 0x7f5d89b3ac50>: could not convert string to float: ''
+2023-10-02 09:13:01,606 - ERROR - Error desconocido con la ip 10.224.126.93
+2023-10-02 09:13:01,606 - ERROR - Error: 1265 (01000): Data truncated for column 'last_uptime_percent' at row 1
+2023-10-02 09:13:01,606 - ERROR - TRAZABILIDAD: Traceback (most recent call last):
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 611, in cmd_query
+    self._cmysql.query(
+_mysql_connector.MySQLInterfaceError: Data truncated for column 'last_uptime_percent' at row 1
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Wan/main.py", line 98, in get_uptime
+    save_bd(data_wan)
+  File "/home/donkami/Sona/devnet-candelaria/Services/Wan/main.py", line 219, in save_bd
+    cursor.execute(query + values)
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/cursor_cext.py", line 330, in execute
+    result = self._cnx.cmd_query(
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 619, in cmd_query
+    raise get_mysql_exception(
+mysql.connector.errors.DatabaseError: 1265 (01000): Data truncated for column 'last_uptime_percent' at row 1
+
+2023-10-02 09:17:04,556 - ERROR - Error con la data en la funcion xml_to_dict <Element 'historicdata' at 0x7f1016d36b60>: could not convert string to float: ''
+2023-10-02 09:17:05,904 - ERROR - Error desconocido con la ip 10.224.126.93
+2023-10-02 09:17:05,905 - ERROR - Error: 1265 (01000): Data truncated for column 'last_uptime_percent' at row 1
+2023-10-02 09:17:05,905 - ERROR - TRAZABILIDAD: Traceback (most recent call last):
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 611, in cmd_query
+    self._cmysql.query(
+_mysql_connector.MySQLInterfaceError: Data truncated for column 'last_uptime_percent' at row 1
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Wan/main.py", line 98, in get_uptime
+    save_bd(data_wan)
+  File "/home/donkami/Sona/devnet-candelaria/Services/Wan/main.py", line 219, in save_bd
+    cursor.execute(query + values)
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/cursor_cext.py", line 330, in execute
+    result = self._cnx.cmd_query(
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 619, in cmd_query
+    raise get_mysql_exception(
+mysql.connector.errors.DatabaseError: 1265 (01000): Data truncated for column 'last_uptime_percent' at row 1
+
+2023-10-02 10:24:46,336 - ERROR: Error Controladora Device 10.117.115.110
+2023-10-02 10:24:46,336 - ERROR: Error Controladora Device 10.117.115.110
+2023-10-02 10:24:46,336 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/controladora.py", line 35, in get_data_controladora
+    data_pala = net_connect.send_command(f"sh wireless client summary detail ipv4 | inc {device_ip}") #! Ip Pala
+  File "/home/donkami/.local/lib/python3.10/site-packages/netmiko/utilities.py", line 592, in wrapper_decorator
+    return func(self, *args, **kwargs)
+  File "/home/donkami/.local/lib/python3.10/site-packages/netmiko/base_connection.py", line 1721, in send_command
+    raise ReadTimeout(msg)
+netmiko.exceptions.ReadTimeout: 
+Pattern not detected: 'WLC\\-9800\\-MESH\\-CD>' in output.
+
+Things you might try to fix this:
+1. Explicitly set your pattern using the expect_string argument.
+2. Increase the read_timeout to a larger value.
+
+You can also look at the Netmiko session_log or debug log for more information.
+
+
+
+2023-10-02 10:24:46,336 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/controladora.py", line 35, in get_data_controladora
+    data_pala = net_connect.send_command(f"sh wireless client summary detail ipv4 | inc {device_ip}") #! Ip Pala
+  File "/home/donkami/.local/lib/python3.10/site-packages/netmiko/utilities.py", line 592, in wrapper_decorator
+    return func(self, *args, **kwargs)
+  File "/home/donkami/.local/lib/python3.10/site-packages/netmiko/base_connection.py", line 1721, in send_command
+    raise ReadTimeout(msg)
+netmiko.exceptions.ReadTimeout: 
+Pattern not detected: 'WLC\\-9800\\-MESH\\-CD>' in output.
+
+Things you might try to fix this:
+1. Explicitly set your pattern using the expect_string argument.
+2. Increase the read_timeout to a larger value.
+
+You can also look at the Netmiko session_log or debug log for more information.
+
+
+
+2023-10-02 10:26:05,124 - ERROR: Error Controladora Device 10.117.115.180
+2023-10-02 10:26:05,124 - ERROR: Error Controladora Device 10.117.115.180
+2023-10-02 10:26:05,125 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/controladora.py", line 38, in get_data_controladora
+    output = net_connect.send_command("sh wireless client mac-address " + data_pala.split()[0] + " detail")
+IndexError: list index out of range
+
+2023-10-02 10:26:05,125 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/controladora.py", line 38, in get_data_controladora
+    output = net_connect.send_command("sh wireless client mac-address " + data_pala.split()[0] + " detail")
+IndexError: list index out of range
+
+2023-10-02 10:26:25,972 - ERROR: Error Controladora Device 10.117.115.181
+2023-10-02 10:26:25,972 - ERROR: Error Controladora Device 10.117.115.181
+2023-10-02 10:26:25,972 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/controladora.py", line 38, in get_data_controladora
+    output = net_connect.send_command("sh wireless client mac-address " + data_pala.split()[0] + " detail")
+IndexError: list index out of range
+
+2023-10-02 10:26:25,972 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/controladora.py", line 38, in get_data_controladora
+    output = net_connect.send_command("sh wireless client mac-address " + data_pala.split()[0] + " detail")
+IndexError: list index out of range
+
+2023-10-03 11:55:13,307 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Camaras/main.py", line 87, in get_devices_data
+    is_databackup = cisco_data['is_databackup']
+KeyError: 'is_databackup'
+
+2023-10-03 11:55:13,316 - ERROR - 10.225.1.78

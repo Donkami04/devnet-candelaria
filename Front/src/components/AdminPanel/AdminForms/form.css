@@ -1,13 +1,13 @@
 /* Estilo para el contenedor principal */
 .form-container {
-  font-family: Arial, sans-serif;
-  max-width: 400px;
   margin: auto;
+  max-width: 400px;
+  margin-top: 3rem;
+  font-family: Arial, sans-serif;
   padding: 20px;
   background-color: #7e777727;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(122, 120, 227, 0.555);
-  margin-top: 3rem;
 }
 
 /* Estilo para los títulos */

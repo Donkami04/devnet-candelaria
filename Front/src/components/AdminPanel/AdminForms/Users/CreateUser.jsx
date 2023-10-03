@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { BASE_API_URL } from "../../../../utils/Api-candelaria/api";
+import { useNavigate } from "react-router-dom";
 import "../form.css";
 
 export const CreateUser = () => {
@@ -12,6 +13,7 @@ export const CreateUser = () => {
   });
 
   const [mensaje, setMensaje] = useState("");
+  const navigate = useNavigate();
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -25,7 +27,15 @@ export const CreateUser = () => {
     event.preventDefault();
 
     try {
-      const response = await axios.post(`${BASE_API_URL}/users/new`, dataUser);
+      const jwtToken = localStorage.getItem("jwtToken");
+      const headers = {
+        Authorization: `Bearer ${jwtToken}`,
+      };
+
+      const response = await axios.post(`${BASE_API_URL}/users/new`, dataUser, {
+        headers,
+      });
+
       setMensaje(response.data.message);
       setDataUser({
         name: "",
@@ -34,7 +44,9 @@ export const CreateUser = () => {
         password: "",
       });
     } catch (error) {
-      if (
+      if (error.response && error.response.status === 401) {
+        setMensaje("Debes iniciar sesión con una cuenta autorizada.");
+      } else if (
         error.response &&
         error.response.data &&
         error.response.data.message
@@ -43,7 +55,7 @@ export const CreateUser = () => {
         setMensaje(errorMessage);
       } else {
         console.error("Error desconocido:", error);
-        setMensaje("Error desconocido: ", error);
+        setMensaje("Error desconocido: " + error.toString());
       }
     }
   };
