@@ -85,7 +85,6 @@ router.delete(
   "/remove/:ip",
   passport.authenticate("jwt", { session: false }),
   checkRoles("admin", "staff"),
-  validateData(createMeshSchema),
   async (req, res, next) => {
     try {
       const ip = req.params.ip;

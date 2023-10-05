@@ -24,10 +24,11 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-router.get("/:ip", async (req, res, next) => {
+router.get("/:ip/:ubication", async (req, res, next) => {
   try {
     const ip = req.params.ip;
-    const firewall = await getOneFirewall(ip);
+    const ubication = req.params.ubication
+    const firewall = await getOneFirewall(ip, ubication);
     res.status(firewall.status).json({
       status: firewall.status,
       message: firewall.message,
@@ -85,13 +86,14 @@ router.put(
 );
 
 router.delete(
-  "/remove/:ip",
+  "/remove/:ip/:ubication",
   passport.authenticate("jwt", { session: false }),
   checkRoles("admin", "staff"),
   async (req, res, next) => {
     try {
       const ip = req.params.ip;
-      const firewallDeleted = await deleteFirewall(ip);
+      const ubication = req.params.ubication;
+      const firewallDeleted = await deleteFirewall(ip, ubication);
       res.status(firewallDeleted.status).json({
         status: firewallDeleted.status,
         message: firewallDeleted.message,

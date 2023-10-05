@@ -5,14 +5,13 @@ import "../form.css";
 
 export const EditSwitch = () => {
   const [ip, setIp] = useState("");
-
   const [id, setId] = useState(0);
   const [newIp, setNewIp] = useState("");
   const [dispositivo, setDispositivo] = useState("");
   const [group, setGroup] = useState("");
-
   const [mensaje, setMensaje] = useState("");
   const [showEditFields, setShowEditFields] = useState(false);
+  const token = localStorage.getItem("jwtToken");
 
   const handleIpChange = (event) => {
     setIp(event.target.value);
@@ -59,12 +58,20 @@ export const EditSwitch = () => {
 
   const handleEditSwitch = async (event) => {
     event.preventDefault();
-
+    if (!token) {
+      setMensaje("No autorizado, por favor inicie sesión.");
+      return;
+    }
     try {
       const response = await axios.put(`${BASE_API_URL}/switches/edit/${id}`, {
         ip: newIp,
         dispositivo,
         group,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
       setMensaje(response.data.message);
     } catch (error) {

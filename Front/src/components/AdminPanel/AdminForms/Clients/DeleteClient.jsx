@@ -6,6 +6,7 @@ import "../form.css";
 export const DeleteClient = () => {
   const [ip, setIp] = useState("");
   const [mensaje, setMensaje] = useState("");
+  const token = localStorage.getItem("jwtToken");
 
   const handleIpChange = (event) => {
     setIp(event.target.value);
@@ -13,14 +14,23 @@ export const DeleteClient = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    // ! ###################
+    if (!token) {
+      setMensaje("No autorizado, por favor inicie sesión.");
+      return;
+    }
     try {
       if (ip.trim() === "") {
         setMensaje("Por favor, ingrese una dirección IP válida.");
         return; // No realizar la solicitud si ip está vacío
       }
       const response = await axios.delete(
-        `${BASE_API_URL}/clients/remove/${ip}`
+        `${BASE_API_URL}/clients/remove/${ip}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       setMensaje(response.data.message);
       setIp("");

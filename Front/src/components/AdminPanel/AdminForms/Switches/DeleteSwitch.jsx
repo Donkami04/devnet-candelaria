@@ -6,6 +6,7 @@ import "../form.css";
 export const DeleteSwitch = () => {
   const [ip, setIp] = useState("");
   const [mensaje, setMensaje] = useState("");
+  const token = localStorage.getItem("jwtToken");
 
   const handleIpChange = (event) => {
     setIp(event.target.value);
@@ -20,7 +21,12 @@ export const DeleteSwitch = () => {
         return; // No realizar la solicitud si ip está vacío
       }
       const response = await axios.delete(
-        `${BASE_API_URL}/switches/remove/${ip}`
+        `${BASE_API_URL}/switches/remove/${ip}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       setMensaje(response.data.message);
       setIp("");

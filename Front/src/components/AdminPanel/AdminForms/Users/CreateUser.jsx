@@ -1,7 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
 import { BASE_API_URL } from "../../../../utils/Api-candelaria/api";
-import { useNavigate } from "react-router-dom";
 import "../form.css";
 
 export const CreateUser = () => {
@@ -13,7 +12,7 @@ export const CreateUser = () => {
   });
 
   const [mensaje, setMensaje] = useState("");
-  const navigate = useNavigate();
+  const token = localStorage.getItem("jwtToken");
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -25,15 +24,15 @@ export const CreateUser = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    if (!token) {
+      setMensaje("No autorizado, por favor inicie sesión.");
+      return;
+    }
     try {
-      const jwtToken = localStorage.getItem("jwtToken");
-      const headers = {
-        Authorization: `Bearer ${jwtToken}`,
-      };
-
       const response = await axios.post(`${BASE_API_URL}/users/new`, dataUser, {
-        headers,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
 
       setMensaje(response.data.message);

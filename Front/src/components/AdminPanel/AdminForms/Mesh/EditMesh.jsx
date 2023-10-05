@@ -5,14 +5,13 @@ import "../form.css";
 
 export const EditMesh = () => {
   const [ip, setIp] = useState("");
-
   const [id, setId] = useState(0)
   const [newIp, setNewIp] = useState("");
   const [device, setDevice] = useState("");
   const [eqmt, setEqmt] = useState("");
-
   const [mensaje, setMensaje] = useState("");
   const [showEditFields, setShowEditFields] = useState(false);
+  const token = localStorage.getItem("jwtToken");
 
   const handleIpChange = (event) => {
     setIp(event.target.value);
@@ -61,7 +60,10 @@ export const EditMesh = () => {
 
   const handleEditMesh = async (event) => {
     event.preventDefault();
-
+    if (!token) {
+      setMensaje("No autorizado, por favor inicie sesión.");
+      return;
+    }
     try {
       const response = await axios.put(
         `${BASE_API_URL}/mesh/edit/${id}`,
@@ -69,6 +71,11 @@ export const EditMesh = () => {
           ip: newIp, 
           device,
           eqmt,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
       );
       setMensaje(response.data.message);

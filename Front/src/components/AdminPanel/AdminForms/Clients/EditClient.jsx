@@ -16,6 +16,7 @@ export const EditClient = () => {
   });
   const [mensaje, setMensaje] = useState("");
   const [showEditFields, setShowEditFields] = useState(false);
+  const token = localStorage.getItem("jwtToken");
 
   const handleIpChange = (event) => {
     setIp(event.target.value);
@@ -68,10 +69,18 @@ export const EditClient = () => {
       // Crear una copia de los datos del cliente sin el campo "id"
       const clientDataWithoutId = { ...dataClient };
       delete clientDataWithoutId.id;
-
+      if (!token) {
+        setMensaje("No autorizado, por favor inicie sesión.");
+        return;
+      }
       const response = await axios.put(
         `${BASE_API_URL}/clients/edit/${id}`,
-        clientDataWithoutId
+        clientDataWithoutId,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       setMensaje(response.data.message);
     } catch (error) {

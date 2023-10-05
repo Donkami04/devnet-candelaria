@@ -9,9 +9,9 @@ export const EditUps = () => {
   const [id, setId] = useState(0)
   const [newIp, setNewIp] = useState("");
   const [ubication, setUbication] = useState("");
-
   const [mensaje, setMensaje] = useState("");
   const [showEditFields, setShowEditFields] = useState(false);
+  const token = localStorage.getItem("jwtToken");
 
   const handleIpChange = (event) => {
     setIp(event.target.value);
@@ -60,13 +60,21 @@ export const EditUps = () => {
 
   const handleEditUps = async (event) => {
     event.preventDefault();
-
+    if (!token) {
+      setMensaje("No autorizado, por favor inicie sesión.");
+      return;
+    }
     try {
       const response = await axios.put(
         `${BASE_API_URL}/ups/edit/${id}`,
         {
           ip: newIp, 
           ubication,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
       );
       setMensaje(response.data.message);

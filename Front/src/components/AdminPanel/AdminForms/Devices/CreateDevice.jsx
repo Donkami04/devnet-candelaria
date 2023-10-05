@@ -11,8 +11,8 @@ export const CreateDevice = () => {
     dpto: "",
     red: "",
   });
-
   const [mensaje, setMensaje] = useState("");
+  const token = localStorage.getItem("jwtToken");
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -24,11 +24,19 @@ export const CreateDevice = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    if (!token) {
+      setMensaje("No autorizado, por favor inicie sesión.");
+      return;
+    }
     try {
       const response = await axios.post(
         `${BASE_API_URL}/devices/new`,
-        dataDevice
+        dataDevice,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       setDataDevice({
         ip: "",
