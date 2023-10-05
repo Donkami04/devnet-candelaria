@@ -56,7 +56,7 @@ export function Navbar(props) {
       ) : (
         <div className="box-buttons-navbar">
           <Link to="/login" className="admin-link login-link" style={{ color: "white" }}>
-            Login
+            Log In
           </Link>
         </div>
       )}

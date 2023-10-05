@@ -35,11 +35,19 @@ def get_devices_data():
     cursor = mydb.cursor()
     query = "SELECT * FROM dcs.data_devices"
     cursor.execute(query)
-
+    
     column_names = [column[0] for column in cursor.description]
 
     # Convertir los resultados a una lista de diccionarios
     devices = []
+    # devices = [{
+    #     'id':1,
+    #     'ip':'10.225.6.17',
+    #     'type_device':'Camara',
+    #     'site':'casa',
+    #     'dpto': 'asda',
+    #     'red': 'OT'
+    # }]
     for row in cursor:
         row_dict = {}
         for i in range(len(column_names)):
@@ -56,6 +64,7 @@ def get_devices_data():
             red_type = device['red']
 
             prtg_data = get_prtg_data(ip)
+            print(prtg_data)
             prtg_name_device = prtg_data.get('prtg_name_device', 'Not Found')
             prtg_id_device = prtg_data.get('prtg_id_device', 'Not Found')
             prtg_name_sensor = prtg_data.get('prtg_name_sensor', 'Not Found')
@@ -69,6 +78,7 @@ def get_devices_data():
                 red = '10.224.241.14'
                 
             cisco_data = get_cisco_data(cursor, red, ip)
+            print(cisco_data)
             cisco_device_ip_adress = cisco_data['cisco_device_ip_adress']
             cisco_device_name = cisco_data['cisco_device_name']
             cisco_client_port = cisco_data['cisco_client_port']
@@ -77,6 +87,7 @@ def get_devices_data():
             prtg_device_status = cisco_data['prtg_device_status']
             cisco_client_mac_address = cisco_data['cisco_client_mac_address']
             is_databackup = cisco_data['is_databackup']
+            
             
             query = (f"INSERT INTO dcs.devices (host, type, site, dpto, prtg_name_device, prtg_id, prtg_sensorname, prtg_status, prtg_lastup, prtg_lastdown, cisco_device_ip, cisco_device_name, cisco_port, cisco_status, cisco_reachability, cisco_status_device, cisco_mac_address, data_backup, red)"
                 f"VALUES ('{ip}', '{device_type}', '{site}', '{dpto}', '{prtg_name_device}', '{prtg_id_device}', '{prtg_name_sensor}', '{prtg_status}', '{prtg_lastup}', '{prtg_lastdown}', '{cisco_device_ip_adress}', '{cisco_device_name}', '{cisco_client_port}', '{cisco_client_status}', '{cisco_device_reachability}', '{prtg_device_status}', '{cisco_client_mac_address}', '{is_databackup}', '{red_type}')")
@@ -101,7 +112,7 @@ def get_devices_data():
         fecha_y_hora = str(fecha_y_hora)
         cursor.execute(f"INSERT INTO dcs.fechas_consultas_devices (ultima_consulta, estado) VALUES ('{fecha_y_hora}', 'ERROR')")
         mydb.commit()
-        cursor.close()
+        # cursor.close()
         
 def get_prtg_data(ip):
     prtg_data = {

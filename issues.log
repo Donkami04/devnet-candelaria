@@ -138,3 +138,33 @@ IndexError: list index out of range
 KeyError: 'is_databackup'
 
 2023-10-03 11:55:13,316 - ERROR - 10.225.1.78
+2023-10-03 16:20:11,542 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Camaras/prueba.py", line 178, in get_devices_data
+    cursor.execute(query)
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/cursor_cext.py", line 303, in execute
+    self._cnx.handle_unread_result()
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 932, in handle_unread_result
+    raise InternalError("Unread result found")
+mysql.connector.errors.InternalError: Unread result found
+
+2023-10-03 16:20:11,542 - ERROR - 10.225.6.17
+2023-10-03 16:21:42,469 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Camaras/main.py", line 91, in get_devices_data
+    cursor.execute(query)
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/cursor_cext.py", line 303, in execute
+    self._cnx.handle_unread_result()
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 932, in handle_unread_result
+    raise InternalError("Unread result found")
+mysql.connector.errors.InternalError: Unread result found
+
+2023-10-03 16:21:42,469 - ERROR - 10.225.6.17
+2023-10-03 16:22:37,093 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Camaras/main.py", line 93, in get_devices_data
+    mydb.commit()
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/cursor_cext.py", line 303, in execute
+    self._cnx.handle_unread_result()
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 932, in handle_unread_result
+    raise InternalError("Unread result found")
+mysql.connector.errors.InternalError: Unread result found
+
+2023-10-03 16:22:37,093 - ERROR - 10.225.6.17

@@ -14,21 +14,21 @@ export function Devices() {
   const [loading, setLoading] = useState(true);
 
   // Probar Spinner
-  // useEffect(() => {
-  //   const fakeLoading = setTimeout(() => {
-  //     setLoading(false);
-  //   }, 21000);
-  //   return () => {
-  //     clearTimeout(fakeLoading);
-  //   };
-  // }, []);
+  useEffect(() => {
+    const fakeLoading = setTimeout(() => {
+      setLoading(false);
+    }, 21000);
+    return () => {
+      clearTimeout(fakeLoading);
+    };
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const devicesList = await getDevices();
         setDevices(devicesList);
-        setLoading(false);
+        // setLoading(false);
       } catch (error) {
         console.error("Error al obtener el listado de Devices:", error);
         return error;

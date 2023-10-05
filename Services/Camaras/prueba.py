@@ -39,20 +39,20 @@ def get_devices_data():
     column_names = [column[0] for column in cursor.description]
 
     # Convertir los resultados a una lista de diccionarios
-    devices = []
-    # devices = [{
-    #     'id':1,
-    #     'ip':'10.224.4.31',
-    #     'type_device':'Camara',
-    #     'site':'casa',
-    #     'dpto': 'asda',
-    #     'red': 'IT'
-    # }]
-    for row in cursor:
-        row_dict = {}
-        for i in range(len(column_names)):
-            row_dict[column_names[i]] = row[i]
-        devices.append(row_dict)
+    # devices = []
+    devices = [{
+        'id':1,
+        'ip':'10.225.6.17',
+        'type_device':'Camara',
+        'site':'casa',
+        'dpto': 'asda',
+        'red': 'OT'
+    }]
+    # for row in cursor:
+    #     row_dict = {}
+    #     for i in range(len(column_names)):
+    #         row_dict[column_names[i]] = row[i]
+    #     devices.append(row_dict)
 
     try:   
         for device in devices:
