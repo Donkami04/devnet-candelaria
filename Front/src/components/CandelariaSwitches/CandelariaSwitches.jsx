@@ -2,6 +2,7 @@ import { Navbar } from "../Navbar/Navbar";
 import { Status_System } from "../Status_System/Status_System";
 import { Dashboard } from '../CandelariaClients/Dashboard/Dashboard';
 import { TableSwitches } from '../CandelariaSwitches/TableSwitches/TableSwitches';
+import { Button } from "../Button/Button"
 
 export function Switches() {
   const switchesTable = 'sw';
@@ -10,6 +11,7 @@ export function Switches() {
     <>
       <Navbar title={'Candelaria'} />
       <Status_System tableToShow={switchesTable}/>
+      <Button interfaz={'clients'} buttonTag={'Clientes'}/>
       <Dashboard />
       <TableSwitches />
     </>

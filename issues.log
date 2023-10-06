@@ -168,3 +168,36 @@ mysql.connector.errors.InternalError: Unread result found
 mysql.connector.errors.InternalError: Unread result found
 
 2023-10-03 16:22:37,093 - ERROR - 10.225.6.17
+2023-10-06 08:10:28,903 - ERROR - Error en el segundo Try, FW 10.230.6.7
+2023-10-06 08:10:28,904 - ERROR - TCP connection to device failed.
+
+Common causes of this problem are:
+1. Incorrect hostname or IP address.
+2. Wrong TCP port.
+3. Intermediate firewall blocking access.
+
+Device settings: fortinet 10.230.6.7:2221
+
+
+2023-10-06 08:42:55,552 - ERROR - Error en el segundo Try, FW 10.230.6.7
+2023-10-06 08:42:55,552 - ERROR - TCP connection to device failed.
+
+Common causes of this problem are:
+1. Incorrect hostname or IP address.
+2. Wrong TCP port.
+3. Intermediate firewall blocking access.
+
+Device settings: fortinet 10.230.6.7:2221
+
+
+2023-10-06 08:45:22,559 - ERROR - Error en el segundo Try, FW 10.230.6.7
+2023-10-06 08:45:22,559 - ERROR - TCP connection to device failed.
+
+Common causes of this problem are:
+1. Incorrect hostname or IP address.
+2. Wrong TCP port.
+3. Intermediate firewall blocking access.
+
+Device settings: fortinet 10.230.6.7:2221
+
+

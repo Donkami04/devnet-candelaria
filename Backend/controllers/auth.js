@@ -3,6 +3,8 @@ const { Users } = require("../models/users");
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
 const SECRET = process.env.JWT_SECRET;
+const nodemailer = require('nodemailer');
+
 
 async function getUser(email, password) {
   try {
