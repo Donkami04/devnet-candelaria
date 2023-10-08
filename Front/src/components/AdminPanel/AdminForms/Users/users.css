@@ -109,4 +109,10 @@
 
 .confirm-delete-message {
   margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+.modal-button {
+  margin-left: 10px;
+  margin-right: 10px;
 }

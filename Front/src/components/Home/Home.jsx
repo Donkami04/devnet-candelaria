@@ -27,6 +27,7 @@ export function Home() {
 
   const queryParams = new URLSearchParams(location.search);
   const logoutParam = queryParams.get("logout");
+  const token = localStorage.getItem("jwtToken");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -73,13 +74,11 @@ export function Home() {
     fetchData();
   }, []);
 
-  // Mostrar el mensaje si logoutParam está presente
+
   useEffect(() => {
-    if (logoutParam) {
+    if (logoutParam && !token) {
       setHomeMessage("Has cerrado sesión.");
       setShowMessage(true);
-
-      // Ocultar el mensaje después de 3 segundos
       setTimeout(() => {
         setShowMessage(false);
       }, 3000);

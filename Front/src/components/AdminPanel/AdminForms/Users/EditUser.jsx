@@ -19,6 +19,8 @@ export const EditUser = () => {
     id: null,
     name: "",
   });
+  const [modalMessage, setModalMessage] = useState("");
+  const token = localStorage.getItem("jwtToken");
 
   useEffect(() => {
     fetchData();
@@ -32,10 +34,6 @@ export const EditUser = () => {
       console.error("Error al obtener el listado de Usuarios:", error);
       return error;
     }
-  };
-  
-  const getJWTFromLocalStorage = () => {
-    return localStorage.getItem("jwtToken"); // Adjust the key as per your application
   };
   
   const handleInputChange = (e) => {
@@ -56,7 +54,12 @@ export const EditUser = () => {
     setIsModalOpen(true);
   };
 
-  const handleEditSubmit = async () => {
+  const handleEditSubmit = async (event) => {
+    event.preventDefault();
+    if (!token) {
+      setModalMessage("No autorizado");
+      return;
+    }
     try {
       const { name, email, rol } = editedUser;
       const editData = {
@@ -65,9 +68,8 @@ export const EditUser = () => {
         rol,
       };
 
-      const jwtToken = getJWTFromLocalStorage();
       const headers = {
-        Authorization: `Bearer ${jwtToken}`,
+        Authorization: `Bearer ${token}`,
       };
       await axios.put(`${BASE_API_URL}/users/edit/${selectedUserId}`, editData, {
         headers,
@@ -93,10 +95,14 @@ export const EditUser = () => {
     setIsDeleteModalOpen(true);
   };
 
-  const handleConfirmDelete = async () => {
-    const jwtToken = getJWTFromLocalStorage();
+  const handleConfirmDelete = async (event) => {
+    event.preventDefault();
+    if (!token) {
+      setModalMessage("No autorizado");
+      return;
+    }
     const headers = {
-      Authorization: `Bearer ${jwtToken}`,
+      Authorization: `Bearer ${token}`,
     };
     try {
       const { id } = userToDelete;
@@ -152,6 +158,7 @@ export const EditUser = () => {
       >
         <div className="modal-content">
           <h2 className="form-title form-title-users">Editar Usuario</h2>
+          <p className="error-message">{modalMessage}</p>
           <form>
             <div>
               <label className="form-users-label" htmlFor="name">
@@ -198,7 +205,7 @@ export const EditUser = () => {
             </div>
             <div className="button-form-container">
               <button
-                className="form-button"
+                className="form-button modal-button"
                 type="button"
                 onClick={handleEditSubmit}
               >
@@ -206,7 +213,7 @@ export const EditUser = () => {
               </button>
 
               <button
-                className="form-button cancel-button"
+                className="form-button cancel-button modal-button"
                 onClick={() => setIsModalOpen(false)}
               >
                 Cancelar
@@ -227,9 +234,10 @@ export const EditUser = () => {
         <div className="modal-content">
           <h2 className="form-title form-title-users">Confirmar Eliminación</h2>
           <p className="confirm-delete-message">Desea realmente eliminar al usuario {userToDelete.name}?</p>
+          <p className="error-message">{modalMessage}</p>
           <div className="button-form-container">
               <button
-                className="form-button cancel-button"
+                className="form-button cancel-button modal-button"
                 type="button"
                 onClick={handleConfirmDelete}
               >
@@ -237,7 +245,7 @@ export const EditUser = () => {
               </button>
 
               <button
-                className="form-button "
+                className="form-button modal-button "
                 onClick={() => setIsDeleteModalOpen(false)}
               >
                 Cancelar
