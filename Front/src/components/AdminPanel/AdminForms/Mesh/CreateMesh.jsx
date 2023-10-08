@@ -8,6 +8,7 @@ export const CreateMesh = () => {
   const [device, setDevice] = useState("");
   const [eqmt, setEqmt] = useState("");
   const [mensaje, setMensaje] = useState("");
+  const token = localStorage.getItem("jwtToken");
 
   const handleIpChange = (event) => {
     setIp(event.target.value);
@@ -23,7 +24,10 @@ export const CreateMesh = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    if (!token) {
+      setMensaje("No autorizado, por favor inicie sesión.");
+      return;
+    }
     try {
       const response = await axios.post(
         `${BASE_API_URL}/mesh/new`,
@@ -31,6 +35,11 @@ export const CreateMesh = () => {
           ip,
           device,
           eqmt,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
       );
       setMensaje(response.data.message);

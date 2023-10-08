@@ -22,6 +22,8 @@ export const useTabsName = (pathname) => {
       return "Firewalls";
     case "/monitoreo/wan":
       return "WAN";
+    case "/login":
+      return "Login Devnet";
     default:
       return "Sistema de Monitoreo";
   }

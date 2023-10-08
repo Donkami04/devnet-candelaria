@@ -6,6 +6,7 @@ import "../form.css";
 export const DeleteMesh = () => {
   const [ip, setIp] = useState("");
   const [mensaje, setMensaje] = useState("");
+  const token = localStorage.getItem("jwtToken");
 
   const handleIpChange = (event) => {
     setIp(event.target.value);
@@ -13,14 +14,22 @@ export const DeleteMesh = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    if (ip.trim() === "") {
+      setMensaje("Por favor, ingrese una dirección IP válida.");
+      return; 
+    }
+    if (!token) {
+      setMensaje("No autorizado, por favor inicie sesión.");
+      return;
+    }
     try {
-      if (ip.trim() === "") {
-        setMensaje("Por favor, ingrese una dirección IP válida.");
-        return; 
-      }
       const response = await axios.delete(
-        `${BASE_API_URL}/mesh/remove/${ip}`
+        `${BASE_API_URL}/mesh/remove/${ip}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       setMensaje(response.data.message);
       setIp("");

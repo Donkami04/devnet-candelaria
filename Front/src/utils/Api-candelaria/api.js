@@ -123,3 +123,10 @@ export const getMeshIndicators = async () => {
     .then((response) => response.data)
     .catch((error) => console.error('INDICADOR MESH: Error del API REST Candealaria : ',error));
 };
+
+export const getUsers = async () => {
+  return axios
+    .get(`${BASE_API_URL}/users`)
+    .then((response) => response.data)
+    .catch((error) => console.error('USUAROS: Error del API REST Candealaria : ',error));
+};

@@ -1,16 +1,27 @@
 const express = require("express");
 const router = express.Router();
 const { validateData } = require("../middlewares/validator.handler");
-const { createSwitchesSchema, editSwitchesSchema } = require("../schemas/switches.schema");
-const {getSwitches, createSwitch, editOneSwitch, deleteSwitch, getOneSwitch} = require('../controllers/switches')
+const {
+  createSwitchesSchema,
+  editSwitchesSchema,
+} = require("../schemas/switches.schema");
+const passport = require("passport");
+const { checkRoles } = require("../middlewares/auth.handler");
+const {
+  getSwitches,
+  createSwitch,
+  editOneSwitch,
+  deleteSwitch,
+  getOneSwitch,
+} = require("../controllers/switches");
 
-router.get('/', async (req, res, next) => {
-    try {
-        const switches = await getSwitches();
-        res.json(switches);
-    } catch (error) {
-        next(error);
-    };
+router.get("/", async (req, res, next) => {
+  try {
+    const switches = await getSwitches();
+    res.json(switches);
+  } catch (error) {
+    next(error);
+  }
 });
 
 router.get("/:ip", async (req, res, next) => {
@@ -28,7 +39,12 @@ router.get("/:ip", async (req, res, next) => {
   }
 });
 
-router.post("/new", validateData(createSwitchesSchema), async (req, res, next) => {
+router.post(
+  "/new",
+  passport.authenticate("jwt", { session: false }),
+  checkRoles("admin", "staff"),
+  validateData(createSwitchesSchema),
+  async (req, res, next) => {
     try {
       const data = req.body;
       const newSwitch = await createSwitch(data);
@@ -42,9 +58,15 @@ router.post("/new", validateData(createSwitchesSchema), async (req, res, next) =
       console.error(error);
       next(error);
     }
-  });
-  
-  router.put("/edit/:id", validateData(editSwitchesSchema), async (req, res, next) => {
+  }
+);
+
+router.put(
+  "/edit/:id",
+  passport.authenticate("jwt", { session: false }),
+  checkRoles("admin", "staff"),
+  validateData(editSwitchesSchema),
+  async (req, res, next) => {
     try {
       const id = req.params.id;
       const changes = req.body;
@@ -59,9 +81,14 @@ router.post("/new", validateData(createSwitchesSchema), async (req, res, next) =
       console.error(error);
       next(error);
     }
-  });
-  
-  router.delete("/remove/:ip", async (req, res, next) => {
+  }
+);
+
+router.delete(
+  "/remove/:ip",
+  passport.authenticate("jwt", { session: false }),
+  checkRoles("admin", "staff"),
+  async (req, res, next) => {
     try {
       const ip = req.params.ip;
       const switchDeleted = await deleteSwitch(ip);
@@ -75,7 +102,7 @@ router.post("/new", validateData(createSwitchesSchema), async (req, res, next) =
       console.error(error);
       next(error);
     }
-  });
-  
+  }
+);
 
 module.exports = router;

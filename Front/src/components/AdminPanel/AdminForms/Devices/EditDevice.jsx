@@ -15,6 +15,7 @@ export const EditDevice = () => {
   });
   const [mensaje, setMensaje] = useState("");
   const [showEditFields, setShowEditFields] = useState(false);
+  const token = localStorage.getItem("jwtToken");
 
   const handleIpChange = (event) => {
     setIp(event.target.value);
@@ -62,7 +63,10 @@ export const EditDevice = () => {
 
   const handleEditDevice = async (event) => {
     event.preventDefault();
-
+    if (!token) {
+      setMensaje("No autorizado, por favor inicie sesión.");
+      return;
+    }
     try {
       // Crear una copia de los datos del dispositivo sin el campo "id"
       const deviceDataWithoutId = { ...dataDevice };
@@ -70,7 +74,12 @@ export const EditDevice = () => {
 
       const response = await axios.put(
         `${BASE_API_URL}/devices/edit/${id}`,
-        deviceDataWithoutId
+        deviceDataWithoutId,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       setMensaje(response.data.message);
     } catch (error) {

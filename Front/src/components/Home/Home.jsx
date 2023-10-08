@@ -1,4 +1,7 @@
-import { getDcsCandelariaIndicators, getUps } from "../../utils/Api-candelaria/api";
+import {
+  getDcsCandelariaIndicators,
+  getUps,
+} from "../../utils/Api-candelaria/api";
 import { Navbar } from "../../components/Navbar/Navbar";
 import { DevicesDash } from "../../components/Devices/DevicesDash/DevicesDash";
 import { DashMesh } from "../Mesh/DashMesh/DashMesh";
@@ -19,6 +22,12 @@ export function Home() {
   const [changeBatery, setChangeBatery] = useState(0);
   const [numberUps, setNumberUps] = useState(0);
   const { vpn1Users, vpn2Users, vpn3Users } = useVpnCounter();
+  const [homeMessage, setHomeMessage] = useState("");
+  const [showMessage, setShowMessage] = useState(false);
+
+  const queryParams = new URLSearchParams(location.search);
+  const logoutParam = queryParams.get("logout");
+  const token = localStorage.getItem("jwtToken");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -65,6 +74,17 @@ export function Home() {
     fetchData();
   }, []);
 
+
+  useEffect(() => {
+    if (logoutParam && !token) {
+      setHomeMessage("Has cerrado sesión.");
+      setShowMessage(true);
+      setTimeout(() => {
+        setShowMessage(false);
+      }, 3000);
+    }
+  }, [logoutParam]);
+
   const overAll = dcsCandeIndicators?.overallKpi?.indicador;
   const disponibilidad = dcsCandeIndicators?.disponibilidad?.indicador;
   const infra_solucion = dcsCandeIndicators?.infra_solucion?.indicador;
@@ -72,6 +92,13 @@ export function Home() {
   return (
     <>
       <Navbar title={"Home"} />
+      <div>
+        {showMessage && (
+          <div className="home-message-container">
+            <p>{homeMessage}</p>
+          </div>
+        )}
+      </div>
       <div className="home-container">
         <section className="system-container">
           <div className="name-system-container">

@@ -17,8 +17,10 @@ async function getNumberFw() {
   return numFw;
 }
 
-async function getOneFirewall(ip) {
-  const firewall = await DataFirewalls.findOne({ where: { ip: ip } });
+async function getOneFirewall(ip, ubication) {
+  const firewall = await DataFirewalls.findOne({
+    where: { ip: ip, ubication: ubication },
+  });
   if (firewall !== null) {
     return {
       status: 200,
@@ -88,9 +90,11 @@ async function editOneFirewall(id, changes) {
   }
 }
 
-async function deleteFirewall(ip) {
+async function deleteFirewall(ip, ubication) {
   try {
-    const firewall = await DataFirewalls.findOne({ where: { ip: ip } });
+    const firewall = await DataFirewalls.findOne({
+      where: { ip: ip, ubication: ubication },
+    });
     if (firewall !== null) {
       await DataFirewalls.destroy({ where: { id: firewall.id } });
       const checkFirewallIsDeleted = await DataFirewalls.findByPk(firewall.id);

@@ -8,6 +8,7 @@ export const CreateSwitch = () => {
   const [dispositivo, setDispositivo] = useState("");
   const [group, setGroup] = useState("");
   const [mensaje, setMensaje] = useState("");
+  const token = localStorage.getItem("jwtToken");
 
   const handleIpChange = (event) => {
     setIp(event.target.value);
@@ -23,7 +24,10 @@ export const CreateSwitch = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    if (!token) {
+      setMensaje("No autorizado, por favor inicie sesión.");
+      return;
+    }
     try {
       const response = await axios.post(
         `${BASE_API_URL}/switches/new`,
@@ -31,6 +35,11 @@ export const CreateSwitch = () => {
           ip,
           dispositivo,
           group,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
       );
       setMensaje(response.data.message);

@@ -35,15 +35,13 @@ def vdom_connection(host, vdom, username, password):
     output = ""
     while channel.recv_ready():
         output += channel.recv(1024).decode('utf-8')
-    print(f"OUTPUT VDOM: {output}")
+    print(f"OUTPUT EN EL VDOM: {output}")
     # Cerrar el canal y la conexión
     channel.close()
     client.close()
     
     # Analizar la salida con regex
-    # pattern = r'Seq\(\d+ ([^\s]+)\): state\(([^)]+)\), packet-loss\(([^)]+)\) latency\(([^)]+)\), jitter\(([^)]+)\)'
     pattern = r'Seq\(\d+ ([^\)]+)\): state\(([^)]+)\), packet-loss\(([^)]+)\)(?: latency\(([^)]+)\), jitter\(([^)]+)\))?.*'
-
     matches = re.findall(pattern, output)
     
     result = []

@@ -26,4 +26,13 @@ function ormErrorHandler(err, req, res, next) {
   next(err);
 }
 
-module.exports = { logErrors, errorHandler, ormErrorHandler };
+function boomErrorHandler(err, req, res, next) {
+  if (err.isBoom) {
+    const { output } = err;
+    res.status(output.statusCode).json(output.payload);
+  }
+  next(err);
+}
+
+
+module.exports = { logErrors, errorHandler, ormErrorHandler, boomErrorHandler };

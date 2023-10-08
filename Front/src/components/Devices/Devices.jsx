@@ -4,18 +4,31 @@ import { Status_System } from "../Status_System/Status_System";
 import { DevicesDash } from "./DevicesDash/DevicesDash";
 import { getDevices } from "../../utils/Api-candelaria/api";
 import { PRTG_URL, CISCO_URL_IT, CISCO_URL } from "../../utils/Api-candelaria/api";
+import { Spinner } from "../Spinner/Spinner"
 import "./devices.css";
 
 export function Devices() {
   const [devices, setDevices] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [filterDownPaused, setFilterDownPaused] = useState(true);
+  const [loading, setLoading] = useState(true);
+
+  // Probar Spinner
+  // useEffect(() => {
+  //   const fakeLoading = setTimeout(() => {
+  //     setLoading(false);
+  //   }, 21000);
+  //   return () => {
+  //     clearTimeout(fakeLoading);
+  //   };
+  // }, []);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const devicesList = await getDevices();
         setDevices(devicesList);
+        setLoading(false);
       } catch (error) {
         console.error("Error al obtener el listado de Devices:", error);
         return error;
@@ -91,7 +104,7 @@ export function Devices() {
             : device.cisco_device_name}
         </td>
         <td>
-        <a href={`${device.red === 'OT' ? CISCO_URL : CISCO_URL_IT}${device.host}&forceLoad=true`} target="_blank">
+          <a href={`${device.red === 'OT' ? CISCO_URL : CISCO_URL_IT}${device.host}&forceLoad=true`} target="_blank">
             {device.data_backup === "true"
               ? `⚠️ ${device.cisco_port}`
               : device.cisco_port}
@@ -143,30 +156,32 @@ export function Devices() {
         Down
       </label>
 
-      <div className="devices-container">
-        <table>
-          <thead>
-            <tr>
-              <th>HOST</th>
-              <th>TYPE</th>
-              <th>SITE</th>
-              <th>DPTO</th>
-              <th>PRTG DEVICE</th>
-              <th>PRTG SENSOR</th>
-              <th>PRTG STATUS</th>
-              <th>PRTG LASTUP</th>
-              <th>PRTG LASTDOWN</th>
-              <th>CISCO IP</th>
-              <th>CISCO SW NAME</th>
-              <th>CISCO PUERTO</th>
-              <th>CISCO ESTADO</th>
-              <th>CISCO REACHABILITY</th>
-            </tr>
-          </thead>
-          <tbody>{renderTableBody()}</tbody>
-        </table>
-        {renderRowCount()}
-      </div>
+      {loading ? <Spinner /> : (
+        <div className="devices-container">
+          <table>
+            <thead>
+              <tr>
+                <th>HOST</th>
+                <th>TYPE</th>
+                <th>SITE</th>
+                <th>DPTO</th>
+                <th>PRTG DEVICE</th>
+                <th>PRTG SENSOR</th>
+                <th>PRTG STATUS</th>
+                <th>PRTG LASTUP</th>
+                <th>PRTG LASTDOWN</th>
+                <th>CISCO IP</th>
+                <th>CISCO SW NAME</th>
+                <th>CISCO PUERTO</th>
+                <th>CISCO ESTADO</th>
+                <th>CISCO REACHABILITY</th>
+              </tr>
+            </thead>
+            <tbody>{renderTableBody()}</tbody>
+          </table>
+          {renderRowCount()}
+        </div>
+      )}
     </>
   );
 }

@@ -92,25 +92,17 @@
     width: 4.2rem;
 }
 
-/* .button-clients {
-    background-color: #bd0b21;
+.home-message-container {
+    width: 100%;
+    border: 2px solid green;
+    background-color: rgb(154, 243, 154);
+    text-align: center;
+    font-size: 0.9rem;
 }
-.button-switches {
-    background-color: #382C7E;
-}
-.button-ups {
-    background-color: #0b7cbd;
-}
-.button-vpn {
-    background-color: #565656;
-}
-.button-mesh {
-    background-color: #40a800;
-}
-.button-devices {
-    background-color: #750071;
-} */
 
+.home-message-container p {
+    font-weight: bold;
+}
 
 .dash-mesh-home {
     width: 95%;

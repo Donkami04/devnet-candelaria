@@ -7,6 +7,7 @@ export const CreateUps = () => {
   const [ip, setIp] = useState("");
   const [ubication, setUbication] = useState("");
   const [mensaje, setMensaje] = useState("");
+  const token = localStorage.getItem("jwtToken");
 
   const handleIpChange = (event) => {
     setIp(event.target.value);
@@ -18,13 +19,21 @@ export const CreateUps = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    if (!token) {
+      setMensaje("No autorizado, por favor inicie sesión.");
+      return;
+    }
     try {
       const response = await axios.post(
         `${BASE_API_URL}/ups/new`,
         {
           ip,
           ubication,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
       );
       setMensaje(response.data.message);

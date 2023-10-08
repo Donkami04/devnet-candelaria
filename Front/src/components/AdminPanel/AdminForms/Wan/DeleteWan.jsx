@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { BASE_API_URL } from "../../../../utils/Api-candelaria/api"
+import { BASE_API_URL } from "../../../../utils/Api-candelaria/api";
 import "../form.css";
 
 export const DeleteWan = () => {
@@ -14,14 +14,22 @@ export const DeleteWan = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    const token = localStorage.getItem("jwtToken");
+
     try {
+      if (!token) {
+        setMensaje("No autorizado, por favor inicie sesión.");
+        return; // No envíes la petición si no hay token
+      }
       if (ip.trim() === "") {
         setMensaje("Por favor, ingrese una dirección IP válida.");
         return; // No realizar la solicitud si ip está vacío
       }
-      const response = await axios.delete(
-        `${BASE_API_URL}/wan/remove/${ip}`
-      );
+      const response = await axios.delete(`${BASE_API_URL}/wan/remove/${ip}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setMensaje(response.data.message);
       setIp("");
     } catch (error) {
@@ -40,28 +48,28 @@ export const DeleteWan = () => {
   };
 
   return (
-
-      <div className="form-container">
-        <h2 className="form-title">Eliminar WAN</h2>
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label className="form-label" htmlFor="ip">IP:</label>
-            <input
-              className="form-input"
-              type="text"
-              id="ip"
-              value={ip}
-              onChange={handleIpChange}
-            />
-          </div>
-          <div>
-            <button className="form-button" type="submit">
-              Eliminar
-            </button>
-          </div>
-        </form>
-        <p className="form-message">{mensaje}</p>
-      </div>
-
+    <div className="form-container">
+      <h2 className="form-title">Eliminar WAN</h2>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label className="form-label" htmlFor="ip">
+            IP:
+          </label>
+          <input
+            className="form-input"
+            type="text"
+            id="ip"
+            value={ip}
+            onChange={handleIpChange}
+          />
+        </div>
+        <div>
+          <button className="form-button" type="submit">
+            Eliminar
+          </button>
+        </div>
+      </form>
+      <p className="form-message">{mensaje}</p>
+    </div>
   );
 };

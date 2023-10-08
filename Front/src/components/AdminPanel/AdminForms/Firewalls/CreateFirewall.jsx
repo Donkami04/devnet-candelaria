@@ -13,8 +13,8 @@ export const CreateFirewall = () => {
     gateway: "",
     ubication: "",
   });
-
   const [mensaje, setMensaje] = useState("");
+  const token = localStorage.getItem("jwtToken");
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -26,11 +26,19 @@ export const CreateFirewall = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    if (!token) {
+      setMensaje("No autorizado, por favor inicie sesión.");
+      return;
+    }
     try {
       const response = await axios.post(
         `${BASE_API_URL}/firewalls/new`,
-        dataFirewall
+        dataFirewall,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       setMensaje(response.data.message);
       setDataFirewall({
@@ -156,8 +164,8 @@ export const CreateFirewall = () => {
             onChange={handleInputChange}
           >
             <option value=""></option>
-            <option value="corporate">corporate</option>
-            <option value="community">community</option>
+            <option value="corporate">Corporativo</option>
+            <option value="community">Comunitario</option>
           </select>
         </div>
         <div>

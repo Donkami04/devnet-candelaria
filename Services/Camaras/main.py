@@ -35,18 +35,18 @@ def get_devices_data():
     cursor = mydb.cursor()
     query = "SELECT * FROM dcs.data_devices"
     cursor.execute(query)
-
+    
     column_names = [column[0] for column in cursor.description]
 
     # Convertir los resultados a una lista de diccionarios
     devices = []
     # devices = [{
     #     'id':1,
-    #     'ip':'10.224.4.31',
+    #     'ip':'10.225.6.17',
     #     'type_device':'Camara',
     #     'site':'casa',
     #     'dpto': 'asda',
-    #     'red': 'IT'
+    #     'red': 'OT'
     # }]
     for row in cursor:
         row_dict = {}
@@ -64,6 +64,7 @@ def get_devices_data():
             red_type = device['red']
 
             prtg_data = get_prtg_data(ip)
+            print(prtg_data)
             prtg_name_device = prtg_data.get('prtg_name_device', 'Not Found')
             prtg_id_device = prtg_data.get('prtg_id_device', 'Not Found')
             prtg_name_sensor = prtg_data.get('prtg_name_sensor', 'Not Found')
@@ -77,7 +78,8 @@ def get_devices_data():
                 red = '10.224.241.14'
                 
             cisco_data = get_cisco_data(cursor, red, ip)
-            cisco_device_ip_adrress = cisco_data['cisco_device_ip_adrress']
+            print(cisco_data)
+            cisco_device_ip_adress = cisco_data['cisco_device_ip_adress']
             cisco_device_name = cisco_data['cisco_device_name']
             cisco_client_port = cisco_data['cisco_client_port']
             cisco_client_status = cisco_data['cisco_client_status']
@@ -86,8 +88,9 @@ def get_devices_data():
             cisco_client_mac_address = cisco_data['cisco_client_mac_address']
             is_databackup = cisco_data['is_databackup']
             
+            
             query = (f"INSERT INTO dcs.devices (host, type, site, dpto, prtg_name_device, prtg_id, prtg_sensorname, prtg_status, prtg_lastup, prtg_lastdown, cisco_device_ip, cisco_device_name, cisco_port, cisco_status, cisco_reachability, cisco_status_device, cisco_mac_address, data_backup, red)"
-                f"VALUES ('{ip}', '{device_type}', '{site}', '{dpto}', '{prtg_name_device}', '{prtg_id_device}', '{prtg_name_sensor}', '{prtg_status}', '{prtg_lastup}', '{prtg_lastdown}', '{cisco_device_ip_adrress}', '{cisco_device_name}', '{cisco_client_port}', '{cisco_client_status}', '{cisco_device_reachability}', '{prtg_device_status}', '{cisco_client_mac_address}', '{is_databackup}', '{red_type}')")
+                f"VALUES ('{ip}', '{device_type}', '{site}', '{dpto}', '{prtg_name_device}', '{prtg_id_device}', '{prtg_name_sensor}', '{prtg_status}', '{prtg_lastup}', '{prtg_lastdown}', '{cisco_device_ip_adress}', '{cisco_device_name}', '{cisco_client_port}', '{cisco_client_status}', '{cisco_device_reachability}', '{prtg_device_status}', '{cisco_client_mac_address}', '{is_databackup}', '{red_type}')")
             cursor.execute(query)
             mydb.commit()
             
@@ -109,7 +112,7 @@ def get_devices_data():
         fecha_y_hora = str(fecha_y_hora)
         cursor.execute(f"INSERT INTO dcs.fechas_consultas_devices (ultima_consulta, estado) VALUES ('{fecha_y_hora}', 'ERROR')")
         mydb.commit()
-        cursor.close()
+        # cursor.close()
         
 def get_prtg_data(ip):
     prtg_data = {
@@ -161,13 +164,13 @@ def get_prtg_data(ip):
 def cisco_backup_data(cursor, ip):
     cisco_data = {}
     try:
-        query = f"SELECT * FROM dcs.devices WHERE host = '{ip}' AND cisco_device_name <> 'Not Found' ORDER BY id DESC LIMIT 1"
+        query = f"SELECT * FROM dcs.devices WHERE host = '{ip}' AND cisco_device_name <> 'Not Found' AND cisco_device_name <> 'Error Devnet' ORDER BY id DESC LIMIT 1"
         cursor.execute(query)
         results = cursor.fetchall()
         data_backup = [dict(zip(cursor.column_names, row)) for row in results]
         data_backup = data_backup[0]
         
-        cisco_data['cisco_device_ip_adrress'] = data_backup['cisco_device_ip']
+        cisco_data['cisco_device_ip_adress'] = data_backup['cisco_device_ip']
         cisco_data['cisco_device_name'] = data_backup['cisco_device_name']
         cisco_data['cisco_client_port'] = data_backup['cisco_port']
         cisco_data['cisco_client_status'] = data_backup['cisco_status']
@@ -178,7 +181,7 @@ def cisco_backup_data(cursor, ip):
         return cisco_data
 
     except:
-        cisco_data['cisco_device_ip_adrress'] = 'Not Found'
+        cisco_data['cisco_device_ip_adress'] = 'Not Found'
         cisco_data['cisco_device_name'] = 'Not Found'
         cisco_data['cisco_client_port'] = 'Not Found'
         cisco_data['cisco_client_status'] = 'Not Found'
@@ -190,6 +193,9 @@ def cisco_backup_data(cursor, ip):
 
 
 def get_cisco_data(cursor, red, ip):
+
+    cisco_data = { 'is_databackup': 'false' }
+    
     try:
         URL_CISCO_GET_ID = os.getenv('URL_CISCO_IP').format(red=red, ip=ip)
         response_cisco_get_id = requests.get(URL_CISCO_GET_ID, verify=False).json()
@@ -197,31 +203,25 @@ def get_cisco_data(cursor, red, ip):
         if cisco_id_device == 'Not Found':
             cisco_data = cisco_backup_data(cursor, ip)
             return cisco_data
+        
         else:
-            cisco_data = {
-                'cisco_device_ip_adrress': 'Not Found',
-                'cisco_device_name': 'Not Found',
-                'cisco_client_port': 'Not Found',
-                'cisco_client_status': 'Not Found',
-                'cisco_device_reachability': 'Not Found',
-                'prtg_device_status': 'Not Found',
-                'cisco_client_mac_address': 'Not Found',
-                'is_databackup': 'false'
-            }
-
             URL_CISCO_ID = os.getenv('URL_CISCO_ID').format(red=red, cisco_id_device=cisco_id_device)
             cisco_client_response = requests.get(URL_CISCO_ID, verify=False).json()
-            cisco_client_data = cisco_client_response['queryResponse']['entity'][0]['clientsDTO']
+            cisco_client_data = cisco_client_response.get('queryResponse', {'queryResponse':'Not Found'}).get('entity', [{}])[0].get('clientsDTO', 'Not Found')
+            
+            if cisco_client_data == 'Not Found':
+                cisco_data = cisco_backup_data(cursor, ip)
+                return cisco_data
+
             cisco_data['cisco_client_port'] = cisco_client_data['clientInterface']
             cisco_data['cisco_client_status'] = cisco_client_data['status']
-            cisco_data['cisco_client_mac_address'] = cisco_client_data['macAddress']['octets']
-            
+            cisco_data['cisco_client_mac_address'] = cisco_client_data['macAddress']['octets']  
             cisco_data['cisco_device_name'] = cisco_client_data['deviceName']
-            cisco_data['cisco_device_ip_adrress'] = cisco_client_data['deviceIpAddress']['address']
+            cisco_data['cisco_device_ip_adress'] = cisco_client_data['deviceIpAddress']['address']
 
-            prtg_device_ip_url = os.getenv('URL_PRTG_IP').format(ip=cisco_data['cisco_device_ip_adrress'])
+            #? Obtencion del estado del sensor ping en PRTG correspondiente al deviceIpAdress
+            prtg_device_ip_url = os.getenv('URL_PRTG_IP').format(ip=cisco_data['cisco_device_ip_adress'])
             prtg_device_ip_response = requests.get(prtg_device_ip_url, verify=False).json()
-            
             if prtg_device_ip_response['treesize'] == 0:
                 cisco_data['prtg_device_status'] = 'Not Found'
             
@@ -231,19 +231,17 @@ def get_cisco_data(cursor, red, ip):
                 prtg_device_status_response = requests.get(prtg_device_id_url, verify=False).json()
                 cisco_data['prtg_device_status'] = prtg_device_status_response['sensors'][0]['status']
                 
-            CISCO_DEVICE_IP_URL = os.getenv('URL_CISCO_IP').format(red=red, ip=cisco_data['cisco_device_ip_adrress'])
+            CISCO_DEVICE_IP_URL = os.getenv('URL_CISCO_IP_DEVICE').format(red=red, ip=cisco_data['cisco_device_ip_adress'])
             cisco_device_ip_response = requests.get(CISCO_DEVICE_IP_URL, verify=False).json()
-            if cisco_device_ip_response['queryResponse']['@count'] == 0:
-                cisco_data['cisco_device_reachability'] = 'Not Found'
-            else:
-                cisco_device_id = cisco_device_ip_response['queryResponse']['entityId'][0]['$']
-                CISCO_DEVICE_ID_URL = os.getenv('URL_CISCO_ID_DEVICE').format(red=red, id_device=cisco_device_id)
-                cisco_device_id_response = requests.get(CISCO_DEVICE_ID_URL, verify=False).json()
-                cisco_data['cisco_device_reachability'] = cisco_device_id_response.get('queryResponse', {}).get('entity', [{}])[0].get('devicesDTO', {}).get('reachability', 'Not Found')
+            cisco_device_id = cisco_device_ip_response.get('queryResponse', {'queryResponse':'Not Found'}).get('entityId', [{}])[0].get('$', 'Not Found')
+            
+            CISCO_DEVICE_ID_URL = os.getenv('URL_CISCO_ID_DEVICE').format(red=red, id_device=cisco_device_id)
+            cisco_device_id_response = requests.get(CISCO_DEVICE_ID_URL, verify=False).json()
+            cisco_data['cisco_device_reachability'] = cisco_device_id_response.get('queryResponse', {'queryResponse':'Not Found'}).get('entity', [{}])[0].get('devicesDTO', {}).get('reachability', 'Not Found')
 
     except Exception as e:
         cisco_data = {
-            'cisco_device_ip_adrress': 'Error Devnet',
+            'cisco_device_ip_adress': 'Error Devnet',
             'cisco_device_name': 'Error Devnet',
             'cisco_client_port': 'Error Devnet',
             'cisco_client_status': 'Error Devnet',

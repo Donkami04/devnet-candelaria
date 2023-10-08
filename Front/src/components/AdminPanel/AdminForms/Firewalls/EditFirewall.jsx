@@ -17,20 +17,31 @@ export const EditFirewall = () => {
   });
   const [mensaje, setMensaje] = useState("");
   const [showEditFields, setShowEditFields] = useState(false);
+  const [ubication, setUbication] = useState("");
+  const token = localStorage.getItem("jwtToken");
 
   const handleIpChange = (event) => {
     setIp(event.target.value);
   };
 
   const handleGetFirewallInfo = async () => {
-    if (ip.trim() === "") {
-      setMensaje("Por favor, ingrese un IP de firewall válido.");
+    if (ip.trim() === "" || ubication.trim() === "") {
+      setMensaje(
+        "Por favor, ingrese una IP y una Ubicación de firewall válida."
+      );
       setShowEditFields(false);
       return;
     }
 
     try {
-      const response = await axios.get(`${BASE_API_URL}/firewalls/${ip}`);
+      if (!token) {
+        setMensaje("No autorizado, por favor inicie sesión.");
+        return;
+      }
+      const response = await axios
+      .get(
+        `${BASE_API_URL}/firewalls/${ip}/${ubication}`, 
+      );
 
       const firewallData = response?.data?.data;
       const message = response?.data?.message;
@@ -69,10 +80,18 @@ export const EditFirewall = () => {
       // Crear una copia de los datos del firewalle sin el campo "id"
       const firewallDataWithoutId = { ...dataFirewall };
       delete firewallDataWithoutId.id;
-
+      if (!token) {
+        setMensaje("No autorizado, por favor inicie sesión.");
+        return;
+      }
       const response = await axios.put(
         `${BASE_API_URL}/firewalls/edit/${id}`,
-        firewallDataWithoutId
+        firewallDataWithoutId,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       setMensaje(response.data.message);
     } catch (error) {
@@ -105,6 +124,21 @@ export const EditFirewall = () => {
             value={ip}
             onChange={handleIpChange}
           />
+            <label className="form-label" htmlFor="ubication">
+              Ubicación:
+            </label>
+            <select
+              className="form-select"
+              type="text"
+              id="ubication"
+              value={ubication}
+              onChange={(e) => setUbication(e.target.value)}
+              required
+            >
+              <option value=""></option>
+              <option value="corporate">Corporativo</option>
+              <option value="community">Comunitario</option>
+            </select>
           <button
             className="form-button search-button"
             onClick={handleGetFirewallInfo}

@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { BASE_API_URL } from "../../../../utils/Api-candelaria/api"
+import { BASE_API_URL } from "../../../../utils/Api-candelaria/api";
 import "../form.css";
 
 export const EditWan = () => {
   const [ip, setIp] = useState("");
 
-  const [id, setId] = useState(0)
+  const [id, setId] = useState(0);
   const [newIp, setNewIp] = useState("");
 
   const [mensaje, setMensaje] = useState("");
@@ -17,26 +17,27 @@ export const EditWan = () => {
   };
 
   const handleGetWanInfo = async () => {
-    // Validar si el campo ip está vacío
+    const token = localStorage.getItem("jwtToken");
+    if (!token) {
+      setMensaje("No autorizado, por favor inicie sesión.");
+      return;
+    }
     if (ip.trim() === "") {
       setMensaje("Por favor, ingrese una dirección IP válida.");
       setShowEditFields(false);
       return; // No realizar la solicitud si ip está vacío
     }
-  
+
     try {
-      const response = await axios.get(
-        `${BASE_API_URL}/wan/${ip}`
-      );
-  
+      const response = await axios.get(`${BASE_API_URL}/wan/${ip}`);
+
       const currentIp = response?.data?.data?.ip;
       const currentId = response?.data?.data?.id;
-  
+
       setNewIp(currentIp);
       setId(currentId);
       setMensaje("");
       setShowEditFields(true);
-      
     } catch (error) {
       if (
         error.response &&
@@ -53,16 +54,24 @@ export const EditWan = () => {
       }
     }
   };
-  
 
   const handleEditWan = async (event) => {
     event.preventDefault();
-
+    const token = localStorage.getItem("jwtToken");
+    if (!token) {
+      setMensaje("No autorizado, por favor inicie sesión.");
+      return;
+    }
     try {
       const response = await axios.put(
         `${BASE_API_URL}/wan/edit/${id}`,
         {
-          ip: newIp, 
+          ip: newIp,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
       );
       setMensaje(response.data.message);
@@ -86,7 +95,9 @@ export const EditWan = () => {
       <div className="form-container">
         <h2 className="form-title">Editar WAN</h2>
         <div>
-          <label className="form-label" htmlFor="ip">Buscar por IP:</label>
+          <label className="form-label" htmlFor="ip">
+            Buscar por IP:
+          </label>
           <input
             className="form-input"
             type="text"
@@ -94,22 +105,27 @@ export const EditWan = () => {
             value={ip}
             onChange={handleIpChange}
           />
-          <button className="form-button search-button" onClick={handleGetWanInfo}>
+          <button
+            className="form-button search-button"
+            onClick={handleGetWanInfo}
+          >
             Buscar
           </button>
-          <hr className="form-divider" /> 
+          <hr className="form-divider" />
         </div>
 
         {showEditFields && (
           <form onSubmit={handleEditWan}>
             <div>
-              <label className="form-label" htmlFor="newIp">IP:</label>
+              <label className="form-label" htmlFor="newIp">
+                IP:
+              </label>
               <input
                 className="form-input"
                 type="text"
                 id="newIp"
-                value={newIp ?? ' '}
-                onChange={(e) => setNewIp(e.target.value)} 
+                value={newIp ?? " "}
+                onChange={(e) => setNewIp(e.target.value)}
               />
             </div>
             <div>
