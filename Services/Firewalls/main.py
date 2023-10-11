@@ -1,4 +1,4 @@
-import mysql.connector, warnings, time, sched, datetime, os, re, traceback, logging, requests
+import mysql.connector, warnings, time, sched, datetime, os, re, traceback, logging, requests, paramiko
 from netmiko import ConnectHandler
 from dotenv import load_dotenv
 from config import database
@@ -63,13 +63,14 @@ def fw_status():
             ubication = fw.get('ubication')
             channel = fw.get('channel')
             logging.info(f'Corriendo : {host} - {name} - {channel}')
-            status_gateway = get_prtg_status(gateway)    
+            status_gateway = get_prtg_status(gateway)
+            
+            if ubication == 'corporate':
+                number_users(host, USER, PASSWORD)  
             
             try:
                 if vdom != 'N/A':
                     results = vdom_connection(host, vdom, USER, PASSWORD)
-                    logging.info(f"RESULTS: {results}")
-                    logging.info(f"CHANNEL: {channel}")
                     for canal, state, packet_loss, latency, jitter in results:
                         if canal == channel or canal == 'Not Found':
                             failed_before = check_failed_before(cursor, name, channel)
@@ -181,7 +182,28 @@ def save_bd_error(cursor, mydb, channel, name, fecha_y_hora, link, gateway, ubic
     value = f"VALUES ('{name}', '{canal}', '{state}', '{packet_loss}', '{latency}', '{jitter}', '{failed_before}', '{fecha_y_hora}', '{link}', '{gateway}', '{ubication}', '{status_gateway}')"
     cursor.execute(query + value)
     mydb.commit()
-    
+
+def number_users(host, username, password):
+    try:
+        network_device_list = {
+            "host": host,
+            "username": username,
+            "password": password,
+            "device_type": "fortinet",
+            "port": 2221,
+        }
+        
+        net_connect = ConnectHandler(**network_device_list)
+        output = net_connect.send_command("diagnose debug authd fsso list | grep 'Total number'")
+        net_connect.disconnect()
+        print(output)
+        
+    except Exception as e:
+        if net_connect:
+            net_connect.disconnect()
+        logging.error(f"Error de bajo nivel, posible error en Netmiko")
+        logging.error(e)
+        
     
 def check_failed_before(cursor, name, channel):
     try:

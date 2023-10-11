@@ -15,7 +15,7 @@ def vdom_connection(host, vdom, username, password):
 
     # Abrir un canal SSH
     channel = client.invoke_shell()
-
+ 
     # Enviar el comando 'config vdom'
     channel.send("config vdom\n")
     time.sleep(1)  # Esperar para que el comando se procese
@@ -35,7 +35,7 @@ def vdom_connection(host, vdom, username, password):
     output = ""
     while channel.recv_ready():
         output += channel.recv(1024).decode('utf-8')
-    print(f"OUTPUT EN EL VDOM: {output}")
+        
     # Cerrar el canal y la conexión
     channel.close()
     client.close()

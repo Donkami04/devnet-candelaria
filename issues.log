@@ -201,3 +201,27 @@ Common causes of this problem are:
 Device settings: fortinet 10.230.6.7:2221
 
 
+2023-10-10 14:32:58,946 - ERROR - Error de bajo nivel, posible error en Netmiko
+2023-10-10 14:32:58,947 - ERROR - number_users() takes 3 positional arguments but 5 were given
+2023-10-10 15:09:43,751 - ERROR - Error en el segundo Try, FW 10.230.6.7
+2023-10-10 15:09:43,751 - ERROR - TCP connection to device failed.
+
+Common causes of this problem are:
+1. Incorrect hostname or IP address.
+2. Wrong TCP port.
+3. Intermediate firewall blocking access.
+
+Device settings: fortinet 10.230.6.7:2221
+
+
+2023-10-11 16:28:48,650 - ERROR - Error en el segundo Try, FW 10.230.6.7
+2023-10-11 16:28:48,660 - ERROR - TCP connection to device failed.
+
+Common causes of this problem are:
+1. Incorrect hostname or IP address.
+2. Wrong TCP port.
+3. Intermediate firewall blocking access.
+
+Device settings: fortinet 10.230.6.7:2221
+
+
