@@ -129,8 +129,8 @@ export function Wan() {
             </tr>
           ))}
           <tr style={{ cursor: "pointer" }} onClick={toggleAdditionalRows}>
-            <td>10.224.126...🔻</td>
-            <td>Administración Candelaria</td>
+            <td>Candelaria🔻</td>
+            <td>Candelaria</td>
             <td
               className={
                 
