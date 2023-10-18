@@ -9,7 +9,7 @@ export function Switches() {
   
   return (
     <>
-      <Navbar title={'Candelaria'} />
+      <Navbar title={'DCS Candelaria - Switches'} />
       <Status_System tableToShow={switchesTable}/>
       <Button interfaz={'clients'} buttonTag={'Clientes'}/>
       <Dashboard />

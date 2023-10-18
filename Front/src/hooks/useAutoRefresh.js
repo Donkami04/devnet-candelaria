@@ -17,7 +17,7 @@ export const useAutoRefresh = () => {
     if (timerActive) {
       activityTimeout = setTimeout(() => {
         setInactive(true);
-      }, 5 * 60 *  1000);
+      }, 5 * 60 * 1000);
     }
 
     if (inactive && timerActive) {

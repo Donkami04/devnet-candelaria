@@ -98,20 +98,20 @@ services:
     restart: always
     # environment: Este se define en el archivo .env
 
-  # wan:
-  #   build:
-  #     context: Services/Wan
-  #   restart: always
-  #   depends_on:
-  #     - db
-  #   environment:
-  #     - ENVIRONMENT=production
+  wan:
+    build:
+      context: Services/Wan
+    restart: always
+    depends_on:
+      - db
+    environment:
+      - ENVIRONMENT=production
 
-  # firewalls:
-  #   build:
-  #     context: Services/Firewalls
-  #   restart: always
-  #   depends_on:
-  #     - db
-  #   environment:
-  #     - ENVIRONMENT=production
+  firewalls:
+    build:
+      context: Services/Firewalls
+    restart: always
+    depends_on:
+      - db
+    environment:
+      - ENVIRONMENT=production

@@ -1,7 +1,7 @@
-const { getDownClients } = require('../controllers/indicators/overallKpi');
+const { getDownClients } = require('../controllers/dashboards/Candelaria-DCS/overallKpi');
 
 describe("allClients", () => {
-  it("#1, Debe retornar solo clientes que incluyan 'Down' o 'Paused (paused)'", async () => {
+  it("#1, Debe retornar solo clientes que incluyan 'Down'", async () => {
     const listAllClients = [
       { clave: 1, group: "CNS", importancia: "ALTA", status_prtg: 'Down' },
       { clave: 101, group: "CNS", importancia: "ALTA", status_prtg: 'Up' },
@@ -12,8 +12,7 @@ describe("allClients", () => {
 
     const expectedClients = [
       { clave: 1, group: "CNS", importancia: "ALTA", status_prtg: 'Down' },
-      { clave: 240, group: "CNS", importancia: "ALTA", status_prtg: 'Down (knowdelge)' },
-      { clave: 244, group: "CNS", importancia: "ALTA", status_prtg: 'Paused (paused)' },
+      { clave: 240, group: "CNS", importancia: "ALTA", status_prtg: 'Down (knowdelge)' }
     ];
 
     const  result = await getDownClients(listAllClients);

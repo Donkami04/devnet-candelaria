@@ -1,4 +1,4 @@
-const { getDisponibilidad } = require('../controllers/indicators/disponibilidad');
+const { getDisponibilidad } = require('../controllers/dashboards/Candelaria-DCS/disponibilidad');
 
 describe('getDisponibilidad', () => {
   const mockClients = [

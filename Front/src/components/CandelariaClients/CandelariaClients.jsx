@@ -9,7 +9,7 @@ export function CandelariaClients() {
 
   return (
     <>
-      <Navbar title={"Clientes Candelaria"} />
+      <Navbar title={"DCS Candelaria - Clientes"} />
       <Status_System tableToShow={clientsTable} />
       <Button interfaz={'switches'} buttonTag={'Switches'}/>
       <Dashboard />

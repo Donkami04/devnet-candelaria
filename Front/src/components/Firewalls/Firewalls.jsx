@@ -50,6 +50,85 @@ export function Firewalls() {
     return firewallsArray.map((fw) => (
       <tr key={fw.id}>
         <td>{fw.fw}</td>
+        <td>{fw.ip}</td>
+        <td>{fw.num_users}</td>
+        <td>{fw.canal}</td>
+        <td>{fw.link}</td>
+        <td>{fw.state}</td>
+        <td
+          className={
+            fw.packet_loss === "Not Found"
+              ? ""
+              : parseFloat(fw.packet_loss) > 5
+              ? "kpi-red"
+              : parseFloat(fw.packet_loss) >= 2 &&
+                parseFloat(fw.packet_loss) <= 5
+              ? "kpi-yellow"
+              : ""
+          }
+        >
+          {fw.packet_loss === "Not Found" ? "Not Found" : fw.packet_loss + "%"}
+        </td>
+        <td
+          className={
+            fw.latency === "Not Found"
+              ? ""
+              : parseFloat(fw.latency) > 100
+              ? "kpi-red"
+              : parseFloat(fw.latency) >= 50 && parseFloat(fw.latency) <= 100
+              ? "kpi-yellow"
+              : ""
+          }
+        >
+          {fw.latency === "Not Found" ? "Not Found" : fw.latency + " ms"}
+        </td>
+        <td
+          className={
+            fw.jitter === "Not Found"
+              ? ""
+              : parseFloat(fw.jitter) > 30
+              ? "kpi-red"
+              : parseFloat(fw.jitter) >= 10 && parseFloat(fw.jitter) <= 30
+              ? "kpi-yellow"
+              : ""
+          }
+        >
+          {fw.jitter === "Not Found" ? "Not Found" : fw.jitter + " ms"}
+        </td>
+        <td
+          className={
+            fw.status_gateway.includes("Up")
+              ? "kpi-green"
+              : fw.gateway.includes("Paused")
+              ? "kpi-yellow"
+              : fw.gateway.includes("Down")
+              ? "kpi-red"
+              : ""
+          }
+        >
+          {fw.gateway}
+        </td>
+
+        <td>{fw.failed_before}</td>
+      </tr>
+    ));
+  };
+
+  const renderTableBody2 = (firewallsArray) => {
+    if (firewallsArray.length === 0) {
+      return (
+        <tr>
+          <td className="no-match" colSpan="14" style={{ fontSize: "13px" }}>
+            No hay elementos
+          </td>
+        </tr>
+      );
+    }
+
+    return firewallsArray.map((fw) => (
+      <tr key={fw.id}>
+        <td>{fw.fw}</td>
+        <td>{fw.ip}</td>
         <td>{fw.canal}</td>
         <td>{fw.link}</td>
         <td>{fw.state}</td>
@@ -133,6 +212,8 @@ export function Firewalls() {
           <thead>
             <tr>
               <th>NOMBRE</th>
+              <th>IP</th>
+              <th>NÚMERO USUARIOS</th>
               <th>CANAL</th>
               <th>DATOS ENLACE</th>
               <th>ESTADO</th>
@@ -154,6 +235,7 @@ export function Firewalls() {
           <thead>
             <tr>
               <th>NOMBRE</th>
+              <th>IP</th>
               <th>CANAL</th>
               <th>DATOS ENLACE</th>
               <th>ESTADO</th>
@@ -164,7 +246,7 @@ export function Firewalls() {
               <th>FALLO 24Hrs</th>
             </tr>
           </thead>
-          <tbody>{renderTableBody(fwCommunity)}</tbody>
+          <tbody>{renderTableBody2(fwCommunity)}</tbody>
         </table>
         {renderRowCount(fwCommunity)}
       </div>
