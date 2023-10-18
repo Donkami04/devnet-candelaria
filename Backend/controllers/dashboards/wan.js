@@ -30,25 +30,22 @@ async function dashboardWan() {
     }
   });
 
-  const percentsUptime = [];
+  let othersWanUptimePercentLasthMonth = 0;
+  othersWan.forEach(
+    (wanElement) =>
+      (othersWanUptimePercentLasthMonth += wanElement.last_uptime_percent)
+  );
+  const totalElementsOthersWan = othersWan.length;
+  let otherPercentUptime = othersWanUptimePercentLasthMonth / totalElementsOthersWan;
+  otherPercentUptime = parseFloat(otherPercentUptime.toFixed(2));
 
   const adminPercentUptime = adminWanCalculate(adminsWan);
-  percentsUptime.push(adminPercentUptime);
 
-  othersWan.forEach((wanElement) =>
-    percentsUptime.push(wanElement.last_uptime_percent)
-  );
-
-  const totalElementsWan = percentsUptime.length;
-
-  let totalUptimePercentLasthMonth = 0;
-  percentsUptime.forEach(
-    (porcent) => (totalUptimePercentLasthMonth += porcent)
-  );
-
-  let kpiWan = totalUptimePercentLasthMonth / totalElementsWan;
-  kpiWan = parseFloat(kpiWan.toFixed(2));
-  return kpiWan;
+  const data = {
+    kpiAdminWans: adminPercentUptime,
+    kpiOtherWans: otherPercentUptime,
+  };
+  return data;
 }
 
 function adminWanCalculate(adminWans) {
