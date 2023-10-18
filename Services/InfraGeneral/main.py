@@ -3,6 +3,7 @@ import requests, warnings, os, datetime, time, calendar, mysql.connector, loggin
 from dotenv import load_dotenv
 from config import database
 
+
 warnings.filterwarnings("ignore", message="Unverified HTTPS request")
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s - %(message)s")
@@ -30,6 +31,7 @@ logging.getLogger().addHandler(file_handler)
 #     password=database['production']['DB_PASSWORD'],
 #     database=database['production']['DB_DATABASE']
 #     )
+
 
 # cursor = mydb.cursor()
 
@@ -67,6 +69,7 @@ def system_health():
     
 system_health()
 
+
 # def bucle(scheduler):
 #     get_uptime()
 #     scheduler.enter(7200, 1, bucle, (scheduler,))
@@ -74,4 +77,6 @@ system_health()
 # if __name__ == '__main__':
 #     s = sched.scheduler(time.time, time.sleep)
 #     s.enter(0, 1, bucle, (s,))
+
 #     s.run()
+
