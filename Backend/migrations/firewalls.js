@@ -48,8 +48,16 @@ module.exports = {
         type: Sequelize.STRING(100),
         allowNull: true,
       },
+      ip: {
+        type: Sequelize.STRING(100),
+        allowNull: true,
+      },
       canal: {
         type: Sequelize.STRING(100),
+        allowNull: true,
+      },
+      num_users: {
+        type: Sequelize.STRING(32),
         allowNull: true,
       },
       state: {

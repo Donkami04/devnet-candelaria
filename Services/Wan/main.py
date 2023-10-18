@@ -69,9 +69,13 @@ def get_uptime():
                 save_bd(data_wan)
             else:
                 device_id = device_data[0].get('objid')
-                if device_id.startswith('10.224.126'):
-                    get_id_ping_url = os.getenv('URL_PRTG_GET_ID_PING_WITH_ID').format(id_device=device_id) 
-                get_id_ping_url = os.getenv('URL_PRTG_GET_ID_PING_WITH_ID').format(id_device=device_id)
+                
+                if ip_wan.startswith('10.224.126'):
+                    get_id_ping_url = os.getenv('URL_PRTG_GET_ID_PING_WITH_ID_SNMP').format(id_device=device_id)
+
+                else:
+                    get_id_ping_url = os.getenv('URL_PRTG_GET_ID_PING_WITH_ID').format(id_device=device_id)
+                    
                 response_2 = requests.get(get_id_ping_url, verify=False).json()
                 sensor_ping_id = response_2.get('sensors', [{}])[0].get('objid', 'Not Found')
                 sensor_name = response_2.get('sensors', [{}])[0].get('device', 'Not Found')

@@ -6,17 +6,9 @@ const { getRed_HSE } = require("../../../services/overall/RHSE");
 
 // Filtramos por aquellos clientes que incluyan en estado "Down" o "Paused (paused)"
 const getDownClients = (listAllClients) => {
-  const allDownClients = [];
-  for (let i = 0; i < listAllClients.length; i++) {
-    const client = listAllClients[i];
-    if (
-      client['status_prtg'].includes("Down") ||
-      client['status_prtg'].includes("Paused")
-    ) {
-      allDownClients.push(client);
-    };
-  };
-  return allDownClients;
+  return listAllClients.filter((client) => 
+    client.status_prtg.includes("Down")
+  );
 };
 
 function overall(listAllClients) {

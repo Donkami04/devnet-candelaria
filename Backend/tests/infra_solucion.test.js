@@ -1,4 +1,4 @@
-const { getInfraSolucion } = require('../controllers/indicators/infra_solucion');
+const { getInfraSolucion } = require('../controllers/dashboards/Candelaria-DCS/infra_solucion');
 
 describe('getInfraSolucion', () => {
   const mockSwitches = [
