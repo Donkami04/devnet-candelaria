@@ -87,8 +87,8 @@ export function Home() {
 
   const overAll = dcsCandeIndicators?.overallKpi?.indicador;
   const disponibilidad = dcsCandeIndicators?.disponibilidad?.indicador;
-  const infra_solucion = dcsCandeIndicators?.infra_solucion?.indicador;
-
+  const infra_solucion = dcsCandeIndicators?.infraSolucion?.indicador;
+  console.log(infra_solucion);
   return (
     <>
       <Navbar title={"Home"} />
