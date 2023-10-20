@@ -1,0 +1,69 @@
+import paramiko
+import time
+import re
+import logging, traceback
+
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
+file_handler = logging.FileHandler('issues.log')
+file_handler.setLevel(logging.WARNING)
+file_handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
+logging.getLogger().addHandler(file_handler)
+paramiko_logger = logging.getLogger("paramiko")
+paramiko_logger.setLevel(logging.WARNING)
+
+def route_function(ip_switch, red, name):
+    try:
+        # Crear una instancia SSHClient de Paramiko
+        client = paramiko.SSHClient()
+        client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+
+        
+        # Conectar al dispositivo
+        client.connect(hostname=ip_switch, port=22, username='roadmin', password='C4nd3*2023')
+
+        # Abrir un canal SSH
+        channel = client.invoke_shell()
+
+        # Enviar otros comandos dentro del contexto 'config vdom'
+        commands = [
+            "show ip route 0.0.0.0\n"
+        ]
+
+        for command in commands:
+            channel.send(command)
+            time.sleep(1)  # Esperar para que el comando se procese
+
+        # Recopilar la salida
+        output = ""
+        while channel.recv_ready():
+            output += channel.recv(1024).decode('utf-8')
+        # print(output)
+        # Cerrar el canal y la conexión
+        channel.close()
+        client.close()
+        
+        data = {
+            'red': red,
+            'name': name,
+        }
+            
+        if 'via "bgp 65001"' not in output:
+            data['viaBgp'] = False
+            data['ip_switch'] = ip_switch
+            return data
+        
+        data['viaBgp'] = True
+        data['ip_switch'] = ip_switch
+        return data
+
+         
+    except Exception as e:
+        logging.error("Error en funcion ROUTE")
+        logging.error(e)
+        logging.error(traceback.format_exc())
+        
+        data = [{
+            'viaBgp': 'Not Found / Error', 
+            'ip_switch': ip_switch
+        }]

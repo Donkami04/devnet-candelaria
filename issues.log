@@ -1,0 +1,54 @@
+2023-10-20 14:43:31,622 - ERROR - Error en el archivo VDOM funcion vdom_connection
+2023-10-20 14:43:31,622 - ERROR - list index out of range
+2023-10-20 14:43:31,622 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/InfraGeneral/eigrp_command.py", line 77, in vdom_connection
+    'Interface': interface[i],
+IndexError: list index out of range
+
+2023-10-20 15:34:38,912 - ERROR - Error en funcion EIRGP
+2023-10-20 15:34:38,912 - ERROR - [Errno -2] Name or service not known
+2023-10-20 15:34:38,922 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/InfraGeneral/command_eigrp.py", line 22, in vdom_connection
+    client.connect(hostname=ip_switch, port=22, username='roadmin', password='C4nd3*2023')
+  File "/home/donkami/.local/lib/python3.10/site-packages/paramiko/client.py", line 377, in connect
+    to_try = list(self._families_and_addresses(hostname, port))
+  File "/home/donkami/.local/lib/python3.10/site-packages/paramiko/client.py", line 202, in _families_and_addresses
+    addrinfos = socket.getaddrinfo(
+  File "/usr/lib/python3.10/socket.py", line 955, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno -2] Name or service not known
+
+2023-10-20 15:34:49,236 - ERROR - Error en funcion EIRGP
+2023-10-20 15:34:49,236 - ERROR - Authentication failed.
+2023-10-20 15:34:49,247 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/InfraGeneral/command_eigrp.py", line 22, in vdom_connection
+    client.connect(hostname=ip_switch, port=22, username='roadmin', password='C4nd3*2023')
+  File "/home/donkami/.local/lib/python3.10/site-packages/paramiko/client.py", line 485, in connect
+    self._auth(
+  File "/home/donkami/.local/lib/python3.10/site-packages/paramiko/client.py", line 818, in _auth
+    raise saved_exception
+  File "/home/donkami/.local/lib/python3.10/site-packages/paramiko/client.py", line 805, in _auth
+    self._transport.auth_password(username, password)
+  File "/home/donkami/.local/lib/python3.10/site-packages/paramiko/transport.py", line 1587, in auth_password
+    return self.auth_handler.wait_for_response(my_event)
+  File "/home/donkami/.local/lib/python3.10/site-packages/paramiko/auth_handler.py", line 263, in wait_for_response
+    raise e
+paramiko.ssh_exception.AuthenticationException: Authentication failed.
+
+2023-10-20 15:35:30,628 - ERROR - Error en funcion EIRGP
+2023-10-20 15:35:30,628 - ERROR - Authentication failed.
+2023-10-20 15:35:30,638 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/InfraGeneral/command_eigrp.py", line 22, in vdom_connection
+    client.connect(hostname=ip_switch, port=22, username='roadmin', password='C4nd3*2023')
+  File "/home/donkami/.local/lib/python3.10/site-packages/paramiko/client.py", line 485, in connect
+    self._auth(
+  File "/home/donkami/.local/lib/python3.10/site-packages/paramiko/client.py", line 818, in _auth
+    raise saved_exception
+  File "/home/donkami/.local/lib/python3.10/site-packages/paramiko/client.py", line 805, in _auth
+    self._transport.auth_password(username, password)
+  File "/home/donkami/.local/lib/python3.10/site-packages/paramiko/transport.py", line 1587, in auth_password
+    return self.auth_handler.wait_for_response(my_event)
+  File "/home/donkami/.local/lib/python3.10/site-packages/paramiko/auth_handler.py", line 263, in wait_for_response
+    raise e
+paramiko.ssh_exception.AuthenticationException: Authentication failed.
+

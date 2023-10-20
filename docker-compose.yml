@@ -107,11 +107,11 @@ services:
   #   environment:
   #     - ENVIRONMENT=production
 
-  firewalls:
-    build:
-      context: Services/Firewalls
-    restart: always
-    depends_on:
-      - db
-    environment:
-      - ENVIRONMENT=production
+  # firewalls:
+  #   build:
+  #     context: Services/Firewalls
+  #   restart: always
+  #   depends_on:
+  #     - db
+  #   environment:
+  #     - ENVIRONMENT=production
