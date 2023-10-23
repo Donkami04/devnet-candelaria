@@ -49,11 +49,11 @@ def route_function(ip_switch, red, name):
         }
             
         if 'via "bgp 65001"' not in output:
-            data['viaBgp'] = False
+            data['via_bgp'] = 'false'
             data['ip_switch'] = ip_switch
             return data
         
-        data['viaBgp'] = True
+        data['via_bgp'] = 'true'
         data['ip_switch'] = ip_switch
         return data
 
@@ -63,7 +63,8 @@ def route_function(ip_switch, red, name):
         logging.error(e)
         logging.error(traceback.format_exc())
         
-        data = [{
-            'viaBgp': 'Not Found / Error', 
-            'ip_switch': ip_switch
-        }]
+        data['via_bgp'] = 'Not Found / Error'
+        data['ip_switch'] = ip_switch
+        
+        return data
+

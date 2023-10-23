@@ -44,33 +44,46 @@ def core1():
     mydb = database_connection()
     cursor = mydb.cursor()
     data_switches = [
-        # {'ip':'10.224.127.1', 'red': 'it', 'name': 'SW-CORE-ADMIN'},
-        {'ip':'10.224.127.2', 'red': 'it', 'name': 'SW-CORE-CONCE'}
+        {'ip':'10.224.127.1', 'red': 'it', 'name': 'ADMIN'},
+        {'ip':'10.224.127.2', 'red': 'it', 'name': 'CONCE'}
     ]
     
     for switch in data_switches:
         ip_switch = switch['ip']
-        name = switch['name']
+        name_switch = switch['name']
         red = switch['red']
         
         id_prtg_switch = get_id_prtg(ip_switch)
         data_interfaces = get_data_interfaces(ip_switch, id_prtg_switch)
         data_systemhealth = system_health(ip_switch, id_prtg_switch)
-        data_bgp = bgp_function(ip_switch, red, name)
-        data_eigrp = eigrp_function(ip_switch, red, name)
-        data_ospf = ospf_function(ip_switch, red, name)
-        # data_route = route_function(ip_switch, red, name)
-        
+        data_bgp = bgp_function(ip_switch, red, name_switch)
+        data_eigrp = eigrp_function(ip_switch, red, name_switch)
+        data_ospf = ospf_function(ip_switch, red, name_switch)
         data_neighbors = data_bgp + data_eigrp + data_ospf
-        print(data_neighbors)
-
+        
+        query = (f"DELETE FROM dcs.neighbors WHERE ip_switch='{ip_switch}'")
+        cursor.execute(query)
+        mydb.commit()
+        
+        data_route = route_function(ip_switch, red, name_switch)
+        route_via_bgp = data_route['via_bgp']
+        route_name = data_route['name']
+        route_red = data_route['red']
+        route_ip_switch = data_route['ip_switch']
+        # query = (f"UPDATE dcs.route_default SET via_bgp = '{route_via_bgp} 'WHERE ip_switch = '{route_ip_switch}'")
+        #! Query comentado para rellenar tabla de datos fijos
+        query = (f"INSERT INTO dcs.route_default (`via_bgp`, `name`, `red`, `ip_switch`) VALUES ('{route_via_bgp}','{route_name}','{route_red}','{route_ip_switch}')")
+        cursor.execute(query)
+        mydb.commit()
+        
         for data in data_neighbors:
             ip_neighbor = data['ip_neighbor']
             ip_switch = data['ip_switch']
             red = data['red']
-            name = data['name']
             neighbor = data['neighbor']
-            query = f"INSERT INTO dcs.inf_gen_netmiko (`ip_neighbor`, `neighbor`, `red`, `name`, `ip_switch`) VALUES ('{ip_neighbor}','{neighbor}','{red}','{name}','{ip_switch}')"
+            #! Query comentado para rellenar tabla de datos fijos
+            # query = f"INSERT INTO dcs.data_neighbors (`ip_neighbor`, `neighbor`, `red`, `name`, `ip_switch`) VALUES ('{ip_neighbor}','{neighbor}','{red}','{name}','{ip_switch}')"
+            query = f"INSERT INTO dcs.neighbors (`ip_neighbor`, `neighbor`, `red`, `name`, `ip_switch`) VALUES ('{ip_neighbor}','{neighbor}','{red}','{name_switch}','{ip_switch}')"
             cursor.execute(query)
             mydb.commit()       
 
@@ -81,8 +94,9 @@ def core1():
                 break
             status_interface = interface['status']
             id_prtg = interface['objid']
-            query = "INSERT INTO dcs.interfaces (id_prtg, name, status, ip_switch) VALUES (%s, %s, %s, %s) ON DUPLICATE KEY UPDATE name = %s, status = %s"
-            cursor.execute(query, (id_prtg, name_interface, status_interface, ip_switch, name_interface, status_interface))
+            query = "INSERT INTO dcs.interfaces (id_prtg, name, status, ip_switch, name_switch) VALUES (%s, %s, %s, %s, %s) ON DUPLICATE KEY UPDATE name = %s, status = %s"
+            cursor.execute(query, (id_prtg, name_interface, status_interface, ip_switch, name_switch, name_interface, status_interface))
+
             mydb.commit()
             
         for sensor in data_systemhealth:
@@ -92,8 +106,8 @@ def core1():
             status_sensor = sensor['status']
             id_prtg = sensor['objid']
             lastvalue = sensor['lastvalue']
-            query = "INSERT INTO dcs.system_health (name, status, id_prtg, lastvalue, ip_switch) VALUES (%s, %s, %s, %s, %s) ON DUPLICATE KEY UPDATE name = %s, status = %s, lastvalue = %s"
-            cursor.execute(query, (name_sensor, status_sensor, id_prtg, lastvalue, ip_switch, name_sensor, status_sensor, lastvalue))
+            query = "INSERT INTO dcs.system_health (name, status, id_prtg, lastvalue, ip_switch, name_switch) VALUES (%s, %s, %s, %s, %s, %s) ON DUPLICATE KEY UPDATE name = %s, status = %s, lastvalue = %s"
+            cursor.execute(query, (name_sensor, status_sensor, id_prtg, lastvalue, ip_switch, name_switch, name_sensor, status_sensor, lastvalue))
             mydb.commit()
         
     cursor.close()

@@ -130,3 +130,31 @@ export const getUsers = async () => {
     .then((response) => response.data)
     .catch((error) => console.error('USUAROS: Error del API REST Candealaria : ',error));
 };
+
+export const getInterfaces = async () => {
+  return axios
+    .get(`${BASE_API_URL}/interfaces`)
+    .then((response) => response.data)
+    .catch((error) => console.error('INTERFACES: Error del API REST Candealaria : ',error));
+};
+
+export const getSystemHealth = async () => {
+  return axios
+    .get(`${BASE_API_URL}/system-health`)
+    .then((response) => response.data)
+    .catch((error) => console.error('SYSTEM HEALTH: Error del API REST Candealaria : ',error));
+};
+
+export const getNeighbors = async () => {
+  return axios
+    .get(`${BASE_API_URL}/neighbors`)
+    .then((response) => response.data)
+    .catch((error) => console.error('NEIGHBORS: Error del API REST Candealaria : ',error));
+};
+
+export const getDefaultRoute = async () => {
+  return axios
+    .get(`${BASE_API_URL}/route-default`)
+    .then((response) => response.data)
+    .catch((error) => console.error('DEFAULT ROUTE: Error del API REST Candealaria : ',error));
+};

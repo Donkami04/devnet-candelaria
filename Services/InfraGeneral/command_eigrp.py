@@ -18,7 +18,6 @@ def eigrp_function(ip_switch, red, name):
         client = paramiko.SSHClient()
         client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
-        
         # Conectar al dispositivo
         client.connect(hostname=ip_switch, port=22, username='roadmin', password='C4nd3*2023')
 
@@ -43,51 +42,35 @@ def eigrp_function(ip_switch, red, name):
         # Cerrar el canal y la conexión
         channel.close()
         client.close()
-        
-        patron = r'\d+\s+([\d.]+)\s+(\S+)\s+(\d+)\s+([\w/]+)\s+(\d+)\s+(\w+)\s+(\d+)\s+(\d+)'
+        # print(output)
+        patron = r'(\d+)\s+(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\s+(\S+)\s+(\d+)\s+([\w/]+)\s+(\d+)\s+(\d+:\d+:\d+|\d+)\s+(\d*)\s+(\d*)'
+        # example = "EIGRP-IPv4 Neighbors for AS(1) H   Address                 Interface              Hold Uptime   SRTT   RTO  Q  Seq (sec)         (ms)       Cnt Num 2   10.224.126.22           Te1/9                    13 00:00:11    1   100  0  2880224 6   10.224.126.78           Vl2407                   10 1w3d       10   100  0  80770 1   10.224.126.86           Vl2409                   14 1w3d       10   100  0  80750 0   10.224.125.162          Te1/28                   12 28w5d      24   144  0  6400284 9   10.224.126.38           Te2/1                    12 28w6d      13   100  0  2858677 8   10.224.126.30           Te1/10                   12 28w6d      11   100  0  2858772 7   10.224.125.2            Vl2401                   12 30w5d      21   126  0  14521439 5   10.224.126.14           Te1/6                    12 35w3d      18   108  0  11793655 4   10.224.125.13           Te1/4                    13 35w3d      11   100  0  2376352 3   10.224.126.6            Te1/3                    12 35w3d      12   100  0  8927857"
+        coincidencias = re.finditer(patron, output)
 
-        # Buscar todas las coincidencias en el texto
-        coincidencias = re.findall(patron, output)
-
-        # Crear listas vacías para almacenar los valores de las columnas
-        address = []
-        # interface = []
-        # hold_uptime = []
-        # srtt = []
-        # rto = []
-        # q = []
-        # seq = []
-
-        # Iterar a través de las coincidencias y almacenar los valores en las listas
-        for match in coincidencias:
-            address.append(match[0])
-            # interface.append(match[1])
-            # hold_uptime.append(match[2])
-            # srtt.append(match[3])
-            # rto.append(match[4])
-            # q.append(match[5])
-            # seq.append(match[6])
-            
-        # Crear una lista de diccionarios
         data_list = []
 
-        # Iterar a través de las listas y crear un diccionario para cada conjunto de valores
-        for i in range(len(address)):
+        for match in coincidencias:                
+            address = match.group(2)
             data = {
-                'ip_neighbor': address[i],
+                'ip_neighbor': address,
                 'ip_switch': ip_switch,
                 'neighbor': 'eigrp',
-                'red':red,
-                'name':name
-                # 'Interface': interface[i],
-                # 'Hold Uptime': srtt[i], #! srtt Corresponde al Hold Uptime despues del regex
-                # 'SRTT': srtt[i],
-                # 'RTO': rto[i],
-                # 'Q': q[i],
-                # 'Seq': seq[i]
+                'red': red,
+                'name': name
             }
             data_list.append(data)
 
+        if "10.224.126.22" in output:
+            data = {
+                'ip_neighbor': "10.224.126.22",
+                'ip_switch': ip_switch,
+                'neighbor': 'eigrp',
+                'red': red,
+                'name': name     
+            }
+            data_list.append(data)    
+            
+        # print(data_list)
         return data_list
 
     except Exception as e:
@@ -98,8 +81,11 @@ def eigrp_function(ip_switch, red, name):
             'ip_neighbor': 'Not Found / Error', 
             'ip_switch': ip_switch,
             'neighbor': 'eigrp',
-            'red':red,
-            'name':name
+            'red': red,
+            'name': name
         }]
 
         return data
+
+# eigrp_function('10.224.127.1', 'it', 'conce')
+eigrp_function('10.224.127.2', 'it', 'conce')

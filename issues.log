@@ -52,3 +52,17 @@ paramiko.ssh_exception.AuthenticationException: Authentication failed.
     raise e
 paramiko.ssh_exception.AuthenticationException: Authentication failed.
 
+2023-10-23 12:37:51,872 - ERROR - Error en funcion EIRGP
+2023-10-23 12:37:51,872 - ERROR - name 'get_ip_addresses' is not defined
+2023-10-23 12:37:51,873 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/InfraGeneral/command_eigrp.py", line 48, in eigrp_function
+    get_ip_addresses(output)
+NameError: name 'get_ip_addresses' is not defined
+
+2023-10-23 12:38:18,865 - ERROR - Error en funcion EIRGP
+2023-10-23 12:38:18,865 - ERROR - name 'get_ip_addresses' is not defined
+2023-10-23 12:38:18,866 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/InfraGeneral/command_eigrp.py", line 48, in eigrp_function
+    get_ip_addresses(output)
+NameError: name 'get_ip_addresses' is not defined
+

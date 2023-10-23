@@ -28,6 +28,7 @@ import { AdminFirewalls } from "./components/AdminPanel/AdminViews/AdminFirewall
 import { AdminUsers } from "./components/AdminPanel/AdminViews/AdminUsers";
 import { AdminHome } from "./components/AdminPanel/AdminHome/AdminHome";
 import { Login } from "./components/Login/Logins";
+import { InfraGeneral } from "./components/InfraGeneral/InfraGeneral";
 import "./app.css";
 
 function App() {
@@ -79,6 +80,7 @@ function App() {
         <Route path="/admin/firewalls" element={<AdminFirewalls />} />
         <Route path="/admin/users" element={<AdminUsers />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/monitoreo/infraestrucura-general" element={<InfraGeneral />} />
       </Routes>
       <div className="refresh-button-container">
         <button

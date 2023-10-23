@@ -1,0 +1,35 @@
+.main-infra-gen-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+}
+.section-infra-general-container {
+    border: solid 2px black;
+    width: 95%
+}
+
+.table-infra-general-section tbody td {
+    font-size: 0.9rem;
+}
+.table-infra-general-section tr th {
+    font-size: 1rem;
+}
+
+.table-infra-general-section {
+    text-align: center;
+}
+
+.title-infra-general-section {
+    text-align: center;
+}
+
+.section-infra-general-container {
+    height: auto;
+}
+
+.default-route-infra-general-container {
+    width: 20rem;
+    border: solid 2px black;
+    margin-top: 5px;
+    margin-left: 5px;
+}

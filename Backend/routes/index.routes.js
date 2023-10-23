@@ -11,6 +11,10 @@ const firewallsRoutes = require("./firewalls.routes");
 const wanRoutes = require("./wan.routes");
 const authRoutes = require("./auth.routes");
 const userRoutes = require("./users.routes");
+const neighborsRoutes = require("./neighbors.routes");
+const interfacesRoutes = require("./interfaces.routes");
+const systemHealthRoutes = require("./system_health.routes");
+const routeDefaultRoutes = require("./route_default.routes");
 const router = express.Router();
 
 const allRoutes = (app) => {
@@ -27,6 +31,10 @@ const allRoutes = (app) => {
   router.use("/wan", wanRoutes);
   router.use("/auth", authRoutes);
   router.use("/users", userRoutes);
+  router.use("/neighbors", neighborsRoutes);
+  router.use("/interfaces", interfacesRoutes);
+  router.use("/system-health", systemHealthRoutes);
+  router.use("/route-default", routeDefaultRoutes);
 };
 
 module.exports = { allRoutes };
