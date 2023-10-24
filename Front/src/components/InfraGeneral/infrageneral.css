@@ -5,7 +5,9 @@
 }
 .section-infra-general-container {
     border: solid 2px black;
-    width: 95%
+    width: 95%;
+    margin-top: 20px;
+    margin-left: 10px;
 }
 
 .table-infra-general-section tbody td {
