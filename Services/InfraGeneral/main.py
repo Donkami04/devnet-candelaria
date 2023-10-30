@@ -52,6 +52,7 @@ def core1():
         ip_switch = switch['ip']
         name_switch = switch['name']
         red = switch['red']
+        logging.info(f"{ip_switch} - {name_switch}")
         
         id_prtg_switch = get_id_prtg(ip_switch)
         data_interfaces = get_data_interfaces(ip_switch, id_prtg_switch)
