@@ -30,9 +30,11 @@ export function DevicesDash() {
       indicatorsDevices.numCamerasUp +
       indicatorsDevices.numApUp + 
       indicatorsDevices.numOthersUp + 
+      indicatorsDevices.numImpresorasUp +
       indicatorsDevices.numCamerasDown +
       indicatorsDevices.numApDown + 
-      indicatorsDevices.numOthersDown;
+      indicatorsDevices.numOthersDown +
+      indicatorsDevices.numImpresorasDown;
   
   return (
     <>
@@ -60,20 +62,20 @@ export function DevicesDash() {
             </tr>
             <tr>
                 <td>IMPRESORAS</td>
-                <td>{indicatorsDevices && indicatorsDevices.numApUp}</td>
-                <td>{indicatorsDevices && indicatorsDevices.numApDown}</td>
-                <td>{indicatorsDevices && indicatorsDevices.numTotalAp}</td>
-            </tr>
-            <tr>
-                <td>OTROS</td>
                 <td>{indicatorsDevices && indicatorsDevices.numImpresorasUp}</td>
                 <td>{indicatorsDevices && indicatorsDevices.numImpresorasDown}</td>
                 <td>{indicatorsDevices && indicatorsDevices.numTotalImpresoras}</td>
             </tr>
             <tr>
+                <td>OTROS</td>
+                <td>{indicatorsDevices && indicatorsDevices.numOthersUp}</td>
+                <td>{indicatorsDevices && indicatorsDevices.numOthersDown}</td>
+                <td>{indicatorsDevices && indicatorsDevices.numTotalOthers}</td>
+            </tr>
+            <tr>
                 <td>TOTAL</td>
-                <td>{indicatorsDevices && indicatorsDevices.numCamerasUp + indicatorsDevices.numApUp+ indicatorsDevices.numOthersUp}</td>
-                <td>{indicatorsDevices && indicatorsDevices.numCamerasDown + indicatorsDevices.numApDown+ indicatorsDevices.numOthersDown}</td>
+                <td>{indicatorsDevices && indicatorsDevices.numCamerasUp + indicatorsDevices.numApUp + indicatorsDevices.numOthersUp + indicatorsDevices.numImpresorasUp}</td>
+                <td>{indicatorsDevices && indicatorsDevices.numCamerasDown + indicatorsDevices.numApDown+ indicatorsDevices.numOthersDown + indicatorsDevices.numImpresorasDown}</td>
                 <td>{totalDevicesFake}</td>
             </tr>
         </tbody>

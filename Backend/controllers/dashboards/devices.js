@@ -15,9 +15,6 @@ const dashboardDevices = async () => {
         device.type.toLowerCase() === "camara" &&
         device.prtg_status.includes("Down")
     );
-    // const numTotalCameras = devices.filter(
-    //   (device) => device.type.toLowerCase() === "camara"
-    // );
 
     const numTotalCameras = numCamerasUp.length + numCamerasDown.length;
     

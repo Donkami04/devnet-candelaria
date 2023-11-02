@@ -71,14 +71,14 @@ services:
   #   environment:
   #     - ENVIRONMENT=production
       
-  # camaras:
-  #   build:
-  #     context: Services/Camaras
-  #   restart: always
-  #   depends_on:
-  #     - db
-  #   environment:
-  #     - ENVIRONMENT=production
+  camaras:
+    build:
+      context: Services/Camaras
+    restart: always
+    depends_on:
+      - db
+    environment:
+      - ENVIRONMENT=production
     
   backend-api-rest:
     build:
@@ -107,11 +107,11 @@ services:
     environment:
       - ENVIRONMENT=production
 
-  firewalls:
-    build:
-      context: Services/Firewalls
-    restart: always
-    depends_on:
-      - db
-    environment:
-      - ENVIRONMENT=production
+  # firewalls:
+  #   build:
+  #     context: Services/Firewalls
+  #   restart: always
+  #   depends_on:
+  #     - db
+  #   environment:
+  #     - ENVIRONMENT=production
