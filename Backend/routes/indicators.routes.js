@@ -60,6 +60,7 @@ router.get("/devices", async (req, res, next) => {
       numTotalDevices: dataDevices.numTotalDevices,
       numTotalCameras: dataDevices.numTotalCameras,
       numTotalAp: dataDevices.numTotalAp,
+      numTotalImpresoras: dataDevices.numTotalImpresoras,
       numTotalOthers: dataDevices.numTotalOthers,
       numCamerasUp: dataDevices.numCamerasUp,
       numCamerasDown: dataDevices.numCamerasDown,
@@ -68,6 +69,8 @@ router.get("/devices", async (req, res, next) => {
       numApDown: dataDevices.numApDown,
       numOthersUp: dataDevices.numOthersUp,
       numOthersDown: dataDevices.numOthersDown,
+      numImpresorasUp: dataDevices.numImpresorasUp,
+      numImpresorasDown: dataDevices.numImpresorasDown
     };
     res.json(devicesIndicators);
   } catch (error) {

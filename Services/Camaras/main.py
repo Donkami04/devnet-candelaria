@@ -64,7 +64,6 @@ def get_devices_data():
             red_type = device['red']
 
             prtg_data = get_prtg_data(ip)
-            print(prtg_data)
             prtg_name_device = prtg_data.get('prtg_name_device', 'Not Found')
             prtg_id_device = prtg_data.get('prtg_id_device', 'Not Found')
             prtg_name_sensor = prtg_data.get('prtg_name_sensor', 'Not Found')
@@ -78,7 +77,6 @@ def get_devices_data():
                 red = '10.224.241.14'
                 
             cisco_data = get_cisco_data(cursor, red, ip)
-            print(cisco_data)
             cisco_device_ip_adress = cisco_data['cisco_device_ip_adress']
             cisco_device_name = cisco_data['cisco_device_name']
             cisco_client_port = cisco_data['cisco_client_port']

@@ -53,16 +53,22 @@ export function DevicesDash() {
                 <td>{indicatorsDevices && indicatorsDevices.numTotalCameras}</td>
             </tr>
             <tr>
-                <td>AP</td>
+                <td>ACCESS POINTS</td>
+                <td>{indicatorsDevices && indicatorsDevices.numApUp}</td>
+                <td>{indicatorsDevices && indicatorsDevices.numApDown}</td>
+                <td>{indicatorsDevices && indicatorsDevices.numTotalAp}</td>
+            </tr>
+            <tr>
+                <td>IMPRESORAS</td>
                 <td>{indicatorsDevices && indicatorsDevices.numApUp}</td>
                 <td>{indicatorsDevices && indicatorsDevices.numApDown}</td>
                 <td>{indicatorsDevices && indicatorsDevices.numTotalAp}</td>
             </tr>
             <tr>
                 <td>OTROS</td>
-                <td>{indicatorsDevices && indicatorsDevices.numOthersUp}</td>
-                <td>{indicatorsDevices && indicatorsDevices.numOthersDown}</td>
-                <td>{indicatorsDevices && indicatorsDevices.numTotalOthers}</td>
+                <td>{indicatorsDevices && indicatorsDevices.numImpresorasUp}</td>
+                <td>{indicatorsDevices && indicatorsDevices.numImpresorasDown}</td>
+                <td>{indicatorsDevices && indicatorsDevices.numTotalImpresoras}</td>
             </tr>
             <tr>
                 <td>TOTAL</td>

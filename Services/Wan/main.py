@@ -5,7 +5,7 @@ from config import database
 
 warnings.filterwarnings('ignore', message='Unverified HTTPS request')
 
-logging.basicConfig(level=logging.INFO, format='%(levelname)s - %(message)s')
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 file_handler = logging.FileHandler('issues.log')
 file_handler.setLevel(logging.WARNING)
 file_handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
@@ -84,7 +84,6 @@ def get_uptime():
                     save_bd(data_wan)
                 else:
                     sdate_anterior, edate_anterior, sdate_actual, edate_actual, sdate_hoy, edate_hoy = dates()
-                    
                     last_month = get_wan_data(sensor_ping_id, sdate_anterior, edate_anterior)
                     current_month = get_wan_data(sensor_ping_id, sdate_actual, edate_actual)
                     today = get_wan_data(sensor_ping_id, sdate_hoy, edate_hoy)
@@ -103,6 +102,7 @@ def get_uptime():
                     save_bd(data_wan)
                     
         cursor.close()
+        logging.info("Terminado")
                     
     except Exception as e:
         logging.error(f"Error desconocido con la ip {ip_wan}")
@@ -164,7 +164,7 @@ def get_wan_data(sensor_ping_id, sdate, edate):
         return data
     
     except Exception as e:
-        logging.error(f"Error con la data en la funcion xml_to_dict {root}: {e}")
+        logging.error(f" {root}: {e}")
         
         data = {
             "uptime_days": uptime_days,
@@ -210,7 +210,7 @@ def save_bd(data_wan):
     last_downtimepercent = data_wan['last_downtimepercent']
     current_uptimepercent = data_wan['current_uptimepercent']
     today_uptimepercent = data_wan['today_uptimepercent']
-    
+    # print(last_uptimepercent)
     query = f"INSERT INTO dcs.wan (`ip`, `sensor`, `last_uptime_days`, `last_uptime_percent`, `last_down_days`, `last_down_percent`, `current_uptime_percent`, `today_uptime_percent`)"
     values = f"VALUES ('{ip}', '{sensor_name}', '{last_uptimedays}', '{last_uptimepercent}', '{last_downtimedays}', '{last_downtimepercent}', '{current_uptimepercent}', '{today_uptimepercent}')"
     cursor.execute(query + values)

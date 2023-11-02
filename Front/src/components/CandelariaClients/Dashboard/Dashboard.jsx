@@ -25,8 +25,8 @@ export function Dashboard() {
   const disponibilidadIndicator = indicators?.disponibilidad?.indicador;
   const clients = indicators?.disponibilidad?.clientsStatus;
   
-  const infraSolucionIndicator = indicators?.infra_solucion?.indicador;
-  const switches = indicators?.infra_solucion?.switchesStatus;
+  const infraSolucionIndicator = indicators?.infraSolucion?.indicador;
+  const switches = indicators?.infraSolucion?.switchesStatus;
   
 
   return (

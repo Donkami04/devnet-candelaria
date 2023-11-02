@@ -21,7 +21,7 @@ export function AdminDevices() {
 
   return (
     <>
-      <Navbar title={"Camaras"} />
+      <Navbar title={"Dispositivos"} />
       <ActionButtons
         buttons={buttons}
         activeComponent={activeComponent}
