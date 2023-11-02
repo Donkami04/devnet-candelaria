@@ -39,7 +39,7 @@ export function DefaultRoute() {
       return (
         <div>
           <div className="title-infra-general-section">
-            <h2>SYSTEM HEALTH</h2>
+            <h2>ROUTE DEFAULT</h2>
           </div>
           <div>
             <table className="table-infra-general-section">

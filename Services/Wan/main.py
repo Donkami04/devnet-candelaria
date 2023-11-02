@@ -112,6 +112,8 @@ def get_uptime():
                                 
 # Convierte el dato en float
 def format_historic_data(data):
+    if "?" in data:
+        data = data.replace("?", "100%")
     data = ''.join(data.split())
     data = data.replace('%', '')
     data = data.replace(',', '.')
@@ -139,6 +141,7 @@ def get_wan_data(sensor_ping_id, sdate, edate):
                     result[child.tag] = [result[child.tag], child_data]
             else:
                 result[child.tag] = child_data
+        # print(result['uptimepercent'])
         return result
     
     xml_dict = xml_to_dict(root)
@@ -164,7 +167,7 @@ def get_wan_data(sensor_ping_id, sdate, edate):
         return data
     
     except Exception as e:
-        logging.error(f"Error con la data en la funcion xml_to_dict {root}: {e}")
+        logging.error(f" {root}: {e}")
         
         data = {
             "uptime_days": uptime_days,
@@ -210,7 +213,7 @@ def save_bd(data_wan):
     last_downtimepercent = data_wan['last_downtimepercent']
     current_uptimepercent = data_wan['current_uptimepercent']
     today_uptimepercent = data_wan['today_uptimepercent']
-    
+    # print(last_uptimepercent)
     query = f"INSERT INTO dcs.wan (`ip`, `sensor`, `last_uptime_days`, `last_uptime_percent`, `last_down_days`, `last_down_percent`, `current_uptime_percent`, `today_uptime_percent`)"
     values = f"VALUES ('{ip}', '{sensor_name}', '{last_uptimedays}', '{last_uptimepercent}', '{last_downtimedays}', '{last_downtimepercent}', '{current_uptimepercent}', '{today_uptimepercent}')"
     cursor.execute(query + values)

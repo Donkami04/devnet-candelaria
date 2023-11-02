@@ -26,7 +26,8 @@
 }
 
 .section-infra-general-container {
-    height: auto;
+    height: 30rem;
+    overflow-y: auto;
 }
 
 .default-route-infra-general-container {
@@ -34,4 +35,18 @@
     border: solid 2px black;
     margin-top: 5px;
     margin-left: 5px;
+}
+
+.section-infra-general-container table {
+
+    border-collapse: collapse;
+}
+
+.section-infra-general-container th,
+.section-infra-general-container td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid black;
+  font-size: 0.8rem;
+  text-align: center;
 }

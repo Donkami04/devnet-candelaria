@@ -14,18 +14,11 @@ paramiko_logger.setLevel(logging.WARNING)
 
 def ospf_function(ip_switch, red, name):
     try:
-        # Crear una instancia SSHClient de Paramiko
         client = paramiko.SSHClient()
         client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-
-        
-        # Conectar al dispositivo
         client.connect(hostname=ip_switch, port=22, username='roadmin', password='C4nd3*2023')
-
-        # Abrir un canal SSH
         channel = client.invoke_shell()
 
-        # Enviar otros comandos dentro del contexto 'config vdom'
         commands = [
             "show ip ospf neighbor\n"
         ]
@@ -34,12 +27,9 @@ def ospf_function(ip_switch, red, name):
             channel.send(command)
             time.sleep(1)  # Esperar para que el comando se procese
 
-        # Recopilar la salida
         output = ""
         while channel.recv_ready():
             output += channel.recv(1024).decode('utf-8')
-        # print(output)
-        # Cerrar el canal y la conexión
         channel.close()
         client.close()
         neighbor_list = re.findall(r'(\d+\.\d+\.\d+\.\d+)(?=\s+\d+\s+FULL)', output)

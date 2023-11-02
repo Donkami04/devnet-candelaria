@@ -62,30 +62,37 @@ def core1():
         data_ospf = ospf_function(ip_switch, red, name_switch)
         data_neighbors = data_bgp + data_eigrp + data_ospf
         
-        query = (f"DELETE FROM dcs.neighbors WHERE ip_switch='{ip_switch}'")
-        cursor.execute(query)
-        mydb.commit()
         
         data_route = route_function(ip_switch, red, name_switch)
         route_via_bgp = data_route['via_bgp']
         route_name = data_route['name']
         route_red = data_route['red']
         route_ip_switch = data_route['ip_switch']
-        # query = (f"UPDATE dcs.route_default SET via_bgp = '{route_via_bgp} 'WHERE ip_switch = '{route_ip_switch}'")
+        
+        query = (f"UPDATE dcs.route_default SET via_bgp = '{route_via_bgp}' WHERE ip_switch = '{route_ip_switch}'")
         #! Query comentado para rellenar tabla de datos fijos
-        query = (f"INSERT INTO dcs.route_default (`via_bgp`, `name`, `red`, `ip_switch`) VALUES ('{route_via_bgp}','{route_name}','{route_red}','{route_ip_switch}')")
+        # query = (f"INSERT INTO dcs.route_default (`via_bgp`, `name`, `red`, `ip_switch`) VALUES ('{route_via_bgp}','{route_name}','{route_red}','{route_ip_switch}')")
+        cursor.execute(query)
+        mydb.commit()
+        query_historic = (f"INSERT INTO dcs.historic_route_default (`via_bgp`, `name`, `red`, `ip_switch`) VALUES ('{route_via_bgp}','{route_name}','{route_red}','{route_ip_switch}')")
+        cursor.execute(query_historic)
+        mydb.commit()
+        
+        query = (f"DELETE FROM dcs.neighbors WHERE ip_switch='{ip_switch}'")
         cursor.execute(query)
         mydb.commit()
         
-        for data in data_neighbors:
-            ip_neighbor = data['ip_neighbor']
-            ip_switch = data['ip_switch']
-            red = data['red']
-            neighbor = data['neighbor']
-            #! Query comentado para rellenar tabla de datos fijos
-            # query = f"INSERT INTO dcs.data_neighbors (`ip_neighbor`, `neighbor`, `red`, `name`, `ip_switch`) VALUES ('{ip_neighbor}','{neighbor}','{red}','{name}','{ip_switch}')"
+        for neighbor in data_neighbors:
+            ip_neighbor = neighbor['ip_neighbor']
+            ip_switch = neighbor['ip_switch']
+            red = neighbor['red']
+            neighbor = neighbor['neighbor']
             query = f"INSERT INTO dcs.neighbors (`ip_neighbor`, `neighbor`, `red`, `name`, `ip_switch`) VALUES ('{ip_neighbor}','{neighbor}','{red}','{name_switch}','{ip_switch}')"
             cursor.execute(query)
+            mydb.commit()
+                
+            query_historic = "INSERT INTO dcs.historic_neighbors (`ip_neighbor`, `neighbor`, `red`, `name`, `ip_switch`) VALUES (%s, %s, %s, %s, %s)"
+            cursor.execute(query_historic, (ip_neighbor, neighbor, red, name_switch, ip_switch))
             mydb.commit()       
 
     
@@ -97,7 +104,10 @@ def core1():
             id_prtg = interface['objid']
             query = "INSERT INTO dcs.interfaces (id_prtg, name, status, ip_switch, name_switch) VALUES (%s, %s, %s, %s, %s) ON DUPLICATE KEY UPDATE name = %s, status = %s"
             cursor.execute(query, (id_prtg, name_interface, status_interface, ip_switch, name_switch, name_interface, status_interface))
-
+            mydb.commit()
+            
+            query_historic = "INSERT INTO dcs.historic_interfaces (id_prtg, name, status, ip_switch, name_switch) VALUES (%s, %s, %s, %s, %s)"
+            cursor.execute(query_historic, (id_prtg, name_interface, status_interface, ip_switch, name_switch))
             mydb.commit()
             
         for sensor in data_systemhealth:
@@ -109,6 +119,10 @@ def core1():
             lastvalue = sensor['lastvalue']
             query = "INSERT INTO dcs.system_health (name, status, id_prtg, lastvalue, ip_switch, name_switch) VALUES (%s, %s, %s, %s, %s, %s) ON DUPLICATE KEY UPDATE name = %s, status = %s, lastvalue = %s"
             cursor.execute(query, (name_sensor, status_sensor, id_prtg, lastvalue, ip_switch, name_switch, name_sensor, status_sensor, lastvalue))
+            mydb.commit()
+            
+            query_historic = "INSERT INTO dcs.historic_system_health (name, status, id_prtg, lastvalue, ip_switch, name_switch) VALUES (%s, %s, %s, %s, %s, %s)"
+            cursor.execute(query_historic, (name_sensor, status_sensor, id_prtg, lastvalue, ip_switch, name_switch))
             mydb.commit()
         
     cursor.close()

@@ -66,3 +66,236 @@ NameError: name 'get_ip_addresses' is not defined
     get_ip_addresses(output)
 NameError: name 'get_ip_addresses' is not defined
 
+2023-11-02 01:10:51,217 - ERROR - Error con la data en la funcion xml_to_dict <Element 'historicdata' at 0x7f34e96efe20>: could not convert string to float: '?'
+2023-11-02 01:10:51,218 - ERROR - Error desconocido con la ip 10.224.17.1
+2023-11-02 01:10:51,218 - ERROR - Error: 1265 (01000): Data truncated for column 'today_uptime_percent' at row 1
+2023-11-02 01:10:51,228 - ERROR - TRAZABILIDAD: Traceback (most recent call last):
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 611, in cmd_query
+    self._cmysql.query(
+_mysql_connector.MySQLInterfaceError: Data truncated for column 'today_uptime_percent' at row 1
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Wan/main.py", line 103, in get_uptime
+    save_bd(data_wan)
+  File "/home/donkami/Sona/devnet-candelaria/Services/Wan/main.py", line 216, in save_bd
+    cursor.execute(query + values)
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/cursor_cext.py", line 330, in execute
+    result = self._cnx.cmd_query(
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 619, in cmd_query
+    raise get_mysql_exception(
+mysql.connector.errors.DatabaseError: 1265 (01000): Data truncated for column 'today_uptime_percent' at row 1
+
+2023-11-02 01:12:39,834 - ERROR - Error con la data en la funcion xml_to_dict <Element 'historicdata' at 0x7f24aff16f70>: could not convert string to float: '?'
+2023-11-02 01:12:39,835 - ERROR - Error desconocido con la ip 10.224.17.1
+2023-11-02 01:12:39,835 - ERROR - Error: 1265 (01000): Data truncated for column 'today_uptime_percent' at row 1
+2023-11-02 01:12:39,835 - ERROR - TRAZABILIDAD: Traceback (most recent call last):
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 611, in cmd_query
+    self._cmysql.query(
+_mysql_connector.MySQLInterfaceError: Data truncated for column 'today_uptime_percent' at row 1
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Wan/main.py", line 103, in get_uptime
+    save_bd(data_wan)
+  File "/home/donkami/Sona/devnet-candelaria/Services/Wan/main.py", line 217, in save_bd
+    cursor.execute(query + values)
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/cursor_cext.py", line 330, in execute
+    result = self._cnx.cmd_query(
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 619, in cmd_query
+    raise get_mysql_exception(
+mysql.connector.errors.DatabaseError: 1265 (01000): Data truncated for column 'today_uptime_percent' at row 1
+
+2023-11-02 01:15:19,283 - ERROR - Error con la data en la funcion xml_to_dict <Element 'historicdata' at 0x7fc310f36f70>: could not convert string to float: '?'
+2023-11-02 01:15:19,284 - ERROR - Error desconocido con la ip 10.224.17.1
+2023-11-02 01:15:19,284 - ERROR - Error: 1265 (01000): Data truncated for column 'today_uptime_percent' at row 1
+2023-11-02 01:15:19,284 - ERROR - TRAZABILIDAD: Traceback (most recent call last):
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 611, in cmd_query
+    self._cmysql.query(
+_mysql_connector.MySQLInterfaceError: Data truncated for column 'today_uptime_percent' at row 1
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Wan/main.py", line 103, in get_uptime
+    save_bd(data_wan)
+  File "/home/donkami/Sona/devnet-candelaria/Services/Wan/main.py", line 217, in save_bd
+    cursor.execute(query + values)
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/cursor_cext.py", line 330, in execute
+    result = self._cnx.cmd_query(
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 619, in cmd_query
+    raise get_mysql_exception(
+mysql.connector.errors.DatabaseError: 1265 (01000): Data truncated for column 'today_uptime_percent' at row 1
+
+2023-11-02 01:17:30,284 - ERROR - Error con la data en la funcion xml_to_dict <Element 'historicdata' at 0x7f3b90317010>: could not convert string to float: '?'
+2023-11-02 01:17:30,285 - ERROR - Error desconocido con la ip 10.224.17.1
+2023-11-02 01:17:30,285 - ERROR - Error: 1265 (01000): Data truncated for column 'today_uptime_percent' at row 1
+2023-11-02 01:17:30,285 - ERROR - TRAZABILIDAD: Traceback (most recent call last):
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 611, in cmd_query
+    self._cmysql.query(
+_mysql_connector.MySQLInterfaceError: Data truncated for column 'today_uptime_percent' at row 1
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Wan/main.py", line 103, in get_uptime
+    save_bd(data_wan)
+  File "/home/donkami/Sona/devnet-candelaria/Services/Wan/main.py", line 217, in save_bd
+    cursor.execute(query + values)
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/cursor_cext.py", line 330, in execute
+    result = self._cnx.cmd_query(
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 619, in cmd_query
+    raise get_mysql_exception(
+mysql.connector.errors.DatabaseError: 1265 (01000): Data truncated for column 'today_uptime_percent' at row 1
+
+2023-11-02 01:18:58,143 - ERROR - Error con la data en la funcion xml_to_dict <Element 'historicdata' at 0x7fb851937010>: could not convert string to float: '?'
+2023-11-02 01:18:58,144 - ERROR - Error desconocido con la ip 10.224.17.1
+2023-11-02 01:18:58,144 - ERROR - Error: 1265 (01000): Data truncated for column 'today_uptime_percent' at row 1
+2023-11-02 01:18:58,145 - ERROR - TRAZABILIDAD: Traceback (most recent call last):
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 611, in cmd_query
+    self._cmysql.query(
+_mysql_connector.MySQLInterfaceError: Data truncated for column 'today_uptime_percent' at row 1
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Wan/main.py", line 103, in get_uptime
+    save_bd(data_wan)
+  File "/home/donkami/Sona/devnet-candelaria/Services/Wan/main.py", line 217, in save_bd
+    cursor.execute(query + values)
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/cursor_cext.py", line 330, in execute
+    result = self._cnx.cmd_query(
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 619, in cmd_query
+    raise get_mysql_exception(
+mysql.connector.errors.DatabaseError: 1265 (01000): Data truncated for column 'today_uptime_percent' at row 1
+
+2023-11-02 01:21:49,983 - ERROR - Error con la data en la funcion xml_to_dict <Element 'historicdata' at 0x7fc98c136f20>: could not convert string to float: '?'
+2023-11-02 01:21:49,985 - ERROR - Error desconocido con la ip 10.224.17.1
+2023-11-02 01:21:49,985 - ERROR - Error: 1265 (01000): Data truncated for column 'today_uptime_percent' at row 1
+2023-11-02 01:21:49,985 - ERROR - TRAZABILIDAD: Traceback (most recent call last):
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 611, in cmd_query
+    self._cmysql.query(
+_mysql_connector.MySQLInterfaceError: Data truncated for column 'today_uptime_percent' at row 1
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Wan/main.py", line 103, in get_uptime
+    save_bd(data_wan)
+  File "/home/donkami/Sona/devnet-candelaria/Services/Wan/main.py", line 217, in save_bd
+    cursor.execute(query + values)
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/cursor_cext.py", line 330, in execute
+    result = self._cnx.cmd_query(
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 619, in cmd_query
+    raise get_mysql_exception(
+mysql.connector.errors.DatabaseError: 1265 (01000): Data truncated for column 'today_uptime_percent' at row 1
+
+2023-11-02 01:22:31,044 - ERROR - Error con la data en la funcion xml_to_dict <Element 'historicdata' at 0x7f9a4c13af70>: could not convert string to float: '?'
+2023-11-02 01:22:31,045 - ERROR - Error desconocido con la ip 10.224.17.1
+2023-11-02 01:22:31,045 - ERROR - Error: 1265 (01000): Data truncated for column 'today_uptime_percent' at row 1
+2023-11-02 01:22:31,046 - ERROR - TRAZABILIDAD: Traceback (most recent call last):
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 611, in cmd_query
+    self._cmysql.query(
+_mysql_connector.MySQLInterfaceError: Data truncated for column 'today_uptime_percent' at row 1
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Wan/main.py", line 103, in get_uptime
+    save_bd(data_wan)
+  File "/home/donkami/Sona/devnet-candelaria/Services/Wan/main.py", line 217, in save_bd
+    cursor.execute(query + values)
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/cursor_cext.py", line 330, in execute
+    result = self._cnx.cmd_query(
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 619, in cmd_query
+    raise get_mysql_exception(
+mysql.connector.errors.DatabaseError: 1265 (01000): Data truncated for column 'today_uptime_percent' at row 1
+
+2023-11-02 01:24:28,973 - ERROR - Error con la data en la funcion xml_to_dict <Element 'historicdata' at 0x7fd53972afc0>: could not convert string to float: '?'
+2023-11-02 01:24:28,974 - ERROR - Error desconocido con la ip 10.224.17.1
+2023-11-02 01:24:28,974 - ERROR - Error: 1265 (01000): Data truncated for column 'today_uptime_percent' at row 1
+2023-11-02 01:24:28,974 - ERROR - TRAZABILIDAD: Traceback (most recent call last):
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 611, in cmd_query
+    self._cmysql.query(
+_mysql_connector.MySQLInterfaceError: Data truncated for column 'today_uptime_percent' at row 1
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Wan/main.py", line 103, in get_uptime
+    save_bd(data_wan)
+  File "/home/donkami/Sona/devnet-candelaria/Services/Wan/main.py", line 218, in save_bd
+    cursor.execute(query + values)
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/cursor_cext.py", line 330, in execute
+    result = self._cnx.cmd_query(
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 619, in cmd_query
+    raise get_mysql_exception(
+mysql.connector.errors.DatabaseError: 1265 (01000): Data truncated for column 'today_uptime_percent' at row 1
+
+2023-11-02 01:27:56,308 - ERROR - Error con la data en la funcion xml_to_dict <Element 'historicdata' at 0x7f9463936c50>: could not convert string to float: 'NotFound'
+2023-11-02 01:27:56,999 - ERROR - Error con la data en la funcion xml_to_dict <Element 'historicdata' at 0x7f9463936e30>: could not convert string to float: 'NotFound'
+2023-11-02 01:27:57,650 - ERROR - Error con la data en la funcion xml_to_dict <Element 'historicdata' at 0x7f9463936c00>: could not convert string to float: 'NotFound'
+2023-11-02 01:27:57,651 - ERROR - Error desconocido con la ip 10.224.15.1
+2023-11-02 01:27:57,651 - ERROR - Error: 1265 (01000): Data truncated for column 'last_uptime_percent' at row 1
+2023-11-02 01:27:57,652 - ERROR - TRAZABILIDAD: Traceback (most recent call last):
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 611, in cmd_query
+    self._cmysql.query(
+_mysql_connector.MySQLInterfaceError: Data truncated for column 'last_uptime_percent' at row 1
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Wan/main.py", line 103, in get_uptime
+    save_bd(data_wan)
+  File "/home/donkami/Sona/devnet-candelaria/Services/Wan/main.py", line 241, in save_bd
+    cursor.execute(query + values)
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/cursor_cext.py", line 330, in execute
+    result = self._cnx.cmd_query(
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 619, in cmd_query
+    raise get_mysql_exception(
+mysql.connector.errors.DatabaseError: 1265 (01000): Data truncated for column 'last_uptime_percent' at row 1
+
+2023-11-02 01:30:36,912 - ERROR - Error con la data en la funcion xml_to_dict <Element 'historicdata' at 0x7fa0dc93af70>: could not convert string to float: ''
+2023-11-02 01:30:36,913 - ERROR - Error desconocido con la ip 10.224.17.1
+2023-11-02 01:30:36,913 - ERROR - Error: 1265 (01000): Data truncated for column 'today_uptime_percent' at row 1
+2023-11-02 01:30:36,913 - ERROR - TRAZABILIDAD: Traceback (most recent call last):
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 611, in cmd_query
+    self._cmysql.query(
+_mysql_connector.MySQLInterfaceError: Data truncated for column 'today_uptime_percent' at row 1
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Wan/main.py", line 103, in get_uptime
+    save_bd(data_wan)
+  File "/home/donkami/Sona/devnet-candelaria/Services/Wan/main.py", line 218, in save_bd
+    cursor.execute(query + values)
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/cursor_cext.py", line 330, in execute
+    result = self._cnx.cmd_query(
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 619, in cmd_query
+    raise get_mysql_exception(
+mysql.connector.errors.DatabaseError: 1265 (01000): Data truncated for column 'today_uptime_percent' at row 1
+
+2023-11-02 01:35:50,359 - ERROR -  <Element 'historicdata' at 0x7f5595f3af70>: could not convert string to float: '?'
+2023-11-02 01:35:50,360 - ERROR - Error desconocido con la ip 10.224.17.1
+2023-11-02 01:35:50,360 - ERROR - Error: 1265 (01000): Data truncated for column 'today_uptime_percent' at row 1
+2023-11-02 01:35:50,360 - ERROR - TRAZABILIDAD: Traceback (most recent call last):
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 611, in cmd_query
+    self._cmysql.query(
+_mysql_connector.MySQLInterfaceError: Data truncated for column 'today_uptime_percent' at row 1
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Wan/main.py", line 103, in get_uptime
+    save_bd(data_wan)
+  File "/home/donkami/Sona/devnet-candelaria/Services/Wan/main.py", line 217, in save_bd
+    cursor.execute(query + values)
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/cursor_cext.py", line 330, in execute
+    result = self._cnx.cmd_query(
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 619, in cmd_query
+    raise get_mysql_exception(
+mysql.connector.errors.DatabaseError: 1265 (01000): Data truncated for column 'today_uptime_percent' at row 1
+
