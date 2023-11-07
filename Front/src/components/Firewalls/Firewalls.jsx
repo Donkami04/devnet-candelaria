@@ -99,9 +99,13 @@ export function Firewalls() {
           className={
             fw.status_gateway.includes("Up")
               ? "kpi-green"
-              : fw.gateway.includes("Paused")
+              : fw.status_gateway.includes("Paused")
               ? "kpi-yellow"
-              : fw.gateway.includes("Down")
+              : fw.status_gateway.includes("Down")
+              ? "kpi-red"
+              : fw.status_gateway.includes("Not Found") && fw.gateway.includes("100.64.0.1")
+              ? "kpi-green"
+              : fw.status_gateway.includes("Not Found")
               ? "kpi-red"
               : ""
           }

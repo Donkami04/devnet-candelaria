@@ -129,3 +129,4 @@ def number_users_vdom(host, vdom, username, password, ssh_timeout=45):
             channel.close()
         if client:
             client.close()
+

@@ -5,7 +5,7 @@ from config import database
 
 warnings.filterwarnings('ignore', message='Unverified HTTPS request')
 
-logging.basicConfig(level=logging.INFO, format='%(levelname)s - %(message)s')
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 file_handler = logging.FileHandler('issues.log')
 file_handler.setLevel(logging.WARNING)
 file_handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
@@ -84,7 +84,6 @@ def get_uptime():
                     save_bd(data_wan)
                 else:
                     sdate_anterior, edate_anterior, sdate_actual, edate_actual, sdate_hoy, edate_hoy = dates()
-                    
                     last_month = get_wan_data(sensor_ping_id, sdate_anterior, edate_anterior)
                     current_month = get_wan_data(sensor_ping_id, sdate_actual, edate_actual)
                     today = get_wan_data(sensor_ping_id, sdate_hoy, edate_hoy)
@@ -103,6 +102,7 @@ def get_uptime():
                     save_bd(data_wan)
                     
         cursor.close()
+        logging.info("Terminado")
                     
     except Exception as e:
         logging.error(f"Error desconocido con la ip {ip_wan}")

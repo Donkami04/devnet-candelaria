@@ -17,7 +17,7 @@ export const AdminHome = () => {
     "DCS Clientes Candelaria",
     "DCS Switches Candelaria",
     "UPS",
-    "Camaras",
+    "Dispositivos",
     "WAN",
     "MESH",
     "Firewalls - Canales Internet",

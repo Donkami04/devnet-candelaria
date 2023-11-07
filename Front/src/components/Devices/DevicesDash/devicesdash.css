@@ -3,25 +3,24 @@
   border-collapse: collapse;
   font-family: Arial, sans-serif;
   text-align: center;
+  height: 10rem;
 }
 
 .devices-dash-table th,
-.devices-dash-table td,
-.devices-dash-table-home th,
-.devices-dash-table-home td {
+.devices-dash-table td {
   border: 1px solid black;
   padding: 8px;
 }
 
 .devices-dash-table {
-  width: 33rem;
+  width: 42rem;
   margin: auto;
   table-layout: fixed;
-  border-collapse: collapse; 
+  border-collapse: collapse;
 }
 
 .devices-dash-table th {
-    font-size: 1rem;
+  font-size: 1rem;
 }
 
 .devices-dash-table-home {
@@ -30,6 +29,12 @@
   margin-top: 2rem;
 }
 
-.devices-dash-table-home th{
-    font-size: 1rem;
+.devices-dash-table-home th {
+  font-size: 1rem;
+  padding: 4px;
+}
+
+.devices-dash-table-home th,
+.devices-dash-table-home td {
+  border: 1px solid black;
 }

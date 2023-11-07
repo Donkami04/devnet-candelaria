@@ -46,6 +46,7 @@ async function dashboardWan() {
     kpiOtherWans: otherPercentUptime,
   };
   return data;
+
 }
 
 function adminWanCalculate(adminWans) {
