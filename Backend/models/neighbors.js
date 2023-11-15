@@ -23,6 +23,10 @@ const Neighbors= sequelize.define(
     ip_switch: {
       type: DataTypes.STRING(100),
       allowNull: false,
+    },
+    interface: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
     }
   },
   {

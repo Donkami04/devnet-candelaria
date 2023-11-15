@@ -1,8 +1,7 @@
 import paramiko
 import time
 import re
-import logging
-import traceback
+import logging, traceback
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -13,7 +12,7 @@ logging.getLogger().addHandler(file_handler)
 paramiko_logger = logging.getLogger("paramiko")
 paramiko_logger.setLevel(logging.WARNING)
 
-def ospf_function(ip_switch, red, name):
+def bgp_function(ip_switch, red, name):
     try:
         client = paramiko.SSHClient()
         client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
@@ -21,7 +20,7 @@ def ospf_function(ip_switch, red, name):
         channel = client.invoke_shell()
 
         commands = [
-            "show ip ospf neighbor\n"
+            "sh ip bgp summary\n"
         ]
 
         for command in commands:
@@ -31,38 +30,36 @@ def ospf_function(ip_switch, red, name):
         output = ""
         while channel.recv_ready():
             output += channel.recv(1024).decode('utf-8')
+
         channel.close()
         client.close()
-        
-        # Utilizar una expresión regular para capturar la IP y la interfaz
-        neighbor_list = re.findall(r'(\d+\.\d+\.\d+\.\d+)\s+\d+\s+(FULL/\w+)\s+\d+:\d+:\d+\s+(\d+\.\d+\.\d+\.\d+)\s+(\w+)', output)
-        
+        print('############# BGP ################')
+        print(output)
+        neighbor_list = re.findall(r'(\d+\.\d+\.\d+\.\d+)\s+\d+\s+\d+\s+\d+\s+\d+\s+\d+\s+\d+\s+\w+\s+\d+', output)
         data_list = []
-        for match in neighbor_list:
-            ip, state, neighbor_ip, interface = match
+        for ip in neighbor_list:
             neighbor_data = {
-                'ip_neighbor': neighbor_ip,
+                'ip_neighbor': ip,
                 'ip_switch': ip_switch,
-                'neighbor': 'ospf',
-                'red': red,
-                'name': name,
-                'interface': interface
+                'neighbor': 'bgp',
+                'red':red,
+                'name':name
             }
             data_list.append(neighbor_data)
 
         return data_list
-
+    
     except Exception as e:
-        logging.error("Error en funcion OSPF")
+        logging.error("Error en funcion BGP")
         logging.error(e)
         logging.error(traceback.format_exc())
+        
         data = [{
-            'ip_neighbor': 'Not Found / Error',
+            'ip_neighbor': 'Not Found / Error', 
             'ip_switch': ip_switch,
-            'neighbor': 'ospf',
-            'red': red,
-            'name': name,
-            'interface': 'Not Found / Error'
+            'neighbor': 'bgp',
+            'red':red,
+            'name':name
         }]
-
+        
         return data

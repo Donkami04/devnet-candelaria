@@ -27,6 +27,10 @@ module.exports = {
         type: Sequelize.STRING(100),
         allowNull: false,
       },
+      interface: {
+        type: Sequelize.STRING(100),
+        allowNull: false,
+      }
     });
 
     await queryInterface.createTable("interfaces", {
@@ -55,7 +59,7 @@ module.exports = {
       name_switch: {
         type: Sequelize.STRING(100),
         allowNull: false,
-      },
+      }
     });
 
     await queryInterface.createTable("neighbors", {
@@ -85,6 +89,10 @@ module.exports = {
         type: Sequelize.STRING(100),
         allowNull: false,
       },
+      interface: {
+        type: Sequelize.STRING(100),
+        allowNull: false,
+      }
     });
 
     await queryInterface.createTable("route_default", {
@@ -146,8 +154,10 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable("data_wan");
-    await queryInterface.dropTable("wan");
-    await queryInterface.dropTable("fechas_consultas_wan");
+    await queryInterface.dropTable("data_neighbors");
+    await queryInterface.dropTable("interfaces");
+    await queryInterface.dropTable("neighbors");
+    await queryInterface.dropTable("route_default");
+    await queryInterface.dropTable("system_health");
   },
 };

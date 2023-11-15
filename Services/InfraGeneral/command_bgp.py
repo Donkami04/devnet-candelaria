@@ -30,10 +30,9 @@ def bgp_function(ip_switch, red, name):
         output = ""
         while channel.recv_ready():
             output += channel.recv(1024).decode('utf-8')
-
+        
         channel.close()
         client.close()
-        
         neighbor_list = re.findall(r'(\d+\.\d+\.\d+\.\d+)\s+\d+\s+\d+\s+\d+\s+\d+\s+\d+\s+\d+\s+\w+\s+\d+', output)
         data_list = []
         for ip in neighbor_list:
@@ -42,7 +41,8 @@ def bgp_function(ip_switch, red, name):
                 'ip_switch': ip_switch,
                 'neighbor': 'bgp',
                 'red':red,
-                'name':name
+                'name':name,
+                'interface': "N/A"
             }
             data_list.append(neighbor_data)
 
@@ -58,7 +58,8 @@ def bgp_function(ip_switch, red, name):
             'ip_switch': ip_switch,
             'neighbor': 'bgp',
             'red':red,
-            'name':name
+            'name':name,
+            'interface': "N/A"
         }]
         
         return data

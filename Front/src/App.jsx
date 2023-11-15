@@ -26,7 +26,6 @@ import { AdminSwitches } from "./components/AdminPanel/AdminViews/AdminSwitches"
 import { AdminMesh } from "./components/AdminPanel/AdminViews/AdminMesh";
 import { AdminFirewalls } from "./components/AdminPanel/AdminViews/AdminFirewalls";
 import { AdminUsers } from "./components/AdminPanel/AdminViews/AdminUsers";
-import { AdminUsers } from "./components/AdminPanel/AdminViews/AdminUsers";
 import { AdminHome } from "./components/AdminPanel/AdminHome/AdminHome";
 import { Login } from "./components/Login/Logins";
 import { InfraGeneral } from "./components/InfraGeneral/InfraGeneral";

@@ -39,6 +39,7 @@ export function Neighbors() {
         <td>{element.ip_neighbor}</td>
         <td>{element.neighbor.toUpperCase()}</td>
         <td>{element.status}</td>
+        <td>{element.interface}</td>
         <td>{element.name}</td>
       </tr>
     ));
@@ -56,6 +57,7 @@ export function Neighbors() {
               <th>IP</th>
               <th>NEIGHBOR</th>
               <th>STATUS</th>
+              <th>INTERFACE</th>
               <th>SWITCH</th>
             </tr>
           </thead>

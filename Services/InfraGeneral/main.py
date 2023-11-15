@@ -6,6 +6,7 @@ from command_bgp import bgp_function
 from command_ospf import ospf_function
 from command_eigrp import eigrp_function
 from command_route import route_function
+from status_neighbor import status_neighbor
 
 warnings.filterwarnings("ignore", message="Unverified HTTPS request")
 
@@ -36,7 +37,7 @@ def database_connection():
         password=database['production']['DB_PASSWORD'],
         database=database['production']['DB_DATABASE']
         )
-    
+
     return mydb
 
 
@@ -47,55 +48,63 @@ def core1():
         {'ip':'10.224.127.1', 'red': 'it', 'name': 'ADMIN'},
         {'ip':'10.224.127.2', 'red': 'it', 'name': 'CONCE'}
     ]
-    
+
+    current_data_neighbors = []
     for switch in data_switches:
         ip_switch = switch['ip']
         name_switch = switch['name']
         red = switch['red']
         logging.info(f"{ip_switch} - {name_switch}")
-        
+
         id_prtg_switch = get_id_prtg(ip_switch)
         data_interfaces = get_data_interfaces(ip_switch, id_prtg_switch)
         data_systemhealth = system_health(ip_switch, id_prtg_switch)
+        
         data_bgp = bgp_function(ip_switch, red, name_switch)
         data_eigrp = eigrp_function(ip_switch, red, name_switch)
         data_ospf = ospf_function(ip_switch, red, name_switch)
         data_neighbors = data_bgp + data_eigrp + data_ospf
-        
+        for neigh in data_neighbors:
+            current_data_neighbors.append(neigh)
         
         data_route = route_function(ip_switch, red, name_switch)
         route_via_bgp = data_route['via_bgp']
         route_name = data_route['name']
         route_red = data_route['red']
         route_ip_switch = data_route['ip_switch']
-        
+
         query = (f"UPDATE dcs.route_default SET via_bgp = '{route_via_bgp}' WHERE ip_switch = '{route_ip_switch}'")
         #! Query comentado para rellenar tabla de datos fijos
         # query = (f"INSERT INTO dcs.route_default (`via_bgp`, `name`, `red`, `ip_switch`) VALUES ('{route_via_bgp}','{route_name}','{route_red}','{route_ip_switch}')")
         cursor.execute(query)
         mydb.commit()
+        
+        
         query_historic = (f"INSERT INTO dcs.historic_route_default (`via_bgp`, `name`, `red`, `ip_switch`) VALUES ('{route_via_bgp}','{route_name}','{route_red}','{route_ip_switch}')")
         cursor.execute(query_historic)
         mydb.commit()
-        
-        query = (f"DELETE FROM dcs.neighbors WHERE ip_switch='{ip_switch}'")
-        cursor.execute(query)
-        mydb.commit()
-        
-        for neighbor in data_neighbors:
-            ip_neighbor = neighbor['ip_neighbor']
-            ip_switch = neighbor['ip_switch']
-            red = neighbor['red']
-            neighbor = neighbor['neighbor']
-            query = f"INSERT INTO dcs.neighbors (`ip_neighbor`, `neighbor`, `red`, `name`, `ip_switch`) VALUES ('{ip_neighbor}','{neighbor}','{red}','{name_switch}','{ip_switch}')"
-            cursor.execute(query)
-            mydb.commit()
-                
-            query_historic = "INSERT INTO dcs.historic_neighbors (`ip_neighbor`, `neighbor`, `red`, `name`, `ip_switch`) VALUES (%s, %s, %s, %s, %s)"
-            cursor.execute(query_historic, (ip_neighbor, neighbor, red, name_switch, ip_switch))
-            mydb.commit()       
 
-    
+        # query = (f"DELETE FROM dcs.neighbors WHERE ip_switch='{ip_switch}'")
+        # cursor.execute(query)
+        # mydb.commit()
+
+        # for neighbor in data_neighbors:
+        #     ip_neighbor = neighbor['ip_neighbor']
+        #     # logging.info(ip_neighbor)
+        #     ip_switch = neighbor['ip_switch']
+        #     red = neighbor['red']
+        #     neighbor_type = neighbor['neighbor']
+        #     interface = neighbor['interface']
+        #     query = f"INSERT INTO dcs.neighbors (`ip_neighbor`, `neighbor`, `red`, `name`, `ip_switch`, `interface`) VALUES ('{ip_neighbor}','{neighbor_type}','{red}','{name_switch}','{ip_switch}','{interface}')"
+        #     cursor.execute(query)
+        #     mydb.commit()
+
+        #     query_historic = "INSERT INTO dcs.historic_neighbors (`ip_neighbor`, `neighbor`, `red`, `name`, `ip_switch`, `interface`) VALUES (%s, %s, %s, %s, %s, %s)"
+        #     cursor.execute(query_historic, (ip_neighbor, neighbor_type, red, name_switch, ip_switch, interface))
+        #     mydb.commit()
+            
+        
+
         for interface in data_interfaces:
             name_interface = interface['name']
             if name_interface == 'No Devices Found':
@@ -105,11 +114,11 @@ def core1():
             query = "INSERT INTO dcs.interfaces (id_prtg, name, status, ip_switch, name_switch) VALUES (%s, %s, %s, %s, %s) ON DUPLICATE KEY UPDATE name = %s, status = %s"
             cursor.execute(query, (id_prtg, name_interface, status_interface, ip_switch, name_switch, name_interface, status_interface))
             mydb.commit()
-            
+
             query_historic = "INSERT INTO dcs.historic_interfaces (id_prtg, name, status, ip_switch, name_switch) VALUES (%s, %s, %s, %s, %s)"
             cursor.execute(query_historic, (id_prtg, name_interface, status_interface, ip_switch, name_switch))
             mydb.commit()
-            
+
         for sensor in data_systemhealth:
             name_sensor = sensor['name']
             if name_sensor == 'No Devices Found':
@@ -120,76 +129,102 @@ def core1():
             query = "INSERT INTO dcs.system_health (name, status, id_prtg, lastvalue, ip_switch, name_switch) VALUES (%s, %s, %s, %s, %s, %s) ON DUPLICATE KEY UPDATE name = %s, status = %s, lastvalue = %s"
             cursor.execute(query, (name_sensor, status_sensor, id_prtg, lastvalue, ip_switch, name_switch, name_sensor, status_sensor, lastvalue))
             mydb.commit()
-            
+
             query_historic = "INSERT INTO dcs.historic_system_health (name, status, id_prtg, lastvalue, ip_switch, name_switch) VALUES (%s, %s, %s, %s, %s, %s)"
             cursor.execute(query_historic, (name_sensor, status_sensor, id_prtg, lastvalue, ip_switch, name_switch))
             mydb.commit()
+    
+    # En el apartado de neighbors se trabaja fuera del bucle pero tomando
+    # el valor de la variable `current_data_neighbors` la cual esta
+    # conformado por los neighbors del SW CONCE y ADM  
+    
+    query = (f"DELETE FROM dcs.neighbors")
+    cursor.execute(query)
+    mydb.commit()
+    status_data_neighbors = status_neighbor(mydb, current_data_neighbors)
+
+    for neighbor in status_data_neighbors:
+        ip_neighbor = neighbor['ip_neighbor']
+        ip_switch = neighbor['ip_switch']
+        name = neighbor['name']
+        red = neighbor['red']
+        neighbor_type = neighbor['neighbor']
+        interface = neighbor['interface']
+        status = neighbor['status']
+        
+        query = "INSERT INTO dcs.neighbors (`ip_neighbor`, `neighbor`, `red`, `name`, `ip_switch`, `interface`, `status`) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+        cursor.execute(query, (ip_neighbor, neighbor_type, red, name, ip_switch, interface, status))
+        mydb.commit()
+
+        query_historic = "INSERT INTO dcs.historic_neighbors (`ip_neighbor`, `neighbor`, `red`, `name`, `ip_switch`, `interface`, `status`) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+        cursor.execute(query_historic, (ip_neighbor, neighbor_type, red, name, ip_switch, interface, status))
+        mydb.commit()
         
     cursor.close()
-    
+
 def get_id_prtg(ip_switch):
     url_objid = os.getenv("URL_PRTG_GET_ID").format(ip=ip_switch)
     response_objid = requests.get(url_objid, verify=False).json()
     objid = response_objid.get("devices", [{'objid':'Not Found'}])
-    
+
     if objid == []:
         objid = 'Not Found'
         return objid
-    
+
     objid = objid[0].get('objid', 'Not Found')
     return objid
 
 
-def get_data_interfaces(ip_switch, id_switch): 
+def get_data_interfaces(ip_switch, id_switch):
     interfaces_notFound = [{
-        "name": "No Devices Found", 
-        "status": "Down", 
-        "objid": "Not Found", 
+        "name": "No Devices Found",
+        "status": "Down",
+        "objid": "Not Found",
         "ip_switch":{ip_switch}
     }]
     try:
         url_interfaces = os.getenv("URL_PRTG_GET_STATUS_INTERFACES").format(id_switch=id_switch)
         response_interfaces = requests.get(url_interfaces, verify=False).json()
         interfaces = response_interfaces.get("sensors", interfaces_notFound)
-        
+
         if interfaces == []:
             return interfaces_notFound
-        
+
         for interface in interfaces:
             interface['ip_switch'] = ip_switch
-            
+
         return interfaces
-            
+
     except Exception as e:
         logging.error(f"Error - Funcion core1-interfaces")
         logging.error(e)
         logging.error(traceback.format_exc())
         return interfaces_notFound
-    
+
 
 def system_health(ip_switch, id_switch):
-    
+
     devices_systemhealth_notFound = [{
-        "name": "No Devices Found", 
-        "status": "Down", 
+        "name": "No Devices Found",
+        "status": "Down",
         "objid": "Not Found",
         "lastvalue": "Not Found",
         "ip_switch": {ip_switch}
     }]
-    
+
     try:
         url_system_health = os.getenv("URL_PRTG_GET_STATUS_SYSTEM_HEALTH").format(id_switch=id_switch)
         response_systemhealth = requests.get(url_system_health, verify=False).json()
         devices_systemhealth = response_systemhealth.get("sensors", devices_systemhealth_notFound)
-        
+
         if devices_systemhealth == []:
             return devices_systemhealth_notFound
-        
+
         for device in devices_systemhealth:
             device['ip_switch'] = ip_switch
-            
+
         return devices_systemhealth
-            
+
     except Exception as e:
         logging.error(f"Error - Funcion system_health")
         logging.error(e)

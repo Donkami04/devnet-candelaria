@@ -1,7 +1,8 @@
 import paramiko
 import time
 import re
-import logging, traceback
+import logging
+import traceback
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -33,16 +34,20 @@ def eigrp_function(ip_switch, red, name):
             output += channel.recv(1024).decode('utf-8')
         channel.close()
         client.close()
+        patron = r'\d+\s+(\S+)\s+(\S+)\s+(\d+)\s+(\S+)\s+(\d+)\s+(\w+)\s+(\d+)\s+(\d+)'
 
-        patron = r'(\d+)\s+(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\s+(\S+)\s+(\d+)\s+([\w/]+)\s+(\d+)\s+(\d+:\d+:\d+|\d+)\s+(\d*)\s+(\d*)'
+        # patron = r'\d+\s+([\d.]+)\s+(\S+)\s+(\d+)\s+([\w/]+)\s+(\d+)\s+(\w+)\s+(\d+)\s+(\d+)'
         coincidencias = re.finditer(patron, output)
-
+        
         data_list = []
 
+
         for match in coincidencias:                
-            address = match.group(2)
+            address = match.group(1)
+            interface = match.group(2)
             data = {
                 'ip_neighbor': address,
+                'interface': interface,
                 'ip_switch': ip_switch,
                 'neighbor': 'eigrp',
                 'red': red,
@@ -53,13 +58,13 @@ def eigrp_function(ip_switch, red, name):
         if "10.224.126.22" in output:
             data = {
                 'ip_neighbor': "10.224.126.22",
+                'interface': "Not Found",
                 'ip_switch': ip_switch,
                 'neighbor': 'eigrp',
                 'red': red,
                 'name': name     
             }
-            data_list.append(data)    
-            
+            data_list.append(data)
         return data_list
 
     except Exception as e:
@@ -68,6 +73,7 @@ def eigrp_function(ip_switch, red, name):
         logging.error(traceback.format_exc())
         data = [{
             'ip_neighbor': 'Not Found / Error', 
+            'interface': 'Not Applicable',
             'ip_switch': ip_switch,
             'neighbor': 'eigrp',
             'red': red,

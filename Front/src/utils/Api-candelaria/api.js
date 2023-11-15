@@ -23,138 +23,138 @@ export const getStatusSystem = async () => {
   return axios
     .get(`${BASE_API_URL}/status`)
     .then((response) => response.data)
-    .catch((error) => console.error('STATUS SYSTEM:Error del API REST Candealaria : ',error));
+    .catch((error) => {throw new Error('STATUS SYSTEM:Error del API REST Candealaria : ',error)});
 };
 
 export const getIndicators = async () => {
   return axios
     .get(`${BASE_API_URL}/indicators/`)
     .then((response) => response.data)
-    .catch((error) => console.error('INDICADORES: Error del API REST Candealaria : ',error));
+    .catch((error) => {throw new Error('INDICADORES: Error del API REST Candealaria : ',error)});
 };
 
 export const getClients = async () => {
   return axios
     .get(`${BASE_API_URL}/clients`)
     .then((response) => response.data)
-    .catch((error) => console.error('CLIENTES: Error del API REST Candealaria : ',error));
+    .catch((error) => {throw new Error('CLIENTES: Error del API REST Candealaria : ',error)});
 };
 
 export const getSwitches = async () => {
   return axios
     .get(`${BASE_API_URL}/switches`)
     .then((response) => response.data)
-    .catch((error) => console.error('SWITCHES: Error del API REST Candealaria : ',error));
+    .catch((error) => {throw new Error('SWITCHES: Error del API REST Candealaria : ',error)});
 };
 
 export const getUps = async () => {
   return axios
     .get(`${BASE_API_URL}/ups`)
     .then((response) => response.data)
-    .catch((error) => console.error('UPS: Error del API REST Candealaria : ',error));
+    .catch((error) => {throw new Error('UPS: Error del API REST Candealaria : ',error)});
 };
 
 export const getVpn = async () => {
   return axios
     .get(`${BASE_API_URL}/vpn`)
     .then((response) => response.data)
-    .catch((error) => console.error('VPN: Error del API REST Candealaria : ',error));
+    .catch((error) => {throw new Error('VPN: Error del API REST Candealaria : ',error)});
 };
 
 export const getMesh = async () => {
   return axios
     .get(`${BASE_API_URL}/mesh`)
     .then((response) => response.data)
-    .catch((error) => console.error('MESH: Error del API REST Candealaria : ',error));
+    .catch((error) => {throw new Error('MESH: Error del API REST Candealaria : ',error)});
 };
 
 export const getDevices = async () => {
   return axios
     .get(`${BASE_API_URL}/devices`)
     .then((response) => response.data)
-    .catch((error) => console.error('DEVICES: Error del API REST Candealaria : ',error));
+    .catch((error) => {throw new Error('DEVICES: Error del API REST Candealaria : ',error)});
 };
 
 export const getFirewalls = async () => {
   return axios
     .get(`${BASE_API_URL}/firewalls`)
     .then((response) => response.data)
-    .catch((error) => console.error('FIREWALLS: Error del API REST Candealaria : ',error));
+    .catch((error) => {throw new Error('FIREWALLS: Error del API REST Candealaria : ',error)});
 };
 
 export const getWan = async () => {
   return axios
     .get(`${BASE_API_URL}/wan`)
     .then((response) => response.data)
-    .catch((error) => console.error('WAN: Error del API REST Candealaria : ',error));
+    .catch((error) => {throw new Error('WAN: Error del API REST Candealaria : ',error)});
 };
 
 export const getDcsCandelariaIndicators = async () => {
   return axios
     .get(`${BASE_API_URL}/indicators/dcs-candelaria`)
     .then((response) => response.data)
-    .catch((error) => console.error('INDICADOR DCS CANDELARIA: Error del API REST Candealaria : ',error));
+    .catch((error) => {throw new Error('INDICADOR DCS CANDELARIA: Error del API REST Candealaria : ',error)});
 };
 
 export const getDevicesIndicators = async () => {
   return axios
     .get(`${BASE_API_URL}/indicators/devices`)
     .then((response) => response.data)
-    .catch((error) => console.error('INDICADOR DEVICES: Error del API REST Candealaria : ',error));
+    .catch((error) => {throw new Error('INDICADOR DEVICES: Error del API REST Candealaria : ',error)});
 };
 
 export const getFirewallsIndicators = async () => {
   return axios
     .get(`${BASE_API_URL}/indicators/firewalls`)
     .then((response) => response.data)
-    .catch((error) => console.error('INDICADOR FIREWALLS: Error del API REST Candealaria : ',error));
+    .catch((error) => {throw new Error('INDICADOR FIREWALLS: Error del API REST Candealaria : ',error)});
 };
 
 export const getWanIndicators = async () => {
   return axios
     .get(`${BASE_API_URL}/indicators/wan`)
     .then((response) => response.data)
-    .catch((error) => console.error('INDICADOR WAN: Error del API REST Candealaria : ',error));
+    .catch((error) => {throw new Error('INDICADOR WAN: Error del API REST Candealaria : ',error)});
 };
 
 export const getMeshIndicators = async () => {
   return axios
     .get(`${BASE_API_URL}/indicators/mesh`)
     .then((response) => response.data)
-    .catch((error) => console.error('INDICADOR MESH: Error del API REST Candealaria : ',error));
+    .catch((error) => {throw new Error('INDICADOR MESH: Error del API REST Candealaria : ',error)});
 };
 
 export const getUsers = async () => {
   return axios
     .get(`${BASE_API_URL}/users`)
     .then((response) => response.data)
-    .catch((error) => console.error('USUAROS: Error del API REST Candealaria : ',error));
+    .catch((error) => {throw new Error('USUAROS: Error del API REST Candealaria : ',error)});
 };
 
 export const getInterfaces = async () => {
   return axios
     .get(`${BASE_API_URL}/interfaces`)
     .then((response) => response.data)
-    .catch((error) => console.error('INTERFACES: Error del API REST Candealaria : ',error));
+    .catch((error) => {throw new Error('INTERFACES: Error del API REST Candealaria : ',error)});
 };
 
 export const getSystemHealth = async () => {
   return axios
     .get(`${BASE_API_URL}/system-health`)
     .then((response) => response.data)
-    .catch((error) => console.error('SYSTEM HEALTH: Error del API REST Candealaria : ',error));
+    .catch((error) => {throw new Error('SYSTEM HEALTH: Error del API REST Candealaria : ',error)});
 };
 
 export const getNeighbors = async () => {
   return axios
     .get(`${BASE_API_URL}/neighbors`)
     .then((response) => response.data)
-    .catch((error) => console.error('NEIGHBORS: Error del API REST Candealaria : ',error));
+    .catch((error) => {throw new Error('NEIGHBORS: Error del API REST Candealaria : ',error)});
 };
 
 export const getDefaultRoute = async () => {
   return axios
     .get(`${BASE_API_URL}/route-default`)
     .then((response) => response.data)
-    .catch((error) => console.error('DEFAULT ROUTE: Error del API REST Candealaria : ',error));
+    .catch((error) => {throw new Error('DEFAULT ROUTE: Error del API REST Candealaria : ',error)});
 };

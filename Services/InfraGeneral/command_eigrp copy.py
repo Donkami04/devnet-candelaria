@@ -1,8 +1,7 @@
 import paramiko
 import time
 import re
-import logging
-import traceback
+import logging, traceback
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -13,7 +12,7 @@ logging.getLogger().addHandler(file_handler)
 paramiko_logger = logging.getLogger("paramiko")
 paramiko_logger.setLevel(logging.WARNING)
 
-def ospf_function(ip_switch, red, name):
+def eigrp_function(ip_switch, red, name):
     try:
         client = paramiko.SSHClient()
         client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
@@ -21,48 +20,60 @@ def ospf_function(ip_switch, red, name):
         channel = client.invoke_shell()
 
         commands = [
-            "show ip ospf neighbor\n"
+            f"terminal length 0\n",
+            "show ip eigrp neighbors\n"
         ]
 
         for command in commands:
             channel.send(command)
-            time.sleep(1)  # Esperar para que el comando se procese
+            time.sleep(1)
 
         output = ""
         while channel.recv_ready():
             output += channel.recv(1024).decode('utf-8')
         channel.close()
         client.close()
-        
-        # Utilizar una expresión regular para capturar la IP y la interfaz
-        neighbor_list = re.findall(r'(\d+\.\d+\.\d+\.\d+)\s+\d+\s+(FULL/\w+)\s+\d+:\d+:\d+\s+(\d+\.\d+\.\d+\.\d+)\s+(\w+)', output)
-        
-        data_list = []
-        for match in neighbor_list:
-            ip, state, neighbor_ip, interface = match
-            neighbor_data = {
-                'ip_neighbor': neighbor_ip,
-                'ip_switch': ip_switch,
-                'neighbor': 'ospf',
-                'red': red,
-                'name': name,
-                'interface': interface
-            }
-            data_list.append(neighbor_data)
+        print(output)
+        patron = r'(\d+)\s+(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\s+(\S+)\s+(\d+)\s+([\w/]+)\s+(\d+)\s+(\d+:\d+:\d+|\d+)\s+(\d*)\s+(\d*)'
+        coincidencias = re.finditer(patron, output)
 
+        data_list = []
+
+        for match in coincidencias:                
+            address = match.group(2)
+            # interface = match.group(1)
+            # print(interface)
+            data = {
+                'ip_neighbor': address,
+                'ip_switch': ip_switch,
+                'neighbor': 'eigrp',
+                'red': red,
+                'name': name
+            }
+            data_list.append(data)
+
+        if "10.224.126.22" in output:
+            data = {
+                'ip_neighbor': "10.224.126.22",
+                'ip_switch': ip_switch,
+                'neighbor': 'eigrp',
+                'red': red,
+                'name': name     
+            }
+            data_list.append(data)    
+            
         return data_list
 
     except Exception as e:
-        logging.error("Error en funcion OSPF")
+        logging.error("Error en funcion EIRGP")
         logging.error(e)
         logging.error(traceback.format_exc())
         data = [{
-            'ip_neighbor': 'Not Found / Error',
+            'ip_neighbor': 'Not Found / Error', 
             'ip_switch': ip_switch,
-            'neighbor': 'ospf',
+            'neighbor': 'eigrp',
             'red': red,
-            'name': name,
-            'interface': 'Not Found / Error'
+            'name': name
         }]
 
         return data
