@@ -59,7 +59,11 @@ module.exports = {
       name_switch: {
         type: Sequelize.STRING(100),
         allowNull: false,
-      }
+      },
+      red: {
+        type: Sequelize.STRING(10),
+        allowNull: false,
+      },
     });
 
     await queryInterface.createTable("neighbors", {
@@ -91,6 +95,10 @@ module.exports = {
       },
       interface: {
         type: Sequelize.STRING(100),
+        allowNull: false,
+      },
+      status: {
+        type: Sequelize.STRING(10),
         allowNull: false,
       }
     });
@@ -151,6 +159,11 @@ module.exports = {
         type: Sequelize.STRING(32),
         allowNull: false,
       },
+      red: {
+        type: Sequelize.STRING(10),
+        allowNull: false,
+      },
+      
     });
   },
   down: async (queryInterface, Sequelize) => {

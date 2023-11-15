@@ -27,6 +27,10 @@ const Neighbors= sequelize.define(
     interface: {
       type: DataTypes.STRING(100),
       allowNull: false,
+    },
+    status: {
+      type: DataTypes.STRING(10),
+      allowNull: false,
     }
   },
   {

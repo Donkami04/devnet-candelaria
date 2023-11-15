@@ -6,23 +6,23 @@ import {
   getNeighbors,
   getDefaultRoute,
 } from "../../utils/Api-candelaria/api";
-
+import { ItCoreAdm } from "./ItCoreAdm/ItCoreAdm";
 import "./infrageneral.css";
 
 export function InfraGeneral() {
-  const [devicesHealth, setDevicesHealth] = useState([]);
-  const [routeStatus, setRouteStatus] = useState([]);
-  const [neighbors, setNeighbors] = useState([]);
   const [devicesInterfaces, setDevicesInterfaces] = useState([]);
-  // Dentro de tu componente
+  const [devicesHealth, setDevicesHealth] = useState([]);
+  const [neighbors, setNeighbors] = useState([]);
+  const [routeStatus, setRouteStatus] = useState([]);
+
   const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        const dataInterfaces = await getInterfaces();
         const dataDevicesHealth = await getSystemHealth();
         const dataRouteStatus = await getDefaultRoute();
-        const dataInterfaces = await getInterfaces();
         const dataNeighbors = await getNeighbors();
 
         setDevicesHealth(dataDevicesHealth);
@@ -39,46 +39,16 @@ export function InfraGeneral() {
     fetchData();
   }, []);
 
-  const devicesHealthUp = [];
-  const devicesHealthDown = [];
-  const interfacesUp = [];
-  const interfacesDown = [];
-  const neighborsUp = [];
-  const neighborsDown = [];
-  const routeUp = [];
-  const routeDown = [];
-
-  devicesInterfaces.forEach((element) => {
-    if (element.status === "Up") {
-      interfacesUp.push(element)
-    } else {
-      interfacesDown.push(element)
-    }
-  })
-
-  
   return (
-    <>
+    <div>
       <Navbar title={"Infraestructura General"} />
-      <main className="main-infra-gen-container">
-        {error && <div className="error-message">{error}</div>}
-        <div className="section-infra-general-container">
-          <table>
-            <thead>
-              <tr>
-                <th>CORE ADM</th>
-                <th>STATUS</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Prueba</td>
-                <td>Prueba</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </main>
-    </>
+      {error && <div className="error-message">{error}</div>}
+      <ItCoreAdm
+        devicesInterfaces={devicesInterfaces}
+        devicesHealth={devicesHealth}
+        neighbors={neighbors}
+        routeStatus={routeStatus}
+      />
+    </div>
   );
 }

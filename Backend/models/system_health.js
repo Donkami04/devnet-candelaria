@@ -27,7 +27,11 @@ const SystemHealth= sequelize.define(
     name_switch: {
       type: DataTypes.STRING(32),
       allowNull: false,
-    }
+    },
+    red: {
+      type: DataTypes.STRING(10),
+      allowNull: false,
+    },
   },
   {
     tableName: "system_health",

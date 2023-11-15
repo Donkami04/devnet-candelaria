@@ -57,8 +57,8 @@ def core1():
         logging.info(f"{ip_switch} - {name_switch}")
 
         id_prtg_switch = get_id_prtg(ip_switch)
-        data_interfaces = get_data_interfaces(ip_switch, id_prtg_switch)
-        data_systemhealth = system_health(ip_switch, id_prtg_switch)
+        data_interfaces = get_data_interfaces(ip_switch, id_prtg_switch, red)
+        data_systemhealth = system_health(ip_switch, id_prtg_switch, red)
         
         data_bgp = bgp_function(ip_switch, red, name_switch)
         data_eigrp = eigrp_function(ip_switch, red, name_switch)
@@ -111,12 +111,13 @@ def core1():
                 break
             status_interface = interface['status']
             id_prtg = interface['objid']
-            query = "INSERT INTO dcs.interfaces (id_prtg, name, status, ip_switch, name_switch) VALUES (%s, %s, %s, %s, %s) ON DUPLICATE KEY UPDATE name = %s, status = %s"
-            cursor.execute(query, (id_prtg, name_interface, status_interface, ip_switch, name_switch, name_interface, status_interface))
+            red_interface = interface["red"]
+            query = "INSERT INTO dcs.interfaces (id_prtg, name, status, ip_switch, name_switch, red) VALUES (%s, %s, %s, %s, %s, %s) ON DUPLICATE KEY UPDATE name = %s, status = %s"
+            cursor.execute(query, (id_prtg, name_interface, status_interface, ip_switch, name_switch, red_interface, name_interface, status_interface))
             mydb.commit()
 
-            query_historic = "INSERT INTO dcs.historic_interfaces (id_prtg, name, status, ip_switch, name_switch) VALUES (%s, %s, %s, %s, %s)"
-            cursor.execute(query_historic, (id_prtg, name_interface, status_interface, ip_switch, name_switch))
+            query_historic = "INSERT INTO dcs.historic_interfaces (id_prtg, name, status, ip_switch, name_switch, red) VALUES (%s, %s, %s, %s, %s, %s)"
+            cursor.execute(query_historic, (id_prtg, name_interface, status_interface, ip_switch, name_switch, red_interface))
             mydb.commit()
 
         for sensor in data_systemhealth:
@@ -126,17 +127,18 @@ def core1():
             status_sensor = sensor['status']
             id_prtg = sensor['objid']
             lastvalue = sensor['lastvalue']
-            query = "INSERT INTO dcs.system_health (name, status, id_prtg, lastvalue, ip_switch, name_switch) VALUES (%s, %s, %s, %s, %s, %s) ON DUPLICATE KEY UPDATE name = %s, status = %s, lastvalue = %s"
-            cursor.execute(query, (name_sensor, status_sensor, id_prtg, lastvalue, ip_switch, name_switch, name_sensor, status_sensor, lastvalue))
+            red_sensor = sensor['red']
+            query = "INSERT INTO dcs.system_health (name, status, id_prtg, lastvalue, ip_switch, name_switch, red) VALUES (%s, %s, %s, %s, %s, %s, %s) ON DUPLICATE KEY UPDATE name = %s, status = %s, lastvalue = %s"
+            cursor.execute(query, (name_sensor, status_sensor, id_prtg, lastvalue, ip_switch, name_switch, red_sensor, name_sensor, status_sensor, lastvalue))
             mydb.commit()
 
-            query_historic = "INSERT INTO dcs.historic_system_health (name, status, id_prtg, lastvalue, ip_switch, name_switch) VALUES (%s, %s, %s, %s, %s, %s)"
-            cursor.execute(query_historic, (name_sensor, status_sensor, id_prtg, lastvalue, ip_switch, name_switch))
+            query_historic = "INSERT INTO dcs.historic_system_health (name, status, id_prtg, lastvalue, ip_switch, name_switch, red) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+            cursor.execute(query_historic, (name_sensor, status_sensor, id_prtg, lastvalue, ip_switch, name_switch, red_sensor))
             mydb.commit()
     
     # En el apartado de neighbors se trabaja fuera del bucle pero tomando
     # el valor de la variable `current_data_neighbors` la cual esta
-    # conformado por los neighbors del SW CONCE y ADM  
+    # conformado por los datos de los neighbors del SW CONCE y ADM  
     
     query = (f"DELETE FROM dcs.neighbors")
     cursor.execute(query)
@@ -175,12 +177,13 @@ def get_id_prtg(ip_switch):
     return objid
 
 
-def get_data_interfaces(ip_switch, id_switch):
+def get_data_interfaces(ip_switch, id_switch, red):
     interfaces_notFound = [{
         "name": "No Devices Found",
         "status": "Down",
         "objid": "Not Found",
-        "ip_switch":{ip_switch}
+        "ip_switch":{ip_switch},
+        "red": "Not Found"
     }]
     try:
         url_interfaces = os.getenv("URL_PRTG_GET_STATUS_INTERFACES").format(id_switch=id_switch)
@@ -192,6 +195,7 @@ def get_data_interfaces(ip_switch, id_switch):
 
         for interface in interfaces:
             interface['ip_switch'] = ip_switch
+            interface['red'] = red
 
         return interfaces
 
@@ -202,14 +206,15 @@ def get_data_interfaces(ip_switch, id_switch):
         return interfaces_notFound
 
 
-def system_health(ip_switch, id_switch):
+def system_health(ip_switch, id_switch, red):
 
     devices_systemhealth_notFound = [{
         "name": "No Devices Found",
         "status": "Down",
         "objid": "Not Found",
         "lastvalue": "Not Found",
-        "ip_switch": {ip_switch}
+        "ip_switch": {ip_switch},
+        "red": "Not Found"
     }]
 
     try:
@@ -222,6 +227,7 @@ def system_health(ip_switch, id_switch):
 
         for device in devices_systemhealth:
             device['ip_switch'] = ip_switch
+            device['red'] = red
 
         return devices_systemhealth
 
@@ -233,7 +239,6 @@ def system_health(ip_switch, id_switch):
 
 
 
-# Llamar a la función para probarla
 core1()
 
 

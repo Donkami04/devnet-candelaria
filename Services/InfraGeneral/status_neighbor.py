@@ -21,6 +21,6 @@ def status_neighbor(mydb, current_neighbors):
         else:
             neighbor['status'] = 'Down'
         
+    cursor.close()
     return dataNeighbor
     
-#! Cerrar Cursor

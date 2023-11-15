@@ -5,4 +5,4 @@ async function getInterfaces() {
     return dataInterfaces
 }
 
-module.exports = { getInterfaces }
+module.exports = { getInterfaces}

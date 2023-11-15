@@ -23,7 +23,11 @@ const Interfaces= sequelize.define(
     name_switch: {
       type: DataTypes.STRING(100),
       allowNull: false,
-    }
+    },
+    red: {
+      type: DataTypes.STRING(10),
+      allowNull: false,
+    },
   },
   {
     tableName: "interfaces",
