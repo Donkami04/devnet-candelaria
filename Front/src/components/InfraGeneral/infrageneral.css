@@ -1,52 +1,6 @@
-.main-infra-gen-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    width: 100%;
-}
-.section-infra-general-container {
-    border: solid 2px black;
-    width: 95%;
-    margin-top: 20px;
-    margin-left: 10px;
-}
-
-.table-infra-general-section tbody td {
-    font-size: 0.9rem;
-}
-.table-infra-general-section tr th {
-    font-size: 1rem;
-}
-
-.table-infra-general-section {
-    text-align: center;
-}
-
-.title-infra-general-section {
-    text-align: center;
-}
-
-.section-infra-general-container {
-    height: 30rem;
-    overflow-y: auto;
-}
-
-.default-route-infra-general-container {
-    width: 20rem;
-    border: solid 2px black;
-    margin-top: 5px;
-    margin-left: 5px;
-}
-
-.section-infra-general-container table {
-
-    border-collapse: collapse;
-}
-
-.section-infra-general-container th,
-.section-infra-general-container td {
-  padding: 10px;
-  text-align: left;
-  border: 1px solid black;
-  font-size: 0.8rem;
-  text-align: center;
+.main-infra-general-container {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: minmax(100px, auto);
 }

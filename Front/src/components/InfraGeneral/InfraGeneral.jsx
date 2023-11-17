@@ -6,7 +6,8 @@ import {
   getNeighbors,
   getDefaultRoute,
 } from "../../utils/Api-candelaria/api";
-import { ItCoreAdm } from "./ItCoreAdm/ItCoreAdm";
+import { ItCoreAdm } from "./Cores/ItCoreAdm";
+import { ItCoreConce } from "./Cores/ItCoreConce";
 import "./infrageneral.css";
 
 export function InfraGeneral() {
@@ -43,12 +44,24 @@ export function InfraGeneral() {
     <div>
       <Navbar title={"Infraestructura General"} />
       {error && <div className="error-message">{error}</div>}
-      <ItCoreAdm
-        devicesInterfaces={devicesInterfaces}
-        devicesHealth={devicesHealth}
-        neighbors={neighbors}
-        routeStatus={routeStatus}
-      />
+      <main className="main-infra-general-container">
+        <div className="section-infra-general">
+          <ItCoreAdm
+            devicesInterfaces={devicesInterfaces}
+            devicesHealth={devicesHealth}
+            neighbors={neighbors}
+            routeStatus={routeStatus}
+          />
+        </div>
+        <div className="section-infra-general">
+          <ItCoreConce
+            devicesInterfaces={devicesInterfaces}
+            devicesHealth={devicesHealth}
+            neighbors={neighbors}
+            routeStatus={routeStatus}
+          />
+        </div>
+      </main>
     </div>
   );
 }

@@ -1,0 +1,43 @@
+.table-infra-general-container {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+}
+
+.table-infra-general-container .table-core {
+  width: 90%;
+  border-collapse: collapse;
+}
+
+.table-core td,
+th {
+  border: 1px solid black;
+  padding: 8px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.table-core th {
+  font-size: 1.1rem;
+  color: white;
+  background-color: #444444;
+}
+
+.table-core td {
+  font-size: 0.9rem;
+}
+
+.table-core td .fail-elements-container {
+  margin-top: 10px;
+}
+
+.fail-elements-container p,
+.status-fail-infra-gen {
+  color: red;
+}
+
+.status-ok-infra-gen {
+  color: rgb(5, 165, 5);
+}
+
+/* Otros estilos según sea necesario */

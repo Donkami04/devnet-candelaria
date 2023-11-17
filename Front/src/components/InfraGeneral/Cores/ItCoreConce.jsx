@@ -1,4 +1,6 @@
-export function ItCoreAdm({
+import "./Cores.css";
+
+export function ItCoreConce({
   devicesInterfaces,
   devicesHealth,
   neighbors,
@@ -19,20 +21,19 @@ export function ItCoreAdm({
   const listDevicesHealthOk = [];
   const listDevicesHealthFail = [];
 
-  //! Agregar Red a las interfaces y system health
   devicesInterfaces.forEach((element) => {
     if (
-      (element.name_switch === "ADMIN" &&
+      (element.name_switch === "CONCE" &&
         element.status === "Up" &&
         element.red === "it") ||
-      (element.name_switch === "ADMIN" &&
+      (element.name_switch === "CONCE" &&
         element.status.toLowerCase().includes("Paused") &&
         element.red === "it")
     ) {
       interfacesUp.push(element);
     }
     if (
-      element.name_switch === "ADMIN" &&
+      element.name_switch === "CONCE" &&
       element.status.includes("Down") &&
       element.red === "it"
     ) {
@@ -42,7 +43,7 @@ export function ItCoreAdm({
 
   neighbors.forEach((element) => {
     if (
-      element.name === "ADMIN" &&
+      element.name === "CONCE" &&
       element.status === "Up" &&
       element.neighbor === "bgp" &&
       element.red === "it"
@@ -50,7 +51,7 @@ export function ItCoreAdm({
       neighborsBgpUp.push(element);
     }
     if (
-      element.name === "ADMIN" &&
+      element.name === "CONCE" &&
       element.status === "Down" &&
       element.neighbor === "bgp" &&
       element.red === "it"
@@ -58,7 +59,7 @@ export function ItCoreAdm({
       neighborsBgpDown.push(element);
     }
     if (
-      element.name === "ADMIN" &&
+      element.name === "CONCE" &&
       element.status === "Up" &&
       element.neighbor === "eigrp" &&
       element.red === "it"
@@ -66,7 +67,7 @@ export function ItCoreAdm({
       neighborsEigrpUp.push(element);
     }
     if (
-      element.name === "ADMIN" &&
+      element.name === "CONCE" &&
       element.status === "Down" &&
       element.neighbor === "eigrp" &&
       element.red === "it"
@@ -74,7 +75,7 @@ export function ItCoreAdm({
       neighborsEigrpDown.push(element);
     }
     if (
-      element.name === "ADMIN" &&
+      element.name === "CONCE" &&
       element.status === "Up" &&
       element.neighbor === "ospf" &&
       element.red === "it"
@@ -82,7 +83,7 @@ export function ItCoreAdm({
       neighborsOspfUp.push(element);
     }
     if (
-      element.name === "ADMIN" &&
+      element.name === "CONCE" &&
       element.status === "Down" &&
       element.neighbor === "ospf" &&
       element.red === "it"
@@ -93,7 +94,7 @@ export function ItCoreAdm({
 
   devicesHealth.forEach((element) => {
     if (
-      element.name_switch === "ADMIN" &&
+      element.name_switch === "CONCE" &&
       element.red === "it" &&
       element.status === "Up" &&
       element.name.includes("CPU") &&
@@ -102,11 +103,11 @@ export function ItCoreAdm({
       listDevicesHealthOk.push(element);
     }
     if (
-      (element.name_switch === "ADMIN" &&
+      (element.name_switch === "CONCE" &&
         element.red === "it" &&
         element.name.includes("CPU") &&
         parseInt(element.lastvalue) > 90) ||
-      (element.name_switch === "ADMIN" &&
+      (element.name_switch === "CONCE" &&
         element.red === "it" &&
         element.name === "System Health CPU" &&
         element.status.includes("Down"))
@@ -114,7 +115,7 @@ export function ItCoreAdm({
       listDevicesHealthFail.push(element);
     }
     if (
-      element.name_switch === "ADMIN" &&
+      element.name_switch === "CONCE" &&
       element.red === "it" &&
       element.status === "Up" &&
       element.name.includes("Power Supplies") &&
@@ -123,11 +124,11 @@ export function ItCoreAdm({
       listDevicesHealthOk.push(element);
     }
     if (
-      (element.name_switch === "ADMIN" &&
+      (element.name_switch === "CONCE" &&
         element.red === "it" &&
         element.name.includes("Power Supplies") &&
         element.lastvalue !== "Normal") ||
-      (element.name_switch === "ADMIN" &&
+      (element.name_switch === "CONCE" &&
         element.red === "it" &&
         element.name.includes("Power Supplies") &&
         element.status.includes("Down"))
@@ -135,7 +136,7 @@ export function ItCoreAdm({
       listDevicesHealthFail.push(element);
     }
     if (
-      element.name_switch === "ADMIN" &&
+      element.name_switch === "CONCE" &&
       element.red === "it" &&
       element.status === "Up" &&
       element.name.includes("Temperatures") &&
@@ -144,29 +145,22 @@ export function ItCoreAdm({
       listDevicesHealthOk.push(element);
     }
     if (
-      (element.name_switch === "ADMIN" &&
+      (element.name_switch === "CONCE" &&
         element.red === "it" &&
         element.name.includes("Temperatures") &&
         parseInt(element.lastvalue) >= 50) ||
-      (element.name_switch === "ADMIN" &&
+      (element.name_switch === "CONCE" &&
         element.red === "it" &&
         element.name.includes("Temperatures") &&
         element.status.includes("Down"))
     ) {
       listDevicesHealthFail.push(element);
     }
-    // if (
-    //     element.name_switch === "ADMIN" &&
-    //     element.red === "it" &&
-    //     element.status === "Up"
-    //   ) {
-    //     listDevicesHealthOk.push(element);
-    //   }
   });
 
-  const numAdmInterfUp = interfacesUp.length;
-  const numAdmInterfDown = interfacesDown.length;
-  const statusInterfaces = numAdmInterfDown > 0 ? "FAIL" : "OK";
+  const numConceInterfUp = interfacesUp.length;
+  const numConceInterfDown = interfacesDown.length;
+  const statusInterfaces = numConceInterfDown > 0 ? "FAIL" : "OK";
 
   const numBgpUp = neighborsBgpUp.length;
   const numBgpDown = neighborsBgpDown.length;
@@ -185,103 +179,144 @@ export function ItCoreAdm({
   const statusSysHealth = numSysHealthFail > 0 ? "FAIL" : "OK";
 
   const routeDefault = routeStatus.filter((e) => {
-    return e.name === "ADMIN" && e.via_bgp === "true";
+    return e.name === "CONCE" && e.via_bgp === "true";
   });
 
   const statusRouteDefault = routeDefault.length > 0 ? "OK" : "FAIL";
 
   return (
-    <div>
-      <div className="section-infra-general-container">
-        <table>
+    <>
+      <div className="table-infra-general-container">
+        <table className="table-core">
           <thead>
             <tr>
-              <th>CORE ADM IT - 10.224.127.1</th>
+              <th>CORE CONCE IT - 10.224.127.2</th>
               <th>STATUS</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>
-                Interfaces: {numAdmInterfUp}/{numAdmInterfUp + numAdmInterfDown}
-                <div>
+                Interfaces: {numConceInterfUp}/
+                {numConceInterfUp + numConceInterfDown}
+                <div className="fail-elements-container">
                   {interfacesDown.map((e) => (
-                    <div key={e.id + e.id_prtg}>
-                      <p>{e.name} - {e.status}</p>
-                    </div>
+                    <p key={e.id + e.id_prtg}>
+                      {e.name} - {e.status}
+                    </p>
                   ))}
                 </div>
               </td>
-              <td>{statusInterfaces}</td>
+              <td
+                className={
+                  statusInterfaces === "FAIL"
+                    ? "status-fail-infra-gen"
+                    : "status-ok-infra-gen"
+                }
+              >
+                {statusInterfaces}
+              </td>
             </tr>
             <tr>
               <td>
                 System Health: {numSysHealthOk}/
                 {numSysHealthOk + numSysHealthFail}
-                <div>
+                <div className="fail-elements-container">
                   {listDevicesHealthFail.map((e) => (
-                    <div key={e.id + e.id_prtg}>
-                      <p>
-                        {e.name} - {e.lastvalue}
-                      </p>
-                    </div>
+                    <p key={e.id + e.id_prtg}>
+                      {e.name} - {e.lastvalue}
+                    </p>
                   ))}
                 </div>
               </td>
-              <td>{statusSysHealth}</td>
+              <td
+                className={
+                  statusSysHealth === "FAIL"
+                    ? "status-fail-infra-gen"
+                    : "status-ok-infra-gen"
+                }
+              >
+                {statusSysHealth}
+              </td>
             </tr>
             <tr>
               <td>
                 Neighbor BGP: {numBgpUp}/{numBgpUp + numBgpDown}
-                <div>
+                <div className="fail-elements-container">
                   {neighborsBgpDown.map((e) => (
-                    <div key={e.id + e.ip_neighbor}>
-                      <p>
-                        {e.ip_neighbor} - {e.interface}
-                      </p>
-                    </div>
+                    <p key={e.id + e.ip_neighbor}>
+                      {e.ip_neighbor} - {e.interface}
+                    </p>
                   ))}
                 </div>
               </td>
-              <td>{statusBgp}</td>
+              <td
+                className={
+                  statusBgp === "FAIL"
+                    ? "status-fail-infra-gen"
+                    : "status-ok-infra-gen"
+                }
+              >
+                {statusBgp}
+              </td>
             </tr>
             <tr>
               <td>
                 Neighbor EIGRP: {numEigrpUp}/{numEigrpUp + numEigrpDown}
-                <div>
+                <div className="fail-elements-container">
                   {neighborsEigrpDown.map((e) => (
-                    <div key={e.id + e.ip_neighbor}>
-                      <p>
-                        {e.ip_neighbor} - {e.interface}
-                      </p>
-                    </div>
+                    <p key={e.id + e.ip_neighbor}>
+                      {e.ip_neighbor} - {e.interface}
+                    </p>
                   ))}
                 </div>
               </td>
-              <td>{statusEigrp}</td>
+              <td
+                className={
+                  statusEigrp === "FAIL"
+                    ? "status-fail-infra-gen"
+                    : "status-ok-infra-gen"
+                }
+              >
+                {statusEigrp}
+              </td>
             </tr>
             <tr>
               <td>
                 Neighbor OSPF: {numOspfUp}/{numOspfUp + numOspfDown}
-                <div>
+                <div className="fail-elements-container">
                   {neighborsOspfDown.map((e) => (
-                    <div key={e.id + e.ip_neighbor}>
-                      <p>
-                        {e.ip_neighbor} - {e.interface}
-                      </p>
-                    </div>
+                    <p key={e.id + e.ip_neighbor}>
+                      {e.ip_neighbor} - {e.interface}
+                    </p>
                   ))}
                 </div>
               </td>
-              <td>{statusOspf}</td>
+              <td
+                className={
+                  statusOspf === "FAIL"
+                    ? "status-fail-infra-gen"
+                    : "status-ok-infra-gen"
+                }
+              >
+                {statusOspf}
+              </td>
             </tr>
             <tr>
               <td>Default Route "Via bgp 65001"</td>
-              <td>{statusRouteDefault}</td>
+              <td
+                className={
+                  statusRouteDefault === "FAIL"
+                    ? "status-fail-infra-gen"
+                    : "status-ok-infra-gen"
+                }
+              >
+                {statusRouteDefault}
+              </td>
             </tr>
           </tbody>
         </table>
       </div>
-    </div>
+    </>
   );
 }
