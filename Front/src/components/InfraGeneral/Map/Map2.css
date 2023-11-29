@@ -1,0 +1,45 @@
+.background-infra-general {
+    background-color: rgba(162, 160, 160, 0.736);
+}
+
+.main-map-container {
+    width: 1400px;
+    margin: auto;
+    
+}
+
+.main-map-container img {
+    width: 100%;
+    height: 100%;
+
+}
+
+.status-light-map-container {
+    width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+
+}
+
+.status-light-inf-gen {
+    border: black solid 1px;
+    width: 17px;
+    height: 17px;
+    border-radius: 100%;
+    background-color: red;
+}
+
+.core-ot-adm {
+    bottom: 660px;
+    left: 575px;
+}
+
+.core-ot-conce {
+    bottom: 679px;
+    left: 830px;
+}
+.fw-santiago {
+    bottom: 1322px;
+    left: 393px;
+}

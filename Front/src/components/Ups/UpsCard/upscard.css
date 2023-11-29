@@ -20,12 +20,10 @@
 }
 
 .status-light {
-  border: black solid 1px;
-  width: 17px;
-  height: 17px;
-  border-radius: 100%;
-  margin-bottom: 5px ;
-  margin-left: 0;
+  width: 100px;
+  height: 100px;
+  border: 10px solid green;
+  border-radius: 50%;
 }
 
 p span {

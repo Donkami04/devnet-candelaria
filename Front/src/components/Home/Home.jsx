@@ -11,6 +11,7 @@ import { DashFirewalls } from "../Firewalls/DashFirewalls/DashFirewalls";
 import { WanDashboard } from "../Wan/WanDashboard/WanDashboard";
 import { useWanDates } from "../../hooks/useWanDates";
 import { useVpnCounter } from "../../hooks/useVpnCounter";
+import { InfraGeneralDash } from "../InfraGeneral/InfraGeneralDash/InfraGeneralDash";
 import "./home.css";
 
 export function Home() {
@@ -73,7 +74,6 @@ export function Home() {
 
     fetchData();
   }, []);
-
 
   useEffect(() => {
     if (logoutParam && !token) {
@@ -325,6 +325,41 @@ export function Home() {
               style={{ color: "white" }}
             >
               Ver detalles
+            </Link>
+          </div>
+        </section>
+
+        <section className="system-container">
+          <div className="name-system-container">
+            <h1>Infraestructura General</h1>
+          </div>
+
+          <div className="home-kpi-container">
+            <InfraGeneralDash />
+          </div>
+
+          <div className="link-system-container">
+            <Link
+              to="/monitoreo/infraestrucura-general/map2"
+              className="link-system button-link"
+              style={{ color: "white" }}
+            >
+              Mapa
+            </Link>
+            <Link
+              to="/monitoreo/infraestrucura-general"
+              className="link-system button-link"
+              style={{ color: "white" }}
+            >
+              Fallas
+            </Link>
+
+            <Link
+              to="/monitoreo/infraestrucura-general/details"
+              className="link-system button-link"
+              style={{ color: "white" }}
+            >
+              Detalles
             </Link>
           </div>
         </section>

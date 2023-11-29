@@ -5,8 +5,12 @@
 }
 
 .table-infra-general-container .table-core {
-  width: 90%;
+  /* width: 90%; */
   border-collapse: collapse;
+}
+
+.table-core {
+  width: 90%;
 }
 
 .table-core td,
@@ -40,4 +44,10 @@ th {
   color: rgb(5, 165, 5);
 }
 
-/* Otros estilos según sea necesario */
+.circulo-vacio {
+  width: 100px;
+  height: 100px;
+  border: 10px solid green;
+  border-radius: 50%;
+}
+

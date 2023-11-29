@@ -1,4 +1,5 @@
 import "./Cores.css";
+import { PRTG_URL } from "../../../utils/Api-candelaria/api";
 
 export function ItCoreAdm({
   devicesInterfaces,
@@ -208,7 +209,10 @@ export function ItCoreAdm({
                 <div className="fail-elements-container">
                   {interfacesDown.map((e) => (
                     <p key={e.id + e.id_prtg}>
-                      {e.name} - {e.status}
+                      {" "}
+                      <a style={{ textDecoration: "none", color:"red" }} href={`${PRTG_URL}${e.id_prtg}`} target="_blank">
+                        {e.name} - {e.status}
+                      </a>
                     </p>
                   ))}
                 </div>

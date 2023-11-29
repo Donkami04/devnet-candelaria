@@ -1,4 +1,3 @@
-import xml.etree.ElementTree as ET
 import requests, warnings, os, datetime, time, calendar, mysql.connector, logging, traceback, sched
 from dotenv import load_dotenv
 from config import database
