@@ -158,3 +158,10 @@ export const getDefaultRoute = async () => {
     .then((response) => response.data)
     .catch((error) => {throw new Error('DEFAULT ROUTE: Error del API REST Candealaria : ',error)});
 };
+
+export const getStatusCores = async () => {
+  return axios
+    .get(`${BASE_API_URL}/status-cores`)
+    .then((response) => response.data)
+    .catch((error) => {throw new Error('STATUS CORES: Error del API REST Candealaria : ',error)});
+};

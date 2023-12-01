@@ -15,6 +15,7 @@ const neighborsRoutes = require("./neighbors.routes");
 const interfacesRoutes = require("./interfaces.routes");
 const systemHealthRoutes = require("./system_health.routes");
 const routeDefaultRoutes = require("./route_default.routes");
+const statusCoresRoutes = require("./status_core.routes");
 const router = express.Router();
 
 const allRoutes = (app) => {
@@ -35,6 +36,7 @@ const allRoutes = (app) => {
   router.use("/interfaces", interfacesRoutes);
   router.use("/system-health", systemHealthRoutes);
   router.use("/route-default", routeDefaultRoutes);
+  router.use("/status-cores", statusCoresRoutes);
 };
 
 module.exports = { allRoutes };

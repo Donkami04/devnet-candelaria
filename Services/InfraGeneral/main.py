@@ -6,6 +6,7 @@ from command_ospf import ospf_function
 from command_eigrp import eigrp_function
 from command_route import route_function
 from status_neighbor import status_neighbor
+from status_core import ping_host
 
 warnings.filterwarnings("ignore", message="Unverified HTTPS request")
 
@@ -54,7 +55,8 @@ def core1():
         name_switch = switch['name']
         red = switch['red']
         logging.info(f"{ip_switch} - {name_switch}")
-
+        status_core, message_status_core = ping_host(ip_switch)
+        cursor.execute(f"UPDATE dcs.status_cores SET `status` = '{status_core}' WHERE `ip` = '{ip_switch}'")
         id_prtg_switch = get_id_prtg(ip_switch)
         data_interfaces = get_data_interfaces(ip_switch, id_prtg_switch, red)
         data_systemhealth = system_health(ip_switch, id_prtg_switch, red)
@@ -77,32 +79,10 @@ def core1():
         # query = (f"INSERT INTO dcs.route_default (`via_bgp`, `name`, `red`, `ip_switch`) VALUES ('{route_via_bgp}','{route_name}','{route_red}','{route_ip_switch}')")
         cursor.execute(query)
         mydb.commit()
-        
-        
+
         query_historic = (f"INSERT INTO dcs.historic_route_default (`via_bgp`, `name`, `red`, `ip_switch`) VALUES ('{route_via_bgp}','{route_name}','{route_red}','{route_ip_switch}')")
         cursor.execute(query_historic)
         mydb.commit()
-
-        # query = (f"DELETE FROM dcs.neighbors WHERE ip_switch='{ip_switch}'")
-        # cursor.execute(query)
-        # mydb.commit()
-
-        # for neighbor in data_neighbors:
-        #     ip_neighbor = neighbor['ip_neighbor']
-        #     # logging.info(ip_neighbor)
-        #     ip_switch = neighbor['ip_switch']
-        #     red = neighbor['red']
-        #     neighbor_type = neighbor['neighbor']
-        #     interface = neighbor['interface']
-        #     query = f"INSERT INTO dcs.neighbors (`ip_neighbor`, `neighbor`, `red`, `name`, `ip_switch`, `interface`) VALUES ('{ip_neighbor}','{neighbor_type}','{red}','{name_switch}','{ip_switch}','{interface}')"
-        #     cursor.execute(query)
-        #     mydb.commit()
-
-        #     query_historic = "INSERT INTO dcs.historic_neighbors (`ip_neighbor`, `neighbor`, `red`, `name`, `ip_switch`, `interface`) VALUES (%s, %s, %s, %s, %s, %s)"
-        #     cursor.execute(query_historic, (ip_neighbor, neighbor_type, red, name_switch, ip_switch, interface))
-        #     mydb.commit()
-            
-        
 
         for interface in data_interfaces:
             name_interface = interface['name']
@@ -152,7 +132,7 @@ def core1():
         neighbor_type = neighbor['neighbor']
         interface = neighbor['interface']
         status = neighbor['status']
-        
+
         query = "INSERT INTO dcs.neighbors (`ip_neighbor`, `neighbor`, `red`, `name`, `ip_switch`, `interface`, `status`) VALUES (%s, %s, %s, %s, %s, %s, %s)"
         cursor.execute(query, (ip_neighbor, neighbor_type, red, name, ip_switch, interface, status))
         mydb.commit()
@@ -160,7 +140,7 @@ def core1():
         query_historic = "INSERT INTO dcs.historic_neighbors (`ip_neighbor`, `neighbor`, `red`, `name`, `ip_switch`, `interface`, `status`) VALUES (%s, %s, %s, %s, %s, %s, %s)"
         cursor.execute(query_historic, (ip_neighbor, neighbor_type, red, name, ip_switch, interface, status))
         mydb.commit()
-        
+
     cursor.close()
 
 def get_id_prtg(ip_switch):

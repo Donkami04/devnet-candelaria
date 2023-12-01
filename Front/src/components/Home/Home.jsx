@@ -340,7 +340,7 @@ export function Home() {
 
           <div className="link-system-container">
             <Link
-              to="/monitoreo/infraestrucura-general/map2"
+              to="/monitoreo/infraestrucura-general/map"
               className="link-system button-link"
               style={{ color: "white" }}
             >

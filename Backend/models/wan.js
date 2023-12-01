@@ -1,7 +1,7 @@
 const sequelize = require("../db/conection");
 const { Sequelize, DataTypes } = require("sequelize");
 
-const Wan= sequelize.define(
+const Wan = sequelize.define(
   "Wan",
   {
     ip: {
@@ -29,13 +29,17 @@ const Wan= sequelize.define(
       allowNull: true,
     },
     current_uptime_percent: {
-        type: DataTypes.FLOAT,
-        allowNull: true,
+      type: DataTypes.FLOAT,
+      allowNull: true,
     },
     today_uptime_percent: {
-        type: DataTypes.FLOAT,
-        allowNull: true,
-      },
+      type: DataTypes.FLOAT,
+      allowNull: true,
+    },
+    status: {
+      type: DataTypes.STRING(100),
+      allowNull: true,
+    },
   },
   {
     tableName: "wan",

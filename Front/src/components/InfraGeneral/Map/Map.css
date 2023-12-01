@@ -24,7 +24,7 @@
   width: 17px;
   height: 17px;
   border-radius: 100%;
-  background-color: red;
+  /* background-color: red; */
 }
 
 .fw-santiago {
@@ -105,4 +105,12 @@
 .core-conce-it {
   bottom: 1195px;
   left: 835px;
+}
+
+.inf-gen-green {
+  background-color: rgb(148, 247, 0);
+}
+
+.inf-gen-red {
+  background-color: red;
 }

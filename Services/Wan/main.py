@@ -62,13 +62,15 @@ def get_uptime():
                 'last_uptimepercent': 0.0,
                 'last_downtimepercent': 0.0,
                 'current_uptimepercent': 0.0,
-                'today_uptimepercent': 0.0
+                'today_uptimepercent': 0.0,
+                'status': 'Not Found'
             }
             
             if device_data == 'Not Found' or device_data == []:
                 save_bd(data_wan)
             else:
                 device_id = device_data[0].get('objid')
+                device_status = device_data[0].get('status', 'Not Found')
                 
                 if ip_wan.startswith('10.224.126'):
                     get_id_ping_url = os.getenv('URL_PRTG_GET_ID_PING_WITH_ID_SNMP').format(id_device=device_id)
@@ -96,7 +98,8 @@ def get_uptime():
                         'last_uptimepercent': last_month['uptime_percent'],
                         'last_downtimepercent': last_month['downtime_percent'],
                         'current_uptimepercent': current_month['uptime_percent'],
-                        'today_uptimepercent': today['uptime_percent']
+                        'today_uptimepercent': today['uptime_percent'],
+                        'status': device_status
                     }
                     
                     save_bd(data_wan)
@@ -213,9 +216,10 @@ def save_bd(data_wan):
     last_downtimepercent = data_wan['last_downtimepercent']
     current_uptimepercent = data_wan['current_uptimepercent']
     today_uptimepercent = data_wan['today_uptimepercent']
+    status_device = data_wan['status']
     # print(last_uptimepercent)
-    query = f"INSERT INTO dcs.wan (`ip`, `sensor`, `last_uptime_days`, `last_uptime_percent`, `last_down_days`, `last_down_percent`, `current_uptime_percent`, `today_uptime_percent`)"
-    values = f"VALUES ('{ip}', '{sensor_name}', '{last_uptimedays}', '{last_uptimepercent}', '{last_downtimedays}', '{last_downtimepercent}', '{current_uptimepercent}', '{today_uptimepercent}')"
+    query = f"INSERT INTO dcs.wan (`ip`, `sensor`, `last_uptime_days`, `last_uptime_percent`, `last_down_days`, `last_down_percent`, `current_uptime_percent`, `today_uptime_percent`, `status`)"
+    values = f"VALUES ('{ip}', '{sensor_name}', '{last_uptimedays}', '{last_uptimepercent}', '{last_downtimedays}', '{last_downtimepercent}', '{current_uptimepercent}', '{today_uptimepercent}', '{status_device}')"
     cursor.execute(query + values)
     mydb.commit()
 
