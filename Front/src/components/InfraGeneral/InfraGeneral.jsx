@@ -8,6 +8,7 @@ import {
 } from "../../utils/Api-candelaria/api";
 import { ItCoreAdm } from "./Cores/ItCoreAdm";
 import { ItCoreConce } from "./Cores/ItCoreConce";
+import { ItCoreOjos } from "./Cores/ItCoreOjos";
 import "./infrageneral.css";
 
 export function InfraGeneral() {
@@ -55,6 +56,14 @@ export function InfraGeneral() {
         </div>
         <div className="section-infra-general">
           <ItCoreConce
+            devicesInterfaces={devicesInterfaces}
+            devicesHealth={devicesHealth}
+            neighbors={neighbors}
+            routeStatus={routeStatus}
+          />
+        </div>
+        <div className="section-infra-general">
+          <ItCoreOjos
             devicesInterfaces={devicesInterfaces}
             devicesHealth={devicesHealth}
             neighbors={neighbors}

@@ -45,6 +45,7 @@ export function Mesh() {
       </div>
     );
   };
+
   return (
     <div>
       <Navbar title={"Equipos Mesh Críticos"} />

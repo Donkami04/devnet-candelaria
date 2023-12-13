@@ -1,4 +1,4 @@
-
+# Funcion empleada para darle estado UP o DOWN al neighbor
 def status_neighbor(mydb, current_neighbors):
     cursor = mydb.cursor()
     cursor.execute("SELECT * FROM dcs.data_neighbors")

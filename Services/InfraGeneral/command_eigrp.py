@@ -65,6 +65,7 @@ def eigrp_function(ip_switch, red, name):
                 'name': name     
             }
             data_list.append(data)
+
         return data_list
 
     except Exception as e:

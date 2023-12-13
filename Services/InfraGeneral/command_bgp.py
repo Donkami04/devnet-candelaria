@@ -34,6 +34,7 @@ def bgp_function(ip_switch, red, name):
         channel.close()
         client.close()
         neighbor_list = re.findall(r'(\d+\.\d+\.\d+\.\d+)\s+\d+\s+\d+\s+\d+\s+\d+\s+\d+\s+\d+\s+\w+\s+\d+', output)
+
         data_list = []
         for ip in neighbor_list:
             neighbor_data = {

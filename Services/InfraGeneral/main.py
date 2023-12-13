@@ -46,7 +46,8 @@ def core1():
     cursor = mydb.cursor()
     data_switches = [
         {'ip':'10.224.127.1', 'red': 'it', 'name': 'ADMIN'},
-        {'ip':'10.224.127.2', 'red': 'it', 'name': 'CONCE'}
+        {'ip':'10.224.127.2', 'red': 'it', 'name': 'CONCE'},
+        {'ip':'10.230.127.1', 'red': 'it', 'name': 'OJOS'},
     ]
 
     current_data_neighbors = []
@@ -54,7 +55,7 @@ def core1():
         ip_switch = switch['ip']
         name_switch = switch['name']
         red = switch['red']
-        logging.info(f"{ip_switch} - {name_switch}")
+        logging.info(f"{ip_switch} - {name_switch} - {red}")
         status_core, message_status_core = ping_host(ip_switch)
         cursor.execute(f"UPDATE dcs.status_cores SET `status` = '{status_core}' WHERE `ip` = '{ip_switch}'")
         id_prtg_switch = get_id_prtg(ip_switch)
@@ -65,8 +66,20 @@ def core1():
         data_eigrp = eigrp_function(ip_switch, red, name_switch)
         data_ospf = ospf_function(ip_switch, red, name_switch)
         data_neighbors = data_bgp + data_eigrp + data_ospf
+
         for neigh in data_neighbors:
             current_data_neighbors.append(neigh)
+            
+            #! Lo comentado se usa para llenar data_neighbors
+            # ip_neighbor = neigh['ip_neighbor']
+            # ip_switch = neigh['ip_switch']
+            # name = neigh['name']
+            # red = neigh['red']
+            # neighbor_type = neigh['neighbor']
+            # interface = neigh['interface']
+            # query = "INSERT INTO dcs.data_neighbors (`ip_neighbor`, `neighbor`, `red`, `name`, `ip_switch`, `interface`) VALUES (%s, %s, %s, %s, %s, %s)"
+            # cursor.execute(query, (ip_neighbor, neighbor_type, red, name, ip_switch, interface))
+            # mydb.commit()
         
         data_route = route_function(ip_switch, red, name_switch)
         route_via_bgp = data_route['via_bgp']
@@ -115,10 +128,6 @@ def core1():
             cursor.execute(query_historic, (name_sensor, status_sensor, id_prtg, lastvalue, ip_switch, name_switch, red_sensor))
             mydb.commit()
     
-    # En el apartado de neighbors se trabaja fuera del bucle pero tomando
-    # el valor de la variable `current_data_neighbors` la cual esta
-    # conformado por los datos de los neighbors del SW CONCE y ADM  
-    
     query = (f"DELETE FROM dcs.neighbors")
     cursor.execute(query)
     mydb.commit()
@@ -132,7 +141,7 @@ def core1():
         neighbor_type = neighbor['neighbor']
         interface = neighbor['interface']
         status = neighbor['status']
-
+        
         query = "INSERT INTO dcs.neighbors (`ip_neighbor`, `neighbor`, `red`, `name`, `ip_switch`, `interface`, `status`) VALUES (%s, %s, %s, %s, %s, %s, %s)"
         cursor.execute(query, (ip_neighbor, neighbor_type, red, name, ip_switch, interface, status))
         mydb.commit()
@@ -217,16 +226,11 @@ def system_health(ip_switch, id_switch, red):
         return devices_systemhealth_notFound
 
 
+def bucle(scheduler):
+    core1()
+    scheduler.enter(7200, 1, bucle, (scheduler,))
 
-core1()
-
-
-
-# def bucle(scheduler):
-#     get_uptime()
-#     scheduler.enter(7200, 1, bucle, (scheduler,))
-
-# if __name__ == '__main__':
-#     s = sched.scheduler(time.time, time.sleep)
-#     s.enter(0, 1, bucle, (s,))
-#     s.run()
+if __name__ == '__main__':
+    s = sched.scheduler(time.time, time.sleep)
+    s.enter(0, 1, bucle, (s,))
+    s.run()

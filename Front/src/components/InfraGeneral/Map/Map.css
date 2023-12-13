@@ -1,5 +1,6 @@
 .background-infra-general {
   background-color: rgba(162, 160, 160, 0.736);
+  overflow-x: hidden;
 }
 
 .main-map-container {
@@ -107,10 +108,45 @@
   left: 835px;
 }
 
+.core-ojos-it {
+  bottom: 1214px;
+  left:1080px;
+}
+
 .inf-gen-green {
   background-color: rgb(148, 247, 0);
 }
 
 .inf-gen-red {
   background-color: red;
+  animation: titilar 2s infinite;
+}
+
+.inf-gen-yellow {
+  background-color: yellow;
+  animation: titilar-yellow 2s infinite;
+}
+
+@keyframes titilar {
+  0% {
+    background-color: red;
+  }
+  20% {
+    background-color: rgb(102, 0, 0)
+  }
+  100% {
+    background-color: red;
+  }
+}
+
+@keyframes titilar-yellow {
+  0% {
+    background-color: yellow;
+  }
+  20% {
+    background-color: rgb(171, 160, 0)
+  }
+  100% {
+    background-color: yellow;
+  }
 }

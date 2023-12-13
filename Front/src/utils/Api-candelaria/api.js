@@ -165,3 +165,5 @@ export const getStatusCores = async () => {
     .then((response) => response.data)
     .catch((error) => {throw new Error('STATUS CORES: Error del API REST Candealaria : ',error)});
 };
+
+

@@ -27,11 +27,15 @@ export const Map = () => {
     fetchData();
   }, []);
 
-  const getDeadElements = (list, name) => {
-    const filteredData = list.filter(e => e.fw === name && e.state === "dead");
-    return filteredData;
-  }
 
+  const getColorLight = (firewallName, canal, firewalls) => {
+    const filteredFirewalls = firewalls.filter(fw => fw.fw === firewallName && fw.canal === canal);
+
+    if (filteredFirewalls.length > 0) {
+      return filteredFirewalls[0].state === "alive" ? "inf-gen-green" : "inf-gen-red";
+    }
+    return "";
+  };
   const getColorLightWan = (sensorName, wanlist) => {
     const filteredWan = wanlist.filter(wanElement => wanElement.sensor === sensorName);
     if (filteredWan.length > 0) {
@@ -39,21 +43,6 @@ export const Map = () => {
     }
     return "";
   };
-
-  const getColorLight = (list, number) => {
-    let finalColor = '';
-    if(list.length === number) {
-      finalColor = "inf-gen-red";
-      return finalColor;
-    }
-    if(list.length < number && list.length !== 0) {
-      finalColor = "inf-gen-yellow";
-      return finalColor;
-    }
-      finalColor = "inf-gen-green";
-    return finalColor;
-  }
-
   const getColorLightCores = (ipCore, red, cores) => {
     const filteredCores = cores.filter(core => core.ip === ipCore && core.red === red);
     if (filteredCores.length > 0) {
@@ -62,40 +51,23 @@ export const Map = () => {
     return "";
   };
 
-  // Filtro de elementos Dead
-  const fwsSantiagoDead = getDeadElements(firewalls, "FW-Santiago");
-  const fwsChamonateDead = getDeadElements(firewalls, "FW-Chamonate");
-  const fwsRalunDead = getDeadElements(firewalls, "FW-Ralun");
-  const fwsDptLegalDead = getDeadElements(firewalls, "FW-Dpto-Legal");
-  const fwsCopiapoDead = getDeadElements(firewalls, "FW-Copiapo");
-  const canalAdminDead = getDeadElements(firewalls, "FW-Admin");
-  const canalConceDead = getDeadElements(firewalls, "FW-Conce");
-  const canalOjosDead = getDeadElements(firewalls, "FW-Ojos");
-
-  // Colores Firewalls
-  const colorLightFwSantiago = getColorLight(fwsSantiagoDead, 2);
-  const colorLightFwChamonate = getColorLight(fwsChamonateDead, 3);
-  const colorLightFwRalun = getColorLight(fwsRalunDead, 1);
-  const colorLightFwDptLegal = getColorLight(fwsDptLegalDead, 1);
-  const colorLightFwCopiapo = getColorLight(fwsCopiapoDead, 1);
-  let colorLightStarlink = canalAdminDead.some(fw => fw.link === "STARLINK");
-  !colorLightStarlink ? colorLightStarlink = "inf-gen-green" : colorLightStarlink = "inf-gen-red"; 
-
-  // Colores Canales
-  const colorLightCanalAdmin = getColorLight(canalAdminDead, 4);
-  const colorLightCanalConce = getColorLight(canalConceDead, 3);
-  const colorLightCanalOjos = getColorLight(canalOjosDead, 3);
-
-  // Colores WAN
+  const colorLightFwSantiago = getColorLight("FW-Santiago", "wan2", firewalls);
+  const colorLightFwChamonate = getColorLight("FW-Chamonate", "wan1", firewalls);
+  const colorLightFwRalun = getColorLight("FW-Ralun", "wan1", firewalls);
+  const colorLightFwDptLegal = getColorLight("FW-Dpto-Legal", "wan1", firewalls);
+  const colorLightFwCopiapo = getColorLight("FW-Copiapo", "wan2", firewalls);
+  const colorLightStarlink = getColorLight("FW-Chamonate", "port5", firewalls);
+  const colorLightCanalAdmin = getColorLight("FW-Admin", "port7", firewalls);
+  const colorLightCanalConce = getColorLight("FW-Conce", "port7", firewalls);
+  const colorLightCanalOjos = getColorLight("FW-Ojos", "port19", firewalls);  
   const colorLightWanAzure = getColorLightWan("LAN_Azure", wan);
   const colorLightWanAdmin = getColorLightWan("FG-Admin", wan);
   const colorLightWanConce = getColorLightWan("FG-Conce", wan);
   const colorLightWanOjos = getColorLightWan("FG-Ojos", wan);
-
-  // Colores Cores
   const colorLightCoreAdmIt = getColorLightCores("10.224.127.1", "it", cores);
   const colorLightCoreConceIt = getColorLightCores("10.224.127.2", "it", cores);
-  const colorLightCoreOjosIt = getColorLightCores("10.230.127.1", "it", cores);
+
+
 
   return (
     <main className="background-infra-general">
@@ -142,7 +114,7 @@ export const Map = () => {
 
       <div className="status-light-map-container internet">
         <Link to="/monitoreo/firewalls">
-          <p className="status-light-inf-gen inf-gen-green"></p>
+          <p className="status-light-inf-gen"></p>
         </Link>
       </div>
 
@@ -197,12 +169,6 @@ export const Map = () => {
       <div className="status-light-map-container core-conce-it">
         <Link to="/monitoreo/infraestrucura-general">
           <p className={`status-light-inf-gen ${colorLightCoreConceIt}`}></p>
-        </Link>
-      </div>
-
-      <div className="status-light-map-container core-ojos-it">
-        <Link to="/monitoreo/infraestrucura-general">
-          <p className={`status-light-inf-gen ${colorLightCoreOjosIt}`}></p>
         </Link>
       </div>
 

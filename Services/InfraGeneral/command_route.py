@@ -32,7 +32,6 @@ def route_function(ip_switch, red, name):
             output += channel.recv(1024).decode('utf-8')
         channel.close()
         client.close()
-        
         data = {
             'red': red,
             'name': name,
@@ -58,3 +57,4 @@ def route_function(ip_switch, red, name):
         
         return data
 
+# route_function('10.230.127.1', 'it', 'OJOS')
