@@ -84,7 +84,7 @@ def prtg_data():
             last_down_ping =  re.sub(patron, '', last_down_ping)
 
             edate = datetime.datetime.today()
-            sdate = datetime.datetime.today() - timedelta(minutes=30)
+            sdate = datetime.datetime.today() - timedelta(minutes=3600)
             edate = edate.strftime("%Y-%m-%d-%H-%M-%S")
             sdate = sdate.strftime("%Y-%m-%d-%H-%M-%S")
                     

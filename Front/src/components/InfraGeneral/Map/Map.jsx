@@ -19,6 +19,7 @@ export const Map = () => {
         setFirewalls(dataFirewalls);
         setWan(dataWan);
         setCores(dataCores);
+        console.log(cores)
 
       } catch (error) {
         return error;

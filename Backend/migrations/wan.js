@@ -70,7 +70,7 @@ module.exports = {
         allowNull: true,
       },
       status: {
-        type: Sequelize.STRING(100),
+        type: Sequelize.STRING(10),
         allowNull: true,
       },
     });
