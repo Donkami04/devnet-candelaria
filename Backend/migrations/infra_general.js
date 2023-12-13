@@ -246,7 +246,6 @@ module.exports = {
       id_prtg: {
         type: Sequelize.STRING(32),
         allowNull: false,
-        unique: true,
       },
       ip_switch: {
         type: Sequelize.STRING(32),
