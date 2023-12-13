@@ -5,12 +5,12 @@ import {
   getDefaultRoute,
 } from "../utils/Api-candelaria/api";
 
-const dataInterfaces = await getInterfaces();
-const dataDevicesHealth = await getSystemHealth();
-const dataRouteStatus = await getDefaultRoute();
-const dataNeighbors = await getNeighbors();
 
-export const useInfGenDash = () => {
+export const useInfGenDash = async () => {
+  const dataInterfaces = await getInterfaces();
+  const dataDevicesHealth = await getSystemHealth();
+  const dataRouteStatus = await getDefaultRoute();
+  const dataNeighbors = await getNeighbors();
   const upElements = [];
   const downElements = [];
   dataInterfaces.forEach((element) => {

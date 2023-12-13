@@ -1,11 +1,31 @@
-import { useInfGenDash } from "../../../hooks/useInfGenDash";
-import "./InfraGeneralDash.css";
-
-const infGenDash = useInfGenDash();
-const infGenDashUp = infGenDash.upElements;
-const infGenDashDown = infGenDash.downElements;
+import { useState, useEffect } from 'react';
+import { useInfGenDash } from '../../../hooks/useInfGenDash';
+import './InfraGeneralDash.css';
 
 export function InfraGeneralDash() {
+  const [infGenDash, setInfGenDash] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const result = await useInfGenDash();
+        setInfGenDash(result);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []); // Empty dependency array ensures the effect runs once on mount
+
+  if (!infGenDash) {
+    // Puedes renderizar un indicador de carga mientras se resuelve la promesa
+    return <p>Cargando...</p>;
+  }
+
+  const infGenDashUp = infGenDash.upElements;
+  const infGenDashDown = infGenDash.downElements;
+
   return (
     <>
       <table className="infra-dash-table">
@@ -22,7 +42,7 @@ export function InfraGeneralDash() {
             <td>CORE</td>
             <td>{infGenDashUp}</td>
             <td>{infGenDashDown}</td>
-            <td>{infGenDashUp+infGenDashDown}</td>
+            <td>{infGenDashUp + infGenDashDown}</td>
           </tr>
         </tbody>
       </table>

@@ -151,6 +151,7 @@ def core1():
         mydb.commit()
 
     cursor.close()
+    logging.info("Terminado")
 
 def get_id_prtg(ip_switch):
     url_objid = os.getenv("URL_PRTG_GET_ID").format(ip=ip_switch)
