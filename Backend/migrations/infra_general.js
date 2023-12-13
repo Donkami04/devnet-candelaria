@@ -51,6 +51,40 @@ module.exports = {
       id_prtg: {
         type: Sequelize.STRING(32),
         allowNull: false,
+        unique: true,
+      },
+      ip_switch: {
+        type: Sequelize.STRING(100),
+        allowNull: false,
+      },
+      name_switch: {
+        type: Sequelize.STRING(100),
+        allowNull: false,
+      },
+      red: {
+        type: Sequelize.STRING(10),
+        allowNull: false,
+      },
+    });
+
+    await queryInterface.createTable("historic_interfaces", {
+      id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+      },
+      name: {
+        type: Sequelize.STRING(225),
+        allowNull: false,
+      },
+      status: {
+        type: Sequelize.STRING(100),
+        allowNull: false,
+      },
+      id_prtg: {
+        type: Sequelize.STRING(32),
+        allowNull: false,
       },
       ip_switch: {
         type: Sequelize.STRING(100),
@@ -67,6 +101,43 @@ module.exports = {
     });
 
     await queryInterface.createTable("neighbors", {
+      id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+      },
+      ip_neighbor: {
+        type: Sequelize.STRING(100),
+        allowNull: false,
+      },
+      neighbor: {
+        type: Sequelize.STRING(32),
+        allowNull: false,
+      },
+      red: {
+        type: Sequelize.STRING(10),
+        allowNull: false,
+      },
+      name: {
+        type: Sequelize.STRING(100),
+        allowNull: false,
+      },
+      ip_switch: {
+        type: Sequelize.STRING(100),
+        allowNull: false,
+      },
+      interface: {
+        type: Sequelize.STRING(100),
+        allowNull: false,
+      },
+      status: {
+        type: Sequelize.STRING(10),
+        allowNull: false,
+      }
+    });
+
+    await queryInterface.createTable("historic_neighbors", {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -128,6 +199,31 @@ module.exports = {
       },
     });
 
+    await queryInterface.createTable("historic_route_default", {
+      id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+      },
+      via_bgp: {
+        type: Sequelize.STRING(10),
+        allowNull: false,
+      },
+      name: {
+        type: Sequelize.STRING(100),
+        allowNull: false,
+      },
+      red: {
+        type: Sequelize.STRING(10),
+        allowNull: false,
+      },
+      ip_switch: {
+        type: Sequelize.STRING(100),
+        allowNull: false,
+      },
+    });
+
     await queryInterface.createTable("system_health", {
       id: {
         type: Sequelize.INTEGER,
@@ -150,6 +246,7 @@ module.exports = {
       id_prtg: {
         type: Sequelize.STRING(32),
         allowNull: false,
+        unique: true,
       },
       ip_switch: {
         type: Sequelize.STRING(32),
@@ -163,7 +260,43 @@ module.exports = {
         type: Sequelize.STRING(10),
         allowNull: false,
       },
-      
+    });
+
+    await queryInterface.createTable("historic_system_health", {
+      id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        autoIncrement: true,
+      },
+      name: {
+        type: Sequelize.STRING(100),
+        allowNull: false,
+      },
+      status: {
+        type: Sequelize.STRING(100),
+        allowNull: false,
+      },
+      lastvalue: {
+        type: Sequelize.STRING(100),
+        allowNull: false,
+      },
+      id_prtg: {
+        type: Sequelize.STRING(32),
+        allowNull: false,
+        unique: true,
+      },
+      ip_switch: {
+        type: Sequelize.STRING(32),
+        allowNull: false,
+      },
+      name_switch: {
+        type: Sequelize.STRING(32),
+        allowNull: false,
+      },
+      red: {
+        type: Sequelize.STRING(10),
+        allowNull: false,
+      },
     });
   },
   down: async (queryInterface, Sequelize) => {
@@ -172,5 +305,9 @@ module.exports = {
     await queryInterface.dropTable("neighbors");
     await queryInterface.dropTable("route_default");
     await queryInterface.dropTable("system_health");
+    await queryInterface.dropTable("historic_interfaces");
+    await queryInterface.dropTable("historic_neighbors");
+    await queryInterface.dropTable("historic_route_default");
+    await queryInterface.dropTable("historic_system_health");
   },
 };
