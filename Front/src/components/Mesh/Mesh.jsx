@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getMesh } from "../../utils/Api-candelaria/api";
 import { Navbar } from "../Navbar/Navbar";
 import { Status_System } from "../Status_System/Status_System";
@@ -45,6 +45,7 @@ export function Mesh() {
       </div>
     );
   };
+
   return (
     <div>
       <Navbar title={"Equipos Mesh Críticos"} />

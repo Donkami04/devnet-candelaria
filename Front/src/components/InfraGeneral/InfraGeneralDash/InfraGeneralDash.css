@@ -1,0 +1,19 @@
+.infra-dash-table {
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin: auto;
+  width: 80%;
+  padding: 4px;
+  font-size: 0.8rem;
+}
+
+.infra-dash-table th,
+.infra-dash-table td {
+  border: 1px solid black;
+  padding: 8px;
+}
+
+.infra-dash-table th {
+  font-size: 1rem;
+}

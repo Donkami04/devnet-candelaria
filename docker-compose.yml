@@ -71,14 +71,14 @@ services:
   #   environment:
   #     - ENVIRONMENT=production
       
-  camaras:
-    build:
-      context: Services/Camaras
-    restart: always
-    depends_on:
-      - db
-    environment:
-      - ENVIRONMENT=production
+  # camaras:
+  #   build:
+  #     context: Services/Camaras
+  #   restart: always
+  #   depends_on:
+  #     - db
+  #   environment:
+  #     - ENVIRONMENT=production
     
   backend-api-rest:
     build:
@@ -98,14 +98,14 @@ services:
     restart: always
     # environment: Este se define en el archivo .env
 
-  wan:
-    build:
-      context: Services/Wan
-    restart: always
-    depends_on:
-      - db
-    environment:
-      - ENVIRONMENT=production
+  # wan:
+  #   build:
+  #     context: Services/Wan
+  #   restart: always
+  #   depends_on:
+  #     - db
+  #   environment:
+  #     - ENVIRONMENT=production
 
   # firewalls:
   #   build:
@@ -115,3 +115,12 @@ services:
   #     - db
   #   environment:
   #     - ENVIRONMENT=production
+
+  infraestructura-general:
+    build:
+      context: Services/InfraGeneral
+    restart: always
+    depends_on:
+      - db
+    environment:
+      - ENVIRONMENT=production

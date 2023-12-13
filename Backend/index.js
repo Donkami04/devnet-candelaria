@@ -1,15 +1,17 @@
-const express = require('express');
-require('dotenv').config();
+const express = require("express");
+require("dotenv").config();
 const app = express();
 const port = process.env.NODE_PORT;
-const cors = require('cors');
-const {allRoutes} = require('./routes/index.routes');
-const { logErrors, errorHandler, ormErrorHandler, boomErrorHandler } = require('./middlewares/error.handler');
-
+const cors = require("cors");
+const { allRoutes } = require("./routes/index.routes");
+const {
+  logErrors,
+  errorHandler,
+  ormErrorHandler,
+  boomErrorHandler,
+} = require("./middlewares/error.handler");
 
 app.use(express.json());
-
-// require('./utils/auth/strategies/local.strategy')
 
 app.use(cors({
   origin: [
@@ -21,17 +23,14 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
-
 allRoutes(app);
-
 
 app.use(logErrors);
 app.use(boomErrorHandler);
 app.use(ormErrorHandler);
 app.use(errorHandler);
-require('./utils/auth')
-
+require("./utils/auth");
 
 app.listen(port, () => {
-  console.log(`System running on port ${port}`)
+  console.log(`System running on port ${port}`);
 });

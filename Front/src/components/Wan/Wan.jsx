@@ -4,7 +4,6 @@ import { Navbar } from "../Navbar/Navbar";
 import { Status_System } from "../Status_System/Status_System";
 import { WanDashboard } from "./WanDashboard/WanDashboard";
 import { useWanDates } from "../../hooks/useWanDates";
-import { useAverageUptime } from "./useAverageUptime";
 import "./wan.css";
 
 export function Wan() {

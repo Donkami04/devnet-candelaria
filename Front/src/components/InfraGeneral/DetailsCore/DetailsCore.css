@@ -1,0 +1,33 @@
+.table-details-inf-gen-container {
+    display: flex;
+    text-align: center;
+    justify-content: space-around;
+    
+}
+
+.div-details-inf-gen{
+    margin-top: 10px;
+    width: 30%;
+    overflow-y: auto;
+    max-height: 50rem;
+}
+
+.table-details-inf-gen {
+    border-collapse: collapse;
+
+
+}
+
+.table-details-inf-gen td, th{
+    border: 1px solid black;
+    padding: 8px;
+    text-align: center;
+}
+
+.table-details-inf-gen td {
+    font-size: 0.8rem;
+}
+
+.table-details-inf-gen th {
+    font-size: 1rem;
+}

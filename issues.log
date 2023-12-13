@@ -1,0 +1,520 @@
+2023-12-01 13:53:07,484 - ERROR - Error desconocido con la ip 10.224.126.89
+2023-12-01 13:53:07,484 - ERROR - Error: 1054 (42S22): Unknown column 'status' in 'field list'
+2023-12-01 13:53:07,485 - ERROR - TRAZABILIDAD: Traceback (most recent call last):
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 611, in cmd_query
+    self._cmysql.query(
+_mysql_connector.MySQLInterfaceError: Unknown column 'status' in 'field list'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Wan/main.py", line 105, in get_uptime
+    save_bd(data_wan)
+  File "/home/donkami/Sona/devnet-candelaria/Services/Wan/main.py", line 223, in save_bd
+    cursor.execute(query + values)
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/cursor_cext.py", line 330, in execute
+    result = self._cnx.cmd_query(
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 619, in cmd_query
+    raise get_mysql_exception(
+mysql.connector.errors.ProgrammingError: 1054 (42S22): Unknown column 'status' in 'field list'
+
+2023-12-11 01:19:22,947 - ERROR: Error en la consulta Pala 11
+2023-12-11 01:19:22,947 - ERROR: Error en la consulta Pala 11
+2023-12-11 01:19:23,089 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 95, in prtg_data
+    data_ping = xmltodict.parse(data_ping.text)
+  File "/usr/local/lib/python3.10/dist-packages/xmltodict.py", line 378, in parse
+    parser.Parse(xml_input, True)
+xml.parsers.expat.ExpatError: syntax error: line 1, column 0
+
+2023-12-11 01:19:23,089 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 95, in prtg_data
+    data_ping = xmltodict.parse(data_ping.text)
+  File "/usr/local/lib/python3.10/dist-packages/xmltodict.py", line 378, in parse
+    parser.Parse(xml_input, True)
+xml.parsers.expat.ExpatError: syntax error: line 1, column 0
+
+2023-12-11 01:22:29,837 - ERROR: Error en la consulta Pala 11
+2023-12-11 01:22:29,837 - ERROR: Error en la consulta Pala 11
+2023-12-11 01:22:29,854 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 95, in prtg_data
+    data_ping = xmltodict.parse(data_ping.text)
+  File "/usr/local/lib/python3.10/dist-packages/xmltodict.py", line 378, in parse
+    parser.Parse(xml_input, True)
+xml.parsers.expat.ExpatError: syntax error: line 1, column 0
+
+2023-12-11 01:22:29,854 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 95, in prtg_data
+    data_ping = xmltodict.parse(data_ping.text)
+  File "/usr/local/lib/python3.10/dist-packages/xmltodict.py", line 378, in parse
+    parser.Parse(xml_input, True)
+xml.parsers.expat.ExpatError: syntax error: line 1, column 0
+
+2023-12-11 01:23:34,985 - ERROR: Error en la consulta Pala 11
+2023-12-11 01:23:34,985 - ERROR: Error en la consulta Pala 11
+2023-12-11 01:23:35,006 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 96, in prtg_data
+    data_ping = xmltodict.parse(data_ping.text)
+  File "/usr/local/lib/python3.10/dist-packages/xmltodict.py", line 378, in parse
+    parser.Parse(xml_input, True)
+xml.parsers.expat.ExpatError: syntax error: line 1, column 0
+
+2023-12-11 01:23:35,006 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 96, in prtg_data
+    data_ping = xmltodict.parse(data_ping.text)
+  File "/usr/local/lib/python3.10/dist-packages/xmltodict.py", line 378, in parse
+    parser.Parse(xml_input, True)
+xml.parsers.expat.ExpatError: syntax error: line 1, column 0
+
+2023-12-11 01:23:48,229 - ERROR: Error en la consulta Pala 11
+2023-12-11 01:23:48,229 - ERROR: Error en la consulta Pala 11
+2023-12-11 01:23:48,242 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 96, in prtg_data
+    data_ping = xmltodict.parse(data_ping.text)
+  File "/usr/local/lib/python3.10/dist-packages/xmltodict.py", line 378, in parse
+    parser.Parse(xml_input, True)
+xml.parsers.expat.ExpatError: syntax error: line 1, column 0
+
+2023-12-11 01:23:48,242 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 96, in prtg_data
+    data_ping = xmltodict.parse(data_ping.text)
+  File "/usr/local/lib/python3.10/dist-packages/xmltodict.py", line 378, in parse
+    parser.Parse(xml_input, True)
+xml.parsers.expat.ExpatError: syntax error: line 1, column 0
+
+2023-12-11 01:24:10,258 - ERROR: Error en la consulta Pala 11
+2023-12-11 01:24:10,258 - ERROR: Error en la consulta Pala 11
+2023-12-11 01:24:10,278 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 98, in prtg_data
+    data_ping = data_ping["histdata"]['item']['value']
+TypeError: list indices must be integers or slices, not str
+
+2023-12-11 01:24:10,278 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 98, in prtg_data
+    data_ping = data_ping["histdata"]['item']['value']
+TypeError: list indices must be integers or slices, not str
+
+2023-12-11 01:24:52,407 - ERROR: Error en la consulta Pala 11
+2023-12-11 01:24:52,407 - ERROR: Error en la consulta Pala 11
+2023-12-11 01:24:52,416 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 98, in prtg_data
+    data_ping = data_ping["histdata"]['item']['value']
+TypeError: list indices must be integers or slices, not str
+
+2023-12-11 01:24:52,416 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 98, in prtg_data
+    data_ping = data_ping["histdata"]['item']['value']
+TypeError: list indices must be integers or slices, not str
+
+2023-12-11 01:25:01,052 - ERROR: Error en la consulta Pala 11
+2023-12-11 01:25:01,052 - ERROR: Error en la consulta Pala 11
+2023-12-11 01:25:01,069 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 96, in prtg_data
+    data_ping = xmltodict.parse(data_ping.text)
+  File "/usr/local/lib/python3.10/dist-packages/xmltodict.py", line 378, in parse
+    parser.Parse(xml_input, True)
+xml.parsers.expat.ExpatError: syntax error: line 1, column 0
+
+2023-12-11 01:25:01,069 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 96, in prtg_data
+    data_ping = xmltodict.parse(data_ping.text)
+  File "/usr/local/lib/python3.10/dist-packages/xmltodict.py", line 378, in parse
+    parser.Parse(xml_input, True)
+xml.parsers.expat.ExpatError: syntax error: line 1, column 0
+
+2023-12-11 01:25:35,176 - ERROR: Error en la consulta Pala 11
+2023-12-11 01:25:35,176 - ERROR: Error en la consulta Pala 11
+2023-12-11 01:25:35,188 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 96, in prtg_data
+    data_ping = xmltodict.parse(data_ping.text)
+  File "/usr/local/lib/python3.10/dist-packages/xmltodict.py", line 378, in parse
+    parser.Parse(xml_input, True)
+xml.parsers.expat.ExpatError: syntax error: line 1, column 0
+
+2023-12-11 01:25:35,188 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 96, in prtg_data
+    data_ping = xmltodict.parse(data_ping.text)
+  File "/usr/local/lib/python3.10/dist-packages/xmltodict.py", line 378, in parse
+    parser.Parse(xml_input, True)
+xml.parsers.expat.ExpatError: syntax error: line 1, column 0
+
+2023-12-11 01:28:20,284 - ERROR: Error en la consulta Pala 11
+2023-12-11 01:28:20,284 - ERROR: Error en la consulta Pala 11
+2023-12-11 01:28:20,295 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 96, in prtg_data
+    data_ping = xmltodict.parse(data_ping.text)#!
+  File "/usr/local/lib/python3.10/dist-packages/xmltodict.py", line 378, in parse
+    parser.Parse(xml_input, True)
+xml.parsers.expat.ExpatError: syntax error: line 1, column 0
+
+2023-12-11 01:28:20,295 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 96, in prtg_data
+    data_ping = xmltodict.parse(data_ping.text)#!
+  File "/usr/local/lib/python3.10/dist-packages/xmltodict.py", line 378, in parse
+    parser.Parse(xml_input, True)
+xml.parsers.expat.ExpatError: syntax error: line 1, column 0
+
+2023-12-11 01:31:30,245 - ERROR: Error en la consulta Pala 12
+2023-12-11 01:31:30,245 - ERROR: Error en la consulta Pala 12
+2023-12-11 01:31:30,253 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 96, in prtg_data
+    data_ping = xmltodict.parse(data_ping.text)#!
+  File "/usr/local/lib/python3.10/dist-packages/xmltodict.py", line 378, in parse
+    parser.Parse(xml_input, True)
+xml.parsers.expat.ExpatError: syntax error: line 1, column 0
+
+2023-12-11 01:31:30,253 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 96, in prtg_data
+    data_ping = xmltodict.parse(data_ping.text)#!
+  File "/usr/local/lib/python3.10/dist-packages/xmltodict.py", line 378, in parse
+    parser.Parse(xml_input, True)
+xml.parsers.expat.ExpatError: syntax error: line 1, column 0
+
+2023-12-11 10:58:29,584 - ERROR: Error en la consulta Pala 19
+2023-12-11 10:58:29,584 - ERROR: Error en la consulta Pala 19
+2023-12-11 10:58:29,603 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 96, in prtg_data
+    data_ping = xmltodict.parse(data_ping.text)#!
+  File "/usr/local/lib/python3.10/dist-packages/xmltodict.py", line 378, in parse
+    parser.Parse(xml_input, True)
+xml.parsers.expat.ExpatError: syntax error: line 1, column 0
+
+2023-12-11 10:58:29,603 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 96, in prtg_data
+    data_ping = xmltodict.parse(data_ping.text)#!
+  File "/usr/local/lib/python3.10/dist-packages/xmltodict.py", line 378, in parse
+    parser.Parse(xml_input, True)
+xml.parsers.expat.ExpatError: syntax error: line 1, column 0
+
+2023-12-11 10:59:42,729 - ERROR: Error en la consulta Pala 19
+2023-12-11 10:59:42,729 - ERROR: Error en la consulta Pala 19
+2023-12-11 10:59:42,748 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 97, in prtg_data
+    data_ping = xmltodict.parse(data_ping.text)#!
+  File "/usr/local/lib/python3.10/dist-packages/xmltodict.py", line 378, in parse
+    parser.Parse(xml_input, True)
+xml.parsers.expat.ExpatError: syntax error: line 1, column 0
+
+2023-12-11 10:59:42,748 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 97, in prtg_data
+    data_ping = xmltodict.parse(data_ping.text)#!
+  File "/usr/local/lib/python3.10/dist-packages/xmltodict.py", line 378, in parse
+    parser.Parse(xml_input, True)
+xml.parsers.expat.ExpatError: syntax error: line 1, column 0
+
+2023-12-11 11:04:38,791 - ERROR: Error en la consulta Pala 19
+2023-12-11 11:04:38,791 - ERROR: Error en la consulta Pala 19
+2023-12-11 11:04:38,809 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 97, in prtg_data
+    data_ping = xmltodict.parse(data_ping.text)#!
+  File "/usr/local/lib/python3.10/dist-packages/xmltodict.py", line 378, in parse
+    parser.Parse(xml_input, True)
+xml.parsers.expat.ExpatError: syntax error: line 1, column 0
+
+2023-12-11 11:04:38,809 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 97, in prtg_data
+    data_ping = xmltodict.parse(data_ping.text)#!
+  File "/usr/local/lib/python3.10/dist-packages/xmltodict.py", line 378, in parse
+    parser.Parse(xml_input, True)
+xml.parsers.expat.ExpatError: syntax error: line 1, column 0
+
+2023-12-12 08:08:00,931 - ERROR: Error en la consulta Pala 19
+2023-12-12 08:08:00,931 - ERROR: Error en la consulta Pala 19
+2023-12-12 08:08:00,951 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 97, in prtg_data
+    data_ping = xmltodict.parse(data_ping.text)#!
+  File "/usr/local/lib/python3.10/dist-packages/xmltodict.py", line 378, in parse
+    parser.Parse(xml_input, True)
+xml.parsers.expat.ExpatError: syntax error: line 1, column 0
+
+2023-12-12 08:08:00,951 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 97, in prtg_data
+    data_ping = xmltodict.parse(data_ping.text)#!
+  File "/usr/local/lib/python3.10/dist-packages/xmltodict.py", line 378, in parse
+    parser.Parse(xml_input, True)
+xml.parsers.expat.ExpatError: syntax error: line 1, column 0
+
+2023-12-12 08:09:23,303 - ERROR: Error en la consulta Pala 19
+2023-12-12 08:09:23,303 - ERROR: Error en la consulta Pala 19
+2023-12-12 08:09:23,320 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 97, in prtg_data
+    data_ping = xmltodict.parse(data_ping.text)#!
+  File "/usr/local/lib/python3.10/dist-packages/xmltodict.py", line 378, in parse
+    parser.Parse(xml_input, True)
+xml.parsers.expat.ExpatError: syntax error: line 1, column 0
+
+2023-12-12 08:09:23,320 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 97, in prtg_data
+    data_ping = xmltodict.parse(data_ping.text)#!
+  File "/usr/local/lib/python3.10/dist-packages/xmltodict.py", line 378, in parse
+    parser.Parse(xml_input, True)
+xml.parsers.expat.ExpatError: syntax error: line 1, column 0
+
+2023-12-12 08:10:08,504 - ERROR: Error en la consulta Pala 19
+2023-12-12 08:10:08,504 - ERROR: Error en la consulta Pala 19
+2023-12-12 08:10:08,515 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 99, in prtg_data
+    data_ping = data_ping["histdata"]['item']['value']
+TypeError: list indices must be integers or slices, not str
+
+2023-12-12 08:10:08,515 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 99, in prtg_data
+    data_ping = data_ping["histdata"]['item']['value']
+TypeError: list indices must be integers or slices, not str
+
+2023-12-12 08:11:26,200 - ERROR: Error en la consulta Pala 19
+2023-12-12 08:11:26,200 - ERROR: Error en la consulta Pala 19
+2023-12-12 08:11:26,209 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 99, in prtg_data
+    data_ping = data_ping["histdata"]['item']['value']
+TypeError: list indices must be integers or slices, not str
+
+2023-12-12 08:11:26,209 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 99, in prtg_data
+    data_ping = data_ping["histdata"]['item']['value']
+TypeError: list indices must be integers or slices, not str
+
+2023-12-12 08:11:36,580 - ERROR: Error en la consulta Pala 19
+2023-12-12 08:11:36,580 - ERROR: Error en la consulta Pala 19
+2023-12-12 08:11:36,597 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 97, in prtg_data
+    data_ping = xmltodict.parse(data_ping.text)#!
+  File "/usr/local/lib/python3.10/dist-packages/xmltodict.py", line 378, in parse
+    parser.Parse(xml_input, True)
+xml.parsers.expat.ExpatError: syntax error: line 1, column 0
+
+2023-12-12 08:11:36,597 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 97, in prtg_data
+    data_ping = xmltodict.parse(data_ping.text)#!
+  File "/usr/local/lib/python3.10/dist-packages/xmltodict.py", line 378, in parse
+    parser.Parse(xml_input, True)
+xml.parsers.expat.ExpatError: syntax error: line 1, column 0
+
+2023-12-12 08:11:49,922 - ERROR: Error en la consulta Pala 19
+2023-12-12 08:11:49,922 - ERROR: Error en la consulta Pala 19
+2023-12-12 08:11:49,941 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 97, in prtg_data
+    data_ping = xmltodict.parse(data_ping.text)#!
+  File "/usr/local/lib/python3.10/dist-packages/xmltodict.py", line 378, in parse
+    parser.Parse(xml_input, True)
+xml.parsers.expat.ExpatError: syntax error: line 1, column 0
+
+2023-12-12 08:11:49,941 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 97, in prtg_data
+    data_ping = xmltodict.parse(data_ping.text)#!
+  File "/usr/local/lib/python3.10/dist-packages/xmltodict.py", line 378, in parse
+    parser.Parse(xml_input, True)
+xml.parsers.expat.ExpatError: syntax error: line 1, column 0
+
+2023-12-12 08:15:10,676 - ERROR: Error en la consulta Pala 19
+2023-12-12 08:15:10,676 - ERROR: Error en la consulta Pala 19
+2023-12-12 08:15:10,685 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 97, in prtg_data
+    data_ping = xmltodict.parse(data_ping.text)#!
+  File "/usr/local/lib/python3.10/dist-packages/xmltodict.py", line 378, in parse
+    parser.Parse(xml_input, True)
+xml.parsers.expat.ExpatError: syntax error: line 1, column 0
+
+2023-12-12 08:15:10,685 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 97, in prtg_data
+    data_ping = xmltodict.parse(data_ping.text)#!
+  File "/usr/local/lib/python3.10/dist-packages/xmltodict.py", line 378, in parse
+    parser.Parse(xml_input, True)
+xml.parsers.expat.ExpatError: syntax error: line 1, column 0
+
+2023-12-12 09:28:22,849 - ERROR: Error en la consulta Pala 19
+2023-12-12 09:28:22,849 - ERROR: Error en la consulta Pala 19
+2023-12-12 09:28:22,866 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 97, in prtg_data
+    data_ping = xmltodict.parse(data_ping.text)#!
+  File "/usr/local/lib/python3.10/dist-packages/xmltodict.py", line 378, in parse
+    parser.Parse(xml_input, True)
+xml.parsers.expat.ExpatError: syntax error: line 1, column 0
+
+2023-12-12 09:28:22,866 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 97, in prtg_data
+    data_ping = xmltodict.parse(data_ping.text)#!
+  File "/usr/local/lib/python3.10/dist-packages/xmltodict.py", line 378, in parse
+    parser.Parse(xml_input, True)
+xml.parsers.expat.ExpatError: syntax error: line 1, column 0
+
+2023-12-12 09:33:24,924 - ERROR: Error en la consulta Pala 19
+2023-12-12 09:33:24,924 - ERROR: Error en la consulta Pala 19
+2023-12-12 09:33:24,942 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 97, in prtg_data
+    data_ping = xmltodict.parse(data_ping.text)#!
+  File "/usr/local/lib/python3.10/dist-packages/xmltodict.py", line 378, in parse
+    parser.Parse(xml_input, True)
+xml.parsers.expat.ExpatError: syntax error: line 1, column 0
+
+2023-12-12 09:33:24,942 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 97, in prtg_data
+    data_ping = xmltodict.parse(data_ping.text)#!
+  File "/usr/local/lib/python3.10/dist-packages/xmltodict.py", line 378, in parse
+    parser.Parse(xml_input, True)
+xml.parsers.expat.ExpatError: syntax error: line 1, column 0
+
+2023-12-12 09:38:26,963 - ERROR: Error en la consulta Pala 19
+2023-12-12 09:38:26,963 - ERROR: Error en la consulta Pala 19
+2023-12-12 09:38:26,981 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 97, in prtg_data
+    data_ping = xmltodict.parse(data_ping.text)#!
+  File "/usr/local/lib/python3.10/dist-packages/xmltodict.py", line 378, in parse
+    parser.Parse(xml_input, True)
+xml.parsers.expat.ExpatError: syntax error: line 1, column 0
+
+2023-12-12 09:38:26,981 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 97, in prtg_data
+    data_ping = xmltodict.parse(data_ping.text)#!
+  File "/usr/local/lib/python3.10/dist-packages/xmltodict.py", line 378, in parse
+    parser.Parse(xml_input, True)
+xml.parsers.expat.ExpatError: syntax error: line 1, column 0
+
+2023-12-12 09:43:28,927 - ERROR: Error en la consulta Pala 19
+2023-12-12 09:43:28,927 - ERROR: Error en la consulta Pala 19
+2023-12-12 09:43:28,938 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 97, in prtg_data
+    data_ping = xmltodict.parse(data_ping.text)#!
+  File "/usr/local/lib/python3.10/dist-packages/xmltodict.py", line 378, in parse
+    parser.Parse(xml_input, True)
+xml.parsers.expat.ExpatError: syntax error: line 1, column 0
+
+2023-12-12 09:43:28,938 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 97, in prtg_data
+    data_ping = xmltodict.parse(data_ping.text)#!
+  File "/usr/local/lib/python3.10/dist-packages/xmltodict.py", line 378, in parse
+    parser.Parse(xml_input, True)
+xml.parsers.expat.ExpatError: syntax error: line 1, column 0
+
+2023-12-12 09:48:30,987 - ERROR: Error en la consulta Pala 19
+2023-12-12 09:48:30,987 - ERROR: Error en la consulta Pala 19
+2023-12-12 09:48:31,004 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 97, in prtg_data
+    data_ping = xmltodict.parse(data_ping.text)#!
+  File "/usr/local/lib/python3.10/dist-packages/xmltodict.py", line 378, in parse
+    parser.Parse(xml_input, True)
+xml.parsers.expat.ExpatError: syntax error: line 1, column 0
+
+2023-12-12 09:48:31,004 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 97, in prtg_data
+    data_ping = xmltodict.parse(data_ping.text)#!
+  File "/usr/local/lib/python3.10/dist-packages/xmltodict.py", line 378, in parse
+    parser.Parse(xml_input, True)
+xml.parsers.expat.ExpatError: syntax error: line 1, column 0
+
+2023-12-12 09:53:33,011 - ERROR: Error en la consulta Pala 19
+2023-12-12 09:53:33,011 - ERROR: Error en la consulta Pala 19
+2023-12-12 09:53:33,027 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 97, in prtg_data
+    data_ping = xmltodict.parse(data_ping.text)#!
+  File "/usr/local/lib/python3.10/dist-packages/xmltodict.py", line 378, in parse
+    parser.Parse(xml_input, True)
+xml.parsers.expat.ExpatError: syntax error: line 1, column 0
+
+2023-12-12 09:53:33,027 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 97, in prtg_data
+    data_ping = xmltodict.parse(data_ping.text)#!
+  File "/usr/local/lib/python3.10/dist-packages/xmltodict.py", line 378, in parse
+    parser.Parse(xml_input, True)
+xml.parsers.expat.ExpatError: syntax error: line 1, column 0
+
+2023-12-12 09:58:35,078 - ERROR: Error en la consulta Pala 19
+2023-12-12 09:58:35,078 - ERROR: Error en la consulta Pala 19
+2023-12-12 09:58:35,088 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 97, in prtg_data
+    data_ping = xmltodict.parse(data_ping.text)#!
+  File "/usr/local/lib/python3.10/dist-packages/xmltodict.py", line 378, in parse
+    parser.Parse(xml_input, True)
+xml.parsers.expat.ExpatError: syntax error: line 1, column 0
+
+2023-12-12 09:58:35,088 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 97, in prtg_data
+    data_ping = xmltodict.parse(data_ping.text)#!
+  File "/usr/local/lib/python3.10/dist-packages/xmltodict.py", line 378, in parse
+    parser.Parse(xml_input, True)
+xml.parsers.expat.ExpatError: syntax error: line 1, column 0
+
+2023-12-12 10:32:36,032 - ERROR - Error en el segundo Try, FW 10.230.6.7
+2023-12-12 10:32:36,032 - ERROR - Error en el segundo Try, FW 10.230.6.7
+2023-12-12 10:32:36,033 - ERROR - TCP connection to device failed.
+
+Common causes of this problem are:
+1. Incorrect hostname or IP address.
+2. Wrong TCP port.
+3. Intermediate firewall blocking access.
+
+Device settings: fortinet 10.230.6.7:2221
+
+
+2023-12-12 10:32:36,033 - ERROR - TCP connection to device failed.
+
+Common causes of this problem are:
+1. Incorrect hostname or IP address.
+2. Wrong TCP port.
+3. Intermediate firewall blocking access.
+
+Device settings: fortinet 10.230.6.7:2221
+
+
+2023-12-12 10:32:36,042 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/.local/lib/python3.10/site-packages/netmiko/base_connection.py", line 1046, in establish_connection
+    self.remote_conn_pre.connect(**ssh_connect_params)
+  File "/home/donkami/.local/lib/python3.10/site-packages/paramiko/client.py", line 386, in connect
+    sock.connect(addr)
+TimeoutError: timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Firewalls/main.py", line 100, in fw_status
+    net_connect = ConnectHandler(**network_device_list)
+  File "/home/donkami/.local/lib/python3.10/site-packages/netmiko/ssh_dispatcher.py", line 365, in ConnectHandler
+    return ConnectionClass(*args, **kwargs)
+  File "/home/donkami/.local/lib/python3.10/site-packages/netmiko/base_connection.py", line 439, in __init__
+    self._open()
+  File "/home/donkami/.local/lib/python3.10/site-packages/netmiko/base_connection.py", line 444, in _open
+    self.establish_connection()
+  File "/home/donkami/.local/lib/python3.10/site-packages/netmiko/base_connection.py", line 1068, in establish_connection
+    raise NetmikoTimeoutException(msg)
+netmiko.exceptions.NetmikoTimeoutException: TCP connection to device failed.
+
+Common causes of this problem are:
+1. Incorrect hostname or IP address.
+2. Wrong TCP port.
+3. Intermediate firewall blocking access.
+
+Device settings: fortinet 10.230.6.7:2221
+
+
+
+2023-12-12 10:32:36,042 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/.local/lib/python3.10/site-packages/netmiko/base_connection.py", line 1046, in establish_connection
+    self.remote_conn_pre.connect(**ssh_connect_params)
+  File "/home/donkami/.local/lib/python3.10/site-packages/paramiko/client.py", line 386, in connect
+    sock.connect(addr)
+TimeoutError: timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Firewalls/main.py", line 100, in fw_status
+    net_connect = ConnectHandler(**network_device_list)
+  File "/home/donkami/.local/lib/python3.10/site-packages/netmiko/ssh_dispatcher.py", line 365, in ConnectHandler
+    return ConnectionClass(*args, **kwargs)
+  File "/home/donkami/.local/lib/python3.10/site-packages/netmiko/base_connection.py", line 439, in __init__
+    self._open()
+  File "/home/donkami/.local/lib/python3.10/site-packages/netmiko/base_connection.py", line 444, in _open
+    self.establish_connection()
+  File "/home/donkami/.local/lib/python3.10/site-packages/netmiko/base_connection.py", line 1068, in establish_connection
+    raise NetmikoTimeoutException(msg)
+netmiko.exceptions.NetmikoTimeoutException: TCP connection to device failed.
+
+Common causes of this problem are:
+1. Incorrect hostname or IP address.
+2. Wrong TCP port.
+3. Intermediate firewall blocking access.
+
+Device settings: fortinet 10.230.6.7:2221
+
+
+
