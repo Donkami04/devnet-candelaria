@@ -37,7 +37,7 @@ const Wan = sequelize.define(
       allowNull: true,
     },
     status: {
-      type: DataTypes.STRING(100),
+      type: DataTypes.STRING(10),
       allowNull: true,
     },
   },

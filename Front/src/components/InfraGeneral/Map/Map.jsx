@@ -19,7 +19,6 @@ export const Map = () => {
         setFirewalls(dataFirewalls);
         setWan(dataWan);
         setCores(dataCores);
-
       } catch (error) {
         return error;
       }
@@ -101,7 +100,7 @@ export const Map = () => {
     <main className="background-infra-general">
       <Navbar title={"Mapa Infra General"} />
       <div className="main-map-container">
-        <img src="/mapa-infra-general.png" alt="mapa-infra-general" />
+        <img src="/mapa-horizontal.jpg" alt="mapa-infra-general" />
       </div>
 
       <div className="status-light-map-container fw-santiago">

@@ -1,11 +1,10 @@
 .background-infra-general {
   background-color: rgba(162, 160, 160, 0.736);
-  /* overflow-x: hidden; */
-  width: 100%;
+  overflow-x: hidden;
 }
 
 .main-map-container {
-  width: 1450px;
+  width: 1400px;
   margin: auto;
 }
 
@@ -15,8 +14,7 @@
 }
 
 .status-light-map-container {
-  /* width: 1450px; */
-  width: 20px;
+  width: 1400px;
   position: relative;
   margin: auto;
   display: flex;
@@ -31,88 +29,88 @@
 }
 
 .fw-santiago {
-  bottom: 400px;
-  left: 620px;
+  bottom: 1280px;
+  left: 393px;
 }
 
 .fw-chamonate {
-  bottom: 360px;
-  left: 620px;
+  bottom: 1330px;
+  left: 495px;
 }
 
 .fw-ralun {
-  bottom: 320px;
-  left: 620px;
+  bottom: 1375px;
+  left: 605px;
 }
 
 .fw-dpto-legal {
-  bottom: 280px;
-  left: 620px;
+  bottom: 1395px;
+  left: 720px;
 }
 
 .fw-copiapo {
-  bottom: 240px;
-  left: 620px;
+  bottom: 1400px;
+  left: 858px;
 }
 
 .fw-azure {
-  bottom: 560px;
-  left: 620px;
+  bottom: 1375px;
+  left: 958px;
 }
 
 .internet {
-  bottom: 420px;
-  left: 540px;
+  bottom: 1320px;
+  left: 770px;
 }
 
 .canal-starlink {
-  bottom: 585px;
-  left: 410px;
+  bottom: 1245px;
+  left: 465px;
 }
 
 .canal-admin {
-  bottom: 515px;
-  left: 410px;
+  bottom: 1264px;
+  left: 600px;
 }
 
 .canal-conce {
-  bottom: 440px;
-  left: 410px;
+  bottom: 1283px;
+  left: 853px;
 }
 
 .canal-ojos {
-  bottom: 370px;
-  left: 410px;
+  bottom: 1302px;
+  left: 1093px;
 }
 
 .fw-admin {
-  bottom: 640px;
-  left: 235px;
+  bottom: 1230px;
+  left: 575px;
 }
 
 .fw-conce {
-  bottom: 525px;
-  left: 235px;
+  bottom: 1249px;
+  left: 830px;
 }
 
 .fw-ojos {
-  bottom: 435px;
-  left: 235px;
+  bottom: 1265px;
+  left: 1075px;
 }
 
 .core-admin-it {
-  bottom: 695px;
-  left: 115px;
+  bottom: 1185px;
+  left: 575px;
 }
 
 .core-conce-it {
-  bottom: 595px;
-  left: 115px;
+  bottom: 1195px;
+  left: 835px;
 }
 
 .core-ojos-it {
-  bottom: 485px;
-  left:115px;
+  bottom: 1214px;
+  left:1080px;
 }
 
 .inf-gen-green {
