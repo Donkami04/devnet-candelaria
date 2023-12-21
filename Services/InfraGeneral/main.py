@@ -48,6 +48,10 @@ def core1():
         {'ip':'10.224.127.1', 'red': 'it', 'name': 'ADMIN'},
         {'ip':'10.224.127.2', 'red': 'it', 'name': 'CONCE'},
         {'ip':'10.230.127.1', 'red': 'it', 'name': 'OJOS'},
+        {'ip':'10.224.127.3', 'red': 'it', 'name': 'DIST-ADM'},
+        {'ip':'10.224.127.4', 'red': 'it', 'name': 'DIST-CONC'},
+        {'ip':'10.224.127.160', 'red': 'it', 'name': 'ADMIN-DNA'},
+        {'ip':'10.224.127.161', 'red': 'it', 'name': 'CONCE-DNA'},
     ]
 
     current_data_neighbors = []
@@ -71,6 +75,7 @@ def core1():
             current_data_neighbors.append(neigh)
             
             #! Lo comentado se usa para llenar data_neighbors
+            #TODO: NO BORRAR
             # ip_neighbor = neigh['ip_neighbor']
             # ip_switch = neigh['ip_switch']
             # name = neigh['name']
