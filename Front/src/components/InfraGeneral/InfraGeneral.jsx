@@ -9,6 +9,10 @@ import {
 import { ItCoreAdm } from "./Cores/ItCoreAdm";
 import { ItCoreConce } from "./Cores/ItCoreConce";
 import { ItCoreOjos } from "./Cores/ItCoreOjos";
+import { ItCoreDistAdm } from "./Cores/ItCoreDistAdm";
+import { ItCoreDistConce } from "./Cores/ItCoreDistConce";
+import { ItCoreAdmDna } from "./Cores/ItCoreAdmDna";
+import { ItCoreConceDna } from "./Cores/ItCoreConceDna";
 import "./infrageneral.css";
 
 export function InfraGeneral() {
@@ -64,6 +68,38 @@ export function InfraGeneral() {
         </div>
         <div className="section-infra-general">
           <ItCoreOjos
+            devicesInterfaces={devicesInterfaces}
+            devicesHealth={devicesHealth}
+            neighbors={neighbors}
+            routeStatus={routeStatus}
+          />
+        </div>
+        <div className="section-infra-general">
+          <ItCoreDistAdm
+            devicesInterfaces={devicesInterfaces}
+            devicesHealth={devicesHealth}
+            neighbors={neighbors}
+            routeStatus={routeStatus}
+          />
+        </div>
+        <div className="section-infra-general">
+          <ItCoreDistConce
+            devicesInterfaces={devicesInterfaces}
+            devicesHealth={devicesHealth}
+            neighbors={neighbors}
+            routeStatus={routeStatus}
+          />
+        </div>
+        <div className="section-infra-general">
+          <ItCoreAdmDna
+            devicesInterfaces={devicesInterfaces}
+            devicesHealth={devicesHealth}
+            neighbors={neighbors}
+            routeStatus={routeStatus}
+          />
+        </div>
+        <div className="section-infra-general">
+          <ItCoreConceDna
             devicesInterfaces={devicesInterfaces}
             devicesHealth={devicesHealth}
             neighbors={neighbors}

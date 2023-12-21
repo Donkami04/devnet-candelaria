@@ -158,6 +158,7 @@ def core1():
     cursor.close()
     logging.info("Terminado")
 
+# Obtiene Id del PRTG
 def get_id_prtg(ip_switch):
     url_objid = os.getenv("URL_PRTG_GET_ID").format(ip=ip_switch)
     response_objid = requests.get(url_objid, verify=False).json()
@@ -171,6 +172,7 @@ def get_id_prtg(ip_switch):
     return objid
 
 
+# Obtiene informacion de las interfaces en PRTG
 def get_data_interfaces(ip_switch, id_switch, red):
     interfaces_notFound = [{
         "name": "No Devices Found",
@@ -190,7 +192,6 @@ def get_data_interfaces(ip_switch, id_switch, red):
         for interface in interfaces:
             interface['ip_switch'] = ip_switch
             interface['red'] = red
-
         return interfaces
 
     except Exception as e:
@@ -199,7 +200,7 @@ def get_data_interfaces(ip_switch, id_switch, red):
         logging.error(traceback.format_exc())
         return interfaces_notFound
 
-
+# Obtiene Datos de los System Health
 def system_health(ip_switch, id_switch, red):
 
     devices_systemhealth_notFound = [{
@@ -222,7 +223,6 @@ def system_health(ip_switch, id_switch, red):
         for device in devices_systemhealth:
             device['ip_switch'] = ip_switch
             device['red'] = red
-
         return devices_systemhealth
 
     except Exception as e:

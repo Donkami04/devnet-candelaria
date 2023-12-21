@@ -192,7 +192,7 @@ export function ItCoreOjos({
         <table className="table-core">
           <thead>
             <tr>
-              <th>CORE OJOS IT - 10.230.127.1</th>
+              <th>SW-CORE OJOS IT 10.230.127.1</th>
               <th>STATUS</th>
             </tr>
           </thead>

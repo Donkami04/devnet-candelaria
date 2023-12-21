@@ -190,7 +190,7 @@ export function ItCoreConce({
         <table className="table-core">
           <thead>
             <tr>
-              <th>CORE CONCE IT - 10.224.127.2</th>
+              <th>SW-CORE CONCE IT 10.224.127.2</th>
               <th>STATUS</th>
             </tr>
           </thead>

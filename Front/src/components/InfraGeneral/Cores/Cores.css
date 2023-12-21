@@ -10,7 +10,7 @@
 }
 
 .table-core {
-  width: 90%;
+  width: 100%;
 }
 
 .table-core td,
@@ -19,20 +19,24 @@ th {
   padding: 8px;
   text-align: center;
   font-weight: bold;
+
 }
 
 .table-core th {
-  font-size: 1.1rem;
+  font-size: 0.8rem;
   color: white;
   background-color: #444444;
 }
 
 .table-core td {
-  font-size: 0.9rem;
+  font-size: 0.7rem;  
+
 }
 
 .table-core td .fail-elements-container {
   margin-top: 10px;
+  max-height: 100px;
+  overflow-y: auto;
 }
 
 .fail-elements-container p,
