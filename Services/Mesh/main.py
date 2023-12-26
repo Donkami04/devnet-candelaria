@@ -84,7 +84,7 @@ def prtg_data():
             last_down_ping =  re.sub(patron, '', last_down_ping)
 
             edate = datetime.datetime.today()
-            sdate = datetime.datetime.today() - timedelta(minutes=3600)
+            sdate = datetime.datetime.today() - timedelta(minutes=360)
             edate = edate.strftime("%Y-%m-%d-%H-%M-%S")
             sdate = sdate.strftime("%Y-%m-%d-%H-%M-%S")
                     
@@ -93,7 +93,7 @@ def prtg_data():
                 data_ping = requests.get(URL_GET_DATA_PING, verify=False)
                 data_ping = xmltodict.parse(data_ping.text)
                 # print('Esto es la respuesta a la api: ', data_ping)
-                data_ping = data_ping["histdata"]['item']['value']
+                data_ping = data_ping["histdata"]['item'][0]['value']
                 # print(f"Toda la info {data_ping}")
                 avg_ping = data_ping[0]['#text']
                 min_ping = data_ping[1]['#text']

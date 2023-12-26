@@ -192,6 +192,9 @@ def get_data_interfaces(ip_switch, id_switch, red):
         for interface in interfaces:
             interface['ip_switch'] = ip_switch
             interface['red'] = red
+        
+        #! BORRAR
+
         return interfaces
 
     except Exception as e:

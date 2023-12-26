@@ -285,7 +285,7 @@ export function ItCoreOjos({
                 {statusEigrp}
               </td>
             </tr>
-            <tr>
+            {/* <tr>
               <td>
                 Neighbor OSPF: {numOspfUp}/{numOspfUp + numOspfDown}
                 <div className="fail-elements-container">
@@ -305,7 +305,7 @@ export function ItCoreOjos({
               >
                 {statusOspf}
               </td>
-            </tr>
+            </tr> */}
             <tr>
               <td>Default Route "Via bgp 65001"</td>
               <td

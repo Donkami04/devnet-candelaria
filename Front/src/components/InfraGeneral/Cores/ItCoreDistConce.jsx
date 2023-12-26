@@ -157,7 +157,6 @@ export function ItCoreDistConce({
     ) {
       listDevicesHealthFail.push(element);
     }
-
   });
 
   const numAdmInterfUp = interfacesUp.length;
@@ -204,7 +203,11 @@ export function ItCoreDistConce({
                   {interfacesDown.map((e) => (
                     <p key={e.id + e.id_prtg}>
                       {" "}
-                      <a style={{ textDecoration: "none", color:"red" }} href={`${PRTG_URL}${e.id_prtg}`} target="_blank">
+                      <a
+                        style={{ textDecoration: "none", color: "red" }}
+                        href={`${PRTG_URL}${e.id_prtg}`}
+                        target="_blank"
+                      >
                         {e.name} - {e.status}
                       </a>
                     </p>
@@ -243,7 +246,7 @@ export function ItCoreDistConce({
                 {statusSysHealth}
               </td>
             </tr>
-            <tr>
+            {/*<tr>
               <td>
                 Neighbor BGP: {numBgpUp}/{numBgpUp + numBgpDown}
                 <div className="fail-elements-container">
@@ -263,8 +266,9 @@ export function ItCoreDistConce({
               >
                 {statusBgp}
               </td>
-            </tr>
-            {/* <tr>
+              </tr>
+              </div>*/}
+            <tr>
               <td>
                 Neighbor EIGRP: {numEigrpUp}/{numEigrpUp + numEigrpDown}
                 <div className="fail-elements-container">
@@ -284,7 +288,7 @@ export function ItCoreDistConce({
               >
                 {statusEigrp}
               </td>
-            </tr> */}
+            </tr>
             {/* <tr>
               <td>
                 Neighbor OSPF: {numOspfUp}/{numOspfUp + numOspfDown}
