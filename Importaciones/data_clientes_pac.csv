@@ -1,0 +1,17 @@
+1,OJPTPSFT01,Servidor Factory Talk,10.123.128.151
+2,OJPTPHIST01,Servidor Historico,10.123.128.152
+3,OJPTPING01,(fallo se reemplaza por oper2),10.123.128.153
+4,OJPTPOPER01,sala de control,10.123.128.154
+5,OJPTPOPER02,Servidor de ingenieria,10.123.128.155
+6,OJPTPOPER03,(apagada),10.123.128.156
+7,OJPTPOPER04,(apagada),10.123.128.157
+8,OJPTPOPER05,KSX,10.123.128.158
+9,OJPTPOPER06,Estacion de relaves,10.123.128.159
+10,OJPTPOPER08,sala de control (eliminada por TI),10.123.128.161
+11,OJPTPOPER09,sala de control,10.123.128.162
+12,OJPTPOPER10,sala de control,10.123.128.163
+13,OSMOS2,Planta Osmosis,10.123.128.13
+14,MINOSAL,Molienda,10.123.128.14
+15,CHANFINO,Chancado Fino,10.123.128.15
+16,PRIMARIO,Chancado Primario,10.123.128.17
+17,UC200,Relave Ducto,10.123.128.51

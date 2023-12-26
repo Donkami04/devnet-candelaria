@@ -84,7 +84,7 @@ def prtg_data():
             last_down_ping =  re.sub(patron, '', last_down_ping)
 
             edate = datetime.datetime.today()
-            sdate = datetime.datetime.today() - timedelta(minutes=3600)
+            sdate = datetime.datetime.today() - timedelta(minutes=360)
             edate = edate.strftime("%Y-%m-%d-%H-%M-%S")
             sdate = sdate.strftime("%Y-%m-%d-%H-%M-%S")
                     
@@ -93,7 +93,7 @@ def prtg_data():
                 data_ping = requests.get(URL_GET_DATA_PING, verify=False)
                 data_ping = xmltodict.parse(data_ping.text)
                 # print('Esto es la respuesta a la api: ', data_ping)
-                data_ping = data_ping["histdata"]['item']['value']
+                data_ping = data_ping["histdata"]['item'][0]['value']
                 # print(f"Toda la info {data_ping}")
                 avg_ping = data_ping[0]['#text']
                 min_ping = data_ping[1]['#text']
@@ -115,8 +115,6 @@ def prtg_data():
             snr_level = netmiko_data['snr_level']
             
             status_dispatch, operador = get_data_dispatch(eqmt_device)
-            
-            # logging.info(f"Terminada consulta a la {name_device}")
 
             query = "INSERT INTO dcs.mesh (`ip`, `device`, `ping_avg`, `minimo`, `maximo`, `packet_loss`, `lastvalue`, `lastup`, `lastdown`, `nivel_senal`, `ruido_senal`, `tiempo_conexion`, `conectado_a`, `status_dispatch`, `operador`, `SNR`, `id_prtg`) "
             value = f"VALUES ('{ip_device}', '{name_device}', '{avg_ping}', '{min_ping}', '{max_ping}', '{packet_loss}', '{last_value_ping}', '{last_up_ping}', '{last_down_ping}', '{signal_strength}', '{signal_noise}', '{connected_for}', '{ap_name}', '{status_dispatch}', '{operador}', '{snr_level}', {id_ping})"

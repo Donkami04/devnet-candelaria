@@ -16,10 +16,10 @@ export function InfraGeneralDash() {
     };
 
     fetchData();
-  }, []); // Empty dependency array ensures the effect runs once on mount
+  }, []);
 
   if (!infGenDash) {
-    // Puedes renderizar un indicador de carga mientras se resuelve la promesa
+    // Renderiza un indicador de carga mientras se resuelve la promesa
     return <p>Cargando...</p>;
   }
 

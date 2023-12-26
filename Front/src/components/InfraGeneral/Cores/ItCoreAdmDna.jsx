@@ -1,7 +1,7 @@
 import "./Cores.css";
 import { PRTG_URL } from "../../../utils/Api-candelaria/api";
 
-export function ItCoreAdm({
+export function ItCoreAdmDna({
   devicesInterfaces,
   devicesHealth,
   neighbors,
@@ -24,17 +24,17 @@ export function ItCoreAdm({
 
   devicesInterfaces.forEach((element) => {
     if (
-      (element.name_switch === "ADMIN" &&
+      (element.name_switch === "ADMIN-DNA" &&
         element.status === "Up" &&
         element.red === "it") ||
-      (element.name_switch === "ADMIN" &&
+      (element.name_switch === "ADMIN-DNA" &&
         element.status.toLowerCase().includes("Paused") &&
         element.red === "it")
     ) {
       interfacesUp.push(element);
     }
     if (
-      element.name_switch === "ADMIN" &&
+      element.name_switch === "ADMIN-DNA" &&
       element.status.includes("Down") &&
       element.red === "it"
     ) {
@@ -44,7 +44,7 @@ export function ItCoreAdm({
 
   neighbors.forEach((element) => {
     if (
-      element.name === "ADMIN" &&
+      element.name === "ADMIN-DNA" &&
       element.status === "Up" &&
       element.neighbor === "bgp" &&
       element.red === "it"
@@ -52,7 +52,7 @@ export function ItCoreAdm({
       neighborsBgpUp.push(element);
     }
     if (
-      element.name === "ADMIN" &&
+      element.name === "ADMIN-DNA" &&
       element.status === "Down" &&
       element.neighbor === "bgp" &&
       element.red === "it"
@@ -60,7 +60,7 @@ export function ItCoreAdm({
       neighborsBgpDown.push(element);
     }
     if (
-      element.name === "ADMIN" &&
+      element.name === "ADMIN-DNA" &&
       element.status === "Up" &&
       element.neighbor === "eigrp" &&
       element.red === "it"
@@ -68,7 +68,7 @@ export function ItCoreAdm({
       neighborsEigrpUp.push(element);
     }
     if (
-      element.name === "ADMIN" &&
+      element.name === "ADMIN-DNA" &&
       element.status === "Down" &&
       element.neighbor === "eigrp" &&
       element.red === "it"
@@ -76,7 +76,7 @@ export function ItCoreAdm({
       neighborsEigrpDown.push(element);
     }
     if (
-      element.name === "ADMIN" &&
+      element.name === "ADMIN-DNA" &&
       element.status === "Up" &&
       element.neighbor === "ospf" &&
       element.red === "it"
@@ -84,7 +84,7 @@ export function ItCoreAdm({
       neighborsOspfUp.push(element);
     }
     if (
-      element.name === "ADMIN" &&
+      element.name === "ADMIN-DNA" &&
       element.status === "Down" &&
       element.neighbor === "ospf" &&
       element.red === "it"
@@ -95,7 +95,7 @@ export function ItCoreAdm({
 
   devicesHealth.forEach((element) => {
     if (
-      element.name_switch === "ADMIN" &&
+      element.name_switch === "ADMIN-DNA" &&
       element.red === "it" &&
       element.status === "Up" &&
       element.name.includes("CPU") &&
@@ -104,11 +104,11 @@ export function ItCoreAdm({
       listDevicesHealthOk.push(element);
     }
     if (
-      (element.name_switch === "ADMIN" &&
+      (element.name_switch === "ADMIN-DNA" &&
         element.red === "it" &&
         element.name.includes("CPU") &&
         parseInt(element.lastvalue) > 90) ||
-      (element.name_switch === "ADMIN" &&
+      (element.name_switch === "ADMIN-DNA" &&
         element.red === "it" &&
         element.name === "System Health CPU" &&
         element.status.includes("Down"))
@@ -116,7 +116,7 @@ export function ItCoreAdm({
       listDevicesHealthFail.push(element);
     }
     if (
-      element.name_switch === "ADMIN" &&
+      element.name_switch === "ADMIN-DNA" &&
       element.red === "it" &&
       element.status === "Up" &&
       element.name.includes("Power Supplies") &&
@@ -125,11 +125,11 @@ export function ItCoreAdm({
       listDevicesHealthOk.push(element);
     }
     if (
-      (element.name_switch === "ADMIN" &&
+      (element.name_switch === "ADMIN-DNA" &&
         element.red === "it" &&
         element.name.includes("Power Supplies") &&
         element.lastvalue !== "Normal") ||
-      (element.name_switch === "ADMIN" &&
+      (element.name_switch === "ADMIN-DNA" &&
         element.red === "it" &&
         element.name.includes("Power Supplies") &&
         element.status.includes("Down"))
@@ -137,7 +137,7 @@ export function ItCoreAdm({
       listDevicesHealthFail.push(element);
     }
     if (
-      element.name_switch === "ADMIN" &&
+      element.name_switch === "ADMIN-DNA" &&
       element.red === "it" &&
       element.status === "Up" &&
       element.name.includes("Temperatures") &&
@@ -146,11 +146,11 @@ export function ItCoreAdm({
       listDevicesHealthOk.push(element);
     }
     if (
-      (element.name_switch === "ADMIN" &&
+      (element.name_switch === "ADMIN-DNA" &&
         element.red === "it" &&
         element.name.includes("Temperatures") &&
         parseInt(element.lastvalue) >= 50) ||
-      (element.name_switch === "ADMIN" &&
+      (element.name_switch === "ADMIN-DNA" &&
         element.red === "it" &&
         element.name.includes("Temperatures") &&
         element.status.includes("Down"))
@@ -181,7 +181,7 @@ export function ItCoreAdm({
   const statusSysHealth = numSysHealthFail > 0 ? "FAIL" : "OK";
 
   const routeDefault = routeStatus.filter((e) => {
-    return e.name === "ADMIN" && e.via_bgp === "true";
+    return e.name === "ADMIN-DNA" && e.via_bgp === "true";
   });
 
   const statusRouteDefault = routeDefault.length > 0 ? "OK" : "FAIL";
@@ -192,7 +192,7 @@ export function ItCoreAdm({
         <table className="table-core">
           <thead>
             <tr>
-              <th>SW-CORE ADM IT 10.224.127.1</th>
+              <th>CORE-ADM-DNA 10.224.127.160</th>
               <th>STATUS</th>
             </tr>
           </thead>
@@ -264,7 +264,7 @@ export function ItCoreAdm({
                 {statusBgp}
               </td>
             </tr>
-            <tr>
+            {/* <tr>
               <td>
                 Neighbor EIGRP: {numEigrpUp}/{numEigrpUp + numEigrpDown}
                 <div className="fail-elements-container">
@@ -317,7 +317,7 @@ export function ItCoreAdm({
               >
                 {statusRouteDefault}
               </td>
-            </tr>
+            </tr> */}
           </tbody>
         </table>
       </div>

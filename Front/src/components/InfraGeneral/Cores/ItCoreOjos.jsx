@@ -192,7 +192,7 @@ export function ItCoreOjos({
         <table className="table-core">
           <thead>
             <tr>
-              <th>CORE OJOS IT - 10.230.127.1</th>
+              <th>SW-CORE OJOS IT 10.230.127.1</th>
               <th>STATUS</th>
             </tr>
           </thead>
@@ -285,7 +285,7 @@ export function ItCoreOjos({
                 {statusEigrp}
               </td>
             </tr>
-            <tr>
+            {/* <tr>
               <td>
                 Neighbor OSPF: {numOspfUp}/{numOspfUp + numOspfDown}
                 <div className="fail-elements-container">
@@ -305,7 +305,7 @@ export function ItCoreOjos({
               >
                 {statusOspf}
               </td>
-            </tr>
+            </tr> */}
             <tr>
               <td>Default Route "Via bgp 65001"</td>
               <td
