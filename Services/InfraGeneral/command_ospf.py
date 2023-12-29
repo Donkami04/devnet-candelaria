@@ -45,7 +45,7 @@ def ospf_function(ip_switch, red, name):
                 'ip_switch': ip_switch,
                 'neighbor': 'ospf',
                 'red': red,
-                'name': name,
+                'name_switch': name,
                 'interface': interface
             }
             data_list.append(neighbor_data)
@@ -61,7 +61,7 @@ def ospf_function(ip_switch, red, name):
             'ip_switch': ip_switch,
             'neighbor': 'ospf',
             'red': red,
-            'name': name,
+            'name_switch': name,
             'interface': 'Not Found / Error'
         }]
 

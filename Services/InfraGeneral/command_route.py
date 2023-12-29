@@ -34,7 +34,7 @@ def route_function(ip_switch, red, name):
         client.close()
         data = {
             'red': red,
-            'name': name,
+            'name_switch': name,
         }
             
         if 'via "bgp 65001"' not in output:

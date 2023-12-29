@@ -44,20 +44,33 @@ def database_connection():
 def core1():
     mydb = database_connection()
     cursor = mydb.cursor()
-    data_switches = [
-        {'ip':'10.224.127.1', 'red': 'it', 'name': 'ADMIN'},
-        {'ip':'10.224.127.2', 'red': 'it', 'name': 'CONCE'},
-        {'ip':'10.230.127.1', 'red': 'it', 'name': 'OJOS'},
-        {'ip':'10.224.127.3', 'red': 'it', 'name': 'DIST-ADM'},
-        {'ip':'10.224.127.4', 'red': 'it', 'name': 'DIST-CONC'},
-        {'ip':'10.224.127.160', 'red': 'it', 'name': 'ADMIN-DNA'},
-        {'ip':'10.224.127.161', 'red': 'it', 'name': 'CONCE-DNA'},
-    ]
+    query = "SELECT * FROM data_inf_gen"
+    cursor.execute(query)
+
+    column_names = [column[0] for column in cursor.description]
+
+    # Convertir los resultados a una lista de diccionarios
+    data_switches = []
+    for row in cursor:
+        row_dict = {}
+        for i in range(len(column_names)):
+            row_dict[column_names[i]] = row[i]
+        data_switches.append(row_dict)
+        
+    # data_switches = [
+    #     # {'ip':'10.224.127.1', 'red': 'it', 'name_switch': 'ADMIN'},
+    #     # {'ip':'10.224.127.2', 'red': 'it', 'name_switch': 'CONCE'},
+    #     # {'ip':'10.230.127.1', 'red': 'it', 'name_switch': 'SW CORE OJOS'},
+    #     # {'ip':'10.224.127.3', 'red': 'it', 'name_switch': 'DIST-ADM'},
+    #     # {'ip':'10.224.127.4', 'red': 'it', 'name_switch': 'DIST-CONC'},
+    #     # {'ip':'10.224.127.160', 'red': 'it', 'name_switch': 'ADMIN-DNA'},
+    #     # {'ip':'10.224.127.161', 'red': 'it', 'name_switch': 'CONCE-DNA'},
+    # ]
 
     current_data_neighbors = []
     for switch in data_switches:
         ip_switch = switch['ip']
-        name_switch = switch['name']
+        name_switch = switch['name_switch']
         red = switch['red']
         logging.info(f"{ip_switch} - {name_switch} - {red}")
         status_core, message_status_core = ping_host(ip_switch)
@@ -82,23 +95,23 @@ def core1():
             # red = neigh['red']
             # neighbor_type = neigh['neighbor']
             # interface = neigh['interface']
-            # query = "INSERT INTO dcs.data_neighbors (`ip_neighbor`, `neighbor`, `red`, `name`, `ip_switch`, `interface`) VALUES (%s, %s, %s, %s, %s, %s)"
+            # query = "INSERT INTO dcs.data_neighbors (`ip_neighbor`, `neighbor`, `red`, `name_switch`, `ip_switch`, `interface`) VALUES (%s, %s, %s, %s, %s, %s)"
             # cursor.execute(query, (ip_neighbor, neighbor_type, red, name, ip_switch, interface))
             # mydb.commit()
         
         data_route = route_function(ip_switch, red, name_switch)
         route_via_bgp = data_route['via_bgp']
-        route_name = data_route['name']
+        route_name = data_route['name_switch']
         route_red = data_route['red']
         route_ip_switch = data_route['ip_switch']
 
         query = (f"UPDATE dcs.route_default SET via_bgp = '{route_via_bgp}' WHERE ip_switch = '{route_ip_switch}'")
         #! Query comentado para rellenar tabla de datos fijos
-        # query = (f"INSERT INTO dcs.route_default (`via_bgp`, `name`, `red`, `ip_switch`) VALUES ('{route_via_bgp}','{route_name}','{route_red}','{route_ip_switch}')")
+        # query = (f"INSERT INTO dcs.route_default (`via_bgp`, `name_switch`, `red`, `ip_switch`) VALUES ('{route_via_bgp}','{route_name}','{route_red}','{route_ip_switch}')")
         cursor.execute(query)
         mydb.commit()
 
-        query_historic = (f"INSERT INTO dcs.historic_route_default (`via_bgp`, `name`, `red`, `ip_switch`) VALUES ('{route_via_bgp}','{route_name}','{route_red}','{route_ip_switch}')")
+        query_historic = (f"INSERT INTO dcs.historic_route_default (`via_bgp`, `name_switch`, `red`, `ip_switch`) VALUES ('{route_via_bgp}','{route_name}','{route_red}','{route_ip_switch}')")
         cursor.execute(query_historic)
         mydb.commit()
 
@@ -141,17 +154,17 @@ def core1():
     for neighbor in status_data_neighbors:
         ip_neighbor = neighbor['ip_neighbor']
         ip_switch = neighbor['ip_switch']
-        name = neighbor['name']
+        name = neighbor['name_switch']
         red = neighbor['red']
         neighbor_type = neighbor['neighbor']
         interface = neighbor['interface']
         status = neighbor['status']
         
-        query = "INSERT INTO dcs.neighbors (`ip_neighbor`, `neighbor`, `red`, `name`, `ip_switch`, `interface`, `status`) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+        query = "INSERT INTO dcs.neighbors (`ip_neighbor`, `neighbor`, `red`, `name_switch`, `ip_switch`, `interface`, `status`) VALUES (%s, %s, %s, %s, %s, %s, %s)"
         cursor.execute(query, (ip_neighbor, neighbor_type, red, name, ip_switch, interface, status))
         mydb.commit()
 
-        query_historic = "INSERT INTO dcs.historic_neighbors (`ip_neighbor`, `neighbor`, `red`, `name`, `ip_switch`, `interface`, `status`) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+        query_historic = "INSERT INTO dcs.historic_neighbors (`ip_neighbor`, `neighbor`, `red`, `name_switch`, `ip_switch`, `interface`, `status`) VALUES (%s, %s, %s, %s, %s, %s, %s)"
         cursor.execute(query_historic, (ip_neighbor, neighbor_type, red, name, ip_switch, interface, status))
         mydb.commit()
 
@@ -192,8 +205,7 @@ def get_data_interfaces(ip_switch, id_switch, red):
         for interface in interfaces:
             interface['ip_switch'] = ip_switch
             interface['red'] = red
-        
-        #! BORRAR
+
 
         return interfaces
 

@@ -166,4 +166,11 @@ export const getStatusCores = async () => {
     .catch((error) => {throw new Error('STATUS CORES: Error del API REST Candealaria : ',error)});
 };
 
+export const getDataInfGen = async () => {
+  return axios
+    .get(`${BASE_API_URL}/infra_general`)
+    .then((response) => response.data)
+    .catch((error) => {throw new Error('DATA INF GEN: Error del API REST Candealaria : ',error)});
+};
+
 

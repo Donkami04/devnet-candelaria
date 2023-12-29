@@ -7,10 +7,12 @@ import {
 
 
 export const useInfGenDash = async () => {
+  
   const dataInterfaces = await getInterfaces();
   const dataDevicesHealth = await getSystemHealth();
   const dataRouteStatus = await getDefaultRoute();
   const dataNeighbors = await getNeighbors();
+  
   const upElements = [];
   const downElements = [];
   dataInterfaces.forEach((element) => {

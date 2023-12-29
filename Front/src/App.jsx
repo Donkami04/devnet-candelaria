@@ -31,6 +31,7 @@ import { Login } from "./components/Login/Logins";
 import { InfraGeneral } from "./components/InfraGeneral/InfraGeneral";
 import { DetailsCore } from "./components/InfraGeneral/DetailsCore/DetailsCore"
 import { Map } from "./components/InfraGeneral/Map/Map"
+import { MainTopology } from "./components/InfraGeneral/MainTopology/MainTopology"
 import "./app.css";
 
 function App() {
@@ -85,6 +86,7 @@ function App() {
         <Route path="/monitoreo/infraestrucura-general" element={<InfraGeneral />} />
         <Route path="/monitoreo/infraestrucura-general/details" element={<DetailsCore />} />
         <Route path="/monitoreo/infraestrucura-general/map" element={<Map />} />
+        <Route path="/monitoreo/infraestrucura-general/view" element={<MainTopology />} />
       </Routes>
       <div className="refresh-button-container">
         <button
