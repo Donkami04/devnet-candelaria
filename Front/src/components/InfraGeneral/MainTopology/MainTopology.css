@@ -1,0 +1,52 @@
+.dataCoreContainer {
+    position: absolute;
+    top: 0; 
+    left: 0; 
+}
+
+.close-button-datacore {
+    position: relative;
+    background-color: blue;
+    color: red;
+    z-index: 9999;
+    width: 500px;
+}
+
+.close-button-datacore p {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+}
+
+.row-ig-table {
+    cursor: pointer;
+}
+
+.table-topology-ig-container {
+    width: 80%;
+    margin: auto;
+    margin-top: 30px;
+}
+
+.table-topology-ig-container table {
+    border-collapse: collapse;
+}
+
+.table-topology-ig-container table td,
+th {
+  border: 1px solid black;
+  padding: 8px;
+  text-align: center;
+  font-weight: bold;
+
+}
+
+.table-topology-ig-container table th {
+  font-size: 0.8rem;
+  color: white;
+  background-color: #444444;
+}
+
+.table-topology-ig-container table td {
+  font-size: 0.7rem;  
+}

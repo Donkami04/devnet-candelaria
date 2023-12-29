@@ -71,9 +71,9 @@ export function MainTopology() {
 
   const handleRowClick = (index, event) => {
     // Si haces clic en la misma fila, oculta el componente
-    setDataCoreVisible(selectedRow !== index);
     setSelectedRow(selectedRow === index ? null : index);
     setPosition({ x: event.clientX, y: event.clientY });
+    setDataCoreVisible(true); // Puedes personalizar la lógica según tus necesidades
   };
 
   return (
@@ -95,7 +95,6 @@ export function MainTopology() {
                 <tr
                   key={e.id}
                   onClick={(event) => handleRowClick(index, event)}
-                  className="row-ig-table"
                 >
                   <td>{e.rol}</td>
                   <td>{e.name_switch}</td>
@@ -107,20 +106,14 @@ export function MainTopology() {
         </table>
       </div>
 
-      {selectedRow !== null && dataCoreVisible && (
+      {selectedRow !== null && (
         <div
           className="dataCoreContainer"
           style={{ left: position.x, top: position.y }}
         >
-          <div className="close-button-datacore">
-            <p
-              
-              onClick={() => setDataCoreVisible(false)}
-            >
-              X
-            </p>
-          </div>
-
+          <p className="close-button-datacore">
+            X
+          </p>
           <DataCore
             dataList={allDataInfGen}
             swName={infraGeneral[selectedRow].name_switch}

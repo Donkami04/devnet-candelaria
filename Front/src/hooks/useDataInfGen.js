@@ -295,6 +295,7 @@ export async function useDataInfGen() {
     });
   };
 
+
   classifyElement(dataInterfaces);
   classifyElement(dataDevicesHealth);
   classifyElement(dataNeighbors);
@@ -342,6 +343,8 @@ export async function useDataInfGen() {
     ...downElements.swDistAdmDown,
     ...downElements.swDistConceDown,
   ];
+
+  dataRouteStatus.forEach(e => totalUpElements.push(e))
 
   const data = {
     totalUpElements: totalUpElements,
