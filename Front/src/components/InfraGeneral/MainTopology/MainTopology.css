@@ -7,7 +7,6 @@
 .close-button-datacore {
     position: relative;
     background-color: blue;
-    color: red;
     z-index: 9999;
     width: 500px;
 }
@@ -16,6 +15,12 @@
     position: absolute;
     right: 5px;
     top: 5px;
+    cursor: pointer;
+    color: red;
+}
+
+.close-button-datacore p:hover {
+    color: white;
 }
 
 .row-ig-table {
