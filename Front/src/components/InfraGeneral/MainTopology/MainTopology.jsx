@@ -9,6 +9,7 @@ import {
 import { Navbar } from "../../Navbar/Navbar";
 import { useDataInfGen } from "../../../hooks/useDataInfGen";
 import { DataCore } from "../DataCore/DataCore";
+import { Status_System } from "../../Status_System/Status_System";
 import "./MainTopology.css";
 
 export function MainTopology() {
@@ -26,22 +27,22 @@ export function MainTopology() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const dataInterfaces = await getInterfaces();
-        const dataDevicesHealth = await getSystemHealth();
-        const dataNeighbors = await getNeighbors();
-        const dataRouteStatus = await getDefaultRoute();
+        // const dataInterfaces = await getInterfaces();
+        // const dataDevicesHealth = await getSystemHealth();
+        // const dataNeighbors = await getNeighbors();
+        // const dataRouteStatus = await getDefaultRoute();
         const dataInfraGeneral = await getDataInfGen();
         const dataStatusInfGen = await useDataInfGen();
 
         setStatusInfGen(dataStatusInfGen);
-        setDevicesHealth(dataDevicesHealth);
-        setRouteStatus(dataRouteStatus);
-        setDevicesInterfaces(dataInterfaces);
-        setNeighbors(dataNeighbors);
+        setAllDataInfGen([
+          ...dataStatusInfGen.upElements,
+          ...dataStatusInfGen.downElements,
+        ]);
 
         // Agregar el estado a cada SW de Inf General
         function sameNameSwitch(sw) {
-          const match = dataStatusInfGen.totalDownElements.some(
+          const match = dataStatusInfGen.downElements.some(
             (e) => e.name_switch === sw.name_switch
           );
           if (match) {
@@ -64,17 +65,9 @@ export function MainTopology() {
           }
           return 0; // Sin cambios en la posición
         }
-        
+
         dataInfraGeneral.sort(sortByFailFirst);
-
         setInfraGeneral(dataInfraGeneral);
-
-
-        const allData = [
-          ...dataStatusInfGen.totalDownElements,
-          ...dataStatusInfGen.totalUpElements,
-        ];
-        setAllDataInfGen(allData);
       } catch (error) {
         console.error(error);
       }
@@ -93,6 +86,7 @@ export function MainTopology() {
   return (
     <div>
       <Navbar title={"Infraestructura General"} />
+      <Status_System tableToShow={"ig"} />
       <div className="table-topology-ig-container">
         <table>
           <thead>
@@ -106,14 +100,19 @@ export function MainTopology() {
           <tbody>
             {infraGeneral &&
               infraGeneral.map((e, index) => (
-                <tr
-                  key={e.id}
-                  onClick={(event) => handleRowClick(index, event)}
-                  className="row-ig-table"
-                >
+                <tr key={e.id}>
+                  <td onClick={(event) => handleRowClick(index, event)}>
+                    {e.name_switch}
+                  </td>
+                  <td
+                    onClick={(event) => handleRowClick(index, event)}
+                    className={`row-ig-table ${
+                      e.swStatus === "FAIL" ? "kpi-red" : "kpi-green"
+                    }`}
+                  >
+                    {e.swStatus}
+                  </td>
                   <td>{e.rol}</td>
-                  <td className={e.swStatus === "FAIL" ? "kpi-red" : "kpi-green"}>{e.swStatus}</td>
-                  <td>{e.name_switch}</td>
                   <td>{e.ip}</td>
                 </tr>
               ))}
@@ -127,12 +126,7 @@ export function MainTopology() {
           style={{ left: position.x, top: position.y }}
         >
           <div className="close-button-datacore">
-            <p
-              
-              onClick={() => setDataCoreVisible(false)}
-            >
-              X
-            </p>
+            <p onClick={() => setDataCoreVisible(false)}>X</p>
           </div>
 
           <DataCore

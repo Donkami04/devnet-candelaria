@@ -22,154 +22,174 @@ load_dotenv()
 env = os.getenv('ENVIRONMENT')
 
 def database_connection():
-    if env == 'local':
-        mydb = mysql.connector.connect(
-        host=database['local']['DB_HOST'],
-        user=database['local']['DB_USER'],
-        password=database['local']['DB_PASSWORD'],
-        database=database['local']['DB_DATABASE']
-        )
+    try:
+        if env == 'local':
+            mydb = mysql.connector.connect(
+            host=database['local']['DB_HOST'],
+            user=database['local']['DB_USER'],
+            password=database['local']['DB_PASSWORD'],
+            database=database['local']['DB_DATABASE']
+            )
 
-    else:
-        mydb = mysql.connector.connect(
-        host=database['production']['DB_HOST'],
-        user=database['production']['DB_USER'],
-        password=database['production']['DB_PASSWORD'],
-        database=database['production']['DB_DATABASE']
-        )
+        else:
+            mydb = mysql.connector.connect(
+            host=database['production']['DB_HOST'],
+            user=database['production']['DB_USER'],
+            password=database['production']['DB_PASSWORD'],
+            database=database['production']['DB_DATABASE']
+            )
+        return mydb
 
-    return mydb
+    except Exception as e:
+        logging.error("Error al conectarse a la base de datos")
+        logging.error(traceback.format_exc())
+        logging.error(e)
 
 
 def core1():
-    mydb = database_connection()
-    cursor = mydb.cursor()
-    query = "SELECT * FROM data_inf_gen"
-    cursor.execute(query)
+    try:
+        mydb = database_connection()
+        cursor = mydb.cursor()
+        query = "SELECT * FROM data_inf_gen"
+        cursor.execute(query)
 
-    column_names = [column[0] for column in cursor.description]
+        column_names = [column[0] for column in cursor.description]
 
-    # Convertir los resultados a una lista de diccionarios
-    data_switches = []
-    for row in cursor:
-        row_dict = {}
-        for i in range(len(column_names)):
-            row_dict[column_names[i]] = row[i]
-        data_switches.append(row_dict)
-        
-    # data_switches = [
-    #     # {'ip':'10.224.127.1', 'red': 'it', 'name_switch': 'ADMIN'},
-    #     # {'ip':'10.224.127.2', 'red': 'it', 'name_switch': 'CONCE'},
-    #     # {'ip':'10.230.127.1', 'red': 'it', 'name_switch': 'SW CORE OJOS'},
-    #     # {'ip':'10.224.127.3', 'red': 'it', 'name_switch': 'DIST-ADM'},
-    #     # {'ip':'10.224.127.4', 'red': 'it', 'name_switch': 'DIST-CONC'},
-    #     # {'ip':'10.224.127.160', 'red': 'it', 'name_switch': 'ADMIN-DNA'},
-    #     # {'ip':'10.224.127.161', 'red': 'it', 'name_switch': 'CONCE-DNA'},
-    # ]
-
-    current_data_neighbors = []
-    for switch in data_switches:
-        ip_switch = switch['ip']
-        name_switch = switch['name_switch']
-        red = switch['red']
-        logging.info(f"{ip_switch} - {name_switch} - {red}")
-        status_core, message_status_core = ping_host(ip_switch)
-        cursor.execute(f"UPDATE dcs.status_cores SET `status` = '{status_core}' WHERE `ip` = '{ip_switch}'")
-        id_prtg_switch = get_id_prtg(ip_switch)
-        data_interfaces = get_data_interfaces(ip_switch, id_prtg_switch, red)
-        data_systemhealth = system_health(ip_switch, id_prtg_switch, red)
-        
-        data_bgp = bgp_function(ip_switch, red, name_switch)
-        data_eigrp = eigrp_function(ip_switch, red, name_switch)
-        data_ospf = ospf_function(ip_switch, red, name_switch)
-        data_neighbors = data_bgp + data_eigrp + data_ospf
-
-        for neigh in data_neighbors:
-            current_data_neighbors.append(neigh)
+        # Convertir los resultados a una lista de diccionarios
+        data_switches = []
+        for row in cursor:
+            row_dict = {}
+            for i in range(len(column_names)):
+                row_dict[column_names[i]] = row[i]
+            data_switches.append(row_dict)
             
-            #! Lo comentado se usa para llenar data_neighbors
-            #TODO: NO BORRAR
-            # ip_neighbor = neigh['ip_neighbor']
-            # ip_switch = neigh['ip_switch']
-            # name = neigh['name']
-            # red = neigh['red']
-            # neighbor_type = neigh['neighbor']
-            # interface = neigh['interface']
-            # query = "INSERT INTO dcs.data_neighbors (`ip_neighbor`, `neighbor`, `red`, `name_switch`, `ip_switch`, `interface`) VALUES (%s, %s, %s, %s, %s, %s)"
-            # cursor.execute(query, (ip_neighbor, neighbor_type, red, name, ip_switch, interface))
-            # mydb.commit()
-        
-        data_route = route_function(ip_switch, red, name_switch)
-        route_via_bgp = data_route['via_bgp']
-        route_name = data_route['name_switch']
-        route_red = data_route['red']
-        route_ip_switch = data_route['ip_switch']
+        # data_switches = [
+        #     # {'ip':'10.224.127.1', 'red': 'it', 'name_switch': 'ADMIN'},
+        #     # {'ip':'10.224.127.2', 'red': 'it', 'name_switch': 'CONCE'},
+        #     # {'ip':'10.230.127.1', 'red': 'it', 'name_switch': 'SW CORE OJOS'},
+        #     # {'ip':'10.224.127.3', 'red': 'it', 'name_switch': 'DIST-ADM'},
+        #     # {'ip':'10.224.127.4', 'red': 'it', 'name_switch': 'DIST-CONC'},
+        #     # {'ip':'10.224.127.160', 'red': 'it', 'name_switch': 'ADMIN-DNA'},
+        #     # {'ip':'10.224.127.161', 'red': 'it', 'name_switch': 'CONCE-DNA'},
+        # ]
 
-        query = (f"UPDATE dcs.route_default SET via_bgp = '{route_via_bgp}' WHERE ip_switch = '{route_ip_switch}'")
-        #! Query comentado para rellenar tabla de datos fijos
-        # query = (f"INSERT INTO dcs.route_default (`via_bgp`, `name_switch`, `red`, `ip_switch`) VALUES ('{route_via_bgp}','{route_name}','{route_red}','{route_ip_switch}')")
+        current_data_neighbors = []
+        for switch in data_switches:
+            ip_switch = switch['ip']
+            name_switch = switch['name_switch']
+            red = switch['red']
+            logging.info(f"{ip_switch} - {name_switch} - {red}")
+            status_core, message_status_core = ping_host(ip_switch)
+            cursor.execute(f"UPDATE dcs.status_cores SET `status` = '{status_core}' WHERE `ip` = '{ip_switch}'")
+            id_prtg_switch = get_id_prtg(ip_switch)
+            data_interfaces = get_data_interfaces(ip_switch, id_prtg_switch, red)
+            data_systemhealth = system_health(ip_switch, id_prtg_switch, red)
+            
+            data_bgp = bgp_function(ip_switch, red, name_switch)
+            data_eigrp = eigrp_function(ip_switch, red, name_switch)
+            data_ospf = ospf_function(ip_switch, red, name_switch)
+            data_neighbors = data_bgp + data_eigrp + data_ospf
+
+            for neigh in data_neighbors:
+                current_data_neighbors.append(neigh)
+                
+                #! Lo comentado se usa para llenar data_neighbors
+                #TODO: NO BORRAR
+                # ip_neighbor = neigh['ip_neighbor']
+                # ip_switch = neigh['ip_switch']
+                # name = neigh['name_switch']
+                # red = neigh['red']
+                # neighbor_type = neigh['neighbor']
+                # interface = neigh['interface']
+                # query = "INSERT INTO dcs.data_neighbors (`ip_neighbor`, `neighbor`, `red`, `name_switch`, `ip_switch`, `interface`) VALUES (%s, %s, %s, %s, %s, %s)"
+                # cursor.execute(query, (ip_neighbor, neighbor_type, red, name, ip_switch, interface))
+                # mydb.commit()
+            
+            data_route = route_function(ip_switch, red, name_switch)
+            route_via_bgp = data_route['via_bgp']
+            route_name = data_route['name_switch']
+            route_red = data_route['red']
+            route_ip_switch = data_route['ip_switch']
+
+            query = (f"UPDATE dcs.route_default SET via_bgp = '{route_via_bgp}' WHERE ip_switch = '{route_ip_switch}'")
+            #! Query comentado para rellenar tabla de datos fijos
+            # query = (f"INSERT INTO dcs.route_default (`via_bgp`, `name_switch`, `red`, `ip_switch`) VALUES ('{route_via_bgp}','{route_name}','{route_red}','{route_ip_switch}')")
+            cursor.execute(query)
+            mydb.commit()
+
+            query_historic = (f"INSERT INTO dcs.historic_route_default (`via_bgp`, `name_switch`, `red`, `ip_switch`) VALUES ('{route_via_bgp}','{route_name}','{route_red}','{route_ip_switch}')")
+            cursor.execute(query_historic)
+            mydb.commit()
+
+            for interface in data_interfaces:
+                name_interface = interface['name']
+                if name_interface == 'No Devices Found':
+                    break
+                status_interface = interface['status']
+                id_prtg = interface['objid']
+                red_interface = interface["red"]
+                query = "INSERT INTO dcs.interfaces (id_prtg, name, status, ip_switch, name_switch, red) VALUES (%s, %s, %s, %s, %s, %s) ON DUPLICATE KEY UPDATE name = %s, status = %s"
+                cursor.execute(query, (id_prtg, name_interface, status_interface, ip_switch, name_switch, red_interface, name_interface, status_interface))
+                mydb.commit()
+
+                query_historic = "INSERT INTO dcs.historic_interfaces (id_prtg, name, status, ip_switch, name_switch, red) VALUES (%s, %s, %s, %s, %s, %s)"
+                cursor.execute(query_historic, (id_prtg, name_interface, status_interface, ip_switch, name_switch, red_interface))
+                mydb.commit()
+
+            for sensor in data_systemhealth:
+                name_sensor = sensor['name']
+                if name_sensor == 'No Devices Found':
+                    break
+                status_sensor = sensor['status']
+                id_prtg = sensor['objid']
+                lastvalue = sensor['lastvalue']
+                red_sensor = sensor['red']
+                query = "INSERT INTO dcs.system_health (name, status, id_prtg, lastvalue, ip_switch, name_switch, red) VALUES (%s, %s, %s, %s, %s, %s, %s) ON DUPLICATE KEY UPDATE name = %s, status = %s, lastvalue = %s"
+                cursor.execute(query, (name_sensor, status_sensor, id_prtg, lastvalue, ip_switch, name_switch, red_sensor, name_sensor, status_sensor, lastvalue))
+                mydb.commit()
+
+                query_historic = "INSERT INTO dcs.historic_system_health (name, status, id_prtg, lastvalue, ip_switch, name_switch, red) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+                cursor.execute(query_historic, (name_sensor, status_sensor, id_prtg, lastvalue, ip_switch, name_switch, red_sensor))
+                mydb.commit()
+        
+        query = (f"DELETE FROM dcs.neighbors")
         cursor.execute(query)
         mydb.commit()
+        status_data_neighbors = status_neighbor(mydb, current_data_neighbors)
 
-        query_historic = (f"INSERT INTO dcs.historic_route_default (`via_bgp`, `name_switch`, `red`, `ip_switch`) VALUES ('{route_via_bgp}','{route_name}','{route_red}','{route_ip_switch}')")
-        cursor.execute(query_historic)
+        for neighbor in status_data_neighbors:
+            ip_neighbor = neighbor['ip_neighbor']
+            ip_switch = neighbor['ip_switch']
+            name = neighbor['name_switch']
+            red = neighbor['red']
+            neighbor_type = neighbor['neighbor']
+            interface = neighbor['interface']
+            status = neighbor['status']
+            
+            query = "INSERT INTO dcs.neighbors (`ip_neighbor`, `neighbor`, `red`, `name_switch`, `ip_switch`, `interface`, `status`) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+            cursor.execute(query, (ip_neighbor, neighbor_type, red, name, ip_switch, interface, status))
+            mydb.commit()
+
+            query_historic = "INSERT INTO dcs.historic_neighbors (`ip_neighbor`, `neighbor`, `red`, `name_switch`, `ip_switch`, `interface`, `status`) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+            cursor.execute(query_historic, (ip_neighbor, neighbor_type, red, name, ip_switch, interface, status))
+            mydb.commit()
+            
+        now = datetime.datetime.now()
+        fecha_y_hora = now.strftime("%Y-%m-%d %H:%M:%S")
+        fecha_y_hora = str(fecha_y_hora)
+        cursor.execute(f"INSERT INTO dcs.fechas_consultas_ig (ultima_consulta, estado) VALUES ('{fecha_y_hora}', 'OK')")
         mydb.commit()
-
-        for interface in data_interfaces:
-            name_interface = interface['name']
-            if name_interface == 'No Devices Found':
-                break
-            status_interface = interface['status']
-            id_prtg = interface['objid']
-            red_interface = interface["red"]
-            query = "INSERT INTO dcs.interfaces (id_prtg, name, status, ip_switch, name_switch, red) VALUES (%s, %s, %s, %s, %s, %s) ON DUPLICATE KEY UPDATE name = %s, status = %s"
-            cursor.execute(query, (id_prtg, name_interface, status_interface, ip_switch, name_switch, red_interface, name_interface, status_interface))
-            mydb.commit()
-
-            query_historic = "INSERT INTO dcs.historic_interfaces (id_prtg, name, status, ip_switch, name_switch, red) VALUES (%s, %s, %s, %s, %s, %s)"
-            cursor.execute(query_historic, (id_prtg, name_interface, status_interface, ip_switch, name_switch, red_interface))
-            mydb.commit()
-
-        for sensor in data_systemhealth:
-            name_sensor = sensor['name']
-            if name_sensor == 'No Devices Found':
-                break
-            status_sensor = sensor['status']
-            id_prtg = sensor['objid']
-            lastvalue = sensor['lastvalue']
-            red_sensor = sensor['red']
-            query = "INSERT INTO dcs.system_health (name, status, id_prtg, lastvalue, ip_switch, name_switch, red) VALUES (%s, %s, %s, %s, %s, %s, %s) ON DUPLICATE KEY UPDATE name = %s, status = %s, lastvalue = %s"
-            cursor.execute(query, (name_sensor, status_sensor, id_prtg, lastvalue, ip_switch, name_switch, red_sensor, name_sensor, status_sensor, lastvalue))
-            mydb.commit()
-
-            query_historic = "INSERT INTO dcs.historic_system_health (name, status, id_prtg, lastvalue, ip_switch, name_switch, red) VALUES (%s, %s, %s, %s, %s, %s, %s)"
-            cursor.execute(query_historic, (name_sensor, status_sensor, id_prtg, lastvalue, ip_switch, name_switch, red_sensor))
-            mydb.commit()
-    
-    query = (f"DELETE FROM dcs.neighbors")
-    cursor.execute(query)
-    mydb.commit()
-    status_data_neighbors = status_neighbor(mydb, current_data_neighbors)
-
-    for neighbor in status_data_neighbors:
-        ip_neighbor = neighbor['ip_neighbor']
-        ip_switch = neighbor['ip_switch']
-        name = neighbor['name_switch']
-        red = neighbor['red']
-        neighbor_type = neighbor['neighbor']
-        interface = neighbor['interface']
-        status = neighbor['status']
+        cursor.close()
+        logging.info("Terminado")
         
-        query = "INSERT INTO dcs.neighbors (`ip_neighbor`, `neighbor`, `red`, `name_switch`, `ip_switch`, `interface`, `status`) VALUES (%s, %s, %s, %s, %s, %s, %s)"
-        cursor.execute(query, (ip_neighbor, neighbor_type, red, name, ip_switch, interface, status))
+    except Exception as e:
+        logging.error(traceback.format_exc())
+        now = datetime.datetime.now()
+        fecha_y_hora = now.strftime("%Y-%m-%d %H:%M:%S")
+        fecha_y_hora = str(fecha_y_hora)
+        cursor.execute(f"INSERT INTO dcs.fechas_consultas_ig (ultima_consulta, estado) VALUES ('{fecha_y_hora}', 'ERROR')")
         mydb.commit()
-
-        query_historic = "INSERT INTO dcs.historic_neighbors (`ip_neighbor`, `neighbor`, `red`, `name_switch`, `ip_switch`, `interface`, `status`) VALUES (%s, %s, %s, %s, %s, %s, %s)"
-        cursor.execute(query_historic, (ip_neighbor, neighbor_type, red, name, ip_switch, interface, status))
-        mydb.commit()
-
-    cursor.close()
-    logging.info("Terminado")
+        cursor.close()
 
 # Obtiene Id del PRTG
 def get_id_prtg(ip_switch):

@@ -83,10 +83,10 @@ function App() {
         <Route path="/admin/firewalls" element={<AdminFirewalls />} />
         <Route path="/admin/users" element={<AdminUsers />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/monitoreo/infraestrucura-general" element={<InfraGeneral />} />
+        {/* <Route path="/monitoreo/infraestrucura-general" element={<InfraGeneral />} /> */}
         <Route path="/monitoreo/infraestrucura-general/details" element={<DetailsCore />} />
         <Route path="/monitoreo/infraestrucura-general/map" element={<Map />} />
-        <Route path="/monitoreo/infraestrucura-general/view" element={<MainTopology />} />
+        <Route path="/monitoreo/infraestrucura-general" element={<MainTopology />} />
       </Routes>
       <div className="refresh-button-container">
         <button

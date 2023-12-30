@@ -1,4 +1,4 @@
-import "./Cores.css";
+import "./DataCore.css";
 import { PRTG_URL } from "../../../utils/Api-candelaria/api";
 
 export function DataCore({ dataList, swName }) {
@@ -214,7 +214,6 @@ export function DataCore({ dataList, swName }) {
 
   return (
     <div className="table-infra-general-container">
-      <main>
         <table className="table-core">
           <thead>
             <tr>
@@ -350,7 +349,6 @@ export function DataCore({ dataList, swName }) {
             </tr>
           </tbody>
         </table>
-      </main>
     </div>
   );
 }

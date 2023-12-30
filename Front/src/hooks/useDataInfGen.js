@@ -1,4 +1,6 @@
-import { useEffect, useState } from "react";
+// Se encarga de clasificar todos los elementos de la Infraestructura General
+// en dos arrays, Up o Down.
+
 import {
   getInterfaces,
   getSystemHealth,
@@ -12,345 +14,119 @@ export async function useDataInfGen() {
   const dataDevicesHealth = await getSystemHealth();
   const dataNeighbors = await getNeighbors();
   const dataRouteStatus = await getDefaultRoute();
-  const dataInfraGeneral = await getDataInfGen();
 
-  const dataSwCoreAdmin = [];
-  const dataSwCoreConce = [];
-  const dataSwCoreOjos = [];
-  const dataSwCoreDistAdmin = [];
-  const dataSwCoreDistConce = [];
-  const dataSwCoreAdminDna = [];
-  const dataSwCoreConceDna = [];
+  const allData = [
+    ...dataInterfaces,
+    ...dataDevicesHealth,
+    ...dataNeighbors,
+    ...dataRouteStatus,
+  ];
 
-  const upElements = {
-    swCoreAdminUp: [],
-    swCoreConceUp: [],
-    swCoreOjosUp: [],
-    swDistAdmUp: [],
-    swDistConceUp: [],
-    coreAdminDnaUp: [],
-    coreConceDnaUp: [],
-  };
+  const upElements = [];
+  const downElements = [];
 
-  const downElements = {
-    swCoreAdminDown: [],
-    swCoreConceDown: [],
-    swCoreOjosDown: [],
-    swDistAdmDown: [],
-    swDistConceDown: [],
-    coreAdminDnaDown: [],
-    coreConceDnaDown: [],
-  };
-
-  //   dataInterfaces.forEach((e) => {
-  //     if (
-  //       (e.name_switch === "ADMIN" && e.status === "Up") ||
-  //       (e.name_switch === "ADMIN" &&
-  //         e.status.toLowerCase().includes("Paused") &&
-  //         e.red === "it")
-  //     ) {
-  //       swCoreAdminUp.push(e);
-  //     }
-  //     if (e.name_switch === "CONCE") {
-  //       swCoreConceUp.push(e);
-  //     }
-  //     if (e.name_switch === "OJOS") {
-  //       swCoreOjosUp.push(e);
-  //     }
-  //     if (e.name_switch === "DIST-ADM") {
-  //       swDistAdmUp.push(e);
-  //     }
-  //     if (e.name_switch === "DIST-CONC") {
-  //       swDistConceUp.push(e);
-  //     }
-  //     if (e.name_switch === "ADMIN-DNA") {
-  //       coreAdminDnaUp.push(e);
-  //     }
-  //     if (e.name_switch === "CONCE-DNA") {
-  //       coreConceDnaUp.push(e);
-  //     }
-  //   });
-
-  //   dataDevicesHealth.forEach((e) => {
-  //     if (e.name_switch === "ADMIN") {
-  //       swCoreAdminUp.push(e);
-  //     }
-  //     if (e.name_switch === "CONCE") {
-  //       swCoreConceUp.push(e);
-  //     }
-  //     if (e.name_switch === "OJOS") {
-  //       swCoreOjosUp.push(e);
-  //     }
-  //     if (e.name_switch === "DIST-ADM") {
-  //       swDistAdmUp.push(e);
-  //     }
-  //     if (e.name_switch === "DIST-CONC") {
-  //       swDistConceUp.push(e);
-  //     }
-  //     if (e.name_switch === "ADMIN-DNA") {
-  //       coreAdminDnaUp.push(e);
-  //     }
-  //     if (e.name_switch === "CONCE-DNA") {
-  //       coreConceDnaUp.push(e);
-  //     }
-  //   });
-
-  //   dataNeighbors.forEach((e) => {
-  //     if (e.name_switch === "ADMIN") {
-  //       swCoreAdminUp.push(e);
-  //     }
-  //     if (e.name_switch === "CONCE") {
-  //       swCoreConceUp.push(e);
-  //     }
-  //     if (e.name_switch === "OJOS") {
-  //       swCoreOjosUp.push(e);
-  //     }
-  //     if (e.name_switch === "DIST-ADM") {
-  //       swDistAdmUp.push(e);
-  //     }
-  //     if (e.name_switch === "DIST-CONC") {
-  //       swDistConceUp.push(e);
-  //     }
-  //     if (e.name_switch === "ADMIN-DNA") {
-  //       coreAdminDnaUp.push(e);
-  //     }
-  //     if (e.name_switch === "CONCE-DNA") {
-  //       coreConceDnaUp.push(e);
-  //     }
-  //   });
-  // }
-
-  // dataInterfaces.forEach((e) => {
-  //   if (e.name_switch === "SW CORE ADMIN") {
-  //     dataSwCoreAdmin.push(e);
-  //   };
-
-  //   if (e.name_switch === "SW CORE CONCE") {
-  //     dataSwCoreConce.push(e);
-  //   };
-  //   if (e.name_switch === "SW CORE OJOS") {
-  //     dataSwCoreOjos.push(e);
-  //   };
-  //   if (e.name_switch === "SW DIST ADM") {
-  //     dataSwCoreDistAdmin.push(e);
-  //   };
-  //   if (e.name_switch === "SW DIST CONCE") {
-  //     dataSwCoreDistConce.push(e);
-  //   };
-  //   if (e.name_switch === "CORE ADMIN DNA") {
-  //     dataSwCoreAdminDna.push(e);
-  //   };
-  //   if (e.name_switch === "CORE CONCE DNA") {
-  //     dataSwCoreConceDna.push(e);
-  //   };
-
-  // })
-
-  const classifyElement = (dataList) => {
-    dataList.forEach((element) => {
-      if (element.name_switch === "SW CORE ADMIN") {
-        element.upArray = "swCoreAdminUp";
-        element.downArray = "swCoreAdminDown";
-        dataSwCoreAdmin.push(element);
-      }
-
-      if (element.name_switch === "SW CORE CONCE") {
-        element.upArray = "swCoreConceUp";
-        element.downArray = "swCoreConceDown";
-        dataSwCoreConce.push(element);
-      }
-
-      if (element.name_switch === "SW CORE OJOS") {
-        element.upArray = "swCoreOjosUp";
-        element.downArray = "swCoreOjosDown";
-        dataSwCoreOjos.push(element);
-      }
-
-      if (element.name_switch === "SW DIST ADM") {
-        element.upArray = "swDistAdmUp";
-        element.downArray = "swDistAdmDown";
-        dataSwCoreDistAdmin.push(element);
-      }
-
-      if (element.name_switch === "SW DIST CONC") {
-        element.upArray = "swDistConceUp";
-        element.downArray = "swDistConceDown";
-        dataSwCoreDistConce.push(element);
-      }
-
-      if (element.name_switch === "CORE ADMIN DNA") {
-        element.upArray = "coreAdminDnaUp";
-        element.downArray = "coreAdminDnaDown";
-        dataSwCoreAdminDna.push(element);
-      }
-
-      if (element.name_switch === "CORE CONCE DNA") {
-        element.upArray = "coreConceDnaUp";
-        element.downArray = "coreConceDnaDown";
-        dataSwCoreConceDna.push(element);
-      }
-    });
-  };
-
-  const upOrDownInterface = (dataList, nameSw) => {
+  const upOrDownInterface = (dataList) => {
     dataList.forEach((element) => {
       if (element.name && element.name.includes("Traffic")) {
         if (
-          (element.name_switch === nameSw && element.status === "Up") ||
-          (element.name_switch === nameSw &&
-            element.status.toLowerCase().includes("paused"))
+          element.status === "Up" ||
+          element.status.toLowerCase().includes("paused")
         ) {
-          const upArrayDestiny = element.upArray;
-          upElements[upArrayDestiny].push(element);
+          upElements.push(element);
         }
 
-        if (element.name_switch === nameSw && element.status.includes("Down")) {
-          const downArrayDestiny = element.downArray;
-          downElements[downArrayDestiny].push(element);
+        if (element.status.includes("Down")) {
+          downElements.push(element);
         }
       }
     });
   };
 
-  const upOrDownNeighbors = (dataList, nameSw) => {
+  const upOrDownNeighbors = (dataList) => {
     dataList.forEach((element) => {
       if (element.neighbor) {
-        if (element.name_switch === nameSw && element.status === "Up") {
-          const upArrayDestiny = element.upArray;
-          upElements[upArrayDestiny].push(element);
+        if (element.status === "Up") {
+          upElements.push(element);
         }
-        if (element.name_switch === nameSw && element.status === "Down") {
-          const downArrayDestiny = element.downArray;
-          downElements[downArrayDestiny].push(element);
+        if (element.status === "Down") {
+          downElements.push(element);
         }
       }
     });
   };
 
-  const upOrDownSysHealth = (dataList, nameSw) => {
+  const upOrDownSysHealth = (dataList) => {
     dataList.forEach((element) => {
       // Primer If es porque los neighbors no tienen `name`
       if (element.name && element.name.includes("System Health")) {
         if (
-          element.name_switch === nameSw &&
           element.status === "Up" &&
           element.name.includes("CPU") &&
           parseInt(element.lastvalue) <= 90
         ) {
-          const upArrayDestiny = element.upArray;
-          upElements[upArrayDestiny].push(element);
+          upElements.push(element);
         }
         if (
-          (element.name_switch === nameSw &&
-            element.name.includes("CPU") &&
-            parseInt(element.lastvalue) > 90) ||
-          (element.name_switch === nameSw &&
-            element.name.includes("CPU") &&
-            element.status.includes("Down"))
+          (element.name.includes("CPU") && parseInt(element.lastvalue) > 90) ||
+          (element.name.includes("CPU") && element.status.includes("Down"))
         ) {
-          const downArrayDestiny = element.downArray;
-          downElements[downArrayDestiny].push(element);
+          downElements.push(element);
         }
         if (
-          element.name_switch === nameSw &&
           element.status === "Up" &&
           element.name.includes("Power Supplies") &&
           element.lastvalue === "Normal"
         ) {
-          const upArrayDestiny = element.upArray;
-          upElements[upArrayDestiny].push(element);
+          upElements.push(element);
         }
         if (
-          (element.name_switch === nameSw &&
-            element.name.includes("Power Supplies") &&
+          (element.name.includes("Power Supplies") &&
             element.lastvalue !== "Normal") ||
-          (element.name_switch === nameSw &&
-            element.name.includes("Power Supplies") &&
+          (element.name.includes("Power Supplies") &&
             element.status.includes("Down"))
         ) {
-          const downArrayDestiny = element.downArray;
-          downElements[downArrayDestiny].push(element);
+          downElements.push(element);
         }
         if (
-          element.name_switch === nameSw &&
           element.status === "Up" &&
           element.name.includes("Temperatures") &&
           parseInt(element.lastvalue) < 50
         ) {
-          const upArrayDestiny = element.upArray;
-          upElements[upArrayDestiny].push(element);
+          upElements.push(element);
         }
         if (
-          (element.name_switch === nameSw &&
-            element.name.includes("Temperatures") &&
+          (element.name.includes("Temperatures") &&
             parseInt(element.lastvalue) >= 50) ||
-          (element.name_switch === nameSw &&
-            element.name.includes("Temperatures") &&
+          (element.name.includes("Temperatures") &&
             element.status.includes("Down"))
         ) {
-          const downArrayDestiny = element.downArray;
-          downElements[downArrayDestiny].push(element);
+          downElements.push(element);
         }
       }
     });
   };
 
+  const upOrDownRouteDefault = (dataList) => {
+    dataList.forEach((element) => {
+      if (element.via_bgp) {
+        if (element.via_bpg === "true") {
+          upElements.push(element);
+        };
+        if (element.via_bgp === "false") {
+          downElements.push(element);
+        }
+      }
+    });
+  };
 
-  classifyElement(dataInterfaces);
-  classifyElement(dataDevicesHealth);
-  classifyElement(dataNeighbors);
-
-  upOrDownInterface(dataSwCoreAdmin, "SW CORE ADMIN");
-  upOrDownInterface(dataSwCoreConce, "SW CORE CONCE");
-  upOrDownInterface(dataSwCoreOjos, "SW CORE OJOS");
-  upOrDownInterface(dataSwCoreDistAdmin, "SW DIST ADM");
-  upOrDownInterface(dataSwCoreDistConce, "SW DIST CONC");
-  upOrDownInterface(dataSwCoreAdminDna, "CORE ADMIN DNA");
-  upOrDownInterface(dataSwCoreConceDna, "CORE CONCE DNA");
-
-  upOrDownNeighbors(dataSwCoreAdmin, "SW CORE ADMIN");
-  upOrDownNeighbors(dataSwCoreConce, "SW CORE CONCE");
-  upOrDownNeighbors(dataSwCoreOjos, "SW CORE OJOS");
-  upOrDownNeighbors(dataSwCoreDistAdmin, "SW DIST ADM");
-  upOrDownNeighbors(dataSwCoreDistConce, "SW DIST CONC");
-  upOrDownNeighbors(dataSwCoreAdminDna, "CORE ADMIN DNA");
-  upOrDownNeighbors(dataSwCoreConceDna, "CORE CONCE DNA");
-
-  upOrDownSysHealth(dataSwCoreAdmin, "SW CORE ADMIN");
-  upOrDownSysHealth(dataSwCoreConce, "SW CORE CONCE");
-  upOrDownSysHealth(dataSwCoreOjos, "SW CORE OJOS");
-  upOrDownSysHealth(dataSwCoreDistAdmin, "SW DIST ADM");
-  upOrDownSysHealth(dataSwCoreDistConce, "SW DIST CONC");
-  upOrDownSysHealth(dataSwCoreAdminDna, "CORE ADMIN DNA");
-  upOrDownSysHealth(dataSwCoreConceDna, "CORE CONCE DNA");
-
-  const totalUpElements = [
-    ...upElements.coreAdminDnaUp,
-    ...upElements.coreConceDnaUp,
-    ...upElements.swCoreAdminUp,
-    ...upElements.swCoreConceUp,
-    ...upElements.swCoreOjosUp,
-    ...upElements.swDistAdmUp,
-    ...upElements.swDistConceUp,
-  ];
-
-  const totalDownElements = [
-    ...downElements.coreAdminDnaDown,
-    ...downElements.coreConceDnaDown,
-    ...downElements.swCoreAdminDown,
-    ...downElements.swCoreConceDown,
-    ...downElements.swCoreOjosDown,
-    ...downElements.swDistAdmDown,
-    ...downElements.swDistConceDown,
-  ];
-
-  dataRouteStatus.forEach(e => totalUpElements.push(e))
+  upOrDownInterface(allData);
+  upOrDownNeighbors(allData);
+  upOrDownSysHealth(allData);
+  upOrDownRouteDefault(allData);
 
   const data = {
-    totalUpElements: totalUpElements,
-    totalDownElements: totalDownElements,
     upElements: upElements,
-    downElements: downElements
+    downElements: downElements,
   };
 
   return data;

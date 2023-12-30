@@ -2,13 +2,12 @@
   display: flex;
   justify-content: center;
   width: 500px;
-  height: 600px;
+  max-height: 600px;
   z-index: 9998;
   position: absolute;
-  background-color: white;
 }
 
-.table-infra-general-container main {
+.table-infra-general-container {
   width: 100%;
   height: 100%;
   border-collapse: collapse;
@@ -17,6 +16,7 @@
 
 .table-core {
   width: 100%;
+  background-color: white;
 }
 
 .table-core td,

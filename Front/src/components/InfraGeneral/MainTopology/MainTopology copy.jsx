@@ -54,7 +54,21 @@ export function MainTopology() {
         dataInfraGeneral.forEach((sw) => {
           sameNameSwitch(sw);
         });
+
+        function sortByFailFirst(a, b) {
+          if (a.swStatus === "FAIL" && b.swStatus === "OK") {
+            return -1; // "FAIL" viene primero
+          }
+          if (a.swStatus === "OK" && b.swStatus === "FAIL") {
+            return 1; // "FAIL" viene después de "OK"
+          }
+          return 0; // Sin cambios en la posición
+        }
+        
+        dataInfraGeneral.sort(sortByFailFirst);
+
         setInfraGeneral(dataInfraGeneral);
+
 
         const allData = [
           ...dataStatusInfGen.totalDownElements,
@@ -71,22 +85,22 @@ export function MainTopology() {
 
   const handleRowClick = (index, event) => {
     // Si haces clic en la misma fila, oculta el componente
+    setDataCoreVisible(selectedRow !== index);
     setSelectedRow(selectedRow === index ? null : index);
     setPosition({ x: event.clientX, y: event.clientY });
-    setDataCoreVisible(true); // Puedes personalizar la lógica según tus necesidades
   };
 
   return (
     <div>
-      <Navbar title={"Infra General"} />
+      <Navbar title={"Infraestructura General"} />
       <div className="table-topology-ig-container">
         <table>
           <thead>
             <tr>
-              <th>Rol Equipo</th>
               <th>Nombre</th>
-              <th>Ip</th>
               <th>Estado</th>
+              <th>Rol Equipo</th>
+              <th>Ip</th>
             </tr>
           </thead>
           <tbody>
@@ -95,25 +109,32 @@ export function MainTopology() {
                 <tr
                   key={e.id}
                   onClick={(event) => handleRowClick(index, event)}
+                  className="row-ig-table"
                 >
                   <td>{e.rol}</td>
+                  <td className={e.swStatus === "FAIL" ? "kpi-red" : "kpi-green"}>{e.swStatus}</td>
                   <td>{e.name_switch}</td>
                   <td>{e.ip}</td>
-                  <td>{e.swStatus}</td>
                 </tr>
               ))}
           </tbody>
         </table>
       </div>
 
-      {selectedRow !== null && (
+      {selectedRow !== null && dataCoreVisible && (
         <div
           className="dataCoreContainer"
           style={{ left: position.x, top: position.y }}
         >
-          <p className="close-button-datacore">
-            X
-          </p>
+          <div className="close-button-datacore">
+            <p
+              
+              onClick={() => setDataCoreVisible(false)}
+            >
+              X
+            </p>
+          </div>
+
           <DataCore
             dataList={allDataInfGen}
             swName={infraGeneral[selectedRow].name_switch}

@@ -31,6 +31,8 @@
     width: 80%;
     margin: auto;
     margin-top: 30px;
+    max-height: 33rem;
+    overflow-y: auto;
 }
 
 .table-topology-ig-container table {
@@ -54,4 +56,8 @@ th {
 
 .table-topology-ig-container table td {
   font-size: 0.7rem;  
+}
+
+.table-topology-ig-container table tr:hover {
+    background-color: rgba(199, 148, 246, 0.206);
 }
