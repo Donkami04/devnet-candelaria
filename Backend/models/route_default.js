@@ -8,7 +8,7 @@ const RouteDefault= sequelize.define(
       type: DataTypes.STRING(10),
       allowNull: false,
     },
-    name: {
+    name_switch: {
       type: DataTypes.STRING(100),
       allowNull: false,
     },

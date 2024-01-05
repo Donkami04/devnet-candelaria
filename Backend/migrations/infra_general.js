@@ -19,7 +19,7 @@ module.exports = {
         type: Sequelize.STRING(10),
         allowNull: false,
       },
-      name: {
+      name_switch: {
         type: Sequelize.STRING(100),
         allowNull: false,
       },
@@ -30,7 +30,7 @@ module.exports = {
       interface: {
         type: Sequelize.STRING(100),
         allowNull: false,
-      }
+      },
     });
 
     await queryInterface.createTable("interfaces", {
@@ -119,7 +119,7 @@ module.exports = {
         type: Sequelize.STRING(10),
         allowNull: false,
       },
-      name: {
+      name_switch: {
         type: Sequelize.STRING(100),
         allowNull: false,
       },
@@ -134,7 +134,7 @@ module.exports = {
       status: {
         type: Sequelize.STRING(10),
         allowNull: false,
-      }
+      },
     });
 
     await queryInterface.createTable("historic_neighbors", {
@@ -156,7 +156,7 @@ module.exports = {
         type: Sequelize.STRING(10),
         allowNull: false,
       },
-      name: {
+      name_switch: {
         type: Sequelize.STRING(100),
         allowNull: false,
       },
@@ -171,7 +171,7 @@ module.exports = {
       status: {
         type: Sequelize.STRING(10),
         allowNull: false,
-      }
+      },
     });
 
     await queryInterface.createTable("route_default", {
@@ -185,7 +185,7 @@ module.exports = {
         type: Sequelize.STRING(10),
         allowNull: false,
       },
-      name: {
+      name_switch: {
         type: Sequelize.STRING(100),
         allowNull: false,
       },
@@ -210,7 +210,7 @@ module.exports = {
         type: Sequelize.STRING(10),
         allowNull: false,
       },
-      name: {
+      name_switch: {
         type: Sequelize.STRING(100),
         allowNull: false,
       },
@@ -298,6 +298,31 @@ module.exports = {
         allowNull: false,
       },
     });
+
+    await queryInterface.createTable("data_inf_gen", {
+      id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+      },
+      ip: {
+        type: Sequelize.STRING(100),
+        allowNull: false,
+      },
+      rol: {
+        type: Sequelize.STRING(100),
+        allowNull: false,
+      },
+      name: {
+        type: Sequelize.STRING(100),
+        allowNull: false,
+      },
+      red: {
+        type: Sequelize.STRING(10),
+        allowNull: false,
+      },
+    });
   },
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable("data_neighbors");
@@ -309,5 +334,6 @@ module.exports = {
     await queryInterface.dropTable("historic_neighbors");
     await queryInterface.dropTable("historic_route_default");
     await queryInterface.dropTable("historic_system_health");
+    await queryInterface.dropTable("data_inf_gen");
   },
 };

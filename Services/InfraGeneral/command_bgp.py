@@ -42,7 +42,7 @@ def bgp_function(ip_switch, red, name):
                 'ip_switch': ip_switch,
                 'neighbor': 'bgp',
                 'red':red,
-                'name':name,
+                'name_switch':name,
                 'interface': "N/A"
             }
             data_list.append(neighbor_data)
@@ -59,7 +59,7 @@ def bgp_function(ip_switch, red, name):
             'ip_switch': ip_switch,
             'neighbor': 'bgp',
             'red':red,
-            'name':name,
+            'name_switch':name,
             'interface': "N/A"
         }]
         

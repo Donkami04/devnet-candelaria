@@ -54,6 +54,8 @@ export function Status_System({ tableToShow }) {
       return "Firewalls";
     } else if (tableToShow === "wan") {
       return "WAN";
+    } else if (tableToShow === "ig") {
+      return "Infra General";
     }
   };
 

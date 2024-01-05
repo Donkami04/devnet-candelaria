@@ -51,7 +51,7 @@ def eigrp_function(ip_switch, red, name):
                 'ip_switch': ip_switch,
                 'neighbor': 'eigrp',
                 'red': red,
-                'name': name
+                'name_switch': name
             }
             data_list.append(data)
 
@@ -62,7 +62,7 @@ def eigrp_function(ip_switch, red, name):
                 'ip_switch': ip_switch,
                 'neighbor': 'eigrp',
                 'red': red,
-                'name': name     
+                'name_switch': name     
             }
             data_list.append(data)
 

@@ -52,4 +52,19 @@ const StatusWan = sequelize.define("StatusWan", columns, {
   timestamps: false,
 });
 
-module.exports = { StatusClients, StatusSwitches, StatusUps, StatusVpn, StatusMesh, StatusDevices, StatusFirewalls, StatusWan };
+const StatusIg = sequelize.define("StatusIg", columns, {
+  tableName: "fechas_consultas_ig",
+  timestamps: false,
+});
+
+module.exports = {
+  StatusClients,
+  StatusSwitches,
+  StatusUps,
+  StatusVpn,
+  StatusMesh,
+  StatusDevices,
+  StatusFirewalls,
+  StatusWan,
+  StatusIg
+};

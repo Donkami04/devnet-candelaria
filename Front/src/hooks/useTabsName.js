@@ -24,6 +24,12 @@ export const useTabsName = (pathname) => {
       return "WAN";
     case "/login":
       return "Login Devnet";
+    case "/monitoreo/infraestrucura-general":
+      return "Infra General";
+    case "/monitoreo/infraestrucura-general/map":
+      return "Mapa Infra General";
+    case "/monitoreo/infraestrucura-general/details":
+      return "Detalles Infra General";
     default:
       return "Sistema de Monitoreo";
   }
