@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Routes, Route, useLocation, useNavigate  } from "react-router-dom";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay, faPause } from "@fortawesome/free-solid-svg-icons";
@@ -29,14 +29,16 @@ import { AdminUsers } from "./components/AdminPanel/AdminViews/AdminUsers";
 import { AdminHome } from "./components/AdminPanel/AdminHome/AdminHome";
 import { Login } from "./components/Login/Logins";
 import { InfraGeneral } from "./components/InfraGeneral/InfraGeneral";
-import { DetailsCore } from "./components/InfraGeneral/DetailsCore/DetailsCore"
-import { Map } from "./components/InfraGeneral/Map/Map"
-import { MainTopology } from "./components/InfraGeneral/MainTopology/MainTopology"
+import { DetailsCore } from "./components/InfraGeneral/DetailsCore/DetailsCore";
+import { Map } from "./components/InfraGeneral/Map/Map";
+import { MainTopology } from "./components/InfraGeneral/MainTopology/MainTopology";
+import { DcsPac } from "./components/DcsPac/DcsPac";
+import { DcsOjos } from "./components/DcsOjos/DcsOjos";
 import "./app.css";
 
 function App() {
   const location = useLocation();
-  const navigate = useNavigate ();
+  const navigate = useNavigate();
   const { timerActive, toggleTimer } = useAutoRefresh();
   const pageTitle = useTabsName(location.pathname);
 
@@ -83,10 +85,18 @@ function App() {
         <Route path="/admin/firewalls" element={<AdminFirewalls />} />
         <Route path="/admin/users" element={<AdminUsers />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/monitoreo/pac/clientes" element={<DcsPac />} />
+        <Route path="/monitoreo/ojos/clientes" element={<DcsOjos />} />
         {/* <Route path="/monitoreo/infraestrucura-general" element={<InfraGeneral />} /> */}
-        <Route path="/monitoreo/infraestrucura-general/details" element={<DetailsCore />} />
+        <Route
+          path="/monitoreo/infraestrucura-general/details"
+          element={<DetailsCore />}
+        />
         <Route path="/monitoreo/infraestrucura-general/map" element={<Map />} />
-        <Route path="/monitoreo/infraestrucura-general" element={<MainTopology />} />
+        <Route
+          path="/monitoreo/infraestrucura-general"
+          element={<MainTopology />}
+        />
       </Routes>
       <div className="refresh-button-container">
         <button

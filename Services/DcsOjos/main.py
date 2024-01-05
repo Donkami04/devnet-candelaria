@@ -35,7 +35,7 @@ def clients():
     cursor = mydb.cursor()
 
     # Realizar una consulta para leer información de la base de datos
-    query = "SELECT * FROM data_clients_pac"
+    query = "SELECT * FROM data_clients_ojos"
     cursor.execute(query)
 
     # Obtener los nombres de las columnas
@@ -83,7 +83,7 @@ def clients():
             if cisco_id_client == 'Not Found':
                 #! Bloque de codigo que consulta informacion antigua si la data actual sale Not Found
                 try:
-                    query = f"SELECT * FROM dcs.clients_pac WHERE ip = '{ip}' AND device_cisco <> 'Not Found' ORDER BY id DESC LIMIT 1"
+                    query = f"SELECT * FROM dcs.clients_ojos WHERE ip = '{ip}' AND device_cisco <> 'Not Found' ORDER BY id DESC LIMIT 1"
                     cursor.execute(query)
                     results = cursor.fetchall()
                     data_backup = [dict(zip(cursor.column_names, row)) for row in results]
@@ -137,7 +137,7 @@ def clients():
                     cisco_device_reachability = cisco_device_id_response.get('queryResponse', {}).get('entity', [{}])[0].get('devicesDTO', {}).get('reachability', 'Not Found')
 
             query_historic = (
-                f"INSERT INTO dcs.historic_clients_pac "
+                f"INSERT INTO dcs.historic_clients_ojos "
                 "(name, description, ip, status_prtg, lastup_prtg, lastdown_prtg, "
                 "device_ip_cisco, device_cisco, port_cisco, status_cisco, reachability_cisco, "
                 "id_prtg, status_device_cisco, data_backup) "
@@ -151,7 +151,7 @@ def clients():
 
             try:              
                 # Intentar ejecutar el UPDATE
-                query_update = (f"UPDATE dcs.clients_pac SET "
+                query_update = (f"UPDATE dcs.clients_ojos SET "
                                 f"name = '{name}', "
                                 f"description = '{description}', "
                                 f"status_prtg = '{status_prtg}', "
@@ -173,7 +173,7 @@ def clients():
                 if cursor.rowcount == 0:
                     # Si no se afectó ninguna fila, realizar la inserción con ON DUPLICATE KEY UPDATE (ip)
                     query_insert = (
-                        f"INSERT INTO dcs.clients_pac "
+                        f"INSERT INTO dcs.clients_ojos "
                         "(name, description, ip, status_prtg, lastup_prtg, lastdown_prtg, "
                         "device_ip_cisco, device_cisco, port_cisco, status_cisco, reachability_cisco, "
                         "id_prtg, status_device_cisco, data_backup) "

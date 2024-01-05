@@ -17,6 +17,8 @@ const systemHealthRoutes = require("./system_health.routes");
 const routeDefaultRoutes = require("./route_default.routes");
 const statusCoresRoutes = require("./status_core.routes");
 const infra_general = require("./inf_gen.routes");
+const clientsPacRoutes = require("./clients_pac.routes");
+const clientsOjosRoutes = require("./clients_ojos.routes");
 const router = express.Router();
 
 const allRoutes = (app) => {
@@ -39,6 +41,8 @@ const allRoutes = (app) => {
   router.use("/route-default", routeDefaultRoutes);
   router.use("/status-cores", statusCoresRoutes);
   router.use("/infra_general", infra_general);
+  router.use("/pac/clients", clientsPacRoutes);
+  router.use("/ojos/clients", clientsOjosRoutes);
 };
 
 module.exports = { allRoutes };

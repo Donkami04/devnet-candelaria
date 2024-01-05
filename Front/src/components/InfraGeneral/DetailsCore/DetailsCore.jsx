@@ -90,7 +90,7 @@ export const DetailsCore = () => {
   });
   return (
     <div>
-      <Navbar title={"Infraestructura General"} />
+      <Navbar title={"Detalles Infra General"} />
       <main className="table-details-inf-gen-container">
         <div className="div-details-inf-gen">
           <table className="table-details-inf-gen">
