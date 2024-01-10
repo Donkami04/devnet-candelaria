@@ -347,20 +347,20 @@ export function Home() {
               Mapa
             </Link>
             <Link
-              to="/monitoreo/infraestrucura-general"
-              className="link-system button-link"
-              style={{ color: "white" }}
-            >
-              Fallas
-            </Link>
-
-            <Link
-              to="/monitoreo/infraestrucura-general/details"
+              to="/monitoreo/infraestrucura-general/categorias"
               className="link-system button-link"
               style={{ color: "white" }}
             >
               Detalles
             </Link>
+
+            {/* <Link
+              to="/monitoreo/infraestrucura-general/details"
+              className="link-system button-link"
+              style={{ color: "white" }}
+            >
+              Detalles
+            </Link> */}
           </div>
         </section>
 

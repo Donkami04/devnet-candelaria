@@ -6,8 +6,6 @@ import {
   getNeighbors,
   getDefaultRoute,
 } from "../../../utils/Api-candelaria/api";
-import { Status_System } from "../../Status_System/Status_System";
-import { useLocation } from "react-router-dom";
 import "./DetailsCore.css";
 
 export const DetailsCore = () => {
@@ -15,7 +13,6 @@ export const DetailsCore = () => {
   const [devicesHealth, setDevicesHealth] = useState([]);
   const [neighbors, setNeighbors] = useState([]);
   const [routeStatus, setRouteStatus] = useState([]);
-  const [filterValue, setFilterValue] = useState(""); // Nuevo estado para el filtro
 
   useEffect(() => {
     const fetchData = async () => {
@@ -42,28 +39,6 @@ export const DetailsCore = () => {
 
     fetchData();
   }, []);
-
-  useEffect(() => {
-    // Obtener el parámetro "nombre" del URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const nombreParam = urlParams.get("nombre");
-
-    // Aplicar el valor al estado del filtro
-    if (nombreParam) {
-      setFilterValue(nombreParam);
-    }
-  }, []);
-
-  const filterData = (data) => {
-    // Filtrar los datos basados en el valor del filtro
-    return data.filter((item) =>
-      Object.values(item).some(
-        (value) =>
-          typeof value === "string" &&
-          value.toLowerCase().includes(filterValue.toLowerCase())
-      )
-    );
-  };
 
   devicesHealth.forEach((element) => {
     // Primer If es porque los neighbors no tienen `name`
@@ -113,35 +88,22 @@ export const DetailsCore = () => {
       }
     }
   });
-
   return (
     <div>
-      <Navbar title={"Detalles Inf. Gen."} />
-      <Status_System tableToShow={"ig"} />
-      <div className="search-container-details-ig">
-        <label htmlFor="search">Buscar por palabre clave</label>
-        <input
-          id="search"
-          type="text"
-          placeholder="Filtrar datos"
-          value={filterValue}
-          onChange={(e) => setFilterValue(e.target.value)}
-        />
-      </div>
+      <Navbar title={"Detalles Infra General"} />
       <main className="table-details-inf-gen-container">
         <div className="div-details-inf-gen">
-          <h3>Interfaces</h3>
           <table className="table-details-inf-gen">
             <thead>
               <tr>
                 <th>Nombre</th>
                 <th>Estado</th>
-                {/* <th>Red</th> */}
+                <th>Red</th>
                 <th>Switch</th>
               </tr>
             </thead>
             <tbody>
-              {filterData(devicesInterfaces).map((interfaceDevice) => (
+              {devicesInterfaces.map((interfaceDevice) => (
                 <tr key={interfaceDevice.id + interfaceDevice.id_prtg}>
                   <td>{interfaceDevice.name}</td>
                   <td
@@ -151,7 +113,7 @@ export const DetailsCore = () => {
                   >
                     {interfaceDevice.status}
                   </td>
-                  {/* <td>{interfaceDevice.red.toUpperCase()}</td> */}
+                  <td>{interfaceDevice.red.toUpperCase()}</td>
                   <td>{interfaceDevice.name_switch}</td>
                 </tr>
               ))}
@@ -159,7 +121,6 @@ export const DetailsCore = () => {
           </table>
         </div>
         <div className="div-details-inf-gen">
-        <h3>System Health</h3>
           <table className="table-details-inf-gen">
             <thead>
               <tr>
@@ -170,7 +131,7 @@ export const DetailsCore = () => {
               </tr>
             </thead>
             <tbody>
-              {filterData(devicesHealth).map((healthDevice) => (
+              {devicesHealth.map((healthDevice) => (
                 <tr key={healthDevice.id + healthDevice.id_prtg}>
                   <td>{healthDevice.name}</td>
                   <td
@@ -190,7 +151,6 @@ export const DetailsCore = () => {
           </table>
         </div>
         <div className="div-details-inf-gen">
-          <h3>Neighbors</h3>
           <table className="table-details-inf-gen">
             <thead>
               <tr>
@@ -202,7 +162,7 @@ export const DetailsCore = () => {
               </tr>
             </thead>
             <tbody>
-              {filterData(neighbors).map((neighbor) => (
+              {neighbors.map((neighbor) => (
                 <tr key={neighbor.id + neighbor.ip_neighbor}>
                   <td>{neighbor.ip_neighbor}</td>
                   <td

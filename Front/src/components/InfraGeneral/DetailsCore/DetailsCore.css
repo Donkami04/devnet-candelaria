@@ -9,13 +9,12 @@
     margin-top: 10px;
     width: 30%;
     overflow-y: auto;
-    max-height: 50rem;
+    max-height: calc(100vh - 4rem - 55px - 48px - 30px);
 }
+
 
 .table-details-inf-gen {
     border-collapse: collapse;
-
-
 }
 
 .table-details-inf-gen td, th{
@@ -33,3 +32,29 @@
     background-color: #444444;
     color: white;
 }
+
+.search-container-details-ig {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    text-align: center;
+}
+
+
+.search-container-details-ig input {
+    width: 300px;
+    height: 1.6rem;
+    margin: auto;
+    text-align: center;
+}
+
+/* Ejemplo de media query para pantallas pequeñas */
+@media only screen and (max-width: 1300px) {
+    /* Estilos para pantallas pequeñas */
+    .table-details-inf-gen th,
+    .table-details-inf-gen td {
+      font-size: 0.6rem;
+      /* background-color: blue; */
+    }
+  }
+  
