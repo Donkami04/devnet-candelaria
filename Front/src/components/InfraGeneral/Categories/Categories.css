@@ -1,0 +1,27 @@
+.table-ig-categories-container {
+    height: calc(100vh - 4rem);
+    position: relative;
+    margin-top: 30px;
+}
+
+.table-ig-categories-container table {
+    margin: auto;
+    width: 70%;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+.table-ig-categories-container table th {
+    font-size: 1.3rem;
+    border: solid 1px black;
+}
+
+.table-ig-categories-container table td {
+    font-size: 1rem;
+    border: solid 1px black;
+    height: 2rem;
+}
+
+.table-ig-categories-container table td a {
+    color: black;
+}

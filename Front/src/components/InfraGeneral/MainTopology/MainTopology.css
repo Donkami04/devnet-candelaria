@@ -33,6 +33,7 @@
     margin-top: 30px;
     max-height: 33rem;
     overflow-y: auto;
+    margin-top: 10px;
 }
 
 .table-topology-ig-container table {
@@ -58,6 +59,24 @@ th {
   font-size: 0.7rem;  
 }
 
+.table-topology-ig-container table td a {
+    color: black;
+}
+
 .table-topology-ig-container table tr:hover {
     background-color: rgba(199, 148, 246, 0.206);
+}
+
+.search-container-ig {
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.search-container-ig label {
+    font-weight: 100;
+}
+
+.search-container-ig input {
+    width: 200px;
 }

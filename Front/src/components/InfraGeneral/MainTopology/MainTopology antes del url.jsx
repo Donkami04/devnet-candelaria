@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
 import {
   getInterfaces,
   getSystemHealth,
@@ -12,12 +11,10 @@ import { useDataInfGen } from "../../../hooks/useDataInfGen";
 import { DataCore } from "../DataCore/DataCore";
 import { Status_System } from "../../Status_System/Status_System";
 import { Spinner } from "../../Spinner/Spinner";
-import { Link } from "react-router-dom"; 
+import { useLocation } from "react-router-dom";
 import "./MainTopology.css";
 
 export function MainTopology() {
-  const location = useLocation();
-
   const [devicesInterfaces, setDevicesInterfaces] = useState([]);
   const [devicesHealth, setDevicesHealth] = useState([]);
   const [neighbors, setNeighbors] = useState([]);
@@ -29,7 +26,6 @@ export function MainTopology() {
   const [allDataInfGen, setAllDataInfGen] = useState([]);
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [searchTerm, setSearchTerm] = useState("");
-
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -72,7 +68,6 @@ export function MainTopology() {
 
         dataInfraGeneral.sort(sortByFailFirst);
         setInfraGeneral(dataInfraGeneral);
-        setSearchTerm(getCategoriaQueryParam(location.search));
         setLoading(false);
       } catch (error) {
         console.error(error);
@@ -81,7 +76,7 @@ export function MainTopology() {
     };
 
     fetchData();
-  }, [location.search]);
+  }, []);
 
   const handleRowClick = (index, event) => {
     setDataCoreVisible(selectedRow !== index);
@@ -96,6 +91,7 @@ export function MainTopology() {
     );
   });
 
+  // Verificar si no hay resultados
   const noResults = filteredInfraGeneral.length === 0;
 
   return (
@@ -108,11 +104,10 @@ export function MainTopology() {
       ) : (
         <div className="table-topology-ig-container">
           <div className="search-container-ig">
-            <label htmlFor="">Buscar por palabra clave:</label>
             <input
               type="text"
               placeholder="Buscar..."
-              value={searchTerm.toUpperCase()}
+              value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
@@ -133,9 +128,8 @@ export function MainTopology() {
               ) : (
                 filteredInfraGeneral.map((e, index) => (
                   <tr key={e.id}>
-                    <td><Link to={`/monitoreo/infraestrucura-general/detalles?nombre=${e.name_switch}`}>{e.name_switch}</Link>
-                    {/* <td onClick={(event) => handleRowClick(index, event)}> */}
-                      
+                    <td onClick={(event) => handleRowClick(index, event)}>
+                      {e.name_switch}
                     </td>
                     <td
                       onClick={(event) => handleRowClick(index, event)}
@@ -172,9 +166,4 @@ export function MainTopology() {
       )}
     </div>
   );
-
-  function getCategoriaQueryParam(search) {
-    const params = new URLSearchParams(search);
-    return params.get("categoria") || "";
-  }
 }
