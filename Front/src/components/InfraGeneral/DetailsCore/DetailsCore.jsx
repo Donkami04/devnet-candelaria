@@ -22,11 +22,14 @@ export const DetailsCore = () => {
       try {
         let dataInterfaces = await getInterfaces();
         dataInterfaces.sort((a, b) => (a.status === "Up" ? 1 : -1));
+        dataInterfaces.sort((a, b) => (a.status === "Up" ? 1 : -1));
 
         let dataDevicesHealth = await getSystemHealth();
         dataDevicesHealth.sort((a, b) => (a.status === "Up" ? 1 : -1));
+        dataDevicesHealth.sort((a, b) => (a.status === "Up" ? 1 : -1));
 
         let dataNeighbors = await getNeighbors();
+        dataNeighbors.sort((a, b) => (a.status === "Up" ? 1 : -1));
         dataNeighbors.sort((a, b) => (a.status === "Up" ? 1 : -1));
 
         const dataRouteStatus = await getDefaultRoute();
