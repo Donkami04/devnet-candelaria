@@ -398,39 +398,6 @@ export function Home() {
           </div>
         </section>
 
-        <section className="system-container">
-          <div className="name-system-container">
-            <h1>DCS PAC</h1>
-          </div>
-
-          <div className="link-system-container">
-            <Link
-              to="/monitoreo/pac/clientes"
-              className="link-system button-link"
-              style={{ color: "white" }}
-            >
-              Detalles
-            </Link>
-
-          </div>
-        </section>
-
-        <section className="system-container">
-          <div className="name-system-container">
-            <h1>DCS OJOS</h1>
-          </div>
-
-          <div className="link-system-container">
-            <Link
-              to="/monitoreo/ojos/clientes"
-              className="link-system button-link"
-              style={{ color: "white" }}
-            >
-              Detalles
-            </Link>
-
-          </div>
-        </section>
       </div>
     </>
   );
