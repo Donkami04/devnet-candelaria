@@ -180,9 +180,9 @@ export function Firewalls() {
           className={
             fw.status_gateway.includes("Up")
               ? "kpi-green"
-              : fw.gateway.includes("Paused")
+              : fw.status_gateway.includes("Paused")
               ? "kpi-yellow"
-              : fw.gateway.includes("Down")
+              : fw.status_gateway.includes("Down")
               ? "kpi-red"
               : ""
           }

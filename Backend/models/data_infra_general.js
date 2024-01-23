@@ -6,20 +6,24 @@ const DataInfGen = sequelize.define(
   {
     ip: {
       type: DataTypes.STRING(100),
-      allowNull: true,
+      allowNull: false,
     },
     rol: {
       type: DataTypes.STRING(100),
-      allowNull: true,
+      allowNull: false,
     },
     name_switch: {
       type: DataTypes.STRING(100),
-      allowNull: true,
+      allowNull: false,
     },
     red: {
       type: DataTypes.STRING(10),
+      allowNull: false,
+    },
+    category: {
+      type: DataTypes.STRING(100),
       allowNull: true,
-    }
+    },
   },
   {
     tableName: "data_inf_gen",

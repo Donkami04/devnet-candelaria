@@ -246,6 +246,7 @@ module.exports = {
       id_prtg: {
         type: Sequelize.STRING(32),
         allowNull: false,
+        unique: true,
       },
       ip_switch: {
         type: Sequelize.STRING(32),
@@ -306,21 +307,25 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
       },
-      ip: {
-        type: Sequelize.STRING(100),
-        allowNull: false,
-      },
       rol: {
         type: Sequelize.STRING(100),
         allowNull: false,
       },
-      name: {
+      name_switch: {
+        type: Sequelize.STRING(100),
+        allowNull: false,
+      },
+      ip: {
         type: Sequelize.STRING(100),
         allowNull: false,
       },
       red: {
         type: Sequelize.STRING(10),
         allowNull: false,
+      },
+      category: {
+        type: Sequelize.STRING(100),
+        allowNull: true,
       },
     });
   },

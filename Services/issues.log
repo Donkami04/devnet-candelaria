@@ -1,0 +1,23 @@
+2024-01-22 16:22:22,809 - ERROR - Error en funcion EIRGP
+2024-01-22 16:22:22,810 - ERROR - You must be root to use this library on linux.
+2024-01-22 16:22:22,810 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/InfGen_Ap/command_ap.py", line 34, in ap_function
+    keyboard.press_and_release('space')
+  File "/home/donkami/.local/lib/python3.10/site-packages/keyboard/__init__.py", line 379, in send
+    parsed = parse_hotkey(hotkey)
+  File "/home/donkami/.local/lib/python3.10/site-packages/keyboard/__init__.py", line 358, in parse_hotkey
+    steps.append(tuple(key_to_scan_codes(key) for key in keys))
+  File "/home/donkami/.local/lib/python3.10/site-packages/keyboard/__init__.py", line 358, in <genexpr>
+    steps.append(tuple(key_to_scan_codes(key) for key in keys))
+  File "/home/donkami/.local/lib/python3.10/site-packages/keyboard/__init__.py", line 317, in key_to_scan_codes
+    t = tuple(_collections.OrderedDict((scan_code, True) for scan_code, modifier in _os_keyboard.map_name(normalized)))
+  File "/home/donkami/.local/lib/python3.10/site-packages/keyboard/__init__.py", line 317, in <genexpr>
+    t = tuple(_collections.OrderedDict((scan_code, True) for scan_code, modifier in _os_keyboard.map_name(normalized)))
+  File "/home/donkami/.local/lib/python3.10/site-packages/keyboard/_nixkeyboard.py", line 148, in map_name
+    build_tables()
+  File "/home/donkami/.local/lib/python3.10/site-packages/keyboard/_nixkeyboard.py", line 64, in build_tables
+    ensure_root()
+  File "/home/donkami/.local/lib/python3.10/site-packages/keyboard/_nixcommon.py", line 174, in ensure_root
+    raise ImportError('You must be root to use this library on linux.')
+ImportError: You must be root to use this library on linux.
+
