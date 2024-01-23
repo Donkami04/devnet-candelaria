@@ -1,0 +1,40 @@
+2023-12-13 12:27:06,236 - ERROR: Error en la consulta Pala 10
+2023-12-13 12:27:06,236 - ERROR: Error en la consulta Pala 10
+2023-12-13 12:27:06,246 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 94, in prtg_data
+    data_ping = xmltodict.parse(data_ping.text)
+  File "/usr/local/lib/python3.10/dist-packages/xmltodict.py", line 378, in parse
+    parser.Parse(xml_input, True)
+xml.parsers.expat.ExpatError: syntax error: line 1, column 0
+
+2023-12-13 12:27:06,246 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 94, in prtg_data
+    data_ping = xmltodict.parse(data_ping.text)
+  File "/usr/local/lib/python3.10/dist-packages/xmltodict.py", line 378, in parse
+    parser.Parse(xml_input, True)
+xml.parsers.expat.ExpatError: syntax error: line 1, column 0
+
+2023-12-13 12:27:42,818 - ERROR: Error en la consulta Pala 10
+2023-12-13 12:27:42,818 - ERROR: Error en la consulta Pala 10
+2023-12-13 12:27:42,837 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 97, in prtg_data
+    data_ping = data_ping["histdata"]['item']['value']
+TypeError: list indices must be integers or slices, not str
+
+2023-12-13 12:27:42,837 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 97, in prtg_data
+    data_ping = data_ping["histdata"]['item']['value']
+TypeError: list indices must be integers or slices, not str
+
+2023-12-13 12:28:17,564 - ERROR: Error en la consulta Pala 10
+2023-12-13 12:28:17,564 - ERROR: Error en la consulta Pala 10
+2023-12-13 12:28:17,581 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 99, in prtg_data
+    data_ping = data_ping["histdata"]['item']['value']
+TypeError: list indices must be integers or slices, not str
+
+2023-12-13 12:28:17,581 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 99, in prtg_data
+    data_ping = data_ping["histdata"]['item']['value']
+TypeError: list indices must be integers or slices, not str
+
