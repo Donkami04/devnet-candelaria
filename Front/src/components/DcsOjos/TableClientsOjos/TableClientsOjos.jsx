@@ -76,7 +76,7 @@ export function TableClientsOjos() {
               : client.status_device_cisco.includes("Down")
               ? "kpi-red"
               : client.status_device_cisco.includes("Paused")
-              ? "kpi-yellow"
+              ? "kpi-blue"
               : ""
           }
         >

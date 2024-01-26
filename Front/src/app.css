@@ -26,3 +26,26 @@
   justify-content: center;
   align-items: center;
 }
+
+.kpi-red {
+  background-color: red;
+  color: white;
+  font-weight: bold;
+}
+
+.kpi-green {
+  background-color: rgb(3, 186, 31);
+  color: white;
+  font-weight: bold;
+}
+
+.kpi-yellow {
+  background-color: yellow;
+  font-weight: bold;
+}
+
+.kpi-blue {
+  background-color: rgb(29, 158, 250);
+  color: white;
+  font-weight: bold;
+}

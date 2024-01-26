@@ -5,9 +5,11 @@ import {
   getSystemHealth,
   getNeighbors,
   getDefaultRoute,
+  getAp,
 } from "../../../utils/Api-candelaria/api";
 import { Status_System } from "../../Status_System/Status_System";
 import { useLocation } from "react-router-dom";
+import { Spinner } from "../../Spinner/Spinner";
 import "./DetailsCore.css";
 
 export const DetailsCore = () => {
@@ -15,7 +17,12 @@ export const DetailsCore = () => {
   const [devicesHealth, setDevicesHealth] = useState([]);
   const [neighbors, setNeighbors] = useState([]);
   const [routeStatus, setRouteStatus] = useState([]);
-  const [filterValue, setFilterValue] = useState(""); // Nuevo estado para el filtro
+  const [filterValue, setFilterValue] = useState("");
+  const [apList, setApList] = useState([]);
+  const [numApPrtg, setNumApPrtg] = useState("Cargando...");
+  const [numApDb, setNumApDb] = useState("Cargando...");
+  const [showOthers, setShowOthers] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,11 +40,16 @@ export const DetailsCore = () => {
         dataNeighbors.sort((a, b) => (a.status === "Up" ? 1 : -1));
 
         const dataRouteStatus = await getDefaultRoute();
+        const dataAp = await getAp();
 
         setDevicesHealth(dataDevicesHealth);
         setRouteStatus(dataRouteStatus);
         setDevicesInterfaces(dataInterfaces);
         setNeighbors(dataNeighbors);
+        setApList(dataAp.apList);
+        setNumApPrtg(dataAp.numberApRegisteredPrtg);
+        setNumApDb(dataAp.numberApRegisteredDb);
+        setLoading(false);
       } catch (error) {
         console.error(error);
       }
@@ -71,6 +83,9 @@ export const DetailsCore = () => {
   devicesHealth.forEach((element) => {
     // Primer If es porque los neighbors no tienen `name`
     if (element.name && element.name.includes("System Health")) {
+      // if (element.status.includes("Paused") || element.status.includes("Unusual")) {
+      //   element.color = "blue";
+      // }
       if (
         element.status === "Up" &&
         element.name.includes("CPU") &&
@@ -92,12 +107,16 @@ export const DetailsCore = () => {
         element.color = "";
       }
       if (
-        (element.name.includes("Power Supplies") &&
-          element.lastvalue !== "Normal") ||
-        (element.name.includes("Power Supplies") &&
-          element.status.includes("Down"))
+        element.name.includes("Power Supplies") &&
+        element.lastvalue.includes("Down")
       ) {
         element.color = "red";
+      }
+      if (
+        element.name.includes("Power Supplies") &&
+        element.lastvalue.includes("Warning")
+      ) {
+        element.color = "yellow";
       }
       if (
         element.status === "Up" &&
@@ -114,13 +133,34 @@ export const DetailsCore = () => {
       ) {
         element.color = "red";
       }
+      if (
+        (element.name.includes("Memory") &&
+          element.name_switch === "WLC 9800 NEGOCIO" &&
+          parseInt(element.lastvalue.replace(".", "")) <= 1000) ||
+        (element.name.includes("Memory") &&
+          element.name_switch === "WLC 9800 NEGOCIO" &&
+          element.status.includes("Down"))
+      ) {
+        element.color = "red";
+      }
     }
   });
+
+  if (loading) {
+    // Si la información está cargando, renderizar el Spinner
+    return (
+      <div>
+        <Navbar title={"Detalles Inf. Gen."} />
+        <Spinner />
+      </div>
+    );
+  }
 
   return (
     <div>
       <Navbar title={"Detalles Inf. Gen."} />
       <Status_System tableToShow={"ig"} />
+      
       <div className="search-container-details-ig">
         <label htmlFor="search">Buscar por palabre clave</label>
         <input
@@ -131,6 +171,56 @@ export const DetailsCore = () => {
           onChange={(e) => setFilterValue(e.target.value)}
         />
       </div>
+      {showOthers && (
+        <div>
+          <div>
+            <p>{`Numero de AP registrados en PRTG: ${numApPrtg}`}</p>
+            <p>{`Numero de AP registrados en DevNet: ${numApDb}`}</p>
+          </div>
+          <div className="table-ap-container">
+            <table className="table-ap">
+              <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Modelo</th>
+                  <th>Estado</th>
+                  <th>Ubicación</th>
+                  <th>IP</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {apList.map((ap) => (
+                  <tr key={ap.id}>
+                    <td>{ap.name}</td>
+                    <td>{ap.model}</td>
+                    <td>{ap.state}</td>
+                    <td>{ap.location}</td>
+                    <td>{ap.ip}</td>
+                    <td>{ap.status}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <table className="table-ap table-route">
+              <thead>
+                <tr>
+                  <th>Switch</th>
+                  <th>Via BGP</th>
+                </tr>
+              </thead>
+              <tbody>
+                {routeStatus.map((route) => (
+                  <tr key={route.id}>
+                    <td>{route.via_bgp === "true" ? "Up" : "Down"}</td>
+                    <td>{route.name_switch}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
       <main className="table-details-inf-gen-container">
         <div className="div-details-inf-gen">
           <h3>Interfaces</h3>
@@ -139,7 +229,6 @@ export const DetailsCore = () => {
               <tr>
                 <th>Nombre</th>
                 <th>Estado</th>
-                {/* <th>Red</th> */}
                 <th>Switch</th>
               </tr>
             </thead>
@@ -149,12 +238,17 @@ export const DetailsCore = () => {
                   <td>{interfaceDevice.name}</td>
                   <td
                     className={
-                      interfaceDevice.status !== "Up" ? "kpi-red" : "kpi-green"
+                      interfaceDevice.status === "Up"
+                        ? "kpi-green"
+                        : interfaceDevice.status.includes("Down")
+                        ? "kpi-red"
+                        : interfaceDevice.status.includes("Warning")
+                        ? "kpi-yellow"
+                        : "kpi-blue"
                     }
                   >
                     {interfaceDevice.status}
                   </td>
-                  {/* <td>{interfaceDevice.red.toUpperCase()}</td> */}
                   <td>{interfaceDevice.name_switch}</td>
                 </tr>
               ))}
@@ -162,7 +256,7 @@ export const DetailsCore = () => {
           </table>
         </div>
         <div className="div-details-inf-gen">
-        <h3>System Health</h3>
+          <h3>System Health</h3>
           <table className="table-details-inf-gen">
             <thead>
               <tr>
@@ -178,7 +272,13 @@ export const DetailsCore = () => {
                   <td>{healthDevice.name}</td>
                   <td
                     className={
-                      healthDevice.status !== "Up" ? "kpi-red" : "kpi-green"
+                      healthDevice.status === "Up"
+                        ? "kpi-green"
+                        : healthDevice.status.includes("Down")
+                        ? "kpi-red"
+                        : healthDevice.status.includes("Warning")
+                        ? "kpi-yellow"
+                        : "kpi-blue"
                     }
                   >
                     {healthDevice.status}

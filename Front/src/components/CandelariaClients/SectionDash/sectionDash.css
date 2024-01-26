@@ -30,7 +30,7 @@
   top: 0.8rem;
 }
 
-.kpi-table td, th {
+.kpi-table td, .kpi-table th {
   text-align: center;
   padding: 2px;
   font-size: 0.7rem;
@@ -41,21 +41,7 @@
   font-size: 1rem;
 }
 
-.kpi-red {
-    background-color: red;
-    color: white;
-    font-weight: bold;
-}
-.kpi-green {
-    background-color: rgb(3, 186, 31);
-    color: white;
-    font-weight: bold;
-}
-.kpi-yellow {
-  background-color: yellow;
-  font-weight: bold;
-  
-}
+
 
 @media (max-width: 530px) {
   .section-dash {

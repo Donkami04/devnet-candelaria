@@ -100,7 +100,7 @@ export function Firewalls() {
             fw.status_gateway.includes("Up")
               ? "kpi-green"
               : fw.status_gateway.includes("Paused")
-              ? "kpi-yellow"
+              ? "kpi-blue"
               : fw.status_gateway.includes("Down")
               ? "kpi-red"
               : fw.status_gateway.includes("Not Found") && fw.gateway.includes("100.64.0.1")
@@ -181,7 +181,7 @@ export function Firewalls() {
             fw.status_gateway.includes("Up")
               ? "kpi-green"
               : fw.status_gateway.includes("Paused")
-              ? "kpi-yellow"
+              ? "kpi-blue"
               : fw.status_gateway.includes("Down")
               ? "kpi-red"
               : ""

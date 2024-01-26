@@ -173,6 +173,13 @@ export const getDataInfGen = async () => {
     .catch((error) => {throw new Error('DATA INF GEN: Error del API REST Candealaria : ',error)});
 };
 
+export const getAp = async () => {
+  return axios
+    .get(`${BASE_API_URL}/infra_general/ap`)
+    .then((response) => response.data)
+    .catch((error) => {throw new Error('AP: Error del API REST Candealaria : ',error)});
+};
+
 export const getDataClientsPac = async () => {
   return axios
     .get(`${BASE_API_URL}/pac/clients`)
@@ -186,5 +193,3 @@ export const getDataClientsOjos = async () => {
     .then((response) => response.data)
     .catch((error) => {throw new Error('CLIENTS OJOS: Error del API REST Candealaria : ',error)});
 };
-
-

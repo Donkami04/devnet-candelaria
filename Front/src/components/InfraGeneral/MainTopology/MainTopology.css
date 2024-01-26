@@ -41,7 +41,7 @@
 }
 
 .table-topology-ig-container table td,
-th {
+.table-topology-ig-container table th {
   border: 1px solid black;
   padding: 8px;
   text-align: center;

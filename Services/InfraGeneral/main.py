@@ -62,7 +62,10 @@ def core1():
             for i in range(len(column_names)):
                 row_dict[column_names[i]] = row[i]
             data_switches.append(row_dict)
-            
+        
+        # Eliminamos del listado la concentradora inalambrica
+        data_switches = [sw for sw in data_switches if sw['category'] != 'AP']
+
         # data_switches = [
         #     # {'ip':'10.224.127.1', 'red': 'it', 'name_switch': 'ADMIN'},
         #     # {'ip':'10.224.127.2', 'red': 'it', 'name_switch': 'CONCE'},
@@ -152,27 +155,37 @@ def core1():
                 cursor.execute(query_historic, (name_sensor, status_sensor, id_prtg, lastvalue, ip_switch, name_switch, red_sensor))
                 mydb.commit()
         
+        status_data_neighbors = status_neighbor(mydb, current_data_neighbors)
+        
+        # Blanqueamos la tabla neighbors antes de rellenarla de nuevo
         query = (f"DELETE FROM dcs.neighbors")
         cursor.execute(query)
         mydb.commit()
-        status_data_neighbors = status_neighbor(mydb, current_data_neighbors)
-
-        for neighbor in status_data_neighbors:
-            ip_neighbor = neighbor['ip_neighbor']
-            ip_switch = neighbor['ip_switch']
-            name = neighbor['name_switch']
-            red = neighbor['red']
-            neighbor_type = neighbor['neighbor']
-            interface = neighbor['interface']
-            status = neighbor['status']
+        
+        # Guardamos en bloque en la BD en vez de linea por linea
+        query = "INSERT INTO dcs.neighbors (`ip_neighbor`, `neighbor`, `red`, `name_switch`, `ip_switch`, `interface`, `status`) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+        query_historic = "INSERT INTO dcs.historic_neighbors (`ip_neighbor`, `neighbor`, `red`, `name_switch`, `ip_switch`, `interface`, `status`) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+        values = [(neigh['ip_neighbor'], neigh['neighbor'], neigh['red'], neigh['name_switch'], neigh['ip_switch'],  neigh['interface'], neigh['status']) for neigh in status_data_neighbors]
+        cursor.executemany(query, values)
+        cursor.executemany(query_historic, values)
+        mydb.commit()
+        
+        # for neighbor in status_data_neighbors:
+        #     ip_neighbor = neighbor['ip_neighbor']
+        #     ip_switch = neighbor['ip_switch']
+        #     name = neighbor['name_switch']
+        #     red = neighbor['red']
+        #     neighbor_type = neighbor['neighbor']
+        #     interface = neighbor['interface']
+        #     status = neighbor['status']
             
-            query = "INSERT INTO dcs.neighbors (`ip_neighbor`, `neighbor`, `red`, `name_switch`, `ip_switch`, `interface`, `status`) VALUES (%s, %s, %s, %s, %s, %s, %s)"
-            cursor.execute(query, (ip_neighbor, neighbor_type, red, name, ip_switch, interface, status))
-            mydb.commit()
+        #     query = "INSERT INTO dcs.neighbors (`ip_neighbor`, `neighbor`, `red`, `name_switch`, `ip_switch`, `interface`, `status`) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+        #     cursor.execute(query, (ip_neighbor, neighbor_type, red, name, ip_switch, interface, status))
+        #     mydb.commit()
 
-            query_historic = "INSERT INTO dcs.historic_neighbors (`ip_neighbor`, `neighbor`, `red`, `name_switch`, `ip_switch`, `interface`, `status`) VALUES (%s, %s, %s, %s, %s, %s, %s)"
-            cursor.execute(query_historic, (ip_neighbor, neighbor_type, red, name, ip_switch, interface, status))
-            mydb.commit()
+        #     query_historic = "INSERT INTO dcs.historic_neighbors (`ip_neighbor`, `neighbor`, `red`, `name_switch`, `ip_switch`, `interface`, `status`) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+        #     cursor.execute(query_historic, (ip_neighbor, neighbor_type, red, name, ip_switch, interface, status))
+        #     mydb.commit()
             
         now = datetime.datetime.now()
         fecha_y_hora = now.strftime("%Y-%m-%d %H:%M:%S")

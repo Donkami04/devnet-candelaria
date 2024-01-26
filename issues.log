@@ -1,40 +1,104 @@
-2023-12-13 12:27:06,236 - ERROR: Error en la consulta Pala 10
-2023-12-13 12:27:06,236 - ERROR: Error en la consulta Pala 10
-2023-12-13 12:27:06,246 - ERROR: Traceback (most recent call last):
-  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 94, in prtg_data
-    data_ping = xmltodict.parse(data_ping.text)
-  File "/usr/local/lib/python3.10/dist-packages/xmltodict.py", line 378, in parse
-    parser.Parse(xml_input, True)
-xml.parsers.expat.ExpatError: syntax error: line 1, column 0
-
-2023-12-13 12:27:06,246 - ERROR: Traceback (most recent call last):
-  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 94, in prtg_data
-    data_ping = xmltodict.parse(data_ping.text)
-  File "/usr/local/lib/python3.10/dist-packages/xmltodict.py", line 378, in parse
-    parser.Parse(xml_input, True)
-xml.parsers.expat.ExpatError: syntax error: line 1, column 0
-
-2023-12-13 12:27:42,818 - ERROR: Error en la consulta Pala 10
-2023-12-13 12:27:42,818 - ERROR: Error en la consulta Pala 10
-2023-12-13 12:27:42,837 - ERROR: Traceback (most recent call last):
-  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 97, in prtg_data
-    data_ping = data_ping["histdata"]['item']['value']
+2024-01-24 13:14:55,449 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/InfGen_Ap/main.py", line 75, in getData
+    if int(ap_registered["sensors"][0]["lastvalue_raw"]) > 0:
 TypeError: list indices must be integers or slices, not str
 
-2023-12-13 12:27:42,837 - ERROR: Traceback (most recent call last):
-  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 97, in prtg_data
-    data_ping = data_ping["histdata"]['item']['value']
+2024-01-24 13:14:55,449 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/InfGen_Ap/main.py", line 75, in getData
+    if int(ap_registered["sensors"][0]["lastvalue_raw"]) > 0:
 TypeError: list indices must be integers or slices, not str
 
-2023-12-13 12:28:17,564 - ERROR: Error en la consulta Pala 10
-2023-12-13 12:28:17,564 - ERROR: Error en la consulta Pala 10
-2023-12-13 12:28:17,581 - ERROR: Traceback (most recent call last):
-  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 99, in prtg_data
-    data_ping = data_ping["histdata"]['item']['value']
+2024-01-24 13:15:23,853 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/InfGen_Ap/main.py", line 75, in getData
+    if int(ap_registered["sensors"][0]["lastvalue_raw"]) > 0:
 TypeError: list indices must be integers or slices, not str
 
-2023-12-13 12:28:17,581 - ERROR: Traceback (most recent call last):
-  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/main.py", line 99, in prtg_data
-    data_ping = data_ping["histdata"]['item']['value']
+2024-01-24 13:15:23,853 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/InfGen_Ap/main.py", line 75, in getData
+    if int(ap_registered["sensors"][0]["lastvalue_raw"]) > 0:
 TypeError: list indices must be integers or slices, not str
+
+2024-01-24 13:45:38,385 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/InfGen_Ap/main.py", line 92, in getData
+    ip_neighbor = neigh['ip_neighbor']
+KeyError: 'ip_neighbor'
+
+2024-01-24 13:45:38,385 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/InfGen_Ap/main.py", line 92, in getData
+    ip_neighbor = neigh['ip_neighbor']
+KeyError: 'ip_neighbor'
+
+2024-01-24 14:09:33,295 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 611, in cmd_query
+    self._cmysql.query(
+_mysql_connector.MySQLInterfaceError: Unknown column 'status' in 'field list'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/InfGen_Ap/main.py", line 111, in getData
+    cursor.execute(query_historic, (name, model, ip_ap, state, location, status))
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/cursor_cext.py", line 330, in execute
+    result = self._cnx.cmd_query(
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 619, in cmd_query
+    raise get_mysql_exception(
+mysql.connector.errors.ProgrammingError: 1054 (42S22): Unknown column 'status' in 'field list'
+
+2024-01-24 14:09:33,295 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 611, in cmd_query
+    self._cmysql.query(
+_mysql_connector.MySQLInterfaceError: Unknown column 'status' in 'field list'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/InfGen_Ap/main.py", line 111, in getData
+    cursor.execute(query_historic, (name, model, ip_ap, state, location, status))
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/cursor_cext.py", line 330, in execute
+    result = self._cnx.cmd_query(
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 619, in cmd_query
+    raise get_mysql_exception(
+mysql.connector.errors.ProgrammingError: 1054 (42S22): Unknown column 'status' in 'field list'
+
+2024-01-24 14:10:10,494 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 611, in cmd_query
+    self._cmysql.query(
+_mysql_connector.MySQLInterfaceError: Unknown column 'status' in 'field list'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/InfGen_Ap/main.py", line 111, in getData
+    cursor.execute(query_historic, (name, model, ip_ap, state, location, status))
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/cursor_cext.py", line 330, in execute
+    result = self._cnx.cmd_query(
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 619, in cmd_query
+    raise get_mysql_exception(
+mysql.connector.errors.ProgrammingError: 1054 (42S22): Unknown column 'status' in 'field list'
+
+2024-01-24 14:10:10,494 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 611, in cmd_query
+    self._cmysql.query(
+_mysql_connector.MySQLInterfaceError: Unknown column 'status' in 'field list'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/InfGen_Ap/main.py", line 111, in getData
+    cursor.execute(query_historic, (name, model, ip_ap, state, location, status))
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/cursor_cext.py", line 330, in execute
+    result = self._cnx.cmd_query(
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 619, in cmd_query
+    raise get_mysql_exception(
+mysql.connector.errors.ProgrammingError: 1054 (42S22): Unknown column 'status' in 'field list'
+
+2024-01-25 13:43:38,110 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/InfGen_Ap/main.py", line 73, in getData
+    ap_elements_list = ap_function(ip_switch, red, name_switch)
+TypeError: ap_function() takes 1 positional argument but 3 were given
+
+2024-01-25 13:43:38,110 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/InfGen_Ap/main.py", line 73, in getData
+    ap_elements_list = ap_function(ip_switch, red, name_switch)
+TypeError: ap_function() takes 1 positional argument but 3 were given
 

@@ -1,6 +1,8 @@
 import requests, warnings, os, datetime, time, calendar, mysql.connector, logging, traceback, sched
 from dotenv import load_dotenv
 from config import database
+from command_ap import ap_function
+from status_ap import status_ap_function
 
 warnings.filterwarnings("ignore", message="Unverified HTTPS request")
 
@@ -41,7 +43,7 @@ def database_connection():
         logging.error(e)
 
 
-def core1():
+def getData():
     try:
         mydb = database_connection()
         cursor = mydb.cursor()
@@ -57,17 +59,64 @@ def core1():
             for i in range(len(column_names)):
                 row_dict[column_names[i]] = row[i]
             data_switches.append(row_dict)
+            
+        data_switches = [sw for sw in data_switches if sw.get('category') == 'AP']
+        for switch in data_switches:
+            ip_switch = switch['ip']
+            name_switch = switch['name_switch']
+            red = switch['red']
+            logging.info(f"{ip_switch} - {name_switch} - {red}")
+            
+            id_prtg_switch = get_id_prtg(ip_switch)
+            # ap_registered = get_data_ap_registered(ip_switch, id_prtg_switch, red)
+            data_systemhealth = system_health(ip_switch, id_prtg_switch, red)
+            ap_elements_list = ap_function(ip_switch)
+            logging.info(f"Numero de AP registrados: {len(ap_elements_list)}")
 
-        # data_switches = [
-        #     # {'ip':'10.224.127.1', 'red': 'it', 'name_switch': 'ADMIN'},
-        #     # {'ip':'10.224.127.2', 'red': 'it', 'name_switch': 'CONCE'},
-        #     # {'ip':'10.230.127.1', 'red': 'it', 'name_switch': 'SW CORE OJOS'},
-        #     # {'ip':'10.224.127.3', 'red': 'it', 'name_switch': 'DIST-ADM'},
-        #     # {'ip':'10.224.127.4', 'red': 'it', 'name_switch': 'DIST-CONC'},
-        #     # {'ip':'10.224.127.160', 'red': 'it', 'name_switch': 'ADMIN-DNA'},
-        #     # {'ip':'10.224.127.161', 'red': 'it', 'name_switch': 'CONCE-DNA'},
-        # ]
+            for sensor in data_systemhealth:
+                name_sensor = sensor['name']
+                if name_sensor == 'No Devices Found':
+                    break
+                status_sensor = sensor['status']
+                id_prtg = sensor['objid']
+                lastvalue = sensor['lastvalue']
+                red_sensor = sensor['red']
+                query = "INSERT INTO dcs.system_health (name, status, id_prtg, lastvalue, ip_switch, name_switch, red) VALUES (%s, %s, %s, %s, %s, %s, %s) ON DUPLICATE KEY UPDATE name = %s, status = %s, lastvalue = %s"
+                cursor.execute(query, (name_sensor, status_sensor, id_prtg, lastvalue, ip_switch, name_switch, red_sensor, name_sensor, status_sensor, lastvalue))
+                mydb.commit()
 
+                query_historic = "INSERT INTO dcs.historic_system_health (name, status, id_prtg, lastvalue, ip_switch, name_switch, red) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+                cursor.execute(query_historic, (name_sensor, status_sensor, id_prtg, lastvalue, ip_switch, name_switch, red_sensor))
+                mydb.commit()
+
+            status_ap = status_ap_function(mydb, ap_elements_list)
+            print(f"Length con el estado: {len(status_ap)}")
+
+            # Blanqueamos la tabla AP antes de rellenarla de nuevo
+            query = (f"DELETE FROM dcs.ap")
+            cursor.execute(query)
+            mydb.commit()
+            
+            # Guardamos en bloque en la BD en vez de linea por linea
+            query = "INSERT INTO dcs.ap (`name`, `model`, `ip`, `state`, `location`, `status`) VALUES (%s, %s, %s, %s, %s, %s)"
+            query_historic = "INSERT INTO dcs.historic_ap (`name`, `model`, `ip`, `state`, `location`, `status`) VALUES (%s, %s, %s, %s, %s, %s)"
+            values = [(ap['name'], ap['model'], ap['ip'], ap['state'], ap['location'], ap['status']) for ap in status_ap]
+            cursor.executemany(query, values)
+            cursor.executemany(query_historic, values)
+            mydb.commit()
+            
+            #! Lo comentado se usa para llenar data_ap
+            #TODO: NO BORRAR
+            # for neigh in ap_elements_list:
+                # name = neigh['name']
+                # model = neigh['model']
+                # ip_ap = neigh['ip']
+                # state = neigh['state']
+                # location = neigh['location']
+                # query = "INSERT INTO dcs.data_ap (`name`, `model`, `ip`, `state`, `location`) VALUES (%s, %s, %s, %s, %s)"
+                # cursor.execute(query, (name, model, ip_ap, state, location))
+                # mydb.commit()
+                
         cursor.close()
         logging.info("Terminado")
 
@@ -98,7 +147,7 @@ def get_id_prtg(ip_switch):
 
 
 # Obtiene informacion de las interfaces en PRTG
-def get_data_interfaces(ip_switch, id_switch, red):
+def get_data_ap_registered(ip_switch, id_switch, red):
     interfaces_notFound = [
         {
             "name": "No Devices Found",
@@ -109,7 +158,7 @@ def get_data_interfaces(ip_switch, id_switch, red):
         }
     ]
     try:
-        url_interfaces = os.getenv("URL_PRTG_GET_STATUS_INTERFACES").format(
+        url_interfaces = os.getenv("URL_PRTG_AP_REGISTERED").format(
             id_switch=id_switch
         )
         response_interfaces = requests.get(url_interfaces, verify=False).json()
@@ -121,7 +170,7 @@ def get_data_interfaces(ip_switch, id_switch, red):
         for interface in interfaces:
             interface["ip_switch"] = ip_switch
             interface["red"] = red
-
+        # print(f"Interfaces: {interfaces}")
         return interfaces
 
     except Exception as e:
@@ -159,6 +208,8 @@ def system_health(ip_switch, id_switch, red):
         for device in devices_systemhealth:
             device["ip_switch"] = ip_switch
             device["red"] = red
+            
+        # print(f"S HEALTH: {devices_systemhealth}")
         return devices_systemhealth
 
     except Exception as e:
@@ -168,12 +219,14 @@ def system_health(ip_switch, id_switch, red):
         return devices_systemhealth_notFound
 
 
-def bucle(scheduler):
-    core1()
-    scheduler.enter(7200, 1, bucle, (scheduler,))
+# def bucle(scheduler):
+#     getData()
+#     scheduler.enter(7200, 1, bucle, (scheduler,))
 
 
-if __name__ == "__main__":
-    s = sched.scheduler(time.time, time.sleep)
-    s.enter(0, 1, bucle, (s,))
-    s.run()
+# if __name__ == "__main__":
+#     s = sched.scheduler(time.time, time.sleep)
+#     s.enter(0, 1, bucle, (s,))
+#     s.run()
+
+getData()

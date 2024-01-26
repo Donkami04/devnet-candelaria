@@ -102,6 +102,17 @@ export async function useDataInfGen() {
         ) {
           downElements.push(element);
         }
+
+        if (
+          (element.name.includes("Memory") &&
+            element.name_switch === "WLC 9800 NEGOCIO" &&
+            parseInt(element.lastvalue) <= 1000) ||
+          (element.name.includes("Memory") &&
+            element.name_switch === "WLC 9800 NEGOCIO" &&
+            element.status.includes("Down"))
+        ) {
+          downElements.push(element);
+        }
       }
     });
   };

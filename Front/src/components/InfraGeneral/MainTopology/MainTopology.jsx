@@ -138,7 +138,7 @@ export function MainTopology() {
                       
                     </td>
                     <td
-                      onClick={(event) => handleRowClick(index, event)}
+                      // onClick={(event) => handleRowClick(index, event)}
                       className={`row-ig-table ${
                         e.swStatus === "FAIL" ? "kpi-red" : "kpi-green"
                       }`}
@@ -155,7 +155,7 @@ export function MainTopology() {
         </div>
       )}
 
-      {selectedRow !== null && dataCoreVisible && (
+      {/* {selectedRow !== null && dataCoreVisible && (
         <div
           className="dataCoreContainer"
           style={{ left: position.x, top: position.y }}
@@ -169,7 +169,7 @@ export function MainTopology() {
             swName={infraGeneral[selectedRow].name_switch}
           />
         </div>
-      )}
+      )} */}
     </div>
   );
 

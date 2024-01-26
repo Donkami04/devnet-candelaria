@@ -13,7 +13,7 @@ logging.getLogger().addHandler(file_handler)
 paramiko_logger = logging.getLogger("paramiko")
 paramiko_logger.setLevel(logging.WARNING)
 
-def ap_function(ip_switch, red, name):
+def ap_function(ip_switch):
     try:
         client = paramiko.SSHClient()
         client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
@@ -34,13 +34,66 @@ def ap_function(ip_switch, red, name):
             output += channel.recv(1024).decode('utf-8')
         channel.close()
         client.close()
-        print(output)
-        return output
+
+        tuples_data = parse_table(output)
+        
+        lista_de_diccionarios = []
+
+        # Iterar sobre cada tupla y crear un diccionario
+        for tupla in tuples_data:
+            diccionario = {
+                'name': tupla[0],
+                'model': tupla[2],
+                'ip': tupla[7],
+                'state': tupla[8],
+                'location': tupla[-1].strip()  # Eliminar espacios en blanco y retorno de carro
+            }
+            lista_de_diccionarios.append(diccionario)
+            
+        return lista_de_diccionarios
 
     except Exception as e:
         logging.error("Error en funcion EIRGP")
         logging.error(e)
         logging.error(traceback.format_exc())
 
-res = ap_function("10.224.127.156", "it", "WLC 9800 NEGOCIO")
+def parse_table(output):
+    pattern = re.compile(r'(\S+)\s+(\d+)\s+(\S+)\s+(\S+)\s+(\S+)\s+(\S+)\s+(\S+)\s+(\S+)\s+(\S+)\s+(.*)')
+    table_data = []
 
+    # Dividir las líneas del output
+    lines = output.split('\n')
+
+    # Iterar sobre cada línea y aplicar el patrón de expresión regular
+    for line in lines:
+        match = pattern.match(line)
+        if match:
+            # Agregar los grupos coincidentes como una fila en la tabla
+            table_data.append(match.groups())
+    return table_data
+
+
+# tuples_data = parse_table(res)
+# # print(len(tuples_data))
+
+# # Lista para almacenar los diccionarios resultantes
+# lista_de_diccionarios = []
+
+# # Iterar sobre cada tupla y crear un diccionario
+# for tupla in tuples_data:
+#     diccionario = {
+#         'name': tupla[0],
+#         'model': tupla[2],
+#         'ip': tupla[7],
+#         'state': tupla[8],
+#         'location': tupla[-1].strip()  # Eliminar espacios en blanco y retorno de carro
+#     }
+#     lista_de_diccionarios.append(diccionario)
+
+# # Imprimir la lista de diccionarios resultante
+# print(len(lista_de_diccionarios))
+# print(lista_de_diccionarios)
+
+# Imprimir los datos de la tabla
+# for row in table_data:
+#     print(row)

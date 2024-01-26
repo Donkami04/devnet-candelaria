@@ -20,7 +20,7 @@
 }
 
 .table-core td,
-th {
+.table-core th {
   border: 1px solid black;
   padding: 8px;
   text-align: center;

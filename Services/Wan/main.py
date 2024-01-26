@@ -184,19 +184,20 @@ def get_wan_data(sensor_ping_id, sdate, edate):
 def dates():
     now = datetime.datetime.now()
     ano_actual = now.year
+    ano_actual_for_mes_anterior = now.year
     mes_actual = now.month
 
     if mes_actual == 1:  # Si es enero, restamos un mes y ajustamos el año
         mes_anterior = 12
-        ano_actual = ano_actual - 1
+        ano_actual_for_mes_anterior = ano_actual - 1
     else:
         mes_anterior = mes_actual - 1
 
     _, num_days_anterior = calendar.monthrange(ano_actual, mes_anterior)
     _, num_days_actual = calendar.monthrange(ano_actual, mes_actual)
 
-    sdate_anterior = f"{ano_actual}-{mes_anterior:02d}-01-00-00-00"
-    edate_anterior = f"{ano_actual}-{mes_anterior:02d}-{num_days_anterior}-23-59-59"
+    sdate_anterior = f"{ano_actual_for_mes_anterior}-{mes_anterior:02d}-01-00-00-00"
+    edate_anterior = f"{ano_actual_for_mes_anterior}-{mes_anterior:02d}-{num_days_anterior}-23-59-59"
 
     sdate_actual = f"{ano_actual}-{mes_actual:02d}-01-00-00-00"
     edate_actual = f"{ano_actual}-{mes_actual:02d}-{num_days_actual}-23-59-59"

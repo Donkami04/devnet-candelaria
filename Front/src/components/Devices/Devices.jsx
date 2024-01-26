@@ -95,7 +95,7 @@ export function Devices() {
               : device.cisco_status_device.includes("Down")
               ? "kpi-red"
               : device.cisco_status_device.includes("Paused")
-              ? "kpi-yellow"
+              ? "kpi-blue"
               : ""
           }
         >

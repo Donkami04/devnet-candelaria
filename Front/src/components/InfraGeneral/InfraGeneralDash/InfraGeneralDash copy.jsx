@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
-// import { useInfGenDash } from '../../../hooks/useInfGenDash';
-import { useDataInfGen } from '../../../hooks/useDataInfGen';
+import { useInfGenDash } from '../../../hooks/useInfGenDash deprecated';
 import './InfraGeneralDash.css';
 
 export function InfraGeneralDash() {
@@ -9,7 +8,7 @@ export function InfraGeneralDash() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result = await useDataInfGen();
+        const result = await useInfGenDash();
         setInfGenDash(result);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -24,8 +23,8 @@ export function InfraGeneralDash() {
     return <p>Cargando...</p>;
   }
 
-  const infGenDashUp = infGenDash.upElements.length;
-  const infGenDashDown = infGenDash.downElements.length;
+  const infGenDashUp = infGenDash.upElements;
+  const infGenDashDown = infGenDash.downElements;
 
   return (
     <>

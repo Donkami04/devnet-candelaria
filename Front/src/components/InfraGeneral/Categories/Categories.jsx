@@ -73,10 +73,10 @@ export function Categories() {
           <table>
             <thead>
               <tr>
-                <th>Categoria</th>
+                <th style={{backgroundColor: "#444444", color: "white"}}>Categoria</th>
                 <th className="kpi-green">Up</th>
                 <th className="kpi-red">Down</th>
-                <th>Total</th>
+                <th style={{backgroundColor: "#444444", color: "white"}}>Total</th>
               </tr>
             </thead>
             <tbody>
