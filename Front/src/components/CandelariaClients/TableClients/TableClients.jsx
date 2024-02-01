@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { getClients } from "../../../utils/Api-candelaria/api";
 import { PRTG_URL, CISCO_URL } from "../../../utils/Api-candelaria/api";
+import PuffLoader from "react-spinners/PuffLoader";
 import "./TableClients.css";
 
 export function TableClients() {
   const [clients, setClients] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [filterDownPaused, setFilterDownPaused] = useState(true);
+  const [showSpinner, setShowSpinner] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const clientsList = await getClients();
         setClients(clientsList);
+        setShowSpinner(false);
       } catch (error) {
         console.error("Error al obtener el listado de Clientes:", error);
         return error;
@@ -40,6 +43,14 @@ export function TableClients() {
       .toLowerCase()
       .includes(searchTerm.toLowerCase())
   );
+
+  if (showSpinner) {
+    return (
+      <div className="spinner-dash-container">
+        <PuffLoader color="red" />
+      </div>
+    );
+  }
 
   const renderTableBody = () => {
     if (filteredSearchClients.length === 0) {

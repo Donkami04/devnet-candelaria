@@ -1,17 +1,20 @@
 import { useEffect, useState } from "react";
 import { SectionDash } from "../SectionDash/SectionDash";
 import { getDcsCandelariaIndicators } from "../../../utils/Api-candelaria/api";
+import PuffLoader from "react-spinners/PuffLoader";
 import "./dashboard.css";
 
 
 export function Dashboard() {
   const [indicators, setIndicators] = useState();
+  const [showSpinner, setShowSpinner] = useState(true);
 
   useEffect(() => {
     const dataIndicators = async () => {
       try {
         const allIndicators = await getDcsCandelariaIndicators();
         setIndicators(allIndicators);
+        setShowSpinner(false);
       } catch (error) {
         console.error("Error al obtener los indicadores del sistema", error);
         return error;
@@ -27,7 +30,14 @@ export function Dashboard() {
   
   const infraSolucionIndicator = indicators?.infraSolucion?.indicador;
   const switches = indicators?.infraSolucion?.switchesStatus;
-  
+
+  if (showSpinner) {
+    return (
+      <div className="spinner-dash-container">
+        <PuffLoader color="red" />
+      </div>
+    );
+  }
 
   return (
     <div className="main-dashboard-container">

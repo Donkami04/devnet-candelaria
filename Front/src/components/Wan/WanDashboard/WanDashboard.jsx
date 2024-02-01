@@ -1,15 +1,18 @@
 import { useState, useEffect } from "react";
 import { getWanIndicators } from "../../../utils/Api-candelaria/api";
+import PuffLoader from "react-spinners/PuffLoader";
 import "./wandashboard.css";
 
 export function WanDashboard({ previousMonthName }) {
   const [wanKpi, setWanKpi] = useState({});
+  const [spinnerWan, setSpinnerWan] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const kpi = await getWanIndicators();
         setWanKpi(kpi.kpiWan);
+        setSpinnerWan(false);
       } catch (error) {
         console.error("Error al obtener el listado de firewalls:", error);
         return error;
@@ -20,6 +23,14 @@ export function WanDashboard({ previousMonthName }) {
 
   const kpiRemoteSites = wanKpi.kpiOtherWans || "Cargando...";
   const kpiCandelaria = wanKpi.kpiAdminWans || "Cargando...";
+
+  if (spinnerWan) {
+    return (
+      <div>
+        <PuffLoader color="red" />
+      </div>
+    );
+  }
 
   return (
     <div className="wan-kpi-container">

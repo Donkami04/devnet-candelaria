@@ -8,16 +8,24 @@ const Ap = sequelize.define(
       type: DataTypes.STRING(100),
       allowNull: false,
     },
-    ip: {
+    model: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
+    },
+    ip : {
+      type: DataTypes.STRING(50),
+      allowNull: false,
+    },
+    state: {
+      type: DataTypes.STRING(50),
+      allowNull: false,
+    },
+    location: {
       type: DataTypes.STRING(100),
       allowNull: false,
     },
     status: {
-      type: DataTypes.STRING(100),
-      allowNull: false,
-    },
-    last_disconnect_reason: {
-      type: DataTypes.STRING(100),
+      type: DataTypes.STRING(10),
       allowNull: false,
     },
   },

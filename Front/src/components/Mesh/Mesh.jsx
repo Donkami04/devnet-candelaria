@@ -3,7 +3,8 @@ import { getMesh } from "../../utils/Api-candelaria/api";
 import { Navbar } from "../Navbar/Navbar";
 import { Status_System } from "../Status_System/Status_System";
 import { DashMesh } from "./DashMesh/DashMesh";
-import { PRTG_URL } from "../../utils/Api-candelaria/api"
+import { PRTG_URL } from "../../utils/Api-candelaria/api";
+import { Spinner } from "../Spinner/Spinner";
 import "./mesh.css";
 
 export function Mesh() {
@@ -11,6 +12,7 @@ export function Mesh() {
   const [filterByPala, setFilterByPala] = useState(false);
   const [filterByCaex, setFilterByCaex] = useState(false);
   const [statusFilter, setStatusFilter] = useState("2");
+  const [showSpinner, setShowSpinner] = useState(true);
   const tableToShow = "mesh";
 
   useEffect(() => {
@@ -18,6 +20,7 @@ export function Mesh() {
       try {
         const meshData = await getMesh();
         setDataMesh(meshData);
+        setShowSpinner(false);
       } catch (error) {
         console.error(
           "Error al obtener el listado de dispositivos MESH:",
@@ -45,7 +48,14 @@ export function Mesh() {
       </div>
     );
   };
-
+  if (showSpinner) {
+    return (
+      <div>
+        <Navbar title={"Equipos Mesh Críticos"} />
+        <Spinner />
+      </div>
+    );
+  }
   return (
     <div>
       <Navbar title={"Equipos Mesh Críticos"} />
@@ -125,11 +135,11 @@ export function Mesh() {
                 }
 
                 if (device.ping_avg !== "Not Found") {
-                  if (parseFloat(device.ping_avg.replace('.', '')) >= 500) {
+                  if (parseFloat(device.ping_avg.replace(".", "")) >= 500) {
                     colorAvgPing = "kpi-red";
                   } else if (
-                    parseFloat(device.ping_avg.replace('.', '')) > 350 &&
-                    parseFloat(device.ping_avg.replace('.', '')) < 500
+                    parseFloat(device.ping_avg.replace(".", "")) > 350 &&
+                    parseFloat(device.ping_avg.replace(".", "")) < 500
                   ) {
                     colorAvgPing = "kpi-yellow";
                   }
@@ -138,7 +148,11 @@ export function Mesh() {
                 return (
                   <tr key={device.id}>
                     <td>{device.ip}</td>
-                    <td><a href={`${PRTG_URL}${device.id_prtg}`} target="_blank">{device.device}</a></td>
+                    <td>
+                      <a href={`${PRTG_URL}${device.id_prtg}`} target="_blank">
+                        {device.device}
+                      </a>
+                    </td>
                     <td>
                       <p>
                         <span>Ping Avg: </span>

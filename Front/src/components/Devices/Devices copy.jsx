@@ -3,12 +3,8 @@ import { Navbar } from "../Navbar/Navbar";
 import { Status_System } from "../Status_System/Status_System";
 import { DevicesDash } from "./DevicesDash/DevicesDash";
 import { getDevices } from "../../utils/Api-candelaria/api";
-import {
-  PRTG_URL,
-  CISCO_URL_IT,
-  CISCO_URL,
-} from "../../utils/Api-candelaria/api";
-import { Spinner } from "../Spinner/Spinner";
+import { PRTG_URL, CISCO_URL_IT, CISCO_URL } from "../../utils/Api-candelaria/api";
+import { Spinner } from "../Spinner/Spinner"
 import "./devices.css";
 
 export function Devices() {
@@ -49,7 +45,8 @@ export function Devices() {
     const searchValues = Object.values(device)
       .map((value) => value.toString().toLowerCase())
       .join(" ");
-    const hasDownPaused = searchValues.includes("down");
+    const hasDownPaused =
+      searchValues.includes("down");
     return !filterDownPaused || (filterDownPaused && hasDownPaused);
   });
 
@@ -116,12 +113,7 @@ export function Devices() {
             : device.cisco_device_name}
         </td>
         <td>
-          <a
-            href={`${device.red === "OT" ? CISCO_URL : CISCO_URL_IT}${
-              device.host
-            }&forceLoad=true`}
-            target="_blank"
-          >
+          <a href={`${device.red === 'OT' ? CISCO_URL : CISCO_URL_IT}${device.host}&forceLoad=true`} target="_blank">
             {device.data_backup === "true"
               ? `⚠️ ${device.cisco_port}`
               : device.cisco_port}
@@ -173,30 +165,32 @@ export function Devices() {
         Down
       </label>
 
-      <div className="devices-container">
-        <table>
-          <thead>
-            <tr>
-              <th>HOST</th>
-              <th>TYPE</th>
-              <th>SITE</th>
-              <th>DPTO</th>
-              <th>PRTG DEVICE</th>
-              <th>PRTG SENSOR</th>
-              <th>PRTG STATUS</th>
-              <th>PRTG LASTUP</th>
-              <th>PRTG LASTDOWN</th>
-              <th>CISCO IP</th>
-              <th>CISCO SW NAME</th>
-              <th>CISCO PUERTO</th>
-              <th>CISCO ESTADO</th>
-              <th>CISCO REACHABILITY</th>
-            </tr>
-          </thead>
-          <tbody>{renderTableBody()}</tbody>
-        </table>
-        {renderRowCount()}
-      </div>
+      {loading ? <Spinner /> : (
+        <div className="devices-container">
+          <table>
+            <thead>
+              <tr>
+                <th>HOST</th>
+                <th>TYPE</th>
+                <th>SITE</th>
+                <th>DPTO</th>
+                <th>PRTG DEVICE</th>
+                <th>PRTG SENSOR</th>
+                <th>PRTG STATUS</th>
+                <th>PRTG LASTUP</th>
+                <th>PRTG LASTDOWN</th>
+                <th>CISCO IP</th>
+                <th>CISCO SW NAME</th>
+                <th>CISCO PUERTO</th>
+                <th>CISCO ESTADO</th>
+                <th>CISCO REACHABILITY</th>
+              </tr>
+            </thead>
+            <tbody>{renderTableBody()}</tbody>
+          </table>
+          {renderRowCount()}
+        </div>
+      )}
     </>
   );
 }

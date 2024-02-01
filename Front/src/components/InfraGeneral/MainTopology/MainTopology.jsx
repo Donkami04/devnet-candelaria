@@ -12,7 +12,7 @@ import { useDataInfGen } from "../../../hooks/useDataInfGen";
 import { DataCore } from "../DataCore/DataCore";
 import { Status_System } from "../../Status_System/Status_System";
 import { Spinner } from "../../Spinner/Spinner";
-import { Link } from "react-router-dom"; 
+import { Link } from "react-router-dom";
 import "./MainTopology.css";
 
 export function MainTopology() {
@@ -116,7 +116,7 @@ export function MainTopology() {
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
-          <table>
+          <table className="table-names-sw-ig">
             <thead>
               <tr>
                 <th>Nombre</th>
@@ -133,9 +133,13 @@ export function MainTopology() {
               ) : (
                 filteredInfraGeneral.map((e, index) => (
                   <tr key={e.id}>
-                    <td><Link to={`/monitoreo/infraestrucura-general/detalles?nombre=${e.name_switch}`}>{e.name_switch}</Link>
-                    {/* <td onClick={(event) => handleRowClick(index, event)}> */}
-                      
+                    <td className="td-category-ig">
+                      <Link style={{color: "blue"}}
+                        to={`/monitoreo/infraestrucura-general/detalles?nombre=${e.name_switch}`}
+                      >
+                        {e.name_switch}
+                      </Link>
+                      {/* <td onClick={(event) => handleRowClick(index, event)}> */}
                     </td>
                     <td
                       // onClick={(event) => handleRowClick(index, event)}

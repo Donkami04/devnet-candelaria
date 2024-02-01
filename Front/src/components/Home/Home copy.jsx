@@ -23,14 +23,14 @@ export function Home() {
   const [otroCount, setOtroCount] = useState(0);
   const [changeBatery, setChangeBatery] = useState(0);
   const [numberUps, setNumberUps] = useState(0);
-  const { dataVpn1Users, dataVpn2Users, dataVpn3Users } = useVpnCounter();
+  const { vpn1Users, vpn2Users, vpn3Users } = useVpnCounter();
   const [homeMessage, setHomeMessage] = useState("");
   const [showMessage, setShowMessage] = useState(false);
 
   // Estados de spinners
   const [spinnerDcsCandelaria, setSpinnerDcsCandelaria] = useState(true);
   const [spinnerUps, setSpinnerUps] = useState(true);
-  const [spinnerMesh, setSpinnerMesh] = useState(false);
+  const [spinnerMesh, setSpinnerMesh] = useState(true);
 
   const queryParams = new URLSearchParams(location.search);
   const logoutParam = queryParams.get("logout");
@@ -39,6 +39,7 @@ export function Home() {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        await DashMesh.loadData();
         const dcsCandelaria = await getDcsCandelariaIndicators();
         const dates = useWanDates();
         const allUps = await getUps();
@@ -67,9 +68,9 @@ export function Home() {
           });
 
         setDcsCandeIndicators(dcsCandelaria);
-        setSpinnerDcsCandelaria(false);
-        setSpinnerUps(false);
-        setSpinnerMesh(false);
+        // setSpinnerDcsCandelaria(false);
+        // setSpinnerUps(false);
+        // setSpinnerMesh(false);
         setWanDates(dates);
         setNumberUps(countUps);
         setEnLineaCount(enLinea);
@@ -115,25 +116,7 @@ export function Home() {
           </div>
           {spinnerDcsCandelaria ? (
             <div className="spinner-home-container">
-              <div className="spinner-container">
-                <PuffLoader color="red" />
-              </div>
-              <div className="link-system-container links-spinner-home">
-                <Link
-                  to="/monitoreo/candelaria/clients"
-                  className="link-system button-clients button-link"
-                  style={{ color: "white" }}
-                >
-                  Clientes
-                </Link>
-                <Link
-                  to="/monitoreo/candelaria/switches"
-                  className="link-system button-switches button-link"
-                  style={{ color: "white" }}
-                >
-                  Switches
-                </Link>
-              </div>
+              <PuffLoader color="red" />
             </div>
           ) : (
             <>
@@ -207,67 +190,55 @@ export function Home() {
           </div>
           {spinnerUps ? (
             <div className="spinner-home-container">
-              <div className="spinner-home-container">
-                <PuffLoader color="red" />
-              </div>
-              <div className="link-system-container links-spinner-home">
-                <Link
-                  to="/monitoreo/ups"
-                  className="link-system button-link"
-                  style={{ color: "white" }}
-                >
-                  Ver detalles
-                </Link>
-              </div>
+              <PuffLoader color="red" />
             </div>
           ) : (
-            <>
-              <div className="home-kpi-container">
-                <table className="home-kpi-table ups-table">
-                  <tbody>
-                    <tr>
-                      <td>
-                        <p className="light-indicator green-light"></p>En línea
-                      </td>
-                      <td>{numberUps}</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <p className="light-indicator yellow-light"></p>Usando
-                        batería
-                      </td>
-                      <td>{usandoBateriaCount}</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <p className="light-indicator red-light"></p>Otro
-                      </td>
-                      <td>1</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <p className="warning-light" style={{ bottom: "10px" }}>
-                          🪫
-                        </p>
-                        Cambio batería
-                      </td>
-                      <td>{changeBatery}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+          <>
+          <div className="home-kpi-container">
+            <table className="home-kpi-table ups-table">
+              <tbody>
+                <tr>
+                  <td>
+                    <p className="light-indicator green-light"></p>En línea
+                  </td>
+                  <td>{numberUps}</td>
+                </tr>
+                <tr>
+                  <td>
+                    <p className="light-indicator yellow-light"></p>Usando
+                    batería
+                  </td>
+                  <td>{usandoBateriaCount}</td>
+                </tr>
+                <tr>
+                  <td>
+                    <p className="light-indicator red-light"></p>Otro
+                  </td>
+                  <td>1</td>
+                </tr>
+                <tr>
+                  <td>
+                    <p className="warning-light" style={{ bottom: "10px" }}>
+                      🪫
+                    </p>
+                    Cambio batería
+                  </td>
+                  <td>{changeBatery}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
 
-              <div className="link-system-container">
-                <Link
-                  to="/monitoreo/ups"
-                  className="link-system button-link"
-                  style={{ color: "white" }}
-                >
-                  Ver detalles
-                </Link>
-              </div>
-            </>
-          )}
+          <div className="link-system-container">
+            <Link
+              to="/monitoreo/ups"
+              className="link-system button-link"
+              style={{ color: "white" }}
+            >
+              Ver detalles
+            </Link>
+          </div>
+          </>)}
         </section>
 
         <section className="system-container">
@@ -280,15 +251,15 @@ export function Home() {
               <tbody>
                 <tr>
                   <td>Administrativo</td>
-                  <td>{dataVpn1Users.number} users</td>
+                  <td>{vpn1Users.number} users</td>
                 </tr>
                 <tr>
                   <td>Concentradora</td>
-                  <td>{dataVpn2Users.number} users</td>
+                  <td>{vpn2Users.number} users</td>
                 </tr>
                 <tr>
                   <td>Ojos</td>
-                  <td>{dataVpn3Users.number} users</td>
+                  <td>{vpn3Users.number} users</td>
                 </tr>
               </tbody>
             </table>
@@ -309,26 +280,19 @@ export function Home() {
           <div className="name-system-container">
             <h1>MESH</h1>
           </div>
-          {spinnerMesh ? (
-            <div className="spinner-home-container">
-              <PuffLoader color="red" />
-            </div>
-          ) : (
-            <>
-              <div className="home-kpi-container">
-                <DashMesh />
-              </div>
-              <div className="link-system-container">
-                <Link
-                  to="/monitoreo/candelaria/mesh"
-                  className="link-system button-link"
-                  style={{ color: "white" }}
-                >
-                  Ver detalles
-                </Link>
-              </div>
-            </>
-          )}
+
+          <div className="home-kpi-container">
+            <DashMesh />
+          </div>
+          <div className="link-system-container">
+            <Link
+              to="/monitoreo/candelaria/mesh"
+              className="link-system button-link"
+              style={{ color: "white" }}
+            >
+              Ver detalles
+            </Link>
+          </div>
         </section>
 
         <section className="system-container">

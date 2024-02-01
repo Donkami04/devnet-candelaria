@@ -21,7 +21,7 @@ export const DetailsCore = () => {
   const [apList, setApList] = useState([]);
   const [numApPrtg, setNumApPrtg] = useState("Cargando...");
   const [numApDb, setNumApDb] = useState("Cargando...");
-  const [showOthers, setShowOthers] = useState(true);
+  const [showOthers, setShowOthers] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -29,18 +29,17 @@ export const DetailsCore = () => {
       try {
         let dataInterfaces = await getInterfaces();
         dataInterfaces.sort((a, b) => (a.status === "Up" ? 1 : -1));
-        dataInterfaces.sort((a, b) => (a.status === "Up" ? 1 : -1));
 
         let dataDevicesHealth = await getSystemHealth();
-        dataDevicesHealth.sort((a, b) => (a.status === "Up" ? 1 : -1));
         dataDevicesHealth.sort((a, b) => (a.status === "Up" ? 1 : -1));
 
         let dataNeighbors = await getNeighbors();
         dataNeighbors.sort((a, b) => (a.status === "Up" ? 1 : -1));
-        dataNeighbors.sort((a, b) => (a.status === "Up" ? 1 : -1));
 
         const dataRouteStatus = await getDefaultRoute();
-        const dataAp = await getAp();
+
+        let dataAp = await getAp();
+        dataAp.apList.sort((a, b) => (a.status === "Joined" ? 1 : -1));
 
         setDevicesHealth(dataDevicesHealth);
         setRouteStatus(dataRouteStatus);
@@ -182,22 +181,19 @@ export const DetailsCore = () => {
               <thead>
                 <tr>
                   <th>Nombre</th>
-                  <th>Modelo</th>
-                  <th>Estado</th>
-                  <th>Ubicación</th>
                   <th>IP</th>
-                  <th>Status</th>
+                  <th>Estado</th>
+                  <th>Last Disconnect Reason</th>
                 </tr>
               </thead>
               <tbody>
                 {apList.map((ap) => (
                   <tr key={ap.id}>
                     <td>{ap.name}</td>
-                    <td>{ap.model}</td>
-                    <td>{ap.state}</td>
-                    <td>{ap.location}</td>
                     <td>{ap.ip}</td>
-                    <td>{ap.status}</td>
+                    <td className={ap.status === "Joined" ? "kpi-green" : "kpi-red"}>{ap.status}</td>
+                    <td>{ap.last_disconnect_reason}</td>
+
                   </tr>
                 ))}
               </tbody>
@@ -205,14 +201,14 @@ export const DetailsCore = () => {
             <table className="table-ap table-route">
               <thead>
                 <tr>
-                  <th>Switch</th>
                   <th>Via BGP</th>
+                  <th>Switch</th>
                 </tr>
               </thead>
               <tbody>
                 {routeStatus.map((route) => (
                   <tr key={route.id}>
-                    <td>{route.via_bgp === "true" ? "Up" : "Down"}</td>
+                    <td className={route.via_bgp === "true" ? "kpi-green" : "kpi-red"}>{route.via_bgp === "true" ? "Up" : "Down"}</td>
                     <td>{route.name_switch}</td>
                   </tr>
                 ))}

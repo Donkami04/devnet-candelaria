@@ -1,31 +1,36 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 // import { useInfGenDash } from '../../../hooks/useInfGenDash';
-import { useDataInfGen } from '../../../hooks/useDataInfGen';
-import './InfraGeneralDash.css';
+import { useDataInfGen } from "../../../hooks/useDataInfGen";
+import PuffLoader from "react-spinners/PuffLoader";
+import "./InfraGeneralDash.css";
 
 export function InfraGeneralDash() {
-  const [infGenDash, setInfGenDash] = useState(null);
+  const [infGenDashUp, setIinfGenDashUp] = useState({});
+  const [infGenDashDown, setIinfGenDashDown] = useState({});
+  const [spinnerInfra, setSpinnerInfra] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const result = await useDataInfGen();
-        setInfGenDash(result);
+        setIinfGenDashUp(result.upElements.length);
+        setIinfGenDashDown(result.downElements.length);
+        setSpinnerInfra(false);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error InfraGeneralDash:", error);
       }
     };
 
     fetchData();
   }, []);
 
-  if (!infGenDash) {
-    // Renderiza un indicador de carga mientras se resuelve la promesa
-    return <p>Cargando...</p>;
+  if (spinnerInfra) {
+    return (
+      <div>
+        <PuffLoader color="red" />
+      </div>
+    );
   }
-
-  const infGenDashUp = infGenDash.upElements.length;
-  const infGenDashDown = infGenDash.downElements.length;
 
   return (
     <>

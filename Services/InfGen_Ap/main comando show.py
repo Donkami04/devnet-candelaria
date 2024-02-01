@@ -71,7 +71,7 @@ def getData():
             # ap_registered = get_data_ap_registered(ip_switch, id_prtg_switch, red)
             data_systemhealth = system_health(ip_switch, id_prtg_switch, red)
             ap_elements_list = ap_function(ip_switch)
-            logging.info(f"Numero de AP obtenidos de la controladora: {len(ap_elements_list)}")
+            logging.info(f"Numero de AP registrados: {len(ap_elements_list)}")
 
             for sensor in data_systemhealth:
                 name_sensor = sensor['name']
@@ -89,8 +89,8 @@ def getData():
                 cursor.execute(query_historic, (name_sensor, status_sensor, id_prtg, lastvalue, ip_switch, name_switch, red_sensor))
                 mydb.commit()
 
-            # status_ap = status_ap_function(mydb, ap_elements_list)
-            # print(f"Length con el estado: {len(status_ap)}")
+            status_ap = status_ap_function(mydb, ap_elements_list)
+            print(f"Length con el estado: {len(status_ap)}")
 
             # Blanqueamos la tabla AP antes de rellenarla de nuevo
             query = (f"DELETE FROM dcs.ap")
@@ -98,11 +98,11 @@ def getData():
             mydb.commit()
             
             # Guardamos en bloque en la BD en vez de linea por linea
-            query = "INSERT INTO dcs.ap (`name`, `ip`, `status`, `last_disconnect_reason`) VALUES (%s, %s, %s, %s)"
-            # query_historic = "INSERT INTO dcs.historic_ap (`name`, `model`, `ip`, `state`, `location`, `status`) VALUES (%s, %s, %s, %s, %s, %s)"
-            values = [(ap['name'], ap['ip'], ap['status'], ap['last_disconnect_reason']) for ap in ap_elements_list]
+            query = "INSERT INTO dcs.ap (`name`, `model`, `ip`, `state`, `location`, `status`) VALUES (%s, %s, %s, %s, %s, %s)"
+            query_historic = "INSERT INTO dcs.historic_ap (`name`, `model`, `ip`, `state`, `location`, `status`) VALUES (%s, %s, %s, %s, %s, %s)"
+            values = [(ap['name'], ap['model'], ap['ip'], ap['state'], ap['location'], ap['status']) for ap in status_ap]
             cursor.executemany(query, values)
-            # cursor.executemany(query_historic, values)
+            cursor.executemany(query_historic, values)
             mydb.commit()
             
             #! Lo comentado se usa para llenar data_ap
@@ -125,7 +125,9 @@ def getData():
         now = datetime.datetime.now()
         fecha_y_hora = now.strftime("%Y-%m-%d %H:%M:%S")
         fecha_y_hora = str(fecha_y_hora)
-        cursor.execute(f"INSERT INTO dcs.fechas_consultas_ig (ultima_consulta, estado) VALUES ('{fecha_y_hora}', 'ERROR')")
+        cursor.execute(
+            f"INSERT INTO dcs.fechas_consultas_ig (ultima_consulta, estado) VALUES ('{fecha_y_hora}', 'ERROR')"
+        )
         mydb.commit()
         cursor.close()
 

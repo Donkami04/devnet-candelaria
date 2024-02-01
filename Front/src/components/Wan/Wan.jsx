@@ -4,6 +4,7 @@ import { Navbar } from "../Navbar/Navbar";
 import { Status_System } from "../Status_System/Status_System";
 import { WanDashboard } from "./WanDashboard/WanDashboard";
 import { useWanDates } from "../../hooks/useWanDates";
+import { Spinner } from "../Spinner/Spinner";
 import "./wan.css";
 
 export function Wan() {
@@ -11,6 +12,7 @@ export function Wan() {
   const [wanAdmin, setWanAdmin] = useState([]);
   const [wanDates, setWanDates] = useState("");
   const [showAdditionalRows, setShowAdditionalRows] = useState(false);
+  const [showSpinner, setShowSpinner] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,6 +30,7 @@ export function Wan() {
         setWanAdmin(ipWanAdmin);
         setWan(otherIpWan);
         setWanDates(dates);
+        setShowSpinner(false);
       } catch (error) {
         console.error("Error al obtener el listado de WAN:", error);
         return error;
@@ -59,6 +62,14 @@ export function Wan() {
     adminDowntimePorcentLastMonth = Math.min(...toNumberDowntimePorcentLastMonth);
     adminUptimePorcentCurrentMonth = Math.max(...toNumberUptimePorcentCurrentMonth);
     adminUptimePorcentToday = Math.max(...toNumberUptimePorcentToday);
+  }
+  if (showSpinner) {
+    return (
+      <div>
+        <Navbar title={"WAN"} />
+        <Spinner />
+      </div>
+    );
   }
 
   return (

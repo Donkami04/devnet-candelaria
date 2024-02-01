@@ -7,6 +7,7 @@ import {
   getNeighbors,
   getDefaultRoute,
   getDataInfGen,
+  getAp,
 } from "../utils/Api-candelaria/api";
 
 export async function useDataInfGen() {
@@ -14,6 +15,7 @@ export async function useDataInfGen() {
   const dataDevicesHealth = await getSystemHealth();
   const dataNeighbors = await getNeighbors();
   const dataRouteStatus = await getDefaultRoute();
+  const dataAp = await getAp();
 
   const allData = [
     ...dataInterfaces,
@@ -122,7 +124,7 @@ export async function useDataInfGen() {
       if (element.via_bgp) {
         if (element.via_bpg === "true") {
           upElements.push(element);
-        };
+        }
         if (element.via_bgp === "false") {
           downElements.push(element);
         }
@@ -130,7 +132,17 @@ export async function useDataInfGen() {
     });
   };
 
+  dataAp.apList.forEach((element) => {
+    if (element.status !== "Joined") {
+      downElements.push(element);
+    }
+    if (element.status === "Joined") {
+      upElements.push(element);
+    }
+  });
+
   upOrDownInterface(allData);
+  
   upOrDownNeighbors(allData);
   upOrDownSysHealth(allData);
   upOrDownRouteDefault(allData);
@@ -139,6 +151,8 @@ export async function useDataInfGen() {
     upElements: upElements,
     downElements: downElements,
   };
+
+
 
   return data;
 }

@@ -22,9 +22,10 @@ def ap_function(ip_switch):
 
         commands = [
             f"terminal length 0\n",
-            "show ap summary\n"
+            "show wireless stats ap join summary\n"
         ]
 
+        output_list = []  # Lista para acumular la salida de cada bloque
         for command in commands:
             channel.send(command)
             time.sleep(2)
@@ -34,66 +35,51 @@ def ap_function(ip_switch):
             output += channel.recv(1024).decode('utf-8')
         channel.close()
         client.close()
+        blocks = re.split('-{100,}', output)
 
-        tuples_data = parse_table(output)
-        
-        lista_de_diccionarios = []
+        # Procesar cada bloque
+        for block in blocks:
+            ap_list = process_block(block.strip())
+            output_list.extend(ap_list)
 
-        # Iterar sobre cada tupla y crear un diccionario
-        for tupla in tuples_data:
-            diccionario = {
-                'name': tupla[0],
-                'model': tupla[2],
-                'ip': tupla[7],
-                'state': tupla[8],
-                'location': tupla[-1].strip()  # Eliminar espacios en blanco y retorno de carro
-            }
-            lista_de_diccionarios.append(diccionario)
-            
-        return lista_de_diccionarios
+        # Eliminar la parte no deseada del valor 'Last Disconnect Reason'
+        for ap_dict in output_list:
+            if 'last_disconnect_reason' in ap_dict and 'Image-Download' in ap_dict['last_disconnect_reason']:
+                ap_dict['last_disconnect_reason'] = ap_dict['last_disconnect_reason'].replace('Image-Download', '').strip()
+            if 'last_disconnect_reason' in ap_dict and 'Dtls-Handshake' in ap_dict['last_disconnect_reason']:
+                ap_dict['last_disconnect_reason'] = ap_dict['last_disconnect_reason'].replace('Dtls-Handshake', '').strip()
+                
+        return output_list
 
     except Exception as e:
         logging.error("Error en funcion EIRGP")
         logging.error(e)
         logging.error(traceback.format_exc())
 
-def parse_table(output):
-    pattern = re.compile(r'(\S+)\s+(\d+)\s+(\S+)\s+(\S+)\s+(\S+)\s+(\S+)\s+(\S+)\s+(\S+)\s+(\S+)\s+(.*)')
-    table_data = []
+def process_block(block):
+    lines = block.split('\n')
+    ap_list = []
 
-    # Dividir las líneas del output
-    lines = output.split('\n')
+    ap_info_pattern = re.compile(r'(?P<name>[\w.-]+)\s+(?P<ip>\d+\.\d+\.\d+\.\d+)\s+(?P<status>Not\s+Joined|Joined)\s+(?P<reason>[\w\s-]+)')
 
-    # Iterar sobre cada línea y aplicar el patrón de expresión regular
     for line in lines:
-        match = pattern.match(line)
+        match = ap_info_pattern.search(line)
         if match:
-            # Agregar los grupos coincidentes como una fila en la tabla
-            table_data.append(match.groups())
-    return table_data
+            # Eliminar 'Run' y espacios en blanco del atributo 'Last Disconnect Reason'
+            disconnect_reason = match.group('reason').replace('Run', '').strip()
+            ap_dict = {
+                'name': match.group('name'),
+                'ip': match.group('ip'),
+                'status': match.group('status'),
+                'last_disconnect_reason': disconnect_reason
+            }
+            ap_list.append(ap_dict)
 
+    return ap_list
 
-# tuples_data = parse_table(res)
-# # print(len(tuples_data))
+# Ejemplo de uso:
+result_list = ap_function("10.224.127.156")
 
-# # Lista para almacenar los diccionarios resultantes
-# lista_de_diccionarios = []
-
-# # Iterar sobre cada tupla y crear un diccionario
-# for tupla in tuples_data:
-#     diccionario = {
-#         'name': tupla[0],
-#         'model': tupla[2],
-#         'ip': tupla[7],
-#         'state': tupla[8],
-#         'location': tupla[-1].strip()  # Eliminar espacios en blanco y retorno de carro
-#     }
-#     lista_de_diccionarios.append(diccionario)
-
-# # Imprimir la lista de diccionarios resultante
-# print(len(lista_de_diccionarios))
-# print(lista_de_diccionarios)
-
-# Imprimir los datos de la tabla
-# for row in table_data:
-#     print(row)
+# # Imprimir la lista completa
+# for ap_dict in result_list:
+#     print(ap_dict)

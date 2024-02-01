@@ -3,9 +3,9 @@ import { getVpn } from '../utils/Api-candelaria/api';
 
 export function useVpnCounter() {
   const [vpnData, setVpnData] = useState({
-    vpn1Users: [],
-    vpn2Users: [],
-    vpn3Users: [],
+    dataVpn1Users: [],
+    dataVpn2Users: [],
+    dataVpn3Users: [],
   });
 
   useEffect(() => {
@@ -13,9 +13,9 @@ export function useVpnCounter() {
       try {
         const vpnDataResponse = await getVpn();
         setVpnData({
-          vpn1Users: vpnDataResponse.vpn_1,
-          vpn2Users: vpnDataResponse.vpn_2,
-          vpn3Users: vpnDataResponse.vpn_3,
+          dataVpn1Users: vpnDataResponse.vpn_1,
+          dataVpn2Users: vpnDataResponse.vpn_2,
+          dataVpn3Users: vpnDataResponse.vpn_3,
         });
       } catch (error) {
         console.error('Error al obtener el listado de Usuarios VPN:', error);

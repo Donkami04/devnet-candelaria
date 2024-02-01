@@ -1,0 +1,44 @@
+.table-ap-container {
+  width: 100%;
+  max-height: calc(100vh - 15rem);
+  overflow-y: auto;
+  margin-top: 15px;
+}
+
+.table-ap {
+  width: 80%;
+  font-size: 0.75rem;
+  border-collapse: collapse;
+  margin: auto;
+}
+
+.table-ap th,
+.table-ap td {
+  border: 1px solid black;
+  padding: 4px;
+  text-align: center;
+}
+
+.table-ap th {
+  background-color: #444444;
+  color: white;
+}
+
+.counter-ap-container {
+  margin-top: 15px;
+  margin-bottom: 20px;
+  margin-left: 10px;
+  position: absolute;
+  top: 5rem;
+  right: 0;
+}
+
+/* Ejemplo de media query para pantallas pequeñas */
+@media only screen and (max-width: 1250px) {
+  /* Estilos para pantallas pequeñas */
+  .table-details-inf-gen th,
+  .table-details-inf-gen td {
+    font-size: 0.6rem;
+    /* background-color: blue; */
+  }
+}
