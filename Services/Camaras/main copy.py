@@ -81,27 +81,14 @@ def get_devices_data():
             cisco_device_name = cisco_data['cisco_device_name']
             cisco_client_port = cisco_data['cisco_client_port']
             cisco_client_status = cisco_data['cisco_client_status']
-            # cisco_device_reachability = cisco_data['cisco_device_reachability']
+            cisco_device_reachability = cisco_data['cisco_device_reachability']
             prtg_device_status = cisco_data['prtg_device_status']
             cisco_client_mac_address = cisco_data['cisco_client_mac_address']
             is_databackup = cisco_data['is_databackup']
-            cctv_enabled = "Not Found"
-            cctv_valid = "Not Found"
-            
-            if device['id_cctv'] != 'Not Found':
-                id_camera = device['id_cctv']
-                username_cctv = os.getenv('CCTV_USER')
-                password_cctv = os.getenv('CCT_PASS')
-                CCTV_DATA_SINGLE_CAMERA = os.getenv('CCTV_DATA_SINGLE_CAMERA').format(id_camera=id_camera)
-
-                auth = (username_cctv, password_cctv)
-                data_camera = requests.get(CCTV_DATA_SINGLE_CAMERA, auth=auth).json()
-                cctv_enabled = data_camera.get('data', 'Error').get('status', 'Error').get('enabled', 'Error')
-                cctv_valid = data_camera.get('data', 'Error').get('status', 'Error').get('valid', 'Error')
             
             
-            query = (f"INSERT INTO dcs.devices (host, type, site, dpto, prtg_name_device, prtg_id, prtg_sensorname, prtg_status, prtg_lastup, prtg_lastdown, cisco_device_ip, cisco_device_name, cisco_port, cisco_status, cisco_status_device, cisco_mac_address, data_backup, red, cctv_enabled, cctv_valid)"
-                f"VALUES ('{ip}', '{device_type}', '{site}', '{dpto}', '{prtg_name_device}', '{prtg_id_device}', '{prtg_name_sensor}', '{prtg_status}', '{prtg_lastup}', '{prtg_lastdown}', '{cisco_device_ip_adress}', '{cisco_device_name}', '{cisco_client_port}', '{cisco_client_status}', '{prtg_device_status}', '{cisco_client_mac_address}', '{is_databackup}', '{red_type}', '{cctv_enabled}', '{cctv_valid}')")
+            query = (f"INSERT INTO dcs.devices (host, type, site, dpto, prtg_name_device, prtg_id, prtg_sensorname, prtg_status, prtg_lastup, prtg_lastdown, cisco_device_ip, cisco_device_name, cisco_port, cisco_status, cisco_reachability, cisco_status_device, cisco_mac_address, data_backup, red)"
+                f"VALUES ('{ip}', '{device_type}', '{site}', '{dpto}', '{prtg_name_device}', '{prtg_id_device}', '{prtg_name_sensor}', '{prtg_status}', '{prtg_lastup}', '{prtg_lastdown}', '{cisco_device_ip_adress}', '{cisco_device_name}', '{cisco_client_port}', '{cisco_client_status}', '{cisco_device_reachability}', '{prtg_device_status}', '{cisco_client_mac_address}', '{is_databackup}', '{red_type}')")
             cursor.execute(query)
             mydb.commit()
             
