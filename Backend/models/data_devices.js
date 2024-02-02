@@ -6,23 +6,27 @@ const DataDevices= sequelize.define(
   {
     ip: {
       type: DataTypes.STRING(100),
-      allowNull: true,
+      allowNull: false,
     },
     type_device: {
       type: DataTypes.STRING(100),
-      allowNull: true,
+      allowNull: false,
     },
     site: {
       type: DataTypes.STRING(100),
-      allowNull: true,
+      allowNull: false,
     },
     dpto: {
       type: DataTypes.STRING(100),
-      allowNull: true,
+      allowNull: false,
     },
     red: {
       type: DataTypes.STRING(10),
-      allowNull: true,
+      allowNull: false,
+    },
+    id_cctv: {
+      type: DataTypes.STRING(10),
+      allowNull: false,
     },
   },
   {

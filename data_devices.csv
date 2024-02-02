@@ -1,17 +1,12 @@
-1,10.224.4.147,Access Point,Dique Mina,TICA,IT
-2,10.225.6.11,Camara,Anden Sur,Open Pit,OT
 3,10.231.0.15,Camara,PAC,Relaveducto PAC,IT
 4,10.231.0.17,Camara,PAC,Relaveducto PAC,IT
 5,10.231.0.19,Camara,PAC,Relaveducto PAC,IT
 6,10.231.0.89,Camara,PAC,Relaveducto PAC,IT
 7,10.225.5.80,Camara,Padrones,DPI,IT
-8,10.224.4.186,Pantalla Led,Concentradora,Operaciones Concentradora,IT
 9,10.231.0.60,Camara,PAC,DPI,IT
 10,10.231.0.20,Camara,PAC,Relaveducto PAC,IT
 11,10.224.73.246,Camara,Concentradora,Operaciones Concentradora,IT
-12,10.225.6.41,Camara,Candelaria,DPI,OT
 13,10.231.0.68,Camara,PAC,Relaveducto PAC,IT
-14,10.224.193.22,IMX,Espesadores,Confiabilidad,OT
 15,10.231.0.61,Camara,PAC,DPI,IT
 16,10.231.0.96,Camara,PAC,Abastecimiento,IT
 17,10.231.0.92,Camara,PAC,Relaveducto PAC,IT
@@ -37,14 +32,12 @@
 37,10.231.0.97,Camara,PAC,Abastecimiento,IT
 38,10.225.5.84,Camara,Padrones,DPI,IT
 39,10.225.5.11,Camara,Padrones,DPI,IT
-40,10.224.10.30,Newmar,TShop,DPI,IT
 41,10.231.0.69,Camara,PAC,Relaveducto PAC,IT
 42,10.231.0.90,Camara,PAC,TICA PAC,IT
 43,10.225.1.121,Camara,Candelaria,Operaciones Concentradora,IT
 44,10.224.4.108,Camara,Candelaria,Operaciones Concentradora,IT
 45,10.225.1.114,Camara,Candelaria,Operaciones Concentradora,IT
 46,10.231.0.65,Camara,PAC,DPI,IT
-47,10.224.4.31,Access Point,Concentradora,Operaciones Concentradora,IT
 48,10.225.1.98,Camara,Candelaria,Operaciones Concentradora,IT
 49,10.225.1.39,Camara,Candelaria,Operaciones Concentradora,IT
 50,10.225.5.85,Camara,Padrones,DPI,IT
@@ -60,11 +53,8 @@
 61,10.225.1.9,Camara,Candelaria,Operaciones Concentradora,IT
 62,10.231.0.67,Camara,PAC,Relaveducto PAC,IT
 63,10.225.1.101,Camara,Candelaria,Operaciones Concentradora,IT
-64,10.225.6.40,Camara,Candelaria,Operaciones Concentradora,OT
 65,10.225.5.13,Camara,Padrones,DPI,IT
-66,10.224.4.69,SmartTAG,Concentradora,Operaciones Concentradora,IT
 67,10.225.0.12,Camara,Romana,DPI,IT
-68,10.224.4.65,SmartTAG,Concentradora,Operaciones Concentradora,IT
 69,10.225.5.91,Camara,Padrones,DPI,IT
 70,10.224.73.247,Camara,Candelaria,Operaciones Concentradora,IT
 71,10.225.1.122,Camara,Candelaria,Operaciones Concentradora,IT
@@ -77,52 +67,19 @@
 78,10.231.0.100,Camara,PAC,Abastecimiento,IT
 79,10.231.0.91,Camara,PAC,TICA PAC,IT
 80,10.225.5.82,Camara,Padrones,DPI,IT
-81,10.224.4.46,Access Point,ABC Predictivo,TICA,IT
-82,10.224.10.8,Access Point,TruckShop,TICA,IT
 83,10.225.5.17,Camara,Padrones,DPI,IT
 84,10.225.1.30,Camara,Candelaria,Operaciones Concentradora,IT
 85,10.225.1.4,Camara,Candelaria,Operaciones Concentradora,IT
 86,10.224.4.47,Camara,Candelaria,Operaciones Concentradora,IT
-87,10.225.6.24,Camara,Candelaria,Operaciones Concentradora,OT
 88,10.225.1.125,Camara,Candelaria,Operaciones Concentradora,IT
-89,10.225.6.22,Camara,Candelaria,Operaciones Concentradora,OT
 90,10.224.4.63,Camara,Candelaria,Operaciones Concentradora,IT
 91,10.225.1.43,Camara,Candelaria,Operaciones Concentradora,IT
 92,10.225.1.128,Camara,Candelaria,Operaciones Concentradora,IT
-93,10.225.6.25,Camara,Candelaria,Operaciones Concentradora,OT
 94,10.225.1.126,Camara,Candelaria,Operaciones Concentradora,IT
 95,10.225.1.44,Camara,Candelaria,Operaciones Concentradora,IT
-96,10.225.6.19,Camara,Candelaria,Medio Ambiente,OT
 97,10.225.1.53,Camara,Candelaria,Operaciones Concentradora,IT
 98,10.225.1.42,Camara,Candelaria,Operaciones Concentradora,IT
-99,10.117.112.204,Camara,Candelaria,Medio Ambiente,OT
 100,10.225.1.54,Camara,Candelaria,Operaciones Concentradora,IT
-101,10.117.112.205,Camara,Candelaria,Medio Ambiente,OT
-102,10.225.6.18,Camara,Candelaria,Open Pit,OT
-103,10.117.112.206,Camara,Candelaria,Medio Ambiente,OT
-104,10.117.112.207,Camara,Candelaria,Medio Ambiente,OT
-105,10.225.6.16,Camara,Candelaria,Open Pit,OT
-106,10.225.6.15,Camara,Candelaria,Open Pit,OT
-107,10.225.6.17,Camara,Candelaria,Open Pit,OT
-108,10.225.6.10,Camara,Candelaria,Open Pit,OT
-109,10.225.6.13,Camara,Candelaria,Open Pit,OT
-110,10.225.6.38,Camara,Candelaria,Open Pit,OT
-111,10.225.6.14,Camara,Candelaria,Open Pit,OT
-112,10.225.6.23,Camara,Candelaria,Open Pit,OT
-113,10.225.6.39,Camara,Candelaria,Open Pit,OT
-114,10.224.73.239,Router,P.Padrones,Medio Ambiente,IT
-115,10.224.73.238,Access Point,P.Padrones,Medio Ambiente,IT
-116,10.224.178.15,Microsismico,Candelaria Norte,Operaciones Mina UG,IT
-117,10.230.178.6,Microsismico,Alcaparrosa,Operaciones Mina UG,IT
-118,10.224.178.16,Microsismico,Candelaria Norte,Operaciones Mina UG,IT
-119,10.224.178.18,Microsismico,Candelaria Norte,Operaciones Mina UG,IT
-120,10.230.178.5,Microsismico,Alcaparrosa,Operaciones Mina UG,IT
-121,10.224.178.5,Microsismico,Candelaria ADM,Operaciones Mina UG,IT
-122,10.230.178.7,Microsismico,Alcaparrosa,Operaciones Mina UG,IT
-123,10.230.178.8,Microsismico,Alcaparrosa,Operaciones Mina UG,IT
-124,10.224.178.17,Microsismico,Candelaria Norte,Operaciones Mina UG,IT
-125,10.230.178.9,Microsismico,Alcaparrosa,Operaciones Mina UG,IT
-126,10.224.75.151,Datalogger,P.Padrones,Medio Ambiente,IT
 127,10.231.0.105,Camara,PAC,DPI,IT
 128,10.231.1.18,Camara,Alcaparrosa,DPI,IT
 129,10.231.1.19,Camara,Alcaparrosa,DPI,IT
@@ -197,21 +154,15 @@
 199,10.225.7.21,Camara,Candelaria Norte,DPI,IT
 200,10.225.1.21,Camara,Candelaria,Operaciones Concentradora,IT
 201,10.225.2.8,Camara,Candelaria,DPI,IT
-202,10.224.65.53,Camara,Candelaria,Operaciones Concentradora,OT
 203,10.224.21.12,Camara,Candelaria,DPI,IT
 204,10.225.1.50,Camara,Candelaria,DPI,IT
 205,10.225.1.49,Camara,Candelaria,DPI,IT
-206,10.225.6.20,Camara,Candelaria,Geotecnica,OT
 207,10.225.1.116,Camara,Candelaria,DPI,IT
 208,10.225.1.115,Camara,Candelaria,DPI,IT
 209,10.225.3.6,Camara,Candelaria,DPI,IT
 210,10.225.1.56,Camara,Candelaria,DPI,IT
-211,10.224.65.52,Camara,Candelaria,Operaciones Concentradora,OT
 212,10.225.1.68,Camara,Candelaria,DPI,IT
-213,10.225.6.7,Camara,Candelaria,DPI,OT
 214,10.225.4.42,Camara,Candelaria,DPI,IT
-215,10.225.6.31,Camara,Candelaria,DPI,OT
-217,10.225.6.43,Camara,Candelaria,DPI,OT
 218,10.225.1.86,Camara,Candelaria,DPI,IT
 219,10.225.1.83,Camara,Candelaria,DPI,IT
 220,10.225.4.43,Camara,Candelaria,DPI,IT
@@ -219,25 +170,18 @@
 222,10.225.1.58,Camara,Candelaria,DPI,IT
 223,10.225.1.74,Camara,Candelaria,DPI,IT
 224,10.225.1.60,Camara,Candelaria,DPI,IT
-225,10.225.6.37,Camara,Candelaria,DPI,OT
 227,10.225.1.123,Camara,Candelaria,DPI,IT
-228,10.225.6.29,Camara,Candelaria,DPI,OT
 229,10.224.27.10,Camara,Candelaria,DPI,IT
 230,10.225.1.85,Camara,Candelaria,DPI,IT
-231,10.225.6.6,Camara,Candelaria,DPI,OT
 232,10.225.1.63,Camara,Candelaria,DPI,IT
 233,10.225.0.14,Camara,Candelaria,DPI,IT
 234,10.225.1.81,Camara,Candelaria,DPI,IT
 235,10.225.1.113,Camara,Candelaria,Operaciones Concentradora,IT
 236,10.224.27.12,Camara,Candelaria,DPI,IT
-237,10.225.6.44,Camara,Candelaria,DPI,OT
 238,10.225.4.40,Camara,Candelaria,DPI,IT
 239,10.225.1.108,Camara,Candelaria,DPI,IT
 240,10.224.27.13,Camara,Candelaria,DPI,IT
-241,10.225.6.28,Camara,Candelaria,DPI,OT
-242,10.225.6.9,Camara,Candelaria,DPI,OT
 243,10.225.3.8,Camara,Candelaria,DPI,IT
-244,10.225.6.8,Camara,Candelaria,DPI,OT
 245,10.225.3.12,Camara,Candelaria,DPI,IT
 246,10.225.1.82,Camara,Candelaria,Operaciones Mina,IT
 247,10.225.1.111,Camara,Candelaria,DPI,IT
@@ -258,7 +202,6 @@
 263,10.225.0.13,Camara,Candelaria,DPI,IT
 264,10.225.3.11,Camara,Candelaria,DPI,IT
 265,10.225.1.78,Camara,Candelaria,DPI,IT
-266,10.225.6.34,Camara,Candelaria,DPI,OT
 267,10.225.0.31,Camara,Candelaria,DPI,IT
 268,10.225.7.12,Camara,Candelaria Norte,Operaciones Mina UG,IT
 269,10.225.0.29,Camara,Candelaria,DPI,IT
@@ -270,30 +213,23 @@
 275,10.225.1.12,Camara,Candelaria,DPI,IT
 276,10.225.4.25,Camara,Candelaria,DPI,IT
 277,10.225.0.30,Camara,Candelaria,DPI,IT
-278,10.225.6.36,Camara,Candelaria,DPI,OT
 279,10.225.1.202,Camara,Candelaria,DPI,IT
 280,10.225.4.38,Camara,Candelaria,DPI,IT
 281,10.225.1.134,Camara,Candelaria,DPI,IT
 282,10.225.4.33,Camara,Candelaria,DPI,IT
 283,10.225.1.52,Camara,Candelaria,DPI,IT
 284,10.225.1.208,Camara,Candelaria,DPI,IT
-285,10.225.6.26,Camara,Candelaria,Geotecnica,OT
 286,10.225.0.35,Camara,Candelaria,DPI,IT
 287,10.225.4.32,Camara,Candelaria,DPI,IT
-288,10.225.6.33,Camara,Candelaria,DPI,OT
 289,10.225.7.20,Camara,Candelaria,Operaciones Mina UG,IT
-290,10.225.6.35,Camara,Candelaria,DPI,OT
 291,10.225.7.19,Camara,Candelaria,Operaciones Mina UG,IT
 292,10.117.112.212,Camara,Candelaria,Operaciones Mina,IT
-293,10.225.6.5,Camara,Candelaria,Medio Ambiente,OT
 294,10.225.4.23,Camara,Candelaria,DPI,IT
 295,10.225.7.9,Camara,Candelaria,Operaciones Mina UG,IT
 296,10.225.7.18,Camara,Candelaria Norte,Operaciones Mina UG,IT
 297,10.225.0.27,Camara,Candelaria,TICA,IT
-298,10.225.6.21,Camara,Candelaria,DPI,OT
 299,10.225.3.7,Camara,Candelaria,DPI,IT
 300,10.225.0.9,Camara,Candelaria,DPI,IT
-301,10.225.6.32,Camara,Candelaria,DPI,OT
 302,10.225.4.34,Camara,Candelaria,DPI,IT
 303,10.225.5.46,Camara,P.Padrones,DPI,IT
 304,10.225.1.55,Camara,Candelaria,Abastecimiento,IT
@@ -318,7 +254,6 @@
 323,10.225.4.39,Camara,Candelaria,DPI,IT
 324,10.225.0.17,Camara,Candelaria,DPI,IT
 325,10.225.0.18,Camara,Candelaria,DPI,IT
-326,10.225.6.42,Camara,Candelaria,DPI,OT
 327,10.225.0.15,Camara,Candelaria,DPI,IT
 329,10.224.18.96,Camara,Chamonate,DPI,IT
 330,10.225.1.104,Camara,Candelaria,TICA,IT
@@ -330,7 +265,6 @@
 337,10.225.2.6,Camara,Candelaria,DPI,IT
 338,10.225.7.11,Camara,Candelaria,Operaciones Mina UG,IT
 339,10.225.1.77,Camara,Candelaria,DPI,IT
-340,10.225.6.12,Camara,Candelaria,Operaciones Concentradora,OT
 341,10.225.1.112,Camara,Candelaria,DPI,IT
 342,10.225.1.62,Camara,Candelaria,DPI,IT
 343,10.225.1.61,Camara,Candelaria,DPI,IT
@@ -345,145 +279,9 @@
 353,10.231.0.88,Camara,PAC,DPI,IT
 355,10.225.2.15,Camara,Candelaria,DPI,IT
 357,10.225.1.87,Camara,Candelaria,DPI,IT
-359,10.230.7.7,Impresora,Ojos,T.Amarilla,IT
-360,10.224.4.237,Impresora,Candelaria,Concentradora,IT
-361,10.224.12.171,Impresora,Candelaria,P.Padrones,IT
-362,10.224.6.177,Impresora,Candelaria,Servicio,IT
-363,10.224.4.11,Impresora,Candelaria,T.Gruas,IT
-364,10.224.10.191,Impresora,Candelaria,TruckShop,IT
-365,10.224.1.176,Impresora,Candelaria,Admistracion,IT
-366,10.224.8.180,Impresora,Candelaria,Operaciones,IT
-367,10.224.10.22,Impresora,Candelaria,TruckShop,IT
-368,10.224.28.5,Impresora,LMC,Santiago,IT
-369,10.224.4.225,Impresora,Candelaria,Concentradora,IT
-370,10.224.4.226,Impresora,Candelaria,Concentradora,IT
-371,10.224.3.89,Impresora,Candelaria,Concentradora,IT
-372,10.224.8.171,Impresora,Candelaria,Operaciones,IT
-373,10.230.5.12,Impresora,Santos,Mantencion,IT
-374,10.224.13.134,Impresora,Candelaria,OpenPit,IT
-375,10.224.1.223,Impresora,Candelaria,Admistracion,IT
-376,10.230.1.216,Impresora,Ojos,Planta,IT
-377,10.224.8.190,Impresora,Candelaria,Operaciones,IT
-378,10.224.8.177,Impresora,Candelaria,Operaciones,IT
-379,10.224.8.182,Impresora,Candelaria,Operaciones,IT
-380,10.224.1.217,Impresora,Candelaria,Admistracion,IT
-381,10.224.10.217,Impresora,Candelaria,TruckShop,IT
-382,10.224.8.183,Impresora,Candelaria,Operaciones,IT
-383,10.224.1.212,Impresora,Candelaria,Admistracion,IT
-384,10.224.1.219,Impresora,Candelaria,Admistracion,IT
-385,10.224.12.174,Impresora,Candelaria,P.Padrones,IT
-386,10.224.10.181,Impresora,Candelaria,TruckShop,IT
-387,10.224.6.7,Impresora,Candelaria,Servicio,IT
-388,10.224.8.248,Impresora,Candelaria,Operaciones,IT
-389,10.230.7.9,Impresora,Ojos,T.Amarilla,IT
-390,10.230.3.100,Impresora,Alcaparrosa,Ingenieria,IT
-391,10.224.3.91,Impresora,Candelaria,Exploraciones,IT
-392,10.224.4.239,Impresora,Candelaria,Concentradora,IT
-393,10.224.10.212,Impresora,Candelaria,TruckShop,IT
-394,10.224.8.181,Impresora,Candelaria,Operaciones,IT
-395,10.224.4.151,Impresora,Candelaria,Concentradora,IT
-396,10.224.10.180,Impresora,Candelaria,TruckShop,IT
-397,10.224.1.222,Impresora,Candelaria,Admistracion,IT
-398,10.224.4.153,Impresora,Candelaria,Concentradora,IT
-399,10.224.10.171,Impresora,Candelaria,TruckShop,IT
-400,10.224.1.191,Impresora,Candelaria,Admistracion,IT
-401,10.224.4.242,Impresora,Candelaria,Concentradora,IT
-402,10.224.8.178,Impresora,Candelaria,Operaciones,IT
-403,10.224.4.24,Impresora,Candelaria,Concentradora,IT
-404,10.224.4.21,Impresora,Candelaria,Concentradora,IT
-405,10.224.10.223,Impresora,Candelaria,TruckShop,IT
-406,10.230.30.24,Impresora,Ojos,Abastecimiento,IT
-407,10.224.1.50,Impresora,Candelaria,Admistracion,IT
-408,10.224.1.211,Impresora,Candelaria,Admistracion,IT
-409,10.224.4.221,Impresora,Candelaria,Concentradora,IT
-410,10.227.36.23,Impresora,Candelaria,Admistracion,IT
-411,10.224.4.240,Impresora,Candelaria,Concentradora,IT
-412,10.224.8.188,Impresora,Candelaria,Operaciones,IT
-413,10.224.12.173,Impresora,Candelaria,P.Padrones,IT
-414,10.224.1.214,Impresora,Candelaria,Admistracion,IT
-415,10.224.6.171,Impresora,Candelaria,Servicio,IT
-416,10.224.1.183,Impresora,Candelaria,Admistracion,IT
-417,10.224.1.171,Impresora,Candelaria,Admistracion,IT
-418,10.224.16.10,Impresora,Candelaria,V.Chamonate,IT
-419,10.230.30.23,Impresora,Ojos,Abastecimiento,IT
-420,10.224.1.185,Impresora,Candelaria,Admistracion,IT
-421,10.224.0.34,Impresora,Candelaria,Operaciones,IT
-422,10.224.8.34,Impresora,Candelaria,Operaciones,IT
-423,10.224.27.170,Impresora,Candelaria,Com.Copiapo,IT
-424,10.224.1.172,Impresora,Candelaria,Admistracion,IT
-425,10.224.8.174,Impresora,Candelaria,Operaciones,IT
-426,10.224.13.9,Impresora,Candelaria,OpenPit,IT
-427,10.224.6.200,Impresora,Candelaria,Servicio,IT
-428,10.224.4.222,Impresora,Candelaria,Concentradora,IT
-429,10.224.30.141,Impresora,Candelaria,Admistracion,IT
-430,10.230.1.235,Impresora,Candelaria,Admistracion,IT
-431,10.230.3.101,Impresora,Alcaparrosa,Romana,IT
-432,10.224.1.221,Impresora,Candelaria,Admistracion,IT
-433,10.230.30.27,Impresora,Ojos,Romana,IT
-434,10.224.72.99,Impresora,Candelaria,Concentradora,IT
-435,10.224.1.184,Impresora,Candelaria,Admistracion,IT
-436,10.224.4.241,Impresora,Candelaria,Concentradora,IT
-437,10.224.8.218,Impresora,Candelaria,Operaciones,IT
-438,10.230.1.232,Impresora,Ojos,Exploraciones,IT
-439,10.224.6.181,Impresora,Candelaria,Servicio,IT
-440,10.224.6.173,Impresora,Candelaria,Servicio,IT
-441,10.224.4.111,Impresora,Candelaria,Concentradora,IT
-442,10.224.16.11,Impresora,Candelaria,V.Chamonate,IT
-443,10.230.30.21,Impresora,Ojos,Abastecimiento,IT
-444,10.224.8.175,Impresora,Candelaria,Operaciones,IT
-445,10.224.4.191,Impresora,Candelaria,Concentradora,IT
-446,10.224.1.24,Impresora,Candelaria,Admistracion,IT
-447,10.230.1.233,Impresora,Ojos,Exploraciones,IT
-448,10.224.30.56,Impresora,Candelaria,Concentradora,IT
-449,10.224.8.189,Impresora,Candelaria,Operaciones,IT
-450,10.224.1.224,Impresora,Candelaria,Admistracion,IT
-451,10.224.4.238,Impresora,Candelaria,Concentradora,IT
-452,10.224.10.216,Impresora,Candelaria,TruckShop,IT
-453,10.224.4.150,Impresora,Candelaria,Concentradora,IT
-454,10.224.6.217,Impresora,Candelaria,Servicio,IT
-455,10.230.1.222,Impresora,Candelaria,Servicio,IT
-456,10.224.18.8,Impresora,Candelaria,V.Chamonate,IT
-457,10.224.4.224,Impresora,Candelaria,Concentradora,IT
-458,10.224.8.184,Impresora,Candelaria,Operaciones,IT
-459,10.224.8.187,Impresora,Candelaria,Operaciones,IT
-460,10.230.1.212,Impresora,Ojos,T.Electrico,IT
-461,10.224.12.172,Impresora,Candelaria,P.Padrones,IT
-462,10.224.8.185,Impresora,Candelaria,Operaciones,IT
-463,10.230.5.10,Impresora,Santos,Romana,IT
-464,10.224.10.174,Impresora,Candelaria,TruckShop,IT
-465,10.224.16.9,Impresora,Candelaria,V.Chamonate,IT
-466,10.224.6.176,Impresora,Candelaria,Servicio,IT
-467,10.224.4.228,Impresora,Candelaria,Concentradora,IT
-468,10.224.8.186,Impresora,Candelaria,Operaciones,IT
-469,10.230.1.236,Impresora,Ojos,Ingenieria,IT
-470,10.230.5.172,Impresora,Santos,Policlinico,IT
-471,10.230.5.100,Impresora,Santos,Ingenieria,IT
-472,10.230.1.231,Impresora,Ojos,Exploraciones,IT
-473,10.224.3.40,Impresora,Candelaria,Concentradora,IT
-474,10.230.1.211,Impresora,Candelaria,Admistracion,IT
-475,10.224.4.192,Impresora,Candelaria,Concentradora,IT
-476,10.224.10.222,Impresora,Candelaria,TruckShop,IT
-477,10.224.10.221,Impresora,Candelaria,TruckShop,IT
-478,10.224.4.229,Impresora,Candelaria,Concentradora,IT
-479,10.224.4.223,Impresora,Candelaria,Concentradora,IT
-480,10.224.10.25,Impresora,Candelaria,TruckShop,IT
-481,10.224.4.152,Impresora,Candelaria,Concentradora,IT
-482,10.230.5.101,Impresora,Santos,Geologia,IT
-483,10.230.5.171,Impresora,Santos,JTurno,IT
-484,10.224.21.6,Impresora,Candelaria,Com.Copiapo,IT
-485,10.224.1.138,Impresora,Candelaria,Admistracion,IT
-486,10.225.6.58,Camara,Candelaria,Open Pit,OT
-487,10.225.6.59,Camara,Candelaria,Open Pit,OT
-488,10.224.75.37,Impresora,Candelaria,Abastecimiento,IT
-489,10.225.6.63,Camara,Candelaria,Open Pit,OT
 490,10.225.1.120,Camara,Candelaria,Operaciones Concentradora,IT
 491,10.225.1.124,Camara,Candelaria,Operaciones Concentradora,IT
 492,10.225.1.127,Camara,Candelaria,Operaciones Concentradora,IT
-493,10.225.6.71,Camara,Candelaria,DPI,OT
-494,10.225.6.72,Camara,Candelaria,DPI,OT
-495,10.224.6.178,Impresora,Candelaria,Servicio,IT
-496,10.225.6.61,Camara,Candelaria,Open Pit,OT
-497,10.225.6.62,Camara,Candelaria,Open Pit,OT
 498,10.225.5.140,Camara,Candelaria,DPI,IT
 499,10.225.1.37,Camara,Candelaria,DPI,IT
 500,10.225.0.38,Camara,Candelaria,DPI,IT

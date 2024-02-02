@@ -60,10 +60,6 @@ const Devices = sequelize.define(
       type: DataTypes.STRING(50),
       allowNull: true,
     },
-    cisco_reachability: {
-      type: DataTypes.STRING(50),
-      allowNull: true,
-    },
     cisco_status_device: {
       type: DataTypes.STRING(50),
       allowNull: true,
@@ -79,7 +75,15 @@ const Devices = sequelize.define(
     red: {
       type: DataTypes.STRING(10),
       allowNull: true,
-    }
+    },
+    cctv_enabled: {
+      type: DataTypes.STRING(10),
+      allowNull: true,
+    },
+    cctv_valid: {
+      type: DataTypes.STRING(10),
+      allowNull: true,
+    },
   },
   {
     tableName: "devices",

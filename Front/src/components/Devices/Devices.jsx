@@ -9,6 +9,9 @@ import {
   CISCO_URL,
 } from "../../utils/Api-candelaria/api";
 import { Spinner } from "../Spinner/Spinner";
+import { MdOnlinePrediction } from "react-icons/md";
+import { IoCloseCircle } from "react-icons/io5";
+import { FaQuestion } from "react-icons/fa";
 import "./devices.css";
 
 export function Devices() {
@@ -133,9 +136,28 @@ export function Devices() {
             : device.cisco_status}
         </td>
         <td>
-          {device.data_backup === "true"
-            ? `⚠️ ${device.cisco_reachability}`
-            : device.cisco_reachability}
+          {device.cctv_enabled === "True" && device.cctv_valid === "True" ? (
+            <MdOnlinePrediction
+              title={"CCTV VALID: True & CCTV VALID: True"}
+              fontSize="1.3rem"
+              color="green"
+            />
+          ) : device.cctv_enabled === "True" &&
+            device.cctv_valid === "False" ? (
+            <MdOnlinePrediction
+              title={"CCTV ENABLED: True & CCTV VALID: False"}
+              fontSize="1.3rem"
+              color="orange"
+            />
+          ) : device.cctv_enabled === "Not Found" ? (
+            <FaQuestion title={"CCTV Not Found"} fontSize="1rem" color="gray" />
+          ) : (
+            <MdOnlinePrediction
+              title={"CCTV ENABLED: False"}
+              fontSize="1.3rem"
+              color="red"
+            />
+          )}
         </td>
       </tr>
     ));
@@ -190,7 +212,7 @@ export function Devices() {
               <th>CISCO SW NAME</th>
               <th>CISCO PUERTO</th>
               <th>CISCO ESTADO</th>
-              <th>CISCO REACHABILITY</th>
+              <th>CCTV</th>
             </tr>
           </thead>
           <tbody>{renderTableBody()}</tbody>
