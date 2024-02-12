@@ -52,9 +52,13 @@ def route_function(ip_switch, red, name):
         logging.error(e)
         logging.error(traceback.format_exc())
         
-        data['via_bgp'] = 'Not Found / Error'
-        data['ip_switch'] = ip_switch
-        
+        data = {
+            'red': red,
+            'name_switch': name,
+            'via_bgp': 'Error',
+            'ip_switch': ip_switch,
+        }
+            
         return data
 
 # route_function('10.230.127.1', 'it', 'OJOS')

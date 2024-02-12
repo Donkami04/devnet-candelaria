@@ -38,3 +38,13 @@
 .devices-dash-table-home td {
   border: 1px solid black;
 }
+
+@media (max-width: 1330px) {
+  .devices-dash-table th, .devices-dash-table td {
+    font-size: 0.8rem;
+  }
+
+  .devices-dash-table {
+    width: 50%;
+  }
+}

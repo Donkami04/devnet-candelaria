@@ -89,6 +89,9 @@ export async function useDataInfGen() {
         ) {
           downElements.push(element);
         }
+        if (element.status.includes("Down")) {
+          downElements.push(element);
+        }
         if (
           element.status === "Up" &&
           element.name.includes("Temperatures") &&
@@ -108,7 +111,7 @@ export async function useDataInfGen() {
         if (
           (element.name.includes("Memory") &&
             element.name_switch === "WLC 9800 NEGOCIO" &&
-            parseInt(element.lastvalue) <= 1000) ||
+            parseInt(element.lastvalue.replace(".", "")) <= 1000) ||
           (element.name.includes("Memory") &&
             element.name_switch === "WLC 9800 NEGOCIO" &&
             element.status.includes("Down"))
@@ -142,7 +145,7 @@ export async function useDataInfGen() {
   });
 
   upOrDownInterface(allData);
-  
+
   upOrDownNeighbors(allData);
   upOrDownSysHealth(allData);
   upOrDownRouteDefault(allData);
@@ -151,8 +154,6 @@ export async function useDataInfGen() {
     upElements: upElements,
     downElements: downElements,
   };
-
-
 
   return data;
 }

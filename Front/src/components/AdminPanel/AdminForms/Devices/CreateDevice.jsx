@@ -47,6 +47,7 @@ export const CreateDevice = () => {
       });
       setMensaje(response.data.message);
     } catch (error) {
+      console.error(error);
       if (
         error.response &&
         error.response.data &&
@@ -133,6 +134,24 @@ export const CreateDevice = () => {
             <option value="OT">OT</option>
           </select>
         </div>
+        {/* {dataDevice.type_device.toLowerCase() === "camara" ||
+        dataDevice.type_device.toLowerCase() === "cámara" ? (
+          <div>
+            <label className="form-label" htmlFor="id_cctv">
+              ID CCTV:
+            </label>
+            <input
+              className="form-input"
+              type="text"
+              id="id_cctv"
+              name="id_cctv"
+              value={dataDevice.id_cctv}
+              onChange={handleInputChange}
+            />
+          </div>
+        ) : (
+          ""
+        )} */}
         <div>
           <button type="submit" className="form-button">
             Enviar

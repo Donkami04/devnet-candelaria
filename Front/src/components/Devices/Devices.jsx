@@ -12,6 +12,8 @@ import { Spinner } from "../Spinner/Spinner";
 import { MdOnlinePrediction } from "react-icons/md";
 import { IoCloseCircle } from "react-icons/io5";
 import { FaQuestion } from "react-icons/fa";
+import { BsFillCameraVideoFill } from "react-icons/bs";
+
 import "./devices.css";
 
 export function Devices() {
@@ -63,6 +65,12 @@ export function Devices() {
       .includes(searchTerm.toLowerCase())
   );
 
+  const [expanded, setExpanded] = useState(false);
+
+  const toggleContent = () => {
+    setExpanded(!expanded);
+  };
+
   if (loading) {
     return (
       <div>
@@ -98,13 +106,13 @@ export function Devices() {
         </td>
         <td>{device.prtg_lastup}</td>
         <td>{device.prtg_lastdown}</td>
-        <td>
+        <td style={{ width: "1%" }}>
           {device.data_backup === "true"
             ? `⚠️ ${device.cisco_device_ip}`
             : device.cisco_device_ip}
         </td>
         <td
-          className={
+          className={`${
             device.cisco_status_device.includes("Up")
               ? "kpi-green"
               : device.cisco_status_device.includes("Down")
@@ -112,7 +120,7 @@ export function Devices() {
               : device.cisco_status_device.includes("Paused")
               ? "kpi-blue"
               : ""
-          }
+          } td-name-cisco`}
         >
           {device.data_backup === "true"
             ? `⚠️ ${device.cisco_device_name}`
@@ -136,15 +144,17 @@ export function Devices() {
             : device.cisco_status}
         </td>
         <td>
-          {device.cctv_enabled === "True" && device.cctv_valid === "True" ? (
-            <MdOnlinePrediction
-              title={"CCTV VALID: True & CCTV VALID: True"}
+          {device.cctv_enabled === "N/A" ? (
+            ""
+          ) : device.cctv_enabled === "True" && device.cctv_valid === "True" ? (
+            <BsFillCameraVideoFill
+              title={"CCTV ENABLED: True & CCTV VALID: True"}
               fontSize="1.3rem"
               color="green"
             />
           ) : device.cctv_enabled === "True" &&
             device.cctv_valid === "False" ? (
-            <MdOnlinePrediction
+            <BsFillCameraVideoFill
               title={"CCTV ENABLED: True & CCTV VALID: False"}
               fontSize="1.3rem"
               color="orange"
@@ -152,7 +162,7 @@ export function Devices() {
           ) : device.cctv_enabled === "Not Found" ? (
             <FaQuestion title={"CCTV Not Found"} fontSize="1rem" color="gray" />
           ) : (
-            <MdOnlinePrediction
+            <BsFillCameraVideoFill
               title={"CCTV ENABLED: False"}
               fontSize="1.3rem"
               color="red"
@@ -215,7 +225,7 @@ export function Devices() {
               <th>CCTV</th>
             </tr>
           </thead>
-          <tbody>{renderTableBody()}</tbody>
+          <tbody className="data-table-devices">{renderTableBody()}</tbody>
         </table>
         {renderRowCount()}
       </div>

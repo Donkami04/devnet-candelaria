@@ -28,7 +28,6 @@ export function Categories() {
     const fetchData = async () => {
       try {
         const dataStatusInfGen = await useDataInfGen();
-
         const newCoresUp = [];
         const newDistUp = [];
         const newApUp = [];
@@ -44,10 +43,7 @@ export function Categories() {
           if (e.name_switch && e.name_switch.includes("DIST")) {
             newDistUp.push(e);
           }
-          if (
-            e.last_disconnect_reason &&
-            e.status === "Joined"
-          ) {
+          if (e.last_disconnect_reason && e.status === "Joined") {
             newApUp.push(e);
           }
         });
@@ -59,10 +55,7 @@ export function Categories() {
           if (e.name_switch && e.name_switch.includes("DIST")) {
             newDistDown.push(e);
           }
-          if (
-            e.last_disconnect_reason &&
-            e.status !== "Joined"
-          ) {
+          if (e.last_disconnect_reason && e.status !== "Joined") {
             newApDown.push(e);
           }
         });

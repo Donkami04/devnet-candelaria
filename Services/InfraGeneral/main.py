@@ -7,6 +7,9 @@ from command_eigrp import eigrp_function
 from command_route import route_function
 from status_neighbor import status_neighbor
 from status_core import ping_host
+from commands_ot.clcanot_dcs import eigrp_clcanot_dcs_function
+from commands_ot.clcanot_ug import eigrp_clcanot_ug_function
+from commands_ot.clcanot_ugmine import eigrp_clcanot_ugmine_function
 
 warnings.filterwarnings("ignore", message="Unverified HTTPS request")
 
@@ -67,13 +70,10 @@ def core1():
         data_switches = [sw for sw in data_switches if sw['category'] != 'AP']
 
         # data_switches = [
-        #     # {'ip':'10.224.127.1', 'red': 'it', 'name_switch': 'ADMIN'},
-        #     # {'ip':'10.224.127.2', 'red': 'it', 'name_switch': 'CONCE'},
-        #     # {'ip':'10.230.127.1', 'red': 'it', 'name_switch': 'SW CORE OJOS'},
-        #     # {'ip':'10.224.127.3', 'red': 'it', 'name_switch': 'DIST-ADM'},
-        #     # {'ip':'10.224.127.4', 'red': 'it', 'name_switch': 'DIST-CONC'},
-        #     # {'ip':'10.224.127.160', 'red': 'it', 'name_switch': 'ADMIN-DNA'},
-        #     # {'ip':'10.224.127.161', 'red': 'it', 'name_switch': 'CONCE-DNA'},
+        #     {'ip':'10.224.127.147', 'red': 'ot', 'name_switch': 'SW-CORE-OT-ADMIN'},
+        #     {'ip':'10.224.127.148', 'red': 'ot', 'name_switch': 'SW-CORE-OT-CONCE'},
+        #     {'ip':'10.224.127.183', 'red': 'ot', 'name_switch': 'CORE-OT-NX-CONC'},
+        #     {'ip':'10.224.127.182', 'red': 'ot', 'name_switch': 'CORE-OT-NX-ADM'},
         # ]
 
         current_data_neighbors = []
@@ -91,7 +91,11 @@ def core1():
             data_bgp = bgp_function(ip_switch, red, name_switch)
             data_eigrp = eigrp_function(ip_switch, red, name_switch)
             data_ospf = ospf_function(ip_switch, red, name_switch)
-            data_neighbors = data_bgp + data_eigrp + data_ospf
+            data_clcanot_dcs = eigrp_clcanot_dcs_function(ip_switch, red, name_switch)
+            data_clcanot_ug = eigrp_clcanot_ug_function(ip_switch, red, name_switch)
+            data_clcanot_ugmine = eigrp_clcanot_ugmine_function(ip_switch, red, name_switch)
+            data_neighbors = data_bgp + data_eigrp + data_ospf + data_clcanot_dcs + data_clcanot_ug + data_clcanot_ugmine
+            data_neighbors = [e for e in data_neighbors if e.get("name_switch") not in ["CORE-OT-NX-CONC", "CORE-OT-NX-ADM"]]
 
             for neigh in data_neighbors:
                 current_data_neighbors.append(neigh)
@@ -169,7 +173,7 @@ def core1():
         cursor.executemany(query, values)
         cursor.executemany(query_historic, values)
         mydb.commit()
-        
+                
         # for neighbor in status_data_neighbors:
         #     ip_neighbor = neighbor['ip_neighbor']
         #     ip_switch = neighbor['ip_switch']

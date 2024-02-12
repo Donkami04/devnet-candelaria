@@ -85,12 +85,10 @@ def getData():
                 cursor.execute(query, (name_sensor, status_sensor, id_prtg, lastvalue, ip_switch, name_switch, red_sensor, name_sensor, status_sensor, lastvalue))
                 mydb.commit()
 
-                query_historic = "INSERT INTO dcs.historic_system_health (name, status, id_prtg, lastvalue, ip_switch, name_switch, red) VALUES (%s, %s, %s, %s, %s, %s, %s)"
-                cursor.execute(query_historic, (name_sensor, status_sensor, id_prtg, lastvalue, ip_switch, name_switch, red_sensor))
-                mydb.commit()
-
-            # status_ap = status_ap_function(mydb, ap_elements_list)
-            # print(f"Length con el estado: {len(status_ap)}")
+                # query_historic = "INSERT INTO dcs.historic_system_health (name, status, id_prtg, lastvalue, ip_switch, name_switch, red) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+                # cursor.execute(query_historic, (name_sensor, status_sensor, id_prtg, lastvalue, ip_switch, name_switch, red_sensor))
+                # mydb.commit()
+                
 
             # Blanqueamos la tabla AP antes de rellenarla de nuevo
             query = (f"DELETE FROM dcs.ap")
@@ -99,10 +97,8 @@ def getData():
             
             # Guardamos en bloque en la BD en vez de linea por linea
             query = "INSERT INTO dcs.ap (`name`, `ip`, `status`, `last_disconnect_reason`) VALUES (%s, %s, %s, %s)"
-            # query_historic = "INSERT INTO dcs.historic_ap (`name`, `model`, `ip`, `state`, `location`, `status`) VALUES (%s, %s, %s, %s, %s, %s)"
             values = [(ap['name'], ap['ip'], ap['status'], ap['last_disconnect_reason']) for ap in ap_elements_list]
             cursor.executemany(query, values)
-            # cursor.executemany(query_historic, values)
             mydb.commit()
             
             #! Lo comentado se usa para llenar data_ap
@@ -117,6 +113,11 @@ def getData():
                 # cursor.execute(query, (name, model, ip_ap, state, location))
                 # mydb.commit()
                 
+        now = datetime.datetime.now()
+        fecha_y_hora = now.strftime("%Y-%m-%d %H:%M:%S")
+        fecha_y_hora = str(fecha_y_hora)
+        cursor.execute(f"INSERT INTO dcs.fechas_consultas_ig (ultima_consulta, estado) VALUES ('{fecha_y_hora}', 'OK')")
+        mydb.commit()
         cursor.close()
         logging.info("Terminado")
 
@@ -217,14 +218,13 @@ def system_health(ip_switch, id_switch, red):
         return devices_systemhealth_notFound
 
 
-# def bucle(scheduler):
-#     getData()
-#     scheduler.enter(7200, 1, bucle, (scheduler,))
+def bucle(scheduler):
+    getData()
+    scheduler.enter(3600, 1, bucle, (scheduler,))
 
 
-# if __name__ == "__main__":
-#     s = sched.scheduler(time.time, time.sleep)
-#     s.enter(0, 1, bucle, (s,))
-#     s.run()
+if __name__ == "__main__":
+    s = sched.scheduler(time.time, time.sleep)
+    s.enter(0, 1, bucle, (s,))
+    s.run()
 
-getData()

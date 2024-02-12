@@ -54,7 +54,20 @@ def get_devices_data():
             row_dict[column_names[i]] = row[i]
         devices.append(row_dict)
 
-    try:   
+    try:
+        username_cctv = os.getenv('CCTV_USER')
+        password_cctv = os.getenv('CCT_PASS')
+        auth = (username_cctv, password_cctv)
+        cctv_list_servers = ['10.225.0.253']
+        # cctv_list_servers = ['10.225.0.253', '10.231.0.253', '10.225.11.253', '10.231.10.253']
+        cctv_data = []
+        
+        for ip in cctv_list_servers:
+            CCTV_API = os.getenv('CCTV_BASE_URL').format(ip_server=ip)  
+            cctv_response = requests.get(CCTV_API, auth=auth).json()
+            data = cctv_response['data']
+            cctv_data = cctv_data + data
+        
         for device in devices:
             ip = device['ip']
             logging.info(ip)
@@ -85,19 +98,29 @@ def get_devices_data():
             prtg_device_status = cisco_data['prtg_device_status']
             cisco_client_mac_address = cisco_data['cisco_client_mac_address']
             is_databackup = cisco_data['is_databackup']
-            cctv_enabled = "Not Found"
-            cctv_valid = "Not Found"
+            cctv_enabled = "N/A"
+            cctv_valid = "N/A"
             
-            if device['id_cctv'] != 'Not Found':
-                id_camera = device['id_cctv']
-                username_cctv = os.getenv('CCTV_USER')
-                password_cctv = os.getenv('CCT_PASS')
-                CCTV_DATA_SINGLE_CAMERA = os.getenv('CCTV_DATA_SINGLE_CAMERA').format(id_camera=id_camera)
+            # Si el tipo de dispositivo es camara buscamos la IP de esta en el listado obtenido de la API de CCTV
+            # Si no lo encuentra enabled y valid son Not Found
+            if device_type == 'Camara' or device_type == 'Cámara':
+                cctv_enabled = "Not Found"
+                cctv_valid = "Not Found"
+                for data in cctv_data:
+                    if data['url'] == ip:
+                        cctv_enabled = data.get('status', 'Error').get('enabled', 'Error')
+                        cctv_valid = data.get('status', 'Error').get('valid', 'Error')
+            
+            # if device['id_cctv'] != 'Not Found':
+            #     id_camera = device['id_cctv']
+            #     username_cctv = os.getenv('CCTV_USER')
+            #     password_cctv = os.getenv('CCT_PASS')
+            #     CCTV_DATA_SINGLE_CAMERA = os.getenv('CCTV_DATA_SINGLE_CAMERA').format(id_camera=id_camera)
 
-                auth = (username_cctv, password_cctv)
-                data_camera = requests.get(CCTV_DATA_SINGLE_CAMERA, auth=auth).json()
-                cctv_enabled = data_camera.get('data', 'Error').get('status', 'Error').get('enabled', 'Error')
-                cctv_valid = data_camera.get('data', 'Error').get('status', 'Error').get('valid', 'Error')
+            #     auth = (username_cctv, password_cctv)
+            #     data_camera = requests.get(CCTV_DATA_SINGLE_CAMERA, auth=auth).json()
+            #     cctv_enabled = data_camera.get('data', 'Error').get('status', 'Error').get('enabled', 'Error')
+            #     cctv_valid = data_camera.get('data', 'Error').get('status', 'Error').get('valid', 'Error')
             
             
             query = (f"INSERT INTO dcs.devices (host, type, site, dpto, prtg_name_device, prtg_id, prtg_sensorname, prtg_status, prtg_lastup, prtg_lastdown, cisco_device_ip, cisco_device_name, cisco_port, cisco_status, cisco_status_device, cisco_mac_address, data_backup, red, cctv_enabled, cctv_valid)"

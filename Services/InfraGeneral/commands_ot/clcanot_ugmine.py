@@ -13,7 +13,7 @@ logging.getLogger().addHandler(file_handler)
 paramiko_logger = logging.getLogger("paramiko")
 paramiko_logger.setLevel(logging.WARNING)
 
-def eigrp_function(ip_switch, red, name):
+def eigrp_clcanot_ugmine_function(ip_switch, red, name):
     try:
         client = paramiko.SSHClient()
         client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
@@ -22,7 +22,7 @@ def eigrp_function(ip_switch, red, name):
 
         commands = [
             f"terminal length 0\n",
-            "show ip eigrp neighbors\n"
+            "sh ip eigrp vrf CLCANOT_UGMINE neighbors\n"
         ]
 
         for command in commands:
@@ -55,16 +55,6 @@ def eigrp_function(ip_switch, red, name):
             }
             data_list.append(data)
 
-        if "10.224.126.22" in output:
-            data = {
-                'ip_neighbor': "10.224.126.22",
-                'interface': "Not Found",
-                'ip_switch': ip_switch,
-                'neighbor': 'eigrp',
-                'red': red,
-                'name_switch': name     
-            }
-            data_list.append(data)
 
         return data_list
 
@@ -80,5 +70,10 @@ def eigrp_function(ip_switch, red, name):
             'red': red,
             'name_switch': name
         }]
+        
 
         return data
+
+
+
+# eigrp_function("10.224.127.147", "OT", "PRUEBA")

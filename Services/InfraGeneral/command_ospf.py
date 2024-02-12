@@ -49,7 +49,7 @@ def ospf_function(ip_switch, red, name):
                 'interface': interface
             }
             data_list.append(neighbor_data)
-
+  
         return data_list
 
     except Exception as e:

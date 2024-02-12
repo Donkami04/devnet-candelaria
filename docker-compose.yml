@@ -62,50 +62,41 @@ services:
   #   environment:
   #     - ENVIRONMENT=production
       
-  mesh:
+  # mesh:
+  #   build:
+  #     context: Services/Mesh
+  #   restart: always
+  #   depends_on:
+  #     - db
+  #   environment:
+  #     - ENVIRONMENT=production
+      
+  camaras:
     build:
-      context: Services/Mesh
+      context: Services/Camaras
     restart: always
     depends_on:
       - db
     environment:
       - ENVIRONMENT=production
-      
-  # camaras:
-  #   build:
-  #     context: Services/Camaras
-  #   restart: always
-  #   depends_on:
-  #     - db
-  #   environment:
-  #     - ENVIRONMENT=production
-      
-  # camaras:
-  #   build:
-  #     context: Services/Camaras
-  #   restart: always
-  #   depends_on:
-  #     - db
-  #   environment:
-  #     - ENVIRONMENT=production
     
-  # backend-api-rest:
-  #   build:
-  #     context: Backend
-  #   ports:
-  #     - '3001:3001'
-  #   restart: always
-  #   environment:
-  #     - NODE_ENV=production
-  #   command: sh -c "npx sequelize-cli db:migrate && node index.js"
+  backend-api-rest:
+    build:
+      context: Backend
+    ports:
+      - '3001:3001'
+    restart: always
+    environment:
+      - NODE_ENV=production
+    command: sh -c "npx sequelize-cli db:migrate && node index.js"
       
-  # frontend-react:
-  #   build:
-  #     context: Front
-  #   ports:
-  #     - '4000:80'
-  #   restart: always
-    # environment: Este se define en el archivo .env
+  frontend-react:
+    build:
+      context: Front
+    ports:
+      - '4000:80'
+    restart: always
+    environment: Este se define en el archivo .env
 
   # wan:
   #   build:
@@ -125,14 +116,14 @@ services:
   #   environment:
   #     - ENVIRONMENT=production
 
-  # infraestructura-general:
-  #   build:
-  #     context: Services/InfraGeneral
-  #   restart: always
-  #   depends_on:
-  #     - db
-  #   environment:
-  #     - ENVIRONMENT=production
+  infraestructura-general:
+    build:
+      context: Services/InfraGeneral
+    restart: always
+    depends_on:
+      - db
+    environment:
+      - ENVIRONMENT=production
 
   # dcs-pac:
   #   build:
@@ -151,3 +142,12 @@ services:
   #     - db
   #   environment:
   #     - ENVIRONMENT=production
+
+  ap:
+    build:
+      context: Services/InfGen_Ap
+    restart: always
+    depends_on:
+      - db
+    environment:
+      - ENVIRONMENT=production

@@ -19,9 +19,9 @@ export const DetailsCore = () => {
   const [routeStatus, setRouteStatus] = useState([]);
   const [filterValue, setFilterValue] = useState("");
   const [apList, setApList] = useState([]);
-  const [numApPrtg, setNumApPrtg] = useState("Cargando...");
-  const [numApDb, setNumApDb] = useState("Cargando...");
-  const [showOthers, setShowOthers] = useState(false);
+  // const [numApPrtg, setNumApPrtg] = useState("Cargando...");
+  // const [numApDb, setNumApDb] = useState("Cargando...");
+  // const [showOthers, setShowOthers] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -38,16 +38,16 @@ export const DetailsCore = () => {
 
         const dataRouteStatus = await getDefaultRoute();
 
-        let dataAp = await getAp();
-        dataAp.apList.sort((a, b) => (a.status === "Joined" ? 1 : -1));
+        // let dataAp = await getAp();
+        // dataAp.apList.sort((a, b) => (a.status === "Joined" ? 1 : -1));
 
         setDevicesHealth(dataDevicesHealth);
         setRouteStatus(dataRouteStatus);
         setDevicesInterfaces(dataInterfaces);
         setNeighbors(dataNeighbors);
-        setApList(dataAp.apList);
-        setNumApPrtg(dataAp.numberApRegisteredPrtg);
-        setNumApDb(dataAp.numberApRegisteredDb);
+        // setApList(dataAp.apList);
+        // setNumApPrtg(dataAp.numberApRegisteredPrtg);
+        // setNumApDb(dataAp.numberApRegisteredDb);
         setLoading(false);
       } catch (error) {
         console.error(error);
@@ -159,7 +159,7 @@ export const DetailsCore = () => {
     <div>
       <Navbar title={"Detalles Inf. Gen."} />
       <Status_System tableToShow={"ig"} />
-      
+
       <div className="search-container-details-ig">
         <label htmlFor="search">Buscar por palabre clave</label>
         <input
@@ -170,7 +170,7 @@ export const DetailsCore = () => {
           onChange={(e) => setFilterValue(e.target.value)}
         />
       </div>
-      {showOthers && (
+      {/* {showOthers && (
         <div>
           <div>
             <p>{`Numero de AP registrados en PRTG: ${numApPrtg}`}</p>
@@ -191,9 +191,14 @@ export const DetailsCore = () => {
                   <tr key={ap.id}>
                     <td>{ap.name}</td>
                     <td>{ap.ip}</td>
-                    <td className={ap.status === "Joined" ? "kpi-green" : "kpi-red"}>{ap.status}</td>
+                    <td
+                      className={
+                        ap.status === "Joined" ? "kpi-green" : "kpi-red"
+                      }
+                    >
+                      {ap.status}
+                    </td>
                     <td>{ap.last_disconnect_reason}</td>
-
                   </tr>
                 ))}
               </tbody>
@@ -208,7 +213,13 @@ export const DetailsCore = () => {
               <tbody>
                 {routeStatus.map((route) => (
                   <tr key={route.id}>
-                    <td className={route.via_bgp === "true" ? "kpi-green" : "kpi-red"}>{route.via_bgp === "true" ? "Up" : "Down"}</td>
+                    <td
+                      className={
+                        route.via_bgp === "true" ? "kpi-green" : "kpi-red"
+                      }
+                    >
+                      {route.via_bgp === "true" ? "Up" : "Down"}
+                    </td>
                     <td>{route.name_switch}</td>
                   </tr>
                 ))}
@@ -216,7 +227,7 @@ export const DetailsCore = () => {
             </table>
           </div>
         </div>
-      )}
+      )} */}
       <main className="table-details-inf-gen-container">
         <div className="div-details-inf-gen">
           <h3>Interfaces</h3>

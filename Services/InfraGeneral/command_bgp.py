@@ -46,7 +46,6 @@ def bgp_function(ip_switch, red, name):
                 'interface': "N/A"
             }
             data_list.append(neighbor_data)
-
         return data_list
     
     except Exception as e:
@@ -62,5 +61,5 @@ def bgp_function(ip_switch, red, name):
             'name_switch':name,
             'interface': "N/A"
         }]
-        
         return data
+    

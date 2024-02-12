@@ -36,7 +36,7 @@ export function MainTopology() {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const dataInfraGeneral = await getDataInfGen();
+        let dataInfraGeneral = await getDataInfGen();
         const dataStatusInfGen = await useDataInfGen();
 
         setStatusInfGen(dataStatusInfGen);
@@ -56,6 +56,9 @@ export function MainTopology() {
           }
         }
 
+        dataInfraGeneral = dataInfraGeneral.filter(
+          (e) => e.name_switch !== "WLC 9800 NEGOCIO"
+        );
         dataInfraGeneral.forEach((sw) => {
           sameNameSwitch(sw);
         });
@@ -134,7 +137,8 @@ export function MainTopology() {
                 filteredInfraGeneral.map((e, index) => (
                   <tr key={e.id}>
                     <td className="td-category-ig">
-                      <Link style={{color: "blue"}}
+                      <Link
+                        style={{ color: "blue" }}
                         to={`/monitoreo/infraestrucura-general/detalles?nombre=${e.name_switch}`}
                       >
                         {e.name_switch}

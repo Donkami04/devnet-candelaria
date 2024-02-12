@@ -24,10 +24,6 @@ const DataDevices= sequelize.define(
       type: DataTypes.STRING(10),
       allowNull: false,
     },
-    id_cctv: {
-      type: DataTypes.STRING(10),
-      allowNull: false,
-    },
   },
   {
     tableName: "data_devices",
