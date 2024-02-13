@@ -13,7 +13,8 @@ logging.getLogger().addHandler(file_handler)
 paramiko_logger = logging.getLogger("paramiko")
 paramiko_logger.setLevel(logging.WARNING)
 
-def ap_function(ip_switch):
+def ap_function(ip_switch, name_switch):
+    
     try:
         client = paramiko.SSHClient()
         client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
@@ -39,7 +40,7 @@ def ap_function(ip_switch):
 
         # Procesar cada bloque
         for block in blocks:
-            ap_list = process_block(block.strip())
+            ap_list = process_block(block.strip(), name_switch)
             output_list.extend(ap_list)
 
         # Eliminar la parte no deseada del valor 'Last Disconnect Reason'
@@ -56,7 +57,7 @@ def ap_function(ip_switch):
         logging.error(e)
         logging.error(traceback.format_exc())
 
-def process_block(block):
+def process_block(block, name_switch):
     lines = block.split('\n')
     ap_list = []
 
@@ -71,15 +72,9 @@ def process_block(block):
                 'name': match.group('name'),
                 'ip': match.group('ip'),
                 'status': match.group('status'),
-                'last_disconnect_reason': disconnect_reason
+                'last_disconnect_reason': disconnect_reason,
+                'name_switch': name_switch,
             }
             ap_list.append(ap_dict)
 
     return ap_list
-
-# Ejemplo de uso:
-result_list = ap_function("10.224.127.156")
-
-# # Imprimir la lista completa
-# for ap_dict in result_list:
-#     print(ap_dict)

@@ -3,9 +3,9 @@ import { Navbar } from "../../Navbar/Navbar";
 import { Status_System } from "../../Status_System/Status_System";
 import { Spinner } from "../../Spinner/Spinner";
 import { getAp } from "../../../utils/Api-candelaria/api";
-import "./Ap.css"
+import "./Ap.css";
 
-export function Ap() {
+export function ApNegocio() {
   const [numApPrtg, setNumApPrtg] = useState("Cargando...");
   const [numApDb, setNumApDb] = useState("Cargando...");
   const [apList, setApList] = useState([]);
@@ -14,12 +14,16 @@ export function Ap() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        let dataAp = await getAp();
-        dataAp.apList.sort((a, b) => (a.status === "Joined" ? 1 : -1));
+        const dataAp = await getAp();
+        const apList = dataAp.apList;
+        let apNegocio = apList.filter((e) => {
+          return e.name_switch === "WLC 9800 NEGOCIO";
+        });
+        apNegocio = apNegocio.sort((a, b) => (a.status === "Joined" ? 1 : -1));
 
-        setApList(dataAp.apList);
+        setApList(apNegocio);
         setNumApPrtg(dataAp.numberApRegisteredPrtg);
-        setNumApDb(dataAp.numberApRegisteredDb);
+        setNumApDb(apNegocio.length);
         setLoading(false);
       } catch (error) {
         console.error(error);
@@ -40,11 +44,11 @@ export function Ap() {
 
   return (
     <div>
-      <Navbar title={"AP Inf. Gen."} />
+      <Navbar title={"AP WLC 9800 NEGOCIO"} />
       <Status_System tableToShow={"ig"} />
       <div className="counter-ap-container">
         <p>{`AP registrados - PRTG: ${numApPrtg}`}</p>
-        <p>{`AP reportados - DevNet: ${apList.length}`}</p>
+        <p>{`AP reportados - DevNet: ${numApDb}`}</p>
       </div>
       <div className="table-ap-container">
         <table className="table-ap">

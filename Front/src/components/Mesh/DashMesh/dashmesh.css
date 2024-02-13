@@ -10,7 +10,7 @@
 .mesh-dash-table-home th,
 .mesh-dash-table-home td {
   border: 1px solid black;
-  padding: 8px;
+  padding: 5px;
 }
 
 .mesh-dash-table {
@@ -30,11 +30,11 @@
 }
 
 .mesh-dash-table-home {
-  width: 90%;
-  
+  width: 80%;
 }
 
 .mesh-dash-table-home th,
 .mesh-dash-table-home td {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
+
 }

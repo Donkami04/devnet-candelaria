@@ -20,6 +20,10 @@ const Ap = sequelize.define(
       type: DataTypes.STRING(100),
       allowNull: false,
     },
+    name_switch: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
+    },
   },
   {
     tableName: "ap",

@@ -58,8 +58,8 @@ def get_devices_data():
         username_cctv = os.getenv('CCTV_USER')
         password_cctv = os.getenv('CCT_PASS')
         auth = (username_cctv, password_cctv)
-        cctv_list_servers = ['10.225.0.253']
-        # cctv_list_servers = ['10.225.0.253', '10.231.0.253', '10.225.11.253', '10.231.10.253']
+        # cctv_list_servers = ['10.225.0.253']
+        cctv_list_servers = ['10.225.0.253', '10.231.0.253', '10.225.11.253', '10.231.10.253', '10.224.116.199']
         cctv_data = []
         
         for ip in cctv_list_servers:

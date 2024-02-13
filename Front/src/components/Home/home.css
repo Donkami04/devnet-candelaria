@@ -1,151 +1,157 @@
 .home-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 10px;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .system-container {
-    border: 2px black solid;
-    height: 20rem;
-    overflow: hidden;
+  border: 2px black solid;
+  height: 20rem;
+  overflow: hidden;
 }
 
 .name-system-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 3rem;
 }
 
 .system-container h1 {
-    font-size: 2rem;
+  font-size: 2rem;
 }
 
 .home-kpi-table {
-    border-collapse: collapse;
-    width: 75%;
+  border-collapse: collapse;
+  width: 75%;
 }
-  
-  .home-kpi-table th,
-  .home-kpi-table td {
-    border: 1px solid black;
-    padding: 8px;
-    text-align: center;
-    font-size: 1.35rem;
-  }
 
+.home-kpi-table th,
+.home-kpi-table td {
+  border: 1px solid black;
+  padding: 8px;
+  text-align: center;
+  font-size: 1rem;
+}
 
 .home-kpi-container {
-    width: 100%;
-    height: 55%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  width: 100%;
+  height: 55%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-
-
 .home-kpi-container ul {
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
 }
 
 .home-kpi-container ul li {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .link-system-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 6rem;
 }
 
 .link-system {
-    margin-right: 10px;
-    margin-left: 10px;
-    justify-content: center;
+  margin-right: 10px;
+  margin-left: 10px;
+  justify-content: center;
 }
 
 .indicators-home li {
-    font-size: 1rem
+  font-size: 1rem;
 }
 
 .button-link {
-    display: flex;
-    align-items: center;
-    color: white;
-    font-size: 0.8rem;
-    border-radius: 10px;
-    padding: 0.6rem 1.25rem;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
-    text-decoration: none;
-    height: 0.6rem;
-    background-color: #084ba3;
-    width: 4.2rem;
+  display: flex;
+  align-items: center;
+  color: white;
+  font-size: 0.8rem;
+  border-radius: 10px;
+  padding: 0.6rem 1.25rem;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+  text-decoration: none;
+  height: 0.6rem;
+  background-color: #084ba3;
+  width: 4.2rem;
 }
 
 .home-message-container {
-    width: 100%;
-    border: 2px solid green;
-    background-color: rgb(154, 243, 154);
-    text-align: center;
-    font-size: 0.9rem;
+  width: 100%;
+  border: 2px solid green;
+  background-color: rgb(154, 243, 154);
+  text-align: center;
+  font-size: 0.9rem;
 }
 
 .home-message-container p {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .dash-mesh-home {
-    width: 95%;
-    text-align: center;
-    
+  width: 95%;
+  text-align: center;
 }
 
 .dash-mesh-home th {
-    font-size: 1rem;
-    
+  font-size: 1rem;
 }
 
 .dash-mesh-home table {
-    table-layout: fixed; /* Fijar el ancho de las celdas */
-    border-collapse: collapse; 
-    height: 8rem;
+  table-layout: fixed; /* Fijar el ancho de las celdas */
+  border-collapse: collapse;
+  height: 8rem;
 }
 
 .dash-mesh-home table td,
 .dash-mesh-home table th {
-    border: 1px solid black;
-   height: 10px;
+  border: 1px solid black;
+  height: 10px;
 }
 
 .spinner-home-container {
-    height: calc(100% - 3rem);
-    z-index: 9999;
-    position: relative;
-    display: grid;
-    place-content: center;
-
+  height: calc(100% - 3rem);
+  z-index: 9999;
+  position: relative;
+  display: grid;
+  place-content: center;
 }
 
 .spinner-container {
-    position: absolute;
-    top: 30%;
-    left: 50%;
-    transform: translateX(-50%);
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .links-spinner-home {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+@media (max-width: 1200px) {
+    .name-system-container h1 {
+        font-size: 1.7rem;
+    }
+}
+
+@media (max-width: 1050px) {
+    .name-system-container h1 {
+        font-size: 1.5rem;
+    }
 }

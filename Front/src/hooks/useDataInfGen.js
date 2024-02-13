@@ -135,6 +135,7 @@ export async function useDataInfGen() {
     });
   };
 
+  // Clasificacion de AP
   dataAp.apList.forEach((element) => {
     if (element.status !== "Joined") {
       downElements.push(element);
@@ -145,7 +146,6 @@ export async function useDataInfGen() {
   });
 
   upOrDownInterface(allData);
-
   upOrDownNeighbors(allData);
   upOrDownSysHealth(allData);
   upOrDownRouteDefault(allData);

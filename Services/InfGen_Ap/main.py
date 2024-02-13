@@ -61,6 +61,9 @@ def getData():
             data_switches.append(row_dict)
             
         data_switches = [sw for sw in data_switches if sw.get('category') == 'AP']
+        
+        all_app_elements = [] # Aqui acumulamos todos los AP de todas las controladoras inalambricas
+        
         for switch in data_switches:
             ip_switch = switch['ip']
             name_switch = switch['name_switch']
@@ -70,7 +73,8 @@ def getData():
             id_prtg_switch = get_id_prtg(ip_switch)
             # ap_registered = get_data_ap_registered(ip_switch, id_prtg_switch, red)
             data_systemhealth = system_health(ip_switch, id_prtg_switch, red)
-            ap_elements_list = ap_function(ip_switch)
+            ap_elements_list = ap_function(ip_switch, name_switch)
+            all_app_elements = all_app_elements + ap_elements_list
             logging.info(f"Numero de AP obtenidos de la controladora: {len(ap_elements_list)}")
 
             for sensor in data_systemhealth:
@@ -94,12 +98,17 @@ def getData():
             query = (f"DELETE FROM dcs.ap")
             cursor.execute(query)
             mydb.commit()
+         
+        # Eliminamos los espacios en blanco del campo last_disconnect_reason y la palabra "Join"   
+        for ap in all_app_elements:
+            if 'Join' in ap['last_disconnect_reason']:
+                ap['last_disconnect_reason'] = ap['last_disconnect_reason'].replace('Join', '').strip()
             
-            # Guardamos en bloque en la BD en vez de linea por linea
-            query = "INSERT INTO dcs.ap (`name`, `ip`, `status`, `last_disconnect_reason`) VALUES (%s, %s, %s, %s)"
-            values = [(ap['name'], ap['ip'], ap['status'], ap['last_disconnect_reason']) for ap in ap_elements_list]
-            cursor.executemany(query, values)
-            mydb.commit()
+        # Guardamos en bloque en la BD en vez de linea por linea
+        query = "INSERT INTO dcs.ap (`name`, `ip`, `status`, `last_disconnect_reason`, `name_switch`) VALUES (%s, %s, %s, %s, %s)"
+        values = [(ap['name'], ap['ip'], ap['status'], ap['last_disconnect_reason'], ap['name_switch']) for ap in all_app_elements]
+        cursor.executemany(query, values)
+        mydb.commit()
             
             #! Lo comentado se usa para llenar data_ap
             #TODO: NO BORRAR

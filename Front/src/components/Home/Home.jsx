@@ -100,7 +100,7 @@ export function Home() {
 
   return (
     <>
-      <Navbar title={"Home"} />
+      <Navbar title={"DEVNET"} />
       <div>
         {showMessage && (
           <div className="home-message-container">
@@ -276,7 +276,7 @@ export function Home() {
           </div>
 
           <div className="home-kpi-container">
-            <table className="home-kpi-table">
+            <table className="home-kpi-table home-vpn-table">
               <tbody>
                 <tr>
                   <td>Administrativo</td>
@@ -309,6 +309,25 @@ export function Home() {
           <div className="name-system-container">
             <h1>MESH</h1>
           </div>
+
+          <div className="home-kpi-container">
+            <DashMesh />
+          </div>
+          <div className="link-system-container">
+            <Link
+              to="/monitoreo/candelaria/mesh"
+              className="link-system button-link"
+              style={{ color: "white" }}
+            >
+              Ver detalles
+            </Link>
+          </div>
+        </section>
+        {/* 
+        <section className="system-container">
+          <div className="name-system-container">
+            <h1>MESH</h1>
+          </div>
           {spinnerMesh ? (
             <div className="spinner-home-container">
               <PuffLoader color="red" />
@@ -329,7 +348,7 @@ export function Home() {
               </div>
             </>
           )}
-        </section>
+        </section> */}
 
         <section className="system-container">
           <div className="name-system-container">

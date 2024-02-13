@@ -34,7 +34,8 @@ import { DetailsCore } from "./components/InfraGeneral/DetailsCore/DetailsCore";
 import { Map } from "./components/InfraGeneral/Map/Map";
 import { MainTopology } from "./components/InfraGeneral/MainTopology/MainTopology";
 import { Categories } from "./components/InfraGeneral/Categories/Categories";
-import { Ap } from "./components/InfraGeneral/Ap/Ap";
+import { ApNegocio } from "./components/InfraGeneral/Ap/ApNegocio";
+import { ApMesh } from "./components/InfraGeneral/Ap/ApMesh";
 import { DcsPac } from "./components/DcsPac/DcsPac";
 import { DcsOjos } from "./components/DcsOjos/DcsOjos";
 import "./app.css";
@@ -91,11 +92,27 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/monitoreo/pac/clientes" element={<DcsPac />} />
         <Route path="/monitoreo/ojos/clientes" element={<DcsOjos />} />
-        <Route path="/monitoreo/infraestrucura-general" element={<MainTopology />}/>
-        <Route path="/monitoreo/infraestrucura-general/detalles/ap" element={<Ap />} />
-        <Route path="/monitoreo/infraestrucura-general/detalles" element={<DetailsCore />}/>
+        <Route
+          path="/monitoreo/infraestrucura-general"
+          element={<MainTopology />}
+        />
+        <Route
+          path="/monitoreo/infraestrucura-general/categorias"
+          element={<Categories />}
+        />
+        <Route
+          path="/monitoreo/infraestrucura-general/detalles/ap/negocio"
+          element={<ApNegocio />}
+        />
+        <Route
+          path="/monitoreo/infraestrucura-general/detalles/ap/mesh"
+          element={<ApMesh />}
+        />
+        <Route
+          path="/monitoreo/infraestrucura-general/detalles"
+          element={<DetailsCore />}
+        />
         <Route path="/monitoreo/infraestrucura-general/map" element={<Map />} />
-        <Route path="/monitoreo/infraestrucura-general/categorias" element={<Categories />}/>
       </Routes>
 
       <div className="refresh-button-container">

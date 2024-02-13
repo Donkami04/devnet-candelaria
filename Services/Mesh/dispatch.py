@@ -16,8 +16,8 @@ def get_data_dispatch(eqmt):
                                database=DATABASE)
 
         cursor = conn.cursor()
-        # cursor.execute("SELECT TOP (1000) [shiftdate],[shift#] ,[endtime] ,[unit] ,[eqmt] ,[status] ,[name] ,[hora] ,[operatorname] FROM [MLCOperational].[dbo].[status_equipos]")
-        cursor.execute("SELECT TOP (1000) FROM [MLCOperational].[dbo].[status_equipos]")
+        cursor.execute("SELECT TOP (1000) [shiftdate],[shift#] ,[endtime] ,[unit] ,[eqmt] ,[status] ,[name] ,[hora] ,[operatorname] FROM [MLCOperational].[dbo].[status_equipos]")
+        # cursor.execute("SELECT TOP (1000) FROM [MLCOperational].[dbo].[status_equipos]")
         
         all_data = []
         for row in cursor:  

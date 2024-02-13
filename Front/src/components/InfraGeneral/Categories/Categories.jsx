@@ -20,21 +20,26 @@ export function Categories() {
   const [coresDown, setCoresDown] = useState([]);
   const [distUp, setDistUp] = useState([]);
   const [distDown, setDistDown] = useState([]);
-  const [apUp, setApUp] = useState([]);
-  const [apDown, setApDown] = useState([]);
+  const [apNegocioUp, setApNegocioUp] = useState([]);
+  const [apNegocioDown, setApNegocioDown] = useState([]);
+  const [apMeshUp, setApMeshUp] = useState([]);
+  const [apMeshDown, setApMeshDown] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const dataStatusInfGen = await useDataInfGen();
+        console.log(dataStatusInfGen);
         const newCoresUp = [];
         const newDistUp = [];
-        const newApUp = [];
+        const newApNegocioUp = [];
+        const newApMeshUp = [];
 
         const newCoresDown = [];
         const newDistDown = [];
-        const newApDown = [];
+        const newApNegocioDown = [];
+        const newApMeshDown = [];
 
         dataStatusInfGen.upElements.forEach((e) => {
           if (e.name_switch && e.name_switch.includes("CORE")) {
@@ -43,8 +48,11 @@ export function Categories() {
           if (e.name_switch && e.name_switch.includes("DIST")) {
             newDistUp.push(e);
           }
-          if (e.last_disconnect_reason && e.status === "Joined") {
-            newApUp.push(e);
+          if (e.name_switch === "WLC 9800 NEGOCIO") {
+            newApNegocioUp.push(e);
+          }
+          if (e.name_switch === "WLC - MESH") {
+            newApMeshUp.push(e);
           }
         });
 
@@ -55,8 +63,11 @@ export function Categories() {
           if (e.name_switch && e.name_switch.includes("DIST")) {
             newDistDown.push(e);
           }
-          if (e.last_disconnect_reason && e.status !== "Joined") {
-            newApDown.push(e);
+          if (e.name_switch === "WLC 9800 NEGOCIO") {
+            newApNegocioDown.push(e);
+          }
+          if (e.name_switch === "WLC - MESH") {
+            newApMeshDown.push(e);
           }
         });
 
@@ -64,8 +75,10 @@ export function Categories() {
         setDistUp(newDistUp);
         setCoresDown(newCoresDown);
         setDistDown(newDistDown);
-        setApUp(newApUp);
-        setApDown(newApDown);
+        setApNegocioUp(newApNegocioUp);
+        setApNegocioDown(newApNegocioDown);
+        setApMeshUp(newApMeshUp);
+        setApMeshDown(newApMeshDown);
         setIsLoading(false);
       } catch (error) {
         console.error(error);
@@ -120,13 +133,23 @@ export function Categories() {
               </tr>
               <tr>
                 <td className="td-category-ig">
-                  <Link to="/monitoreo/infraestrucura-general/detalles/ap">
-                    AP
+                  <Link to="/monitoreo/infraestrucura-general/detalles/ap/negocio">
+                    AP NEGOCIO
                   </Link>
                 </td>
-                <td>{apUp.length}</td>
-                <td>{apDown.length}</td>
-                <td>{apUp.length + apDown.length}</td>
+                <td>{apNegocioUp.length}</td>
+                <td>{apNegocioDown.length}</td>
+                <td>{apNegocioUp.length + apNegocioDown.length}</td>
+              </tr>
+              <tr>
+                <td className="td-category-ig">
+                  <Link to="/monitoreo/infraestrucura-general/detalles/ap/mesh">
+                    AP MESH
+                  </Link>
+                </td>
+                <td>{apMeshUp.length}</td>
+                <td>{apMeshDown.length}</td>
+                <td>{apMeshUp.length + apMeshDown.length}</td>
               </tr>
             </tbody>
           </table>
