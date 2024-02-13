@@ -444,7 +444,7 @@ export function Home() {
           </div>
         </section>
 
-        <section className="system-container">
+        {/* <section className="system-container">
           <div className="name-system-container">
             <h1>DCS PAC</h1>
           </div>
@@ -474,7 +474,7 @@ export function Home() {
               Detalles
             </Link>
           </div>
-        </section>
+        </section> */}
       </div>
     </>
   );
