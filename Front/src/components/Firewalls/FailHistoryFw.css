@@ -12,4 +12,6 @@
     border-left: black solid 1px;
     border-top: black solid 1px;
     border-bottom: black solid 1px;
+    max-height: 80vh;
+    overflow-y: auto;
 }

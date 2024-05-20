@@ -10,6 +10,7 @@ const {
   StatusIg,
   StatusFim,
   MeshProcess,
+  Anillo,
 } = require("../models/status_system");
 
 async function date_status_system() {
@@ -63,7 +64,10 @@ async function date_status_system() {
     limit: 1,
   });
 
+  
   const meshProcess = await MeshProcess.findAll();
+  
+  const anillo = await Anillo.findAll();
 
   const data = {
     dcs: dcs_status,
@@ -77,6 +81,7 @@ async function date_status_system() {
     ig: ig_status,
     fim: fim_status,
     mesh_process: meshProcess,
+    anillo: anillo
   };
 
   return data;

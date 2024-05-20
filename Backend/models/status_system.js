@@ -67,6 +67,11 @@ const MeshProcess = sequelize.define("MeshProcess", columns, {
   timestamps: false,
 });
 
+const Anillo = sequelize.define("Anillo", columns, {
+  tableName: "fechas_consultas_anillo",
+  timestamps: false,
+});
+
 module.exports = {
   StatusClients,
   StatusSwitches,
@@ -78,5 +83,6 @@ module.exports = {
   StatusWan,
   StatusIg,
   StatusFim,
-  MeshProcess
+  MeshProcess,
+  Anillo,
 };

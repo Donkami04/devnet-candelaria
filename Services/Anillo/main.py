@@ -74,12 +74,29 @@ def status_interfaces():
             cursor.execute(query)
             mydb.commit()
             
+        now = datetime.datetime.now()
+        fecha_y_hora = now.strftime("%Y-%m-%d %H:%M:%S")
+        fecha_y_hora = str(fecha_y_hora)
+
+        cursor.execute(
+            f"UPDATE dcs.fechas_consultas_anillo SET `ultima_consulta` = '{fecha_y_hora}', estado = 'OK' WHERE `id` = 1"
+        )
+        mydb.commit()
         cursor.close()
+        logging.info("Terminado")
                     
     except Exception as e:
         logging.error(f"Error en la funcion principal")
         logging.error(traceback.format_exc())
         logging.error(e)
+        now = datetime.datetime.now()
+        fecha_y_hora = now.strftime("%Y-%m-%d %H:%M:%S")
+        fecha_y_hora = str(fecha_y_hora)
+
+        cursor.execute(
+            f"UPDATE dcs.fechas_consultas_anillo SET `ultima_consulta` = '{fecha_y_hora}', estado = 'ERROR' WHERE `id` = 1"
+        )
+        mydb.commit()
         
         
 def get_data_interfaces(data_anillo):
@@ -104,7 +121,7 @@ def get_data_interfaces(data_anillo):
             for interface in interfaces:
                 data_interfaces.append(interface)
         
-        logging.info("Terminado")
+
         return data_interfaces
 
 

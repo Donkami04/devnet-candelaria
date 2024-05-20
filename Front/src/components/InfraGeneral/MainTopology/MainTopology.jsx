@@ -101,12 +101,13 @@ export function MainTopology() {
     });
   });
 
+  const noResultsInfraGeneral = filteredPrtgGroups.length === 0;
   const noResults = filteredPrtgGroups.length === 0;
 
   const handleClickPrtgGroup = (name) => {
     setNamePrtgGroup(name);
     setShowTablePrtgGroup(true);
-  }
+  };
 
   return (
     <div>
@@ -137,7 +138,8 @@ export function MainTopology() {
                 </tr>
               </thead>
               <tbody>
-                {noResults ? (
+                {filteredInfraGeneral.length === 0 &&
+                filteredPrtgGroups.length === 0 ? (
                   <tr>
                     <td colSpan="4">No hay coincidencias</td>
                   </tr>
@@ -173,11 +175,14 @@ export function MainTopology() {
                 )}
                 {filteredPrtgGroups.map((e, index) => (
                   <tr key={index}>
-                    <td style={{cursor: "pointer", color: "blue"}} onClick={() => handleClickPrtgGroup(e.device)}>
+                    <td
+                      style={{ cursor: "pointer", color: "blue" }}
+                      onClick={() => handleClickPrtgGroup(e.device)}
+                    >
                       {e.device.toUpperCase()}
                     </td>
                     <td className={e.down >= 1 ? "kpi-red" : "kpi-green"}>
-                      {e.up} / {e.down+e.up}
+                      {e.up} / {e.down + e.up}
                     </td>
                     <td>{e.group.toUpperCase()}</td>
                     <td>N/A</td>
@@ -188,7 +193,9 @@ export function MainTopology() {
           </div>
         </div>
       )}
-      {showTablePrtgGroup && (<TableGroupPrtg name={namePrtgGroup} show={setShowTablePrtgGroup}/>)}
+      {showTablePrtgGroup && (
+        <TableGroupPrtg name={namePrtgGroup} show={setShowTablePrtgGroup} />
+      )}
     </div>
   );
 

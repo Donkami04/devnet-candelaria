@@ -8058,3 +8058,91 @@ NameError: name 'database_connection' is not defined
     mydb = database_connection()
 NameError: name 'database_connection' is not defined
 
+2024-05-20 00:57:20,753 - ERROR - No se encontraron las palabras 'Health Check - FW 10.224.28.1'
+2024-05-20 00:57:20,753 - ERROR - No se encontraron las palabras 'Health Check - FW 10.224.28.1'
+2024-05-20 00:57:20,754 - ERROR - NoneType: None
+
+2024-05-20 00:57:20,754 - ERROR - NoneType: None
+
+2024-05-20 01:08:18,131 - ERROR - No se encontraron las palabras 'Health Check - FW 10.224.28.1'
+2024-05-20 01:08:18,131 - ERROR - No se encontraron las palabras 'Health Check - FW 10.224.28.1'
+2024-05-20 01:08:18,131 - ERROR - NoneType: None
+
+2024-05-20 01:08:18,131 - ERROR - NoneType: None
+
+2024-05-20 01:14:19,065 - ERROR - No se encontraron las palabras 'Health Check - FW 10.224.28.1'
+2024-05-20 01:14:19,065 - ERROR - No se encontraron las palabras 'Health Check - FW 10.224.28.1'
+2024-05-20 01:14:19,066 - ERROR - NoneType: None
+
+2024-05-20 01:14:19,066 - ERROR - NoneType: None
+
+2024-05-20 01:20:15,480 - ERROR - No se encontraron las palabras 'Health Check - FW 10.224.28.1'
+2024-05-20 01:20:15,480 - ERROR - No se encontraron las palabras 'Health Check - FW 10.224.28.1'
+2024-05-20 01:20:15,480 - ERROR - NoneType: None
+
+2024-05-20 01:20:15,480 - ERROR - NoneType: None
+
+2024-05-20 01:25:51,610 - ERROR - Error de bajo nivel, posible error en Netmiko
+2024-05-20 01:25:51,610 - ERROR - Error de bajo nivel, posible error en Netmiko
+2024-05-20 01:25:51,611 - ERROR - 
+Pattern not detected: 'FortiGate\\-101F\\-Santi\\~ort\\ \\$' in output.
+
+Things you might try to fix this:
+1. Explicitly set your pattern using the expect_string argument.
+2. Increase the read_timeout to a larger value.
+
+You can also look at the Netmiko session_log or debug log for more information.
+
+
+2024-05-20 01:25:51,611 - ERROR - 
+Pattern not detected: 'FortiGate\\-101F\\-Santi\\~ort\\ \\$' in output.
+
+Things you might try to fix this:
+1. Explicitly set your pattern using the expect_string argument.
+2. Increase the read_timeout to a larger value.
+
+You can also look at the Netmiko session_log or debug log for more information.
+
+
+2024-05-20 01:26:27,921 - ERROR - No se encontraron las palabras 'Health Check - FW 10.224.28.1'
+2024-05-20 01:26:27,921 - ERROR - No se encontraron las palabras 'Health Check - FW 10.224.28.1'
+2024-05-20 01:26:27,921 - ERROR - NoneType: None
+
+2024-05-20 01:26:27,921 - ERROR - NoneType: None
+
+2024-05-20 01:32:30,849 - ERROR - No se encontraron las palabras 'Health Check - FW 10.224.28.1'
+2024-05-20 01:32:30,849 - ERROR - No se encontraron las palabras 'Health Check - FW 10.224.28.1'
+2024-05-20 01:32:30,849 - ERROR - NoneType: None
+
+2024-05-20 01:32:30,849 - ERROR - NoneType: None
+
+2024-05-20 01:38:34,767 - ERROR - No se encontraron las palabras 'Health Check - FW 10.224.28.1'
+2024-05-20 01:38:34,767 - ERROR - No se encontraron las palabras 'Health Check - FW 10.224.28.1'
+2024-05-20 01:38:34,767 - ERROR - NoneType: None
+
+2024-05-20 01:38:34,767 - ERROR - NoneType: None
+
+2024-05-20 01:44:34,471 - ERROR - No se encontraron las palabras 'Health Check - FW 10.224.28.1'
+2024-05-20 01:44:34,471 - ERROR - No se encontraron las palabras 'Health Check - FW 10.224.28.1'
+2024-05-20 01:44:34,472 - ERROR - NoneType: None
+
+2024-05-20 01:44:34,472 - ERROR - NoneType: None
+
+2024-05-20 01:50:33,224 - ERROR - No se encontraron las palabras 'Health Check - FW 10.224.28.1'
+2024-05-20 01:50:33,224 - ERROR - No se encontraron las palabras 'Health Check - FW 10.224.28.1'
+2024-05-20 01:50:33,224 - ERROR - NoneType: None
+
+2024-05-20 01:50:33,224 - ERROR - NoneType: None
+
+2024-05-20 01:56:32,919 - ERROR - No se encontraron las palabras 'Health Check - FW 10.224.28.1'
+2024-05-20 01:56:32,919 - ERROR - No se encontraron las palabras 'Health Check - FW 10.224.28.1'
+2024-05-20 01:56:32,919 - ERROR - NoneType: None
+
+2024-05-20 01:56:32,919 - ERROR - NoneType: None
+
+2024-05-20 02:02:30,503 - ERROR - No se encontraron las palabras 'Health Check - FW 10.224.28.1'
+2024-05-20 02:02:30,503 - ERROR - No se encontraron las palabras 'Health Check - FW 10.224.28.1'
+2024-05-20 02:02:30,504 - ERROR - NoneType: None
+
+2024-05-20 02:02:30,504 - ERROR - NoneType: None
+

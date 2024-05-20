@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Navbar } from "../Navbar/Navbar";
+import { Status_System } from "../Status_System/Status_System";
 import { Link } from "react-router-dom";
 import { getDataAnillo, PRTG_URL } from "../../utils/Api-candelaria/api";
 import "./Anillo.css";
@@ -99,6 +100,7 @@ export const Anillo = () => {
   return (
     <>
       <Navbar title={"Anillo Candelaria"} />
+      <Status_System tableToShow={"anillo"} />
       <div className="button-zoom-container">
         <button className="button-zoom zoom-in" onClick={handleZoomIn}>
           +

@@ -6,14 +6,6 @@ import os
 from dotenv import load_dotenv
 from config import database
 
-last_data = [
-    {'id': 1, 'ubication': 'Camion 201', 'device': 'Cisco AP', 'client': '10.117.115.111', 'last_mac': 'Not Found', 'current_mac': 'f01d.2d55.9bfc', 'note': 'No data', 'last_change_date': 'No data', 'status': 'ok'}, 
-    {'id': 2, 'ubication': 'Camion 201', 'device': 'Cisco RO', 'client': '10.117.116.201', 'last_mac': 'C', 'current_mac': '0027.e3c7.5600', 'note': 'No data', 'last_change_date': 'No data', 'status': 'ok'}, 
-    {'id': 3, 'ubication': 'Camion 201', 'device': 'Dispatch', 'client': '10.117.123.201', 'last_mac': 'C', 'current_mac': '0080.0701.12d8', 'note': 'No data', 'last_change_date': 'No data', 'status': 'ok'},
-#     {'id': 4, 'ubication': 'Camion 201', 'device': 'Dispatch', 'client': '10.117.123.221', 'last_mac': 'B', 'current_mac': 'Not Found', 'note': 'No data', 'last_change_date': 'No data', 'status': 'ok'},
-#     {'id': 5, 'ubication': 'Camion 201', 'device': 'Dispatch', 'client': '10.117.123.201', 'last_mac': 'B', 'current_mac': 'A', 'note': 'No data', 'last_change_date': 'No data', 'status': 'ok'},
-#     {'id': 6, 'ubication': 'Camion 201', 'device': 'Dispatch', 'client': '10.117.123.221', 'last_mac': 'B', 'current_mac': 'A', 'note': 'No data', 'last_change_date': 'No data', 'status': 'ok'},
-]
 
 """
     Funcion encargada de validar si `current_mac` se repite en algun otro elemento,
@@ -21,26 +13,29 @@ last_data = [
 """
 
 # Configuración básica de logging
-logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s: %(message)s")
+logging.basicConfig(
+    level=logging.INFO, format="%(asctime)s - %(levelname)s: %(message)s"
+)
+
 
 def database_connection():
     try:
         load_dotenv()
-        env = os.getenv('ENVIRONMENT')
-        if env == 'local':
+        env = os.getenv("ENVIRONMENT")
+        if env == "local":
             mydb = mysql.connector.connect(
-            host=database['local']['DB_HOST'],
-            user=database['local']['DB_USER'],
-            password=database['local']['DB_PASSWORD'],
-            database=database['local']['DB_DATABASE']
+                host=database["local"]["DB_HOST"],
+                user=database["local"]["DB_USER"],
+                password=database["local"]["DB_PASSWORD"],
+                database=database["local"]["DB_DATABASE"],
             )
 
         else:
             mydb = mysql.connector.connect(
-            host=database['production']['DB_HOST'],
-            user=database['production']['DB_USER'],
-            password=database['production']['DB_PASSWORD'],
-            database=database['production']['DB_DATABASE']
+                host=database["production"]["DB_HOST"],
+                user=database["production"]["DB_USER"],
+                password=database["production"]["DB_PASSWORD"],
+                database=database["production"]["DB_DATABASE"],
             )
         return mydb
 
@@ -48,7 +43,7 @@ def database_connection():
         logging.error("Error al conectarse a la base de datos en la funcion CHECK_MAC")
         logging.error(traceback.format_exc())
         logging.error(e)
-        
+
 
 def check_mac():
     try:
@@ -66,35 +61,68 @@ def check_mac():
                 row_dict[column_names[i]] = row[i]
             data_updated.append(row_dict)
             
+        #! DATA TEST    
+        # data_updated = [
+        #     {
+        #         "id": 353,
+        #         "ubication": "Pala 10",
+        #         "device": "Cisco AP",
+        #         "client": "10.117.115.110",
+        #         "last_mac": "f01d.2d55.7512",
+        #         "current_mac": "f01d.2d55.7512",
+        #         "note": "No data",
+        #         "last_change_date": "No data",
+        #         "status": "ok",
+        #     },
+        #     {
+        #         "id": 349,
+        #         "ubication": "Camion 318",
+        #         "device": "UMAN",
+        #         "client": "10.117.126.118",
+        #         "last_mac": "No data",
+        #         "current_mac": "f01d.2d55.7512",
+        #         "note": "No data",
+        #         "last_change_date": "No data",
+        #         "status": "ok",
+        #     },
+        # ]
+
         for i, data in enumerate(data_updated):
-            current_mac = data['current_mac']
-            if current_mac != 'No data' and current_mac != 'Not Found' and current_mac != 'b827.eb80.f108':
-                mac_repeated = False
-                for j, other_data in enumerate(data_updated):
-                    if i != j and other_data['current_mac'] == current_mac:
-                        data['status'] = 'fail'
-                        mac_repeated = True
-                        break
-                if not mac_repeated:
-                    data['status'] = 'ok'
-            
+            if data["note"] == "NAT":
+                data["status"] = "ok"
             else:
-                data['status'] = 'ok'
-                    
+                current_mac = data["current_mac"]
+                if (
+                    current_mac != "No data"
+                    and current_mac != "Not Found"
+                    and current_mac != "b827.eb80.f108"
+                ):
+                    mac_repeated = False
+                    for j, other_data in enumerate(data_updated):
+                        if i != j and other_data["current_mac"] == current_mac:
+                            data["status"] = "fail"
+                            mac_repeated = True
+                            break
+                    if not mac_repeated:
+                        data["status"] = "ok"
+                else:
+                    data["status"] = "ok"
+
         for data in data_updated:
-            if data['client'] != '10.117.126.100':
-                status = data['status']
+            if data["client"] != "10.117.126.100":
+                status = data["status"]
                 query_mac = f"UPDATE dcs.mesh_process SET status = '{status}' WHERE client = '{data['client']}'"
                 cursor.execute(query_mac)
-                mydb.commit() 
-                   
+                mydb.commit()
+
         logging.info("CHECK_MAC: Estados de los clientes Actualizado Exitosamente")
         cursor.close()
         # return data_updated
-                    
+
     except Exception as e:
         logging.error("Error en la funcion CHECK_MAC")
         logging.error(e)
         logging.error(traceback.format_exc())
-        
+
+
 # check_mac()

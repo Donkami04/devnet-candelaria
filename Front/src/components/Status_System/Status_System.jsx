@@ -66,6 +66,8 @@ export function Status_System({ tableToShow }) {
       return "Base Fim";
     } else if (tableToShow === "mesh_process") {
       return "Proceso Mesh";
+    } else if (tableToShow === "anillo") {
+      return "Anillo Candelaria";
     }
   };
 
