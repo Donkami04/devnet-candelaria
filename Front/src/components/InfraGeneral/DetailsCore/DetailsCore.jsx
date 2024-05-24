@@ -70,7 +70,7 @@ export const DetailsCore = () => {
 
   const filterData = (data) => {
     // Filtrar los datos basados en el valor del filtro
-    console.log(data);
+
     return data.filter((item) =>
       Object.values(item).some(
         (value) =>

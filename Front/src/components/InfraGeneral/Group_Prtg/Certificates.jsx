@@ -10,7 +10,7 @@ export function Certificates() {
     const fetchData = async () => {
       try {
         const data = await getDataPrtgGroups();
-        console.log(data)
+
         const dataCertificates = data.filter(
           (e) => e.group.toLowerCase() === "certificados candelaria"
         );

@@ -115,7 +115,6 @@ router.post(
   async (req, res, next) => {
     try {
       const { fw, canal } = req.body;
-      console.log(fw, canal)
       const data = await getHistoryFail(fw, canal);
       res.status(data.status).json({
         status: data.status,

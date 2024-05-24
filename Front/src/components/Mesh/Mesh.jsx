@@ -216,17 +216,19 @@ export function Mesh() {
                         <span>Conectado a: </span>
                         {device.conectado_a}
                       </p>
-                      <p>
+                      <div>
                         <p>
                           <span>Distancia:</span>
                           {device.distance === 0.0
                             ? "Not Found"
                             : `${device.distance} metros`}
                         </p>
-                        <span>Nivel de SNR: </span>
-                        <span className={`mesh-valor ${colorNivelSnr}`}>
-                          {device.snr}
-                        </span>
+                        <p>
+                          <span>Nivel de SNR: </span>
+                          <span className={`mesh-valor ${colorNivelSnr}`}>
+                            {device.snr}
+                          </span>
+                        </p>
                         <p>
                           <span>Contador Fail SNR: </span>
                           {device.fail_snr}
@@ -235,8 +237,9 @@ export function Mesh() {
                           <span>Duración Última Falla: </span>
                           {device.fail_time_snr} min
                         </p>
-                      </p>
+                      </div>
                     </td>
+
                     <td>
                       <p>
                         <span>Status Dispatch: </span>

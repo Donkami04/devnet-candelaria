@@ -8,7 +8,6 @@ export function FailHistoryFw({
   setShowHistoryTable,
 }) {
   const [datesList, setDatesList] = useState([]);
-  console.log(fwHistory);
   useEffect(() => {
     const dates = arrayHistoryFail.map((e) => e.datetime);
     setDatesList(dates);

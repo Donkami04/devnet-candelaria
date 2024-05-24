@@ -10,8 +10,10 @@ export function Cctv() {
     const fetchData = async () => {
       try {
         const data = await getDataPrtgGroups();
-        console.log(data)
-        const dataCertificates = data.filter((e) => e.group.toUpperCase() === "CCTV");
+
+        const dataCertificates = data.filter(
+          (e) => e.group.toUpperCase() === "CCTV"
+        );
         setCertificates(dataCertificates);
       } catch (error) {
         console.error(error);

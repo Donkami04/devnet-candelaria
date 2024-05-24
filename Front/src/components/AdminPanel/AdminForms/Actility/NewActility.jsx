@@ -60,7 +60,6 @@ export function NewActility({
         });
       } else {
         console.error("Error al guardar el nuevo elemento");
-        console.log(response);
       }
     } catch (error) {
       console.error("Error al enviar el nuevo elemento:", error);

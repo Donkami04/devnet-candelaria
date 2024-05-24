@@ -6,7 +6,7 @@ import "./TableGroupPrtg.css";
 
 export function TableGroupPrtg({ name, show }) {
   const [prtgGroup, setPrtgGroup] = useState([]);
-  console.log(name);
+
   useEffect(() => {
     const fetchData = async () => {
       try {

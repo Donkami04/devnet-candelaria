@@ -127,35 +127,34 @@ export function Actility() {
     }
   };
 
-    const deleteElement = async () => {
-      try {
-        const response = await axios.delete(
-          `${BASE_API_URL}/actility/remove/${idElem}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        console.log(response);
-        if (response.status === 200) {
-          cancelForm();
+  const deleteElement = async () => {
+    try {
+      const response = await axios.delete(
+        `${BASE_API_URL}/actility/remove/${idElem}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
-      } catch (error) {
-        console.error("Error al ELIMINAR el elemento:", error);
+      );
+      if (response.status === 200) {
+        cancelForm();
       }
-    };
+    } catch (error) {
+      console.error("Error al ELIMINAR el elemento:", error);
+    }
+  };
 
-    const selectDeleteOption = () => {
-      setShowDeleteConfirm(true);
-      setShowButtons(false);
-    };
+  const selectDeleteOption = () => {
+    setShowDeleteConfirm(true);
+    setShowButtons(false);
+  };
 
-    const openNewElement = () => {
-      setShowPopUp(true);
-      setNewDataElem(true);
-      setShowNewForm(true);
-    };
+  const openNewElement = () => {
+    setShowPopUp(true);
+    setNewDataElem(true);
+    setShowNewForm(true);
+  };
 
   return (
     <div>

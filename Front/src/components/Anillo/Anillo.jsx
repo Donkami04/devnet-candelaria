@@ -111,7 +111,7 @@ export const Anillo = () => {
       </div>
       <main className={`background-anillo zoom-${zoomLevel}`}>
         <div className="main-anillo-container">
-          <img src="/anillo.png" alt="anillo" />
+          <img src="/anillo2-modified.png" alt="anillo" />
 
           <div className=".main-lights-anillo-container">
             <div className="status-light-anillo-container">
@@ -263,6 +263,20 @@ export const Anillo = () => {
                 <a
                   style={{ color: "black" }}
                   href={`${PRTG_URL}5444&tabid=1`}
+                  target="_blank"
+                >
+                  Gi1/1
+                </a>
+              </p>
+            </div>
+            <div className="status-light-anillo-container">
+              <p // 10.224.114.106
+                title={statusTitle(17408)}
+                className={`status-light-anillo id17408 ${statusLight(17408)}`}
+              >
+                <a
+                  style={{ color: "black" }}
+                  href={`${PRTG_URL}17404&tabid=1`}
                   target="_blank"
                 >
                   Gi1/1

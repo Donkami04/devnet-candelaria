@@ -271,7 +271,6 @@ export function Firewalls() {
 
   // Funcion para obtener historial de fallas de los FW
   const getHistoryFail = async (dataFw) => {
-    console.log("eeeas");
     setShowHistoryButton(false);
     setShowLoadingButton(true);
     setFwHistory({
