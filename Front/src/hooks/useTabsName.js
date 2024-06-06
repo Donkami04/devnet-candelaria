@@ -36,6 +36,8 @@ export const useTabsName = (pathname) => {
       return "Anillo Candelaria";
     case "/monitoreo/infraestrucura-general/categorias":
       return "Categorias Infra. Gen.";
+    case "/monitoreo/infraestrucura-general/proceso-mesh":
+      return "Proceso Mesh.";
     default:
       return "Sistema de Monitoreo";
   }

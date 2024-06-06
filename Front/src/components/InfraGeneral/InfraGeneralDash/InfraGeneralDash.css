@@ -6,6 +6,7 @@
   width: 80%;
   padding: 4px;
   font-size: 0.8rem;
+  table-layout: fixed;
 }
 
 .infra-dash-table th,

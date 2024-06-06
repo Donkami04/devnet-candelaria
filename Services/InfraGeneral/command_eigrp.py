@@ -4,9 +4,10 @@ import re
 import logging
 import traceback
 
+
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-file_handler = logging.FileHandler('issues.log')
+file_handler = logging.FileHandler('eigrp.log')
 file_handler.setLevel(logging.WARNING)
 file_handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
 logging.getLogger().addHandler(file_handler)
@@ -43,7 +44,7 @@ def eigrp_function(switch):
             output += channel.recv(1024).decode('utf-8')
         channel.close()
         client.close()
-        print(f"output {output}")
+        # print(f"output EIGRP {output}")
         patron = r'\d+\s+(\S+)\s+(\S+)\s+(\d+)\s+(\S+)\s+(\d+)\s+(\w+)\s+(\d+)\s+(\d+)'
 
         # patron = r'\d+\s+([\d.]+)\s+(\S+)\s+(\d+)\s+([\w/]+)\s+(\d+)\s+(\w+)\s+(\d+)\s+(\d+)'
@@ -76,6 +77,10 @@ def eigrp_function(switch):
             }
             data_list.append(data)
         # print(f"data_list {data_list}")
+        
+        if len(data_list) == 0:
+            logging.warning("No se detecto resultado en el output")
+            logging.warning(output)
         return data_list
 
     except Exception as e:
@@ -94,5 +99,5 @@ def eigrp_function(switch):
 
         return data
 
-# prueba = {'ip': '10.224.127.147', 'red': 'it', 'name_switch':'prueba', 'is_eigrp': 1}
+# prueba = {'ip': '10.224.127.3', 'red': 'it', 'name_switch':'prueba', 'is_eigrp': 1}
 # eigrp_function(prueba)

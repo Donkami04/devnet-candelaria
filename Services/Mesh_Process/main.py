@@ -143,9 +143,11 @@ def main():
                     mydb.commit()
                     break
 
-        # Definir si en la salida del comando se encuentra la IP o no,
-        # En caso de no encontrar la IP la mac actual sera Not Found
-        # La mac anterior tendra el valor de la mac actual si esta es distinta de not found
+        """
+        Definir si en la salida del comando se encuentra la IP o no,
+        En caso de no encontrar la IP la mac actual sera Not Found
+        La mac anterior tendra el valor de la mac actual si esta es distinta de not found
+        """
         ips = [data["ip"] for data in current_data]
 
         # Validar si hay coincidencias entre las listas

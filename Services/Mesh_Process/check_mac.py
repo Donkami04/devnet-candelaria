@@ -46,6 +46,9 @@ def database_connection():
 
 
 def check_mac():
+    """
+        Funcion encargada de validar el estado "fail" u "ok" del elemento
+    """
     try:
         mydb = database_connection()
         cursor = mydb.cursor()

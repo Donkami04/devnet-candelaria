@@ -105,7 +105,11 @@ export function MeshProcess() {
                       ? "kpi-orange"
                       : ""
                   }
-                  title={`PRTG: ${device.prtg_status}`}
+                  title={
+                    device.prtg_status.includes("operando")
+                      ? "Pala no operativa"
+                      : `PRTG: ${device.prtg_status}`
+                  }
                   style={{ cursor: "help" }}
                 >
                   {device.client}

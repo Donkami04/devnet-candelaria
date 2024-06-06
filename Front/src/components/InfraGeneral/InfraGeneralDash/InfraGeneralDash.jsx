@@ -37,15 +37,13 @@ export function InfraGeneralDash() {
       <table className="infra-dash-table">
         <thead>
           <tr>
-            <th>ELEMENTO</th>
-            <th className="kpi-green">UP</th>
+            <th className="kpi-green">OK</th>
             <th className="kpi-red">FAIL</th>
             <th>TOTAL</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>CORE</td>
             <td>{infGenDashUp}</td>
             <td>{infGenDashDown}</td>
             <td>{infGenDashUp + infGenDashDown}</td>
