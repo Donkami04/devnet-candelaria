@@ -15,6 +15,10 @@ const FimBase = sequelize.define(
     status: {
       type: DataTypes.STRING(100),
       allowNull: false,
+    },
+    error: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
     }
   },
   {

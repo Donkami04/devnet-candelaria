@@ -35,7 +35,7 @@ def check_fim():
     ]
 
     try:
-        general_status = ""
+        general_status = "OK"
         for base in data:
             ip_base = base["ip"]
             logging.info(base["name"])
