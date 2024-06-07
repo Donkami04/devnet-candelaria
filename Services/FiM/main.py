@@ -53,15 +53,19 @@ def check_fim():
             for sensor in sensors:
                 if "portsensor" in sensor["tags"]:
                     base["base_status"] = sensor["status"]
+                    base["error"] = "OK"
                     update_status_base(base)
 
             # Reiniciamos la FIM y guardamos registro en caso de ser Down
             for sensor in sensors:
+                # sensor["tags"] = 'portsensor' #! Prueba
+                # sensor["status"] = 'Down' #! Prueba
                 if "portsensor" in sensor["tags"] and "Down" in sensor["status"]:
                     logging.info(sensor["status"])
-                    result = reset_base(ip_base)
+                    result, err = reset_base(ip_base)
                     if result == "Error":
                         general_status = "ERROR"
+                        base["error"] = err
                         break
                     save_down_register(base)
                     

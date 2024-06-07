@@ -37,6 +37,6 @@ def reset_base(ip_base):
         logging.error("Error en funcion Reset_Base")
         logging.error(e)
         logging.error(traceback.format_exc())
-        return "Error"
+        return "Error", e
         
 # reset_base("10.224.89.10")

@@ -68,7 +68,7 @@ def update_status_base(data):
     base_ip = data["ip"]
     base_status = data["base_status"]
     
-    query_update = (f"UPDATE dcs.fim_base SET status = '{base_status}' WHERE base_ip = '{base_ip}'")
+    query_update = (f"UPDATE dcs.fim_base SET status = '{base_status}', error = '{data['error']}' WHERE base_ip = '{base_ip}'")
 
     cursor.execute(query_update)
     mydb.commit()
