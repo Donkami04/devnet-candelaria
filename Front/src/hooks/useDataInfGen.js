@@ -16,7 +16,7 @@ export async function useDataInfGen() {
   const dataDevicesHealth = await getSystemHealth();
   const dataNeighbors = await getNeighbors();
   const dataRouteStatus = await getDefaultRoute();
-  const dataAp = await getAp();
+  // const dataAp = await getAp();
   const dataPrtgGroups = await getDataPrtgGroups();
 
   const allData = [

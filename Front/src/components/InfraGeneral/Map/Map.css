@@ -158,16 +158,18 @@
 }
 
 .button-zoom-container {
-  width: 50px;
   position: absolute;
   z-index: 9999;
   text-align: center;
+
 }
 
 .button-zoom {
   margin-bottom: 15px;
   width: 30px;
   border-radius: 25%;
+  background-color: blue;
+  color: white;
 }
 
 .background-infra-general {
@@ -200,4 +202,5 @@
   margin: 5px;
   padding: 8px;
   cursor: pointer;
+  
 }

@@ -152,7 +152,7 @@ export function Actility() {
 
   const openNewElement = () => {
     setShowPopUp(true);
-    setNewDataElem(true);
+    // setNewDataElem(true);
     setShowNewForm(true);
   };
 

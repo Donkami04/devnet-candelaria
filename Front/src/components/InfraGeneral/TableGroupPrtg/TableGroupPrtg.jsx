@@ -46,7 +46,7 @@ export function TableGroupPrtg({ name, show }) {
           </thead>
           <tbody>
             {prtgGroup.map((e, index) => (
-              <tr key={e.name + index}>
+              <tr key={e.name + index + e.sensor}>
                 <td>
                   {" "}
                   <a

@@ -6,7 +6,6 @@ import {
 } from "../../../utils/Api-candelaria/api";
 import { Navbar } from "../../Navbar/Navbar";
 import { useDataInfGen } from "../../../hooks/useDataInfGen";
-import { DataCore } from "../DataCore/DataCore";
 import { Status_System } from "../../Status_System/Status_System";
 import { Spinner } from "../../Spinner/Spinner";
 import { Link } from "react-router-dom";

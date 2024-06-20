@@ -58,12 +58,23 @@ def get_data():
         prtg_data = []
         
         # lista de id de los grupos de prtg
-        id_list = [15959, 18016, 8681, 4418, 14635, 10160]
+        id_list = [15959, 18016, 8681, 4418, 14635, 10160, 14804, 14809, 14873,  16153, 16157, 17559, 14884, 14886, 18695, 18700]
+        optional_group_list_it = [14804, 14809, 14873,  16153, 16157, 17559, 14884, 14886, 18695, 18700]
+        optional_group_list_ot = [18695, 18700]
 
         for id_group in id_list:
+            logging.info(id_group)
             api_endpoint = os.getenv("GROUP_PRTG").format(id_group=id_group)
             api_request = requests.get(api_endpoint, verify=False).json()
             data = api_request["sensors"]
+            
+            # Estos sensores no tienen un grupo general, por esto lo agregamos aqui
+            for e in data:
+                if id_group in optional_group_list_it:
+                    e["group"] = "FW IT"
+                if id_group in optional_group_list_ot:
+                    e["group"] = "FW OT"
+                    
             if data:
                 prtg_data.extend(data)
                 

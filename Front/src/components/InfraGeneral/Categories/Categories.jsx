@@ -35,6 +35,10 @@ export function Categories() {
   const [lteUp, setLteUp] = useState([]);
   const [lteDown, setLteDown] = useState([]);
   const [cctvUp, setCctvUp] = useState([]);
+  const [fwItUp, setFwItUp] = useState([]);
+  const [fwItDown, setFwItDown] = useState([]);
+  const [fwOtUp, setFwOtUp] = useState([]);
+  const [fwOtDown, setFwOtDown] = useState([]);
   const [cctvDown, setCctvDown] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -52,6 +56,8 @@ export function Categories() {
         const dataIseUp = [];
         const dataLteUp = [];
         const dataCctvUp = [];
+        const dataFwItUp = [];
+        const dataFwOtUp = [];
 
         const newCoresDown = [];
         const newDistDown = [];
@@ -63,6 +69,8 @@ export function Categories() {
         const dataIseDown = [];
         const dataLteDown = [];
         const dataCctvDown = [];
+        const dataFwItDown = [];
+        const dataFwOtDown = [];
 
         dataStatusInfGen.upElements.forEach((e) => {
           if (e.name_switch && e.name_switch.includes("CORE")) {
@@ -97,6 +105,12 @@ export function Categories() {
           }
           if (e.group && e.group.toLowerCase() === "cctv") {
             dataCctvUp.push(e);
+          }
+          if (e.group && e.group.toLowerCase() === "fw it") {
+            dataFwItUp.push(e);
+          }
+          if (e.group && e.group.toLowerCase() === "fw ot") {
+            dataFwOtUp.push(e);
           }
         });
 
@@ -134,6 +148,12 @@ export function Categories() {
           if (e.group && e.group.toLowerCase() === "cctv") {
             dataCctvDown.push(e);
           }
+          if (e.group && e.group.toLowerCase() === "fw it") {
+            dataFwItDown.push(e);
+          }
+          if (e.group && e.group.toLowerCase() === "fw ot") {
+            dataFwOtDown.push(e);
+          }
         });
 
         setCoresUp(newCoresUp);
@@ -157,6 +177,10 @@ export function Categories() {
         setLteDown(dataLteDown);
         setCctvUp(dataCctvUp);
         setCctvDown(dataCctvDown);
+        setFwItUp(dataFwItUp);
+        setFwItDown(dataFwItDown);
+        setFwOtUp(dataFwOtUp);
+        setFwOtDown(dataFwOtDown);
       } catch (error) {
         console.error(error);
         setIsLoading(false);
@@ -208,26 +232,6 @@ export function Categories() {
                 <td>{distDown.length}</td>
                 <td>{distUp.length + distDown.length}</td>
               </tr>
-              {/* <tr>
-                <td className="td-category-ig">
-                  <Link to="/monitoreo/infraestrucura-general/detalles/ap/negocio">
-                    AP NEGOCIO
-                  </Link>
-                </td>
-                <td>{apNegocioUp.length}</td>
-                <td>{apNegocioDown.length}</td>
-                <td>{apNegocioUp.length + apNegocioDown.length}</td>
-              </tr>
-              <tr>
-                <td className="td-category-ig">
-                  <Link to="/monitoreo/infraestrucura-general/detalles/ap/mesh">
-                    AP MESH
-                  </Link>
-                </td>
-                <td>{apMeshUp.length}</td>
-                <td>{apMeshDown.length}</td>
-                <td>{apMeshUp.length + apMeshDown.length}</td>
-              </tr> */}
               <tr>
                 <td className="td-category-ig">
                   <Link to="/monitoreo/infraestrucura-general?categoria=fortigate">
@@ -302,6 +306,26 @@ export function Categories() {
                 <td>{cctvUp.length}</td>
                 <td>{cctvDown.length}</td>
                 <td>{cctvUp.length + cctvDown.length}</td>
+              </tr>
+              <tr>
+                <td className="td-category-ig">
+                  <Link to="/monitoreo/infraestrucura-general?categoria=fw%20it">
+                    Firewalls IT
+                  </Link>
+                </td>
+                <td>{fwItUp.length}</td>
+                <td>{fwItDown.length}</td>
+                <td>{fwItUp.length + fwItDown.length}</td>
+              </tr>
+              <tr>
+                <td className="td-category-ig">
+                  <Link to="/monitoreo/infraestrucura-general?categoria=fw%20ot">
+                    Firewalls OT
+                  </Link>
+                </td>
+                <td>{fwOtUp.length}</td>
+                <td>{fwOtDown.length}</td>
+                <td>{fwOtUp.length + fwOtDown.length}</td>
               </tr>
             </tbody>
           </table>

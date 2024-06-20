@@ -69,10 +69,8 @@ def main():
                 row_dict[column_names[i]] = row[i]
             last_data.append(row_dict)
 
-        # Obtenemos los datos actuales de la controladora 
+        # Obtenemos los datos actuales de la controladora
         current_data = get_mesh_process_data()
-        # print(f"de la base de datos: {last_data}")
-        # print(f"de la controladora: {current_data}")
 
         # #! db_data_test
         # last_data = [
@@ -166,18 +164,21 @@ def main():
                 query_last_mac = f"UPDATE dcs.mesh_process SET last_mac = '{last['current_mac']}' WHERE client = '{last['client']}'"
                 cursor.execute(query_last_mac)
                 mydb.commit()
-
-                now = datetime.datetime.now()
-                fecha_y_hora = now.strftime("%Y-%m-%d %H:%M:%S")
-                fecha_y_hora = str(fecha_y_hora)
-                query_current_mac = f"UPDATE dcs.mesh_process SET current_mac = 'Not Found', last_change_date = '{fecha_y_hora}' WHERE client = '{last['client']}'"
+                
+                query_current_mac = f"UPDATE dcs.mesh_process SET current_mac = 'Not Found' WHERE client = '{last['client']}'"
                 cursor.execute(query_current_mac)
                 mydb.commit()
                 break
+            
+                # now = datetime.datetime.now()
+                # fecha_y_hora = now.strftime("%Y-%m-%d %H:%M:%S")
+                # fecha_y_hora = str(fecha_y_hora)
+                #! Se elimina el last_change_date = '{fecha_y_hora}'
+                # query_current_mac = f"UPDATE dcs.mesh_process SET current_mac = 'Not Found', last_change_date = '{fecha_y_hora}' WHERE client = '{last['client']}'"
 
         # Funcion para validar si una mac se repite o no
         check_mac()
-        
+
         # Funcion para actualizar el estado y id de PRTG
         status_prtg()
 
@@ -211,9 +212,8 @@ def bucle(scheduler):
     main()
     scheduler.enter(900, 1, bucle, (scheduler,))
 
+
 if __name__ == "__main__":
     s = sched.scheduler(time.time, time.sleep)
     s.enter(0, 1, bucle, (s,))
     s.run()
-
-# main()

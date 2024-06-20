@@ -126,6 +126,3 @@ def check_mac():
         logging.error("Error en la funcion CHECK_MAC")
         logging.error(e)
         logging.error(traceback.format_exc())
-
-
-# check_mac()

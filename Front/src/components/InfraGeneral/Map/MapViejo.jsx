@@ -6,9 +6,6 @@ import {
   getStatusCores,
 } from "../../../utils/Api-candelaria/api";
 import { Link } from "react-router-dom";
-import { useDataInfGen } from "../../../hooks/useDataInfGen";
-import { Spinner } from "../../Spinner/Spinner";
-import { useCoreStatus } from "../../../hooks/useCoreStatus";
 import "./Map.css";
 
 export const Map = () => {
@@ -16,9 +13,6 @@ export const Map = () => {
   const [wan, setWan] = useState([]);
   const [cores, setCores] = useState([]);
   const [zoomLevel, setZoomLevel] = useState(1);
-  const [infraGeneral, setInfraGeneral] = useState([]);
-  const [showSpinner, setShowSpinner] = useState(true);
-  const [coreStatus, setCoreStatus] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,17 +20,11 @@ export const Map = () => {
         const dataFirewalls = await getFirewalls();
         const dataWan = await getWan();
         const dataCores = await getStatusCores();
-        const dataInfGen = await useDataInfGen();
-        const dataCoreStatus = await useCoreStatus();
 
-        setFirewalls(dataFirewalls);
         setWan(dataWan);
         setCores(dataCores);
-        setInfraGeneral(dataInfGen);
-        setShowSpinner(false);
-        setCoreStatus(dataCoreStatus);
       } catch (error) {
-        console.error(error);
+        return error;
       }
     };
     fetchData();
@@ -134,15 +122,6 @@ export const Map = () => {
   const colorLightCoreConceIt = getColorLightCores("10.224.127.2", "it", cores);
   const colorLightCoreOjosIt = getColorLightCores("10.230.127.1", "it", cores);
 
-  if (showSpinner) {
-    return (
-      <div>
-        <Navbar title={"Mapa Infra General"} />
-        <Spinner />
-      </div>
-    );
-  }
-
   return (
     <>
       <Navbar title={"Mapa Infra General"} />
@@ -150,11 +129,7 @@ export const Map = () => {
         <button className="button-zoom zoom-in" onClick={handleZoomIn}>
           +
         </button>
-        <button
-          title={"Disminuir Zoom"}
-          className="button-zoom zoom-out"
-          onClick={handleZoomOut}
-        >
+        <button className="button-zoom zoom-out" onClick={handleZoomOut}>
           -
         </button>
       </div>
@@ -250,40 +225,37 @@ export const Map = () => {
             </div>
 
             <div className="status-light-map-container fw-conce">
-              <Link to="/monitoreo/wan">
+              <Link to="/monitoreo/firewalls">
                 <p className={`status-light-inf-gen ${colorLightWanConce}`}></p>
               </Link>
             </div>
 
             <div className="status-light-map-container fw-ojos">
-              <Link to="/monitoreo/wan">
+              <Link to="/monitoreo/firewalls">
                 <p className={`status-light-inf-gen ${colorLightWanOjos}`}></p>
               </Link>
             </div>
 
             <div className="status-light-map-container core-admin-it">
-              <Link to="/monitoreo/infraestrucura-general/detalles?nombre=SW%20CORE%20ADMIN">
+              <Link to="/monitoreo/infraestrucura-general">
                 <p
-                  title={`El ${coreStatus.coreAdminUpPercent}% de los elementos está Up`}
-                  className={`status-light-inf-gen inf-gen-${coreStatus.colorAdminCore}`}
+                  className={`status-light-inf-gen ${colorLightCoreAdmIt}`}
                 ></p>
               </Link>
             </div>
 
             <div className="status-light-map-container core-conce-it">
-              <Link to="/monitoreo/infraestrucura-general/detalles?nombre=SW%20CORE%20CONCE">
+              <Link to="/monitoreo/infraestrucura-general">
                 <p
-                  title={`El ${coreStatus.coreConceUpPercent}% de los elementos está Up`}
-                  className={`status-light-inf-gen inf-gen-${coreStatus.colorConceCore}`}
+                  className={`status-light-inf-gen ${colorLightCoreConceIt}`}
                 ></p>
               </Link>
             </div>
 
             <div className="status-light-map-container core-ojos-it">
-              <Link to="/monitoreo/infraestrucura-general/detalles?nombre=SW%20CORE%20OJOS">
+              <Link to="/monitoreo/infraestrucura-general">
                 <p
-                  title={`El ${coreStatus.coreOjosUpPercent}% de los elementos está Up`}
-                  className={`status-light-inf-gen inf-gen-${coreStatus.colorOjosCore}`}
+                  className={`status-light-inf-gen ${colorLightCoreOjosIt}`}
                 ></p>
               </Link>
             </div>
