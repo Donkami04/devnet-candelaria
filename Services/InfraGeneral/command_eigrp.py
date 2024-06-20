@@ -81,14 +81,22 @@ def eigrp_function(switch, max_attempts=5):
                 logging.warning(f"No se detecto resultado en el output en intento {attempts + 1}")
                 logging.warning(output)
                 attempts += 1
+<<<<<<< HEAD
                 time.sleep(2)  # Pausa antes de volver a intentar
+=======
+                time.sleep(2)  # Espera un poco antes de volver a intentar
+>>>>>>> 3255affd65e4dcd260972230942a79a70fef1541
 
         except Exception as e:
             logging.error("Error en funcion EIRGP")
             logging.error(e)
             logging.error(traceback.format_exc())
             attempts += 1
+<<<<<<< HEAD
             time.sleep(2)  # Pausa antes de volver a intentar
+=======
+            time.sleep(2)  # Espera un poco antes de volver a intentar
+>>>>>>> 3255affd65e4dcd260972230942a79a70fef1541
 
     data = [{
         'ip_neighbor': 'Not Found / Error', 
