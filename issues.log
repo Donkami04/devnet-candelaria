@@ -1,642 +1,322 @@
-Error
-HTTPSConnectionPool(host='10.224.241.25', port=443): Max retries exceeded with url: /api/table.json?content=sensors&id=15959&columns=lastvalue,objid,device,status,group,sensor&username=canadmin&password=Carrera01 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd790dd2860>, 'Connection to 10.224.241.25 timed out. (connect timeout=None)'))
-Traceback (most recent call last):
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connection.py", line 200, in _new_conn
-    sock = connection.create_connection(
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/util/connection.py", line 85, in create_connection
-    raise err
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/util/connection.py", line 73, in create_connection
-    sock.connect(sa)
-TimeoutError: [Errno 110] Connection timed out
+2024-06-07 11:55:09,872 - ERROR - Error al conectarse a la base de datos
+2024-06-07 11:55:09,872 - ERROR - Error al conectarse a la base de datos
+Error al conectarse a la base de datos
+2024-06-07 11:55:09,872 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 291, in _open_connection
+    self._cmysql.connect(**cnx_kwargs)
+_mysql_connector.MySQLInterfaceError: Can't connect to MySQL server on '127.0.0.1:3306' (111)
 
 The above exception was the direct cause of the following exception:
 
 Traceback (most recent call last):
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 790, in urlopen
-    response = self._make_request(
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 491, in _make_request
-    raise new_e
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 467, in _make_request
-    self._validate_conn(conn)
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 1092, in _validate_conn
-    conn.connect()
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connection.py", line 604, in connect
-    self.sock = sock = self._new_conn()
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connection.py", line 209, in _new_conn
-    raise ConnectTimeoutError(
-urllib3.exceptions.ConnectTimeoutError: (<urllib3.connection.HTTPSConnection object at 0x7fd790dd2860>, 'Connection to 10.224.241.25 timed out. (connect timeout=None)')
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "/home/donkami/.local/lib/python3.10/site-packages/requests/adapters.py", line 486, in send
-    resp = conn.urlopen(
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 844, in urlopen
-    retries = retries.increment(
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/util/retry.py", line 515, in increment
-    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
-urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='10.224.241.25', port=443): Max retries exceeded with url: /api/table.json?content=sensors&id=15959&columns=lastvalue,objid,device,status,group,sensor&username=canadmin&password=Carrera01 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd790dd2860>, 'Connection to 10.224.241.25 timed out. (connect timeout=None)'))
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/home/donkami/Sona/devnet-candelaria/Services/Groups_Prtg/main.py", line 67, in get_data
-    api_request = requests.get(api_endpoint, verify=False).json()
-  File "/home/donkami/.local/lib/python3.10/site-packages/requests/api.py", line 73, in get
-    return request("get", url, params=params, **kwargs)
-  File "/home/donkami/.local/lib/python3.10/site-packages/requests/api.py", line 59, in request
-    return session.request(method=method, url=url, **kwargs)
-  File "/home/donkami/.local/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
-    resp = self.send(prep, **send_kwargs)
-  File "/home/donkami/.local/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
-    r = adapter.send(request, **kwargs)
-  File "/home/donkami/.local/lib/python3.10/site-packages/requests/adapters.py", line 507, in send
-    raise ConnectTimeout(e, request=request)
-requests.exceptions.ConnectTimeout: HTTPSConnectionPool(host='10.224.241.25', port=443): Max retries exceeded with url: /api/table.json?content=sensors&id=15959&columns=lastvalue,objid,device,status,group,sensor&username=canadmin&password=Carrera01 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd790dd2860>, 'Connection to 10.224.241.25 timed out. (connect timeout=None)'))
-
-Error
-HTTPSConnectionPool(host='10.224.241.25', port=443): Max retries exceeded with url: /api/table.json?content=sensors&id=15959&columns=lastvalue,objid,device,status,group,sensor&username=canadmin&password=Carrera01 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd790dd3010>, 'Connection to 10.224.241.25 timed out. (connect timeout=None)'))
-Traceback (most recent call last):
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connection.py", line 200, in _new_conn
-    sock = connection.create_connection(
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/util/connection.py", line 85, in create_connection
-    raise err
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/util/connection.py", line 73, in create_connection
-    sock.connect(sa)
-TimeoutError: [Errno 110] Connection timed out
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 790, in urlopen
-    response = self._make_request(
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 491, in _make_request
-    raise new_e
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 467, in _make_request
-    self._validate_conn(conn)
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 1092, in _validate_conn
-    conn.connect()
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connection.py", line 604, in connect
-    self.sock = sock = self._new_conn()
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connection.py", line 209, in _new_conn
-    raise ConnectTimeoutError(
-urllib3.exceptions.ConnectTimeoutError: (<urllib3.connection.HTTPSConnection object at 0x7fd790dd3010>, 'Connection to 10.224.241.25 timed out. (connect timeout=None)')
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "/home/donkami/.local/lib/python3.10/site-packages/requests/adapters.py", line 486, in send
-    resp = conn.urlopen(
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 844, in urlopen
-    retries = retries.increment(
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/util/retry.py", line 515, in increment
-    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
-urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='10.224.241.25', port=443): Max retries exceeded with url: /api/table.json?content=sensors&id=15959&columns=lastvalue,objid,device,status,group,sensor&username=canadmin&password=Carrera01 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd790dd3010>, 'Connection to 10.224.241.25 timed out. (connect timeout=None)'))
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/home/donkami/Sona/devnet-candelaria/Services/Groups_Prtg/main.py", line 67, in get_data
-    api_request = requests.get(api_endpoint, verify=False).json()
-  File "/home/donkami/.local/lib/python3.10/site-packages/requests/api.py", line 73, in get
-    return request("get", url, params=params, **kwargs)
-  File "/home/donkami/.local/lib/python3.10/site-packages/requests/api.py", line 59, in request
-    return session.request(method=method, url=url, **kwargs)
-  File "/home/donkami/.local/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
-    resp = self.send(prep, **send_kwargs)
-  File "/home/donkami/.local/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
-    r = adapter.send(request, **kwargs)
-  File "/home/donkami/.local/lib/python3.10/site-packages/requests/adapters.py", line 507, in send
-    raise ConnectTimeout(e, request=request)
-requests.exceptions.ConnectTimeout: HTTPSConnectionPool(host='10.224.241.25', port=443): Max retries exceeded with url: /api/table.json?content=sensors&id=15959&columns=lastvalue,objid,device,status,group,sensor&username=canadmin&password=Carrera01 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd790dd3010>, 'Connection to 10.224.241.25 timed out. (connect timeout=None)'))
-
-Error
-HTTPSConnectionPool(host='10.224.241.25', port=443): Max retries exceeded with url: /api/table.json?content=sensors&id=15959&columns=lastvalue,objid,device,status,group,sensor&username=canadmin&password=Carrera01 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd790dd38b0>, 'Connection to 10.224.241.25 timed out. (connect timeout=None)'))
-Traceback (most recent call last):
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connection.py", line 200, in _new_conn
-    sock = connection.create_connection(
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/util/connection.py", line 85, in create_connection
-    raise err
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/util/connection.py", line 73, in create_connection
-    sock.connect(sa)
-TimeoutError: [Errno 110] Connection timed out
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 790, in urlopen
-    response = self._make_request(
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 491, in _make_request
-    raise new_e
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 467, in _make_request
-    self._validate_conn(conn)
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 1092, in _validate_conn
-    conn.connect()
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connection.py", line 604, in connect
-    self.sock = sock = self._new_conn()
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connection.py", line 209, in _new_conn
-    raise ConnectTimeoutError(
-urllib3.exceptions.ConnectTimeoutError: (<urllib3.connection.HTTPSConnection object at 0x7fd790dd38b0>, 'Connection to 10.224.241.25 timed out. (connect timeout=None)')
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "/home/donkami/.local/lib/python3.10/site-packages/requests/adapters.py", line 486, in send
-    resp = conn.urlopen(
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 844, in urlopen
-    retries = retries.increment(
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/util/retry.py", line 515, in increment
-    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
-urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='10.224.241.25', port=443): Max retries exceeded with url: /api/table.json?content=sensors&id=15959&columns=lastvalue,objid,device,status,group,sensor&username=canadmin&password=Carrera01 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd790dd38b0>, 'Connection to 10.224.241.25 timed out. (connect timeout=None)'))
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/home/donkami/Sona/devnet-candelaria/Services/Groups_Prtg/main.py", line 67, in get_data
-    api_request = requests.get(api_endpoint, verify=False).json()
-  File "/home/donkami/.local/lib/python3.10/site-packages/requests/api.py", line 73, in get
-    return request("get", url, params=params, **kwargs)
-  File "/home/donkami/.local/lib/python3.10/site-packages/requests/api.py", line 59, in request
-    return session.request(method=method, url=url, **kwargs)
-  File "/home/donkami/.local/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
-    resp = self.send(prep, **send_kwargs)
-  File "/home/donkami/.local/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
-    r = adapter.send(request, **kwargs)
-  File "/home/donkami/.local/lib/python3.10/site-packages/requests/adapters.py", line 507, in send
-    raise ConnectTimeout(e, request=request)
-requests.exceptions.ConnectTimeout: HTTPSConnectionPool(host='10.224.241.25', port=443): Max retries exceeded with url: /api/table.json?content=sensors&id=15959&columns=lastvalue,objid,device,status,group,sensor&username=canadmin&password=Carrera01 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd790dd38b0>, 'Connection to 10.224.241.25 timed out. (connect timeout=None)'))
-
-Error
-HTTPSConnectionPool(host='10.224.241.25', port=443): Max retries exceeded with url: /api/table.json?content=sensors&id=15959&columns=lastvalue,objid,device,status,group,sensor&username=canadmin&password=Carrera01 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd790dd3880>, 'Connection to 10.224.241.25 timed out. (connect timeout=None)'))
-Traceback (most recent call last):
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connection.py", line 200, in _new_conn
-    sock = connection.create_connection(
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/util/connection.py", line 85, in create_connection
-    raise err
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/util/connection.py", line 73, in create_connection
-    sock.connect(sa)
-TimeoutError: [Errno 110] Connection timed out
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 790, in urlopen
-    response = self._make_request(
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 491, in _make_request
-    raise new_e
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 467, in _make_request
-    self._validate_conn(conn)
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 1092, in _validate_conn
-    conn.connect()
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connection.py", line 604, in connect
-    self.sock = sock = self._new_conn()
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connection.py", line 209, in _new_conn
-    raise ConnectTimeoutError(
-urllib3.exceptions.ConnectTimeoutError: (<urllib3.connection.HTTPSConnection object at 0x7fd790dd3880>, 'Connection to 10.224.241.25 timed out. (connect timeout=None)')
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "/home/donkami/.local/lib/python3.10/site-packages/requests/adapters.py", line 486, in send
-    resp = conn.urlopen(
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 844, in urlopen
-    retries = retries.increment(
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/util/retry.py", line 515, in increment
-    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
-urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='10.224.241.25', port=443): Max retries exceeded with url: /api/table.json?content=sensors&id=15959&columns=lastvalue,objid,device,status,group,sensor&username=canadmin&password=Carrera01 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd790dd3880>, 'Connection to 10.224.241.25 timed out. (connect timeout=None)'))
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/home/donkami/Sona/devnet-candelaria/Services/Groups_Prtg/main.py", line 67, in get_data
-    api_request = requests.get(api_endpoint, verify=False).json()
-  File "/home/donkami/.local/lib/python3.10/site-packages/requests/api.py", line 73, in get
-    return request("get", url, params=params, **kwargs)
-  File "/home/donkami/.local/lib/python3.10/site-packages/requests/api.py", line 59, in request
-    return session.request(method=method, url=url, **kwargs)
-  File "/home/donkami/.local/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
-    resp = self.send(prep, **send_kwargs)
-  File "/home/donkami/.local/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
-    r = adapter.send(request, **kwargs)
-  File "/home/donkami/.local/lib/python3.10/site-packages/requests/adapters.py", line 507, in send
-    raise ConnectTimeout(e, request=request)
-requests.exceptions.ConnectTimeout: HTTPSConnectionPool(host='10.224.241.25', port=443): Max retries exceeded with url: /api/table.json?content=sensors&id=15959&columns=lastvalue,objid,device,status,group,sensor&username=canadmin&password=Carrera01 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd790dd3880>, 'Connection to 10.224.241.25 timed out. (connect timeout=None)'))
-
-Error
-HTTPSConnectionPool(host='10.224.241.25', port=443): Max retries exceeded with url: /api/table.json?content=sensors&id=15959&columns=lastvalue,objid,device,status,group,sensor&username=canadmin&password=Carrera01 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd790dd2fe0>, 'Connection to 10.224.241.25 timed out. (connect timeout=None)'))
-Traceback (most recent call last):
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connection.py", line 200, in _new_conn
-    sock = connection.create_connection(
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/util/connection.py", line 85, in create_connection
-    raise err
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/util/connection.py", line 73, in create_connection
-    sock.connect(sa)
-TimeoutError: [Errno 110] Connection timed out
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 790, in urlopen
-    response = self._make_request(
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 491, in _make_request
-    raise new_e
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 467, in _make_request
-    self._validate_conn(conn)
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 1092, in _validate_conn
-    conn.connect()
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connection.py", line 604, in connect
-    self.sock = sock = self._new_conn()
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connection.py", line 209, in _new_conn
-    raise ConnectTimeoutError(
-urllib3.exceptions.ConnectTimeoutError: (<urllib3.connection.HTTPSConnection object at 0x7fd790dd2fe0>, 'Connection to 10.224.241.25 timed out. (connect timeout=None)')
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "/home/donkami/.local/lib/python3.10/site-packages/requests/adapters.py", line 486, in send
-    resp = conn.urlopen(
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 844, in urlopen
-    retries = retries.increment(
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/util/retry.py", line 515, in increment
-    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
-urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='10.224.241.25', port=443): Max retries exceeded with url: /api/table.json?content=sensors&id=15959&columns=lastvalue,objid,device,status,group,sensor&username=canadmin&password=Carrera01 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd790dd2fe0>, 'Connection to 10.224.241.25 timed out. (connect timeout=None)'))
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/home/donkami/Sona/devnet-candelaria/Services/Groups_Prtg/main.py", line 67, in get_data
-    api_request = requests.get(api_endpoint, verify=False).json()
-  File "/home/donkami/.local/lib/python3.10/site-packages/requests/api.py", line 73, in get
-    return request("get", url, params=params, **kwargs)
-  File "/home/donkami/.local/lib/python3.10/site-packages/requests/api.py", line 59, in request
-    return session.request(method=method, url=url, **kwargs)
-  File "/home/donkami/.local/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
-    resp = self.send(prep, **send_kwargs)
-  File "/home/donkami/.local/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
-    r = adapter.send(request, **kwargs)
-  File "/home/donkami/.local/lib/python3.10/site-packages/requests/adapters.py", line 507, in send
-    raise ConnectTimeout(e, request=request)
-requests.exceptions.ConnectTimeout: HTTPSConnectionPool(host='10.224.241.25', port=443): Max retries exceeded with url: /api/table.json?content=sensors&id=15959&columns=lastvalue,objid,device,status,group,sensor&username=canadmin&password=Carrera01 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fd790dd2fe0>, 'Connection to 10.224.241.25 timed out. (connect timeout=None)'))
-
-Error
-'optional_group'
-Traceback (most recent call last):
-  File "/home/donkami/Sona/devnet-candelaria/Services/Groups_Prtg/main.py", line 88, in get_data
-    values = [(item["device"], item["group"], item["status"], item["objid"], item["sensor"], item["lastvalue"], item["optional_group"]) for item in prtg_data]
-  File "/home/donkami/Sona/devnet-candelaria/Services/Groups_Prtg/main.py", line 88, in <listcomp>
-    values = [(item["device"], item["group"], item["status"], item["objid"], item["sensor"], item["lastvalue"], item["optional_group"]) for item in prtg_data]
-KeyError: 'optional_group'
-
-2024-06-20 14:42:00,137 - ERROR: Error en funcion get_mesh_process_data
-2024-06-20 14:42:00,137 - ERROR: Error en funcion get_mesh_process_data
-2024-06-20 14:42:00,137 - ERROR: 'mac'
-2024-06-20 14:42:00,137 - ERROR: 'mac'
-2024-06-20 14:42:00,138 - ERROR: Traceback (most recent call last):
-  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process_2/command_mac_detail.py", line 31, in run_mac_detail
-    mac = client["mac"]
-KeyError: 'mac'
-
-2024-06-20 14:42:00,138 - ERROR: Traceback (most recent call last):
-  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process_2/command_mac_detail.py", line 31, in run_mac_detail
-    mac = client["mac"]
-KeyError: 'mac'
-
-2024-06-20 14:42:33,452 - ERROR: Error en funcion get_mesh_process_data
-2024-06-20 14:42:33,452 - ERROR: Error en funcion get_mesh_process_data
-2024-06-20 14:42:33,452 - ERROR: 'dict' object has no attribute 'close'
-2024-06-20 14:42:33,452 - ERROR: 'dict' object has no attribute 'close'
-2024-06-20 14:42:33,452 - ERROR: Traceback (most recent call last):
-  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process_2/command_mac_detail.py", line 42, in run_mac_detail
-    client.close()
-AttributeError: 'dict' object has no attribute 'close'
-
-2024-06-20 14:42:33,452 - ERROR: Traceback (most recent call last):
-  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process_2/command_mac_detail.py", line 42, in run_mac_detail
-    client.close()
-AttributeError: 'dict' object has no attribute 'close'
-
-2024-06-20 14:43:20,460 - ERROR: Error en funcion get_mesh_process_data
-2024-06-20 14:43:20,460 - ERROR: Error en funcion get_mesh_process_data
-2024-06-20 14:43:20,460 - ERROR: 'dict' object has no attribute 'close'
-2024-06-20 14:43:20,460 - ERROR: 'dict' object has no attribute 'close'
-2024-06-20 14:43:20,460 - ERROR: Traceback (most recent call last):
-  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process_2/command_mac_detail.py", line 44, in run_mac_detail
-    client.close()
-AttributeError: 'dict' object has no attribute 'close'
-
-2024-06-20 14:43:20,460 - ERROR: Traceback (most recent call last):
-  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process_2/command_mac_detail.py", line 44, in run_mac_detail
-    client.close()
-AttributeError: 'dict' object has no attribute 'close'
-
-2024-06-20 14:43:52,786 - ERROR: Error en funcion get_mesh_process_data
-2024-06-20 14:43:52,786 - ERROR: Error en funcion get_mesh_process_data
-2024-06-20 14:43:52,786 - ERROR: 'dict' object has no attribute 'close'
-2024-06-20 14:43:52,786 - ERROR: 'dict' object has no attribute 'close'
-2024-06-20 14:43:52,795 - ERROR: Traceback (most recent call last):
-  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process_2/command_mac_detail.py", line 44, in run_mac_detail
-    client.close()
-AttributeError: 'dict' object has no attribute 'close'
-
-2024-06-20 14:43:52,795 - ERROR: Traceback (most recent call last):
-  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process_2/command_mac_detail.py", line 44, in run_mac_detail
-    client.close()
-AttributeError: 'dict' object has no attribute 'close'
-
-2024-06-20 14:45:14,494 - ERROR: Error en funcion get_mesh_process_data
-2024-06-20 14:45:14,494 - ERROR: Error en funcion get_mesh_process_data
-2024-06-20 14:45:14,494 - ERROR: 'dict' object has no attribute 'close'
-2024-06-20 14:45:14,494 - ERROR: 'dict' object has no attribute 'close'
-2024-06-20 14:45:14,494 - ERROR: Traceback (most recent call last):
-  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process_2/command_mac_detail.py", line 44, in run_mac_detail
-    client.close()
-AttributeError: 'dict' object has no attribute 'close'
-
-2024-06-20 14:45:14,494 - ERROR: Traceback (most recent call last):
-  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process_2/command_mac_detail.py", line 44, in run_mac_detail
-    client.close()
-AttributeError: 'dict' object has no attribute 'close'
-
-2024-06-20 14:45:47,108 - ERROR: Error en funcion get_mesh_process_data
-2024-06-20 14:45:47,108 - ERROR: Error en funcion get_mesh_process_data
-2024-06-20 14:45:47,108 - ERROR: 'SSHClient' object is not subscriptable
-2024-06-20 14:45:47,108 - ERROR: 'SSHClient' object is not subscriptable
-2024-06-20 14:45:47,108 - ERROR: Traceback (most recent call last):
-  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process_2/command_mac_detail.py", line 31, in run_mac_detail
-    mac = client["current_mac"]
-TypeError: 'SSHClient' object is not subscriptable
-
-2024-06-20 14:45:47,108 - ERROR: Traceback (most recent call last):
-  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process_2/command_mac_detail.py", line 31, in run_mac_detail
-    mac = client["current_mac"]
-TypeError: 'SSHClient' object is not subscriptable
-
-2024-06-20 14:52:22,288 - ERROR: Error en funcion get_mesh_process_data
-2024-06-20 14:52:22,289 - ERROR: local variable 'client' referenced before assignment
-2024-06-20 14:52:22,289 - ERROR: Traceback (most recent call last):
-  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process_2/command_mac_detail copy.py", line 23, in run_mac_detail
-    mac = client["current_mac"]
-UnboundLocalError: local variable 'client' referenced before assignment
-
-2024-06-20 15:42:13,753 - ERROR: Error en funcion
-2024-06-20 15:42:13,762 - ERROR: 'dict' object has no attribute 'close'
-2024-06-20 15:42:13,763 - ERROR: Traceback (most recent call last):
-  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process_2/command_mac_detail copy.py", line 51, in run_mac_detail
-    client.close()
-AttributeError: 'dict' object has no attribute 'close'
-
-2024-06-28 11:22:42,095 - ERROR: Error en funcion
-2024-06-28 11:22:42,096 - ERROR: local variable 'mac_addresses' referenced before assignment
-2024-06-28 11:22:42,096 - ERROR: Traceback (most recent call last):
-  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process/command_mac_detail.py", line 110, in run_mac_detail
-    if len(mac_addresses) > 12:
-UnboundLocalError: local variable 'mac_addresses' referenced before assignment
-
-2024-06-29 10:16:39,918 - ERROR: Error en funcion
-2024-06-29 10:16:39,927 - ERROR: get_data_from_db() missing 1 required positional argument: 'ubication'
-2024-06-29 10:16:39,927 - ERROR: Traceback (most recent call last):
-  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process/command_mac_detail.py", line 102, in run_mac_detail
-    status_num_clients = get_data_from_db()
-TypeError: get_data_from_db() missing 1 required positional argument: 'ubication'
-
-2024-06-29 10:20:32,599 - ERROR: Error en funcion
-2024-06-29 10:20:32,599 - ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ', note <> 'NAT'' at line 1
-2024-06-29 10:20:32,601 - ERROR: Traceback (most recent call last):
-  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 611, in cmd_query
-    self._cmysql.query(
-_mysql_connector.MySQLInterfaceError: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ', note <> 'NAT'' at line 1
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process/command_mac_detail.py", line 102, in run_mac_detail
-    status_num_clients = get_data_from_db(ubication)
-  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process/command_mac_detail.py", line 51, in get_data_from_db
-    cursor.execute(query)
-  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/cursor_cext.py", line 330, in execute
-    result = self._cnx.cmd_query(
-  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 619, in cmd_query
+  File "/home/donkami/Sona/devnet-candelaria/Services/FiM/save_register.py", line 24, in database_connection
+    mydb = mysql.connector.connect(
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/pooling.py", line 293, in connect
+    return CMySQLConnection(*args, **kwargs)
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 120, in __init__
+    self.connect(**kwargs)
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/abstracts.py", line 1181, in connect
+    self._open_connection()
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 296, in _open_connection
     raise get_mysql_exception(
-mysql.connector.errors.ProgrammingError: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ', note <> 'NAT'' at line 1
+mysql.connector.errors.DatabaseError: 2003 (HY000): Can't connect to MySQL server on '127.0.0.1:3306' (111)
 
-2024-06-29 10:21:11,544 - ERROR: Error en funcion
-2024-06-29 10:21:11,544 - ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ', note != 'NAT'' at line 1
-2024-06-29 10:21:11,545 - ERROR: Traceback (most recent call last):
-  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 611, in cmd_query
-    self._cmysql.query(
-_mysql_connector.MySQLInterfaceError: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ', note != 'NAT'' at line 1
+2024-06-07 11:55:09,872 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 291, in _open_connection
+    self._cmysql.connect(**cnx_kwargs)
+_mysql_connector.MySQLInterfaceError: Can't connect to MySQL server on '127.0.0.1:3306' (111)
 
 The above exception was the direct cause of the following exception:
 
 Traceback (most recent call last):
-  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process/command_mac_detail.py", line 102, in run_mac_detail
-    status_num_clients = get_data_from_db(ubication)
-  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process/command_mac_detail.py", line 51, in get_data_from_db
-    cursor.execute(query)
-  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/cursor_cext.py", line 330, in execute
-    result = self._cnx.cmd_query(
-  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 619, in cmd_query
+  File "/home/donkami/Sona/devnet-candelaria/Services/FiM/save_register.py", line 24, in database_connection
+    mydb = mysql.connector.connect(
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/pooling.py", line 293, in connect
+    return CMySQLConnection(*args, **kwargs)
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 120, in __init__
+    self.connect(**kwargs)
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/abstracts.py", line 1181, in connect
+    self._open_connection()
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 296, in _open_connection
     raise get_mysql_exception(
-mysql.connector.errors.ProgrammingError: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ', note != 'NAT'' at line 1
+mysql.connector.errors.DatabaseError: 2003 (HY000): Can't connect to MySQL server on '127.0.0.1:3306' (111)
 
-2024-06-30 12:30:37,544 - ERROR: Error en funcion Main
-2024-06-30 12:30:37,544 - ERROR: Error en funcion Main
-2024-06-30 12:30:37,544 - ERROR: Error en funcion Main
-2024-06-30 12:30:37,553 - ERROR: 'ip'
-2024-06-30 12:30:37,553 - ERROR: 'ip'
-2024-06-30 12:30:37,553 - ERROR: 'ip'
-2024-06-30 12:30:37,553 - ERROR: Traceback (most recent call last):
-  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process/main.py", line 206, in main
-    query = f"UPDATE dcs.mesh_process SET status = '{client['status']}', status_num_clients = '{client['status_num_clients']}' WHERE client = '{client['ip']}'"
-KeyError: 'ip'
-
-2024-06-30 12:30:37,553 - ERROR: Traceback (most recent call last):
-  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process/main.py", line 206, in main
-    query = f"UPDATE dcs.mesh_process SET status = '{client['status']}', status_num_clients = '{client['status_num_clients']}' WHERE client = '{client['ip']}'"
-KeyError: 'ip'
-
-2024-06-30 12:30:37,553 - ERROR: Traceback (most recent call last):
-  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process/main.py", line 206, in main
-    query = f"UPDATE dcs.mesh_process SET status = '{client['status']}', status_num_clients = '{client['status_num_clients']}' WHERE client = '{client['ip']}'"
-KeyError: 'ip'
-
-2024-06-30 12:31:09,266 - ERROR: Error en la funcion STATUS_PRTG
-2024-06-30 12:31:09,266 - ERROR: Error en la funcion STATUS_PRTG
-2024-06-30 12:31:09,266 - ERROR: Error en la funcion STATUS_PRTG
-2024-06-30 12:31:09,267 - ERROR: HTTPConnectionPool(host='localhost', port=3001): Max retries exceeded with url: /api/v1/candelaria/mesh (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f89a9816380>: Failed to establish a new connection: [Errno 111] Connection refused'))
-2024-06-30 12:31:09,267 - ERROR: HTTPConnectionPool(host='localhost', port=3001): Max retries exceeded with url: /api/v1/candelaria/mesh (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f89a9816380>: Failed to establish a new connection: [Errno 111] Connection refused'))
-2024-06-30 12:31:09,267 - ERROR: HTTPConnectionPool(host='localhost', port=3001): Max retries exceeded with url: /api/v1/candelaria/mesh (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f89a9816380>: Failed to establish a new connection: [Errno 111] Connection refused'))
-2024-06-30 12:31:09,272 - ERROR: Traceback (most recent call last):
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connection.py", line 200, in _new_conn
-    sock = connection.create_connection(
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/util/connection.py", line 85, in create_connection
-    raise err
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/util/connection.py", line 73, in create_connection
-    sock.connect(sa)
-ConnectionRefusedError: [Errno 111] Connection refused
+Traceback (most recent call last):
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 291, in _open_connection
+    self._cmysql.connect(**cnx_kwargs)
+_mysql_connector.MySQLInterfaceError: Can't connect to MySQL server on '127.0.0.1:3306' (111)
 
 The above exception was the direct cause of the following exception:
 
 Traceback (most recent call last):
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 790, in urlopen
-    response = self._make_request(
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 496, in _make_request
-    conn.request(
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connection.py", line 388, in request
-    self.endheaders()
-  File "/usr/lib/python3.10/http/client.py", line 1278, in endheaders
-    self._send_output(message_body, encode_chunked=encode_chunked)
-  File "/usr/lib/python3.10/http/client.py", line 1038, in _send_output
-    self.send(msg)
-  File "/usr/lib/python3.10/http/client.py", line 976, in send
-    self.connect()
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connection.py", line 236, in connect
-    self.sock = self._new_conn()
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connection.py", line 215, in _new_conn
-    raise NewConnectionError(
-urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x7f89a9816380>: Failed to establish a new connection: [Errno 111] Connection refused
+  File "/home/donkami/Sona/devnet-candelaria/Services/FiM/save_register.py", line 24, in database_connection
+    mydb = mysql.connector.connect(
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/pooling.py", line 293, in connect
+    return CMySQLConnection(*args, **kwargs)
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 120, in __init__
+    self.connect(**kwargs)
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/abstracts.py", line 1181, in connect
+    self._open_connection()
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 296, in _open_connection
+    raise get_mysql_exception(
+mysql.connector.errors.DatabaseError: 2003 (HY000): Can't connect to MySQL server on '127.0.0.1:3306' (111)
 
-The above exception was the direct cause of the following exception:
+2024-06-07 11:55:09,873 - ERROR - 2003 (HY000): Can't connect to MySQL server on '127.0.0.1:3306' (111)
+2024-06-07 11:55:09,873 - ERROR - 2003 (HY000): Can't connect to MySQL server on '127.0.0.1:3306' (111)
+2003 (HY000): Can't connect to MySQL server on '127.0.0.1:3306' (111)
+2024-06-07 11:55:09,873 - ERROR - Error en la funcion principal - Base RAP11
+2024-06-07 11:55:09,873 - ERROR - Error en la funcion principal - Base RAP11
+Error en la funcion principal - Base RAP11
+2024-06-07 11:55:09,873 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/FiM/main.py", line 57, in check_fim
+    update_status_base(base)
+  File "/home/donkami/Sona/devnet-candelaria/Services/FiM/save_register.py", line 66, in update_status_base
+    cursor = mydb.cursor()
+AttributeError: 'NoneType' object has no attribute 'cursor'
 
-Traceback (most recent call last):
-  File "/home/donkami/.local/lib/python3.10/site-packages/requests/adapters.py", line 486, in send
-    resp = conn.urlopen(
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 844, in urlopen
-    retries = retries.increment(
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/util/retry.py", line 515, in increment
-    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
-urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='localhost', port=3001): Max retries exceeded with url: /api/v1/candelaria/mesh (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f89a9816380>: Failed to establish a new connection: [Errno 111] Connection refused'))
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process/status_prtg.py", line 109, in status_prtg
-    response_api_candelaria = requests.get(
-  File "/home/donkami/.local/lib/python3.10/site-packages/requests/api.py", line 73, in get
-    return request("get", url, params=params, **kwargs)
-  File "/home/donkami/.local/lib/python3.10/site-packages/requests/api.py", line 59, in request
-    return session.request(method=method, url=url, **kwargs)
-  File "/home/donkami/.local/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
-    resp = self.send(prep, **send_kwargs)
-  File "/home/donkami/.local/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
-    r = adapter.send(request, **kwargs)
-  File "/home/donkami/.local/lib/python3.10/site-packages/requests/adapters.py", line 519, in send
-    raise ConnectionError(e, request=request)
-requests.exceptions.ConnectionError: HTTPConnectionPool(host='localhost', port=3001): Max retries exceeded with url: /api/v1/candelaria/mesh (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f89a9816380>: Failed to establish a new connection: [Errno 111] Connection refused'))
-
-2024-06-30 12:31:09,272 - ERROR: Traceback (most recent call last):
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connection.py", line 200, in _new_conn
-    sock = connection.create_connection(
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/util/connection.py", line 85, in create_connection
-    raise err
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/util/connection.py", line 73, in create_connection
-    sock.connect(sa)
-ConnectionRefusedError: [Errno 111] Connection refused
-
-The above exception was the direct cause of the following exception:
+2024-06-07 11:55:09,873 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/FiM/main.py", line 57, in check_fim
+    update_status_base(base)
+  File "/home/donkami/Sona/devnet-candelaria/Services/FiM/save_register.py", line 66, in update_status_base
+    cursor = mydb.cursor()
+AttributeError: 'NoneType' object has no attribute 'cursor'
 
 Traceback (most recent call last):
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 790, in urlopen
-    response = self._make_request(
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 496, in _make_request
-    conn.request(
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connection.py", line 388, in request
-    self.endheaders()
-  File "/usr/lib/python3.10/http/client.py", line 1278, in endheaders
-    self._send_output(message_body, encode_chunked=encode_chunked)
-  File "/usr/lib/python3.10/http/client.py", line 1038, in _send_output
-    self.send(msg)
-  File "/usr/lib/python3.10/http/client.py", line 976, in send
-    self.connect()
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connection.py", line 236, in connect
-    self.sock = self._new_conn()
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connection.py", line 215, in _new_conn
-    raise NewConnectionError(
-urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x7f89a9816380>: Failed to establish a new connection: [Errno 111] Connection refused
+  File "/home/donkami/Sona/devnet-candelaria/Services/FiM/main.py", line 57, in check_fim
+    update_status_base(base)
+  File "/home/donkami/Sona/devnet-candelaria/Services/FiM/save_register.py", line 66, in update_status_base
+    cursor = mydb.cursor()
+AttributeError: 'NoneType' object has no attribute 'cursor'
 
-The above exception was the direct cause of the following exception:
+2024-06-07 11:55:09,873 - ERROR - 'NoneType' object has no attribute 'cursor'
+2024-06-07 11:55:09,873 - ERROR - 'NoneType' object has no attribute 'cursor'
+'NoneType' object has no attribute 'cursor'
+2024-06-07 13:10:54,207 - WARNING - No se detecto resultado en el output en intento 1
+2024-06-07 13:10:54,207 - WARNING - 
+CANBUSSW01-ADM-DST>show ip ospf neighbor
+CANBUSSW01-ADM-DST>
+2024-06-07 13:10:59,733 - WARNING - No se detecto resultado en el output en intento 2
+2024-06-07 13:10:59,734 - WARNING - 
+CANBUSSW01-ADM-DST>show ip ospf neighbor
+CANBUSSW01-ADM-DST>
+2024-06-07 13:11:05,294 - WARNING - No se detecto resultado en el output en intento 3
+2024-06-07 13:11:05,294 - WARNING - 
+CANBUSSW01-ADM-DST>show ip ospf neighbor
+CANBUSSW01-ADM-DST>
+2024-06-07 13:11:10,838 - WARNING - No se detecto resultado en el output en intento 4
+2024-06-07 13:11:10,838 - WARNING - 
+CANBUSSW01-ADM-DST>show ip ospf neighbor
+CANBUSSW01-ADM-DST>
+2024-06-07 13:11:16,331 - WARNING - No se detecto resultado en el output en intento 5
+2024-06-07 13:11:16,331 - WARNING - 
+CANBUSSW01-ADM-DST>show ip ospf neighbor
+CANBUSSW01-ADM-DST>
+2024-06-07 13:11:36,228 - WARNING - No se detecto resultado en el output en intento 1
+2024-06-07 13:11:36,228 - WARNING - 
+CORE_OT_CONC>show ip ospf neighbor
 
-Traceback (most recent call last):
-  File "/home/donkami/.local/lib/python3.10/site-packages/requests/adapters.py", line 486, in send
-    resp = conn.urlopen(
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 844, in urlopen
-    retries = retries.increment(
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/util/retry.py", line 515, in increment
-    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
-urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='localhost', port=3001): Max retries exceeded with url: /api/v1/candelaria/mesh (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f89a9816380>: Failed to establish a new connection: [Errno 111] Connection refused'))
+Neighbor ID     Pri   State           Dead Time   Address         Interface
+10.224.126.62     1   FULL/BDR        00:00:39    10.224.126.62   Vlan900
+10.224.126.51     1   FULL/DROTHER    00:00:32    10.228.254.1    Vlan2040
+10.228.10.2       1   FULL/DROTHER    00:00:33    10.228.254.13   Vlan2040
+10.228.10.3       1   FULL/DR         00:00:30    10.228.254.12   Vlan2040
+10.224.126.51     1   2WAY/DROTHER    00:00:39    10.228.254.161  Vlan2035
+10.228.254.162    1   FULL/BDR        00:00:35    10.228.254.173  Vlan2035
+10.228.254.163    1   FULL/DR         00:00:35    10.228.254.172  Vlan2035
+10.224.125.4      1   FULL/DROTHER    00:00:36    10.224.126.49   Vlan600
+10.224.126.51     1   FULL/DR         00:00:33    10.224.126.51   Vlan600
+10.228.10.50      1   FULL/BDR        00:00:35    10.228.254.61   Vlan2043
+10.228.10.51      1   FULL/DR         00:00:35    10.228.254.60   Vlan2043
+10.228.254.49     1   2WAY/DROTHER    00:00:39    10.228.254.49   Vlan2043
+10.228.10.82      1   FULL/DROTHER    00:00:31    10.228.254.93   Vlan2045
+10.228.10.83      1   FULL/DROTHER    00:00:33    10.228.254.92   Vlan2045
+10.228.254.81     1   FULL/BDR        00:00:35    10.228.254.81   Vlan2045
+10.228.10.66      1   FULL/DROTHER    00:00:32    10.228.254.77   Vlan2044
+10.228.10.67      1   FULL/DROTHER    00:00:32    10.228.254.76   Vlan2044
+10.228.254.65     1   FULL/BDR        00:00:35    10.228.254.65   Vlan2044
+10.228.10.34      1   FULL/DROTHER    00:00:39    10.228.254.45   Vlan2042
+10.228.10.35      1   FULL/DROTHER    00:00:37    10.228.254.44   Vlan2042
+10.228.254.33     1   FULL/BDR        00:00:39    10.228.254.33   Vlan2042
+ --More-- 
+2024-06-07 13:11:41,704 - WARNING - No se detecto resultado en el output en intento 2
+2024-06-07 13:11:41,704 - WARNING - 
+CORE_OT_CONC>show ip ospf neighbor
 
-During handling of the above exception, another exception occurred:
+Neighbor ID     Pri   State           Dead Time   Address         Interface
+10.224.126.62     1   FULL/BDR        00:00:34    10.224.126.62   Vlan900
+10.224.126.51     1   FULL/DROTHER    00:00:37    10.228.254.1    Vlan2040
+10.228.10.2       1   FULL/DROTHER    00:00:37    10.228.254.13   Vlan2040
+10.228.10.3       1   FULL/DR         00:00:34    10.228.254.12   Vlan2040
+10.224.126.51     1   2WAY/DROTHER    00:00:33    10.228.254.161  Vlan2035
+10.228.254.162    1   FULL/BDR        00:00:39    10.228.254.173  Vlan2035
+10.228.254.163    1   FULL/DR         00:00:39    10.228.254.172  Vlan2035
+10.224.125.4      1   FULL/DROTHER    00:00:31    10.224.126.49   Vlan600
+10.224.126.51     1   FULL/DR         00:00:36    10.224.126.51   Vlan600
+10.228.10.50      1   FULL/BDR        00:00:30    10.228.254.61   Vlan2043
+10.228.10.51      1   FULL/DR         00:00:39    10.228.254.60   Vlan2043
+10.228.254.49     1   2WAY/DROTHER    00:00:34    10.228.254.49   Vlan2043
+10.228.10.82      1   FULL/DROTHER    00:00:35    10.228.254.93   Vlan2045
+10.228.10.83      1   FULL/DROTHER    00:00:37    10.228.254.92   Vlan2045
+10.228.254.81     1   FULL/BDR        00:00:39    10.228.254.81   Vlan2045
+10.228.10.66      1   FULL/DROTHER    00:00:36    10.228.254.77   Vlan2044
+10.228.10.67      1   FULL/DROTHER    00:00:36    10.228.254.76   Vlan2044
+10.228.254.65     1   FULL/BDR        00:00:39    10.228.254.65   Vlan2044
+10.228.10.34      1   FULL/DROTHER    00:00:33    10.228.254.45   Vlan2042
+10.228.10.35      1   FULL/DROTHER    00:00:31    10.228.254.44   Vlan2042
+10.228.254.33     1   FULL/BDR        00:00:33    10.228.254.33   Vlan2042
+ --More-- 
+2024-06-07 13:12:23,576 - WARNING - No se detecto resultado en el output en intento 1
+2024-06-07 13:12:23,576 - WARNING - 
+CORE_OT_CONC>terminal length 0
+CORE_OT_CONC>show ip ospf neighbor
 
-Traceback (most recent call last):
-  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process/status_prtg.py", line 109, in status_prtg
-    response_api_candelaria = requests.get(
-  File "/home/donkami/.local/lib/python3.10/site-packages/requests/api.py", line 73, in get
-    return request("get", url, params=params, **kwargs)
-  File "/home/donkami/.local/lib/python3.10/site-packages/requests/api.py", line 59, in request
-    return session.request(method=method, url=url, **kwargs)
-  File "/home/donkami/.local/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
-    resp = self.send(prep, **send_kwargs)
-  File "/home/donkami/.local/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
-    r = adapter.send(request, **kwargs)
-  File "/home/donkami/.local/lib/python3.10/site-packages/requests/adapters.py", line 519, in send
-    raise ConnectionError(e, request=request)
-requests.exceptions.ConnectionError: HTTPConnectionPool(host='localhost', port=3001): Max retries exceeded with url: /api/v1/candelaria/mesh (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f89a9816380>: Failed to establish a new connection: [Errno 111] Connection refused'))
+Neighbor ID     Pri   State           Dead Time   Address         Interface
+10.224.126.62     1   FULL/BDR        00:00:39    10.224.126.62   Vlan900
+10.224.126.51     1   FULL/DROTHER    00:00:32    10.228.254.1    Vlan2040
+10.228.10.2       1   FULL/DROTHER    00:00:34    10.228.254.13   Vlan2040
+10.228.10.3       1   FULL/DR         00:00:39    10.228.254.12   Vlan2040
+10.224.126.51     1   2WAY/DROTHER    00:00:39    10.228.254.161  Vlan2035
+10.228.254.162    1   FULL/BDR        00:00:35    10.228.254.173  Vlan2035
+10.228.254.163    1   FULL/DR         00:00:35    10.228.254.172  Vlan2035
+10.224.125.4      1   FULL/DROTHER    00:00:39    10.224.126.49   Vlan600
+10.224.126.51     1   FULL/DR         00:00:33    10.224.126.51   Vlan600
+10.228.10.50      1   FULL/BDR        00:00:37    10.228.254.61   Vlan2043
+10.228.10.51      1   FULL/DR         00:00:35    10.228.254.60   Vlan2043
+10.228.254.49     1   2WAY/DROTHER    00:00:39    10.228.254.49   Vlan2043
+10.228.10.82      1   FULL/DROTHER    00:00:31    10.228.254.93   Vlan2045
+10.228.10.83      1   FULL/DROTHER    00:00:34    10.228.254.92   Vlan2045
+10.228.254.81     1   FULL/BDR        00:00:34    10.228.254.81   Vlan2045
+10.228.10.66      1   FULL/DROTHER    00:00:33    10.228.254.77   Vlan2044
+10.228.10.67      1   FULL/DROTHER    00:00:32    10.228.254.76   Vlan2044
+10.228.254.65     1   FULL/BDR        00:00:35    10.228.254.65   Vlan2044
+10.228.10.34      1   FULL/DROTHER    00:00:39    10.228.254.45   Vlan2042
+10.228.10.35      1   FULL/DROTHER    00:00:37    10.228.254.44   Vlan2042
+10.228.254.33     1   FULL/BDR        00:00:38    10.228.254.33   Vlan2042
+10.228.10.18      1   FULL/DROTHER    00:00:39    10.228.254.29   Vlan2041
+10.228.10.19      1   FULL/DROTHER    00:00:32    10.228.254.28   Vlan2041
+10.228.254.17     1   FULL/BDR        00:00:32    10.228.254.17   Vlan2041
+CORE_OT_CONC>
+2024-06-07 13:12:30,073 - WARNING - No se detecto resultado en el output en intento 2
+2024-06-07 13:12:30,073 - WARNING - 
+CORE_OT_CONC>terminal length 0
+CORE_OT_CONC>show ip ospf neighbor
 
-2024-06-30 12:31:09,272 - ERROR: Traceback (most recent call last):
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connection.py", line 200, in _new_conn
-    sock = connection.create_connection(
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/util/connection.py", line 85, in create_connection
-    raise err
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/util/connection.py", line 73, in create_connection
-    sock.connect(sa)
-ConnectionRefusedError: [Errno 111] Connection refused
+Neighbor ID     Pri   State           Dead Time   Address         Interface
+10.224.126.62     1   FULL/BDR        00:00:33    10.224.126.62   Vlan900
+10.224.126.51     1   FULL/DROTHER    00:00:35    10.228.254.1    Vlan2040
+10.228.10.2       1   FULL/DROTHER    00:00:37    10.228.254.13   Vlan2040
+10.228.10.3       1   FULL/DR         00:00:33    10.228.254.12   Vlan2040
+10.224.126.51     1   2WAY/DROTHER    00:00:33    10.228.254.161  Vlan2035
+10.228.254.162    1   FULL/BDR        00:00:38    10.228.254.173  Vlan2035
+10.228.254.163    1   FULL/DR         00:00:38    10.228.254.172  Vlan2035
+10.224.125.4      1   FULL/DROTHER    00:00:33    10.224.126.49   Vlan600
+10.224.126.51     1   FULL/DR         00:00:36    10.224.126.51   Vlan600
+10.228.10.50      1   FULL/BDR        00:00:30    10.228.254.61   Vlan2043
+10.228.10.51      1   FULL/DR         00:00:38    10.228.254.60   Vlan2043
+10.228.254.49     1   2WAY/DROTHER    00:00:32    10.228.254.49   Vlan2043
+10.228.10.82      1   FULL/DROTHER    00:00:34    10.228.254.93   Vlan2045
+10.228.10.83      1   FULL/DROTHER    00:00:37    10.228.254.92   Vlan2045
+10.228.254.81     1   FULL/BDR        00:00:37    10.228.254.81   Vlan2045
+10.228.10.66      1   FULL/DROTHER    00:00:36    10.228.254.77   Vlan2044
+10.228.10.67      1   FULL/DROTHER    00:00:36    10.228.254.76   Vlan2044
+10.228.254.65     1   FULL/BDR        00:00:37    10.228.254.65   Vlan2044
+10.228.10.34      1   FULL/DROTHER    00:00:33    10.228.254.45   Vlan2042
+10.228.10.35      1   FULL/DROTHER    00:00:31    10.228.254.44   Vlan2042
+10.228.254.33     1   FULL/BDR        00:00:32    10.228.254.33   Vlan2042
+10.228.10.18      1   FULL/DROTHER    00:00:33    10.228.254.29   Vlan2041
+10.228.10.19      1   FULL/DROTHER    00:00:36    10.228.254.28   Vlan2041
+10.228.254.17     1   FULL/BDR        00:00:35    10.228.254.17   Vlan2041
+CORE_OT_CONC>
+2024-06-07 13:12:36,570 - WARNING - No se detecto resultado en el output en intento 3
+2024-06-07 13:12:36,570 - WARNING - 
+CORE_OT_CONC>terminal length 0
+CORE_OT_CONC>show ip ospf neighbor
 
-The above exception was the direct cause of the following exception:
+Neighbor ID     Pri   State           Dead Time   Address         Interface
+10.224.126.62     1   FULL/BDR        00:00:36    10.224.126.62   Vlan900
+10.224.126.51     1   FULL/DROTHER    00:00:38    10.228.254.1    Vlan2040
+10.228.10.2       1   FULL/DROTHER    00:00:30    10.228.254.13   Vlan2040
+10.228.10.3       1   FULL/DR         00:00:36    10.228.254.12   Vlan2040
+10.224.126.51     1   2WAY/DROTHER    00:00:35    10.228.254.161  Vlan2035
+10.228.254.162    1   FULL/BDR        00:00:31    10.228.254.173  Vlan2035
+10.228.254.163    1   FULL/DR         00:00:31    10.228.254.172  Vlan2035
+10.224.125.4      1   FULL/DROTHER    00:00:36    10.224.126.49   Vlan600
+10.224.126.51     1   FULL/DR         00:00:39    10.224.126.51   Vlan600
+10.228.10.50      1   FULL/BDR        00:00:33    10.228.254.61   Vlan2043
+10.228.10.51      1   FULL/DR         00:00:31    10.228.254.60   Vlan2043
+10.228.254.49     1   2WAY/DROTHER    00:00:35    10.228.254.49   Vlan2043
+10.228.10.82      1   FULL/DROTHER    00:00:37    10.228.254.93   Vlan2045
+10.228.10.83      1   FULL/DROTHER    00:00:30    10.228.254.92   Vlan2045
+10.228.254.81     1   FULL/BDR        00:00:31    10.228.254.81   Vlan2045
+10.228.10.66      1   FULL/DROTHER    00:00:39    10.228.254.77   Vlan2044
+10.228.10.67      1   FULL/DROTHER    00:00:38    10.228.254.76   Vlan2044
+10.228.254.65     1   FULL/BDR        00:00:31    10.228.254.65   Vlan2044
+10.228.10.34      1   FULL/DROTHER    00:00:36    10.228.254.45   Vlan2042
+10.228.10.35      1   FULL/DROTHER    00:00:34    10.228.254.44   Vlan2042
+10.228.254.33     1   FULL/BDR        00:00:34    10.228.254.33   Vlan2042
+10.228.10.18      1   FULL/DROTHER    00:00:36    10.228.254.29   Vlan2041
+10.228.10.19      1   FULL/DROTHER    00:00:38    10.228.254.28   Vlan2041
+10.228.254.17     1   FULL/BDR        00:00:38    10.228.254.17   Vlan2041
+CORE_OT_CONC>
+2024-06-07 13:12:43,051 - WARNING - No se detecto resultado en el output en intento 4
+2024-06-07 13:12:43,051 - WARNING - 
+CORE_OT_CONC>terminal length 0
+CORE_OT_CONC>show ip ospf neighbor
 
-Traceback (most recent call last):
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 790, in urlopen
-    response = self._make_request(
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 496, in _make_request
-    conn.request(
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connection.py", line 388, in request
-    self.endheaders()
-  File "/usr/lib/python3.10/http/client.py", line 1278, in endheaders
-    self._send_output(message_body, encode_chunked=encode_chunked)
-  File "/usr/lib/python3.10/http/client.py", line 1038, in _send_output
-    self.send(msg)
-  File "/usr/lib/python3.10/http/client.py", line 976, in send
-    self.connect()
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connection.py", line 236, in connect
-    self.sock = self._new_conn()
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connection.py", line 215, in _new_conn
-    raise NewConnectionError(
-urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x7f89a9816380>: Failed to establish a new connection: [Errno 111] Connection refused
+Neighbor ID     Pri   State           Dead Time   Address         Interface
+10.224.126.62     1   FULL/BDR        00:00:38    10.224.126.62   Vlan900
+10.224.126.51     1   FULL/DROTHER    00:00:38    10.228.254.1    Vlan2040
+10.228.10.2       1   FULL/DROTHER    00:00:33    10.228.254.13   Vlan2040
+10.228.10.3       1   FULL/DR         00:00:39    10.228.254.12   Vlan2040
+10.224.126.51     1   2WAY/DROTHER    00:00:39    10.228.254.161  Vlan2035
+10.228.254.162    1   FULL/BDR        00:00:34    10.228.254.173  Vlan2035
+10.228.254.163    1   FULL/DR         00:00:38    10.228.254.172  Vlan2035
+10.224.125.4      1   FULL/DROTHER    00:00:38    10.224.126.49   Vlan600
+10.224.126.51     1   FULL/DR         00:00:38    10.224.126.51   Vlan600
+10.228.10.50      1   FULL/BDR        00:00:36    10.228.254.61   Vlan2043
+10.228.10.51      1   FULL/DR         00:00:35    10.228.254.60   Vlan2043
+10.228.254.49     1   2WAY/DROTHER    00:00:38    10.228.254.49   Vlan2043
+10.228.10.82      1   FULL/DROTHER    00:00:30    10.228.254.93   Vlan2045
+10.228.10.83      1   FULL/DROTHER    00:00:34    10.228.254.92   Vlan2045
+10.228.254.81     1   FULL/BDR        00:00:34    10.228.254.81   Vlan2045
+10.228.10.66      1   FULL/DROTHER    00:00:33    10.228.254.77   Vlan2044
+10.228.10.67      1   FULL/DROTHER    00:00:32    10.228.254.76   Vlan2044
+10.228.254.65     1   FULL/BDR        00:00:34    10.228.254.65   Vlan2044
+10.228.10.34      1   FULL/DROTHER    00:00:30    10.228.254.45   Vlan2042
+10.228.10.35      1   FULL/DROTHER    00:00:37    10.228.254.44   Vlan2042
+10.228.254.33     1   FULL/BDR        00:00:37    10.228.254.33   Vlan2042
+10.228.10.18      1   FULL/DROTHER    00:00:39    10.228.254.29   Vlan2041
+10.228.10.19      1   FULL/DROTHER    00:00:32    10.228.254.28   Vlan2041
+10.228.254.17     1   FULL/BDR        00:00:32    10.228.254.17   Vlan2041
+CORE_OT_CONC>
+2024-06-07 13:12:49,569 - WARNING - No se detecto resultado en el output en intento 5
+2024-06-07 13:12:49,569 - WARNING - 
+CORE_OT_CONC>terminal length 0
+CORE_OT_CONC>show ip ospf neighbor
 
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "/home/donkami/.local/lib/python3.10/site-packages/requests/adapters.py", line 486, in send
-    resp = conn.urlopen(
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 844, in urlopen
-    retries = retries.increment(
-  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/util/retry.py", line 515, in increment
-    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
-urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='localhost', port=3001): Max retries exceeded with url: /api/v1/candelaria/mesh (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f89a9816380>: Failed to establish a new connection: [Errno 111] Connection refused'))
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process/status_prtg.py", line 109, in status_prtg
-    response_api_candelaria = requests.get(
-  File "/home/donkami/.local/lib/python3.10/site-packages/requests/api.py", line 73, in get
-    return request("get", url, params=params, **kwargs)
-  File "/home/donkami/.local/lib/python3.10/site-packages/requests/api.py", line 59, in request
-    return session.request(method=method, url=url, **kwargs)
-  File "/home/donkami/.local/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
-    resp = self.send(prep, **send_kwargs)
-  File "/home/donkami/.local/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
-    r = adapter.send(request, **kwargs)
-  File "/home/donkami/.local/lib/python3.10/site-packages/requests/adapters.py", line 519, in send
-    raise ConnectionError(e, request=request)
-requests.exceptions.ConnectionError: HTTPConnectionPool(host='localhost', port=3001): Max retries exceeded with url: /api/v1/candelaria/mesh (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f89a9816380>: Failed to establish a new connection: [Errno 111] Connection refused'))
-
+Neighbor ID     Pri   State           Dead Time   Address         Interface
+10.224.126.62     1   FULL/BDR        00:00:34    10.224.126.62   Vlan900
+10.224.126.51     1   FULL/DROTHER    00:00:35    10.228.254.1    Vlan2040
+10.228.10.2       1   FULL/DROTHER    00:00:36    10.228.254.13   Vlan2040
+10.228.10.3       1   FULL/DR         00:00:32    10.228.254.12   Vlan2040
+10.224.126.51     1   2WAY/DROTHER    00:00:32    10.228.254.161  Vlan2035
+10.228.254.162    1   FULL/BDR        00:00:37    10.228.254.173  Vlan2035
+10.228.254.163    1   FULL/DR         00:00:37    10.228.254.172  Vlan2035
+10.224.125.4      1   FULL/DROTHER    00:00:34    10.224.126.49   Vlan600
+10.224.126.51     1   FULL/DR         00:00:36    10.224.126.51   Vlan600
+10.228.10.50      1   FULL/BDR        00:00:30    10.228.254.61   Vlan2043
+10.228.10.51      1   FULL/DR         00:00:38    10.228.254.60   Vlan2043
+10.228.254.49     1   2WAY/DROTHER    00:00:32    10.228.254.49   Vlan2043
+10.228.10.82      1   FULL/DROTHER    00:00:33    10.228.254.93   Vlan2045
+10.228.10.83      1   FULL/DROTHER    00:00:37    10.228.254.92   Vlan2045
+10.228.254.81     1   FULL/BDR        00:00:37    10.228.254.81   Vlan2045
+10.228.10.66      1   FULL/DROTHER    00:00:36    10.228.254.77   Vlan2044
+10.228.10.67      1   FULL/DROTHER    00:00:35    10.228.254.76   Vlan2044
+10.228.254.65     1   FULL/BDR        00:00:36    10.228.254.65   Vlan2044
+10.228.10.34      1   FULL/DROTHER    00:00:33    10.228.254.45   Vlan2042
+10.228.10.35      1   FULL/DROTHER    00:00:30    10.228.254.44   Vlan2042
+10.228.254.33     1   FULL/BDR        00:00:31    10.228.254.33   Vlan2042
+10.228.10.18      1   FULL/DROTHER    00:00:33    10.228.254.29   Vlan2041
+10.228.10.19      1   FULL/DROTHER    00:00:35    10.228.254.28   Vlan2041
+10.228.254.17     1   FULL/BDR        00:00:35    10.228.254.17   Vlan2041
+CORE_OT_CONC>

@@ -71,6 +71,7 @@ def main():
             last_data.append(row_dict)
 
         # Obtenemos los datos actuales de la controladora
+        # Obtenemos los datos actuales de la controladora
         current_data = get_mesh_process_data()
 
         # #! db_data_test

@@ -181,9 +181,18 @@ services:
 
   # groups_prtg:
   #   build:
-  #     context: Services/Groups_Prtg
+  #     context: Services/Mesh_Process
   #   restart: always
   #   depends_on:
   #     - db
   #   environment:
   #     - ENVIRONMENT=production
+
+  groups_prtg:
+    build:
+      context: Services/Groups_Prtg
+    restart: always
+    depends_on:
+      - db
+    environment:
+      - ENVIRONMENT=production
