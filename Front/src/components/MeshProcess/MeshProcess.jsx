@@ -92,11 +92,21 @@ export function MeshProcess() {
                 <td>{device.ubication}</td>
                 <td
                   className={
-                    device.status_num_clients === "fail" ? "kpi-grey" : ""
+                    device.device === "Cisco AP"
+                      ? device.status_num_clients === "fail"
+                        ? "kpi-red"
+                        : device.status === "fail"
+                        ? "kpi-red"
+                        : ""
+                      : ""
                   }
                   title={
-                    device.status_num_clients === "fail"
-                      ? "Este AP reporta mas de 12 direcciones MAC"
+                    device.device === "Cisco AP"
+                      ? device.status_num_clients === "fail"
+                        ? "Este AP reporta más de 12 clientes"
+                        : device.status === "fail"
+                        ? "Este AP reporta clientes pertenecientes a otra ubicación"
+                        : ""
                       : ""
                   }
                 >
@@ -127,11 +137,15 @@ export function MeshProcess() {
                 </td>
                 <td>{device.last_mac}</td>
                 <td
-                  className={device.status === "fail" ? "kpi-red" : ""}
+                  className={
+                    device.status === "fail" && device.device !== "Cisco AP"
+                      ? "kpi-red"
+                      : ""
+                  }
                   style={device.status === "fail" ? { cursor: "help" } : {}}
                   title={
-                    device.status === "fail"
-                      ? "El valor de esta MAC se repite en otra Ubicación"
+                    device.status === "fail" && device.device !== "Cisco AP"
+                      ? "El valor de esta MAC pertenece a otra Ubicación"
                       : ""
                   }
                 >
