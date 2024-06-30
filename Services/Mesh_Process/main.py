@@ -209,7 +209,7 @@ def main():
             mydb.commit()
 
         # Funcion para actualizar el estado y id de PRTG
-        # status_prtg()
+        status_prtg()
 
         now = datetime.datetime.now()
         fecha_y_hora = now.strftime("%Y-%m-%d %H:%M:%S")
