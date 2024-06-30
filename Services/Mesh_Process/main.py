@@ -14,7 +14,8 @@ from config import database
 from mesh_data import get_mesh_process_data
 from check_mac import check_mac
 from status_prtg import status_prtg
-
+from command_mac_detail import run_mac_detail
+from validate_status import validate_status
 
 logging.basicConfig(
     level=logging.INFO, format="%(asctime)s - %(levelname)s: %(message)s"
@@ -176,11 +177,38 @@ def main():
                 #! Se elimina el last_change_date = '{fecha_y_hora}'
                 # query_current_mac = f"UPDATE dcs.mesh_process SET current_mac = 'Not Found', last_change_date = '{fecha_y_hora}' WHERE client = '{last['client']}'"
 
-        # Funcion para validar si una mac se repite o no
-        check_mac()
+        # Funcion para validar si una mac se repite en otra ubicacion
+        # check_mac()
+        
+        mydb = database_connection()
+        cursor = mydb.cursor()
+        query = "SELECT * FROM dcs.mesh_process"
+        cursor.execute(query)
+
+        column_names = [column[0] for column in cursor.description]
+        
+        mesh_clients_updated = []
+        for row in cursor:
+            row_dict = {}
+            for i in range(len(column_names)):
+                row_dict[column_names[i]] = row[i]
+            mesh_clients_updated.append(row_dict)
+            
+        cisco_ap_list = [ e for e in mesh_clients_updated if e["device"] == "Cisco AP"]    
+        data_command_mac_detail = run_mac_detail(cisco_ap_list)
+        status_clients_list = validate_status(mesh_clients_updated, data_command_mac_detail)
+        
+        for client in status_clients_list:
+            if client["device"] != "Cisco AP":
+                client["status"] = "N/A"
+                client["status_num_clients"] = "N/A"
+                
+            query = f"UPDATE dcs.mesh_process SET status = '{client['status']}', status_num_clients = '{client['status_num_clients']}' WHERE client = '{client['client']}'"
+            cursor.execute(query)
+            mydb.commit()
 
         # Funcion para actualizar el estado y id de PRTG
-        status_prtg()
+        # status_prtg()
 
         now = datetime.datetime.now()
         fecha_y_hora = now.strftime("%Y-%m-%d %H:%M:%S")

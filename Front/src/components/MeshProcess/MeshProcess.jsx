@@ -90,7 +90,18 @@ export function MeshProcess() {
             {filteredProcessMesh.map((device) => (
               <tr key={device.id}>
                 <td>{device.ubication}</td>
-                <td>{device.device}</td>
+                <td
+                  className={
+                    device.status_num_clients === "fail" ? "kpi-grey" : ""
+                  }
+                  title={
+                    device.status_num_clients === "fail"
+                      ? "Este AP reporta mas de 12 direcciones MAC"
+                      : ""
+                  }
+                >
+                  {device.device}
+                </td>
                 <td
                   className={
                     device.prtg_status.toLowerCase().includes("up")

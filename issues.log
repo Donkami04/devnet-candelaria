@@ -287,3 +287,356 @@ Traceback (most recent call last):
     values = [(item["device"], item["group"], item["status"], item["objid"], item["sensor"], item["lastvalue"], item["optional_group"]) for item in prtg_data]
 KeyError: 'optional_group'
 
+2024-06-20 14:42:00,137 - ERROR: Error en funcion get_mesh_process_data
+2024-06-20 14:42:00,137 - ERROR: Error en funcion get_mesh_process_data
+2024-06-20 14:42:00,137 - ERROR: 'mac'
+2024-06-20 14:42:00,137 - ERROR: 'mac'
+2024-06-20 14:42:00,138 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process_2/command_mac_detail.py", line 31, in run_mac_detail
+    mac = client["mac"]
+KeyError: 'mac'
+
+2024-06-20 14:42:00,138 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process_2/command_mac_detail.py", line 31, in run_mac_detail
+    mac = client["mac"]
+KeyError: 'mac'
+
+2024-06-20 14:42:33,452 - ERROR: Error en funcion get_mesh_process_data
+2024-06-20 14:42:33,452 - ERROR: Error en funcion get_mesh_process_data
+2024-06-20 14:42:33,452 - ERROR: 'dict' object has no attribute 'close'
+2024-06-20 14:42:33,452 - ERROR: 'dict' object has no attribute 'close'
+2024-06-20 14:42:33,452 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process_2/command_mac_detail.py", line 42, in run_mac_detail
+    client.close()
+AttributeError: 'dict' object has no attribute 'close'
+
+2024-06-20 14:42:33,452 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process_2/command_mac_detail.py", line 42, in run_mac_detail
+    client.close()
+AttributeError: 'dict' object has no attribute 'close'
+
+2024-06-20 14:43:20,460 - ERROR: Error en funcion get_mesh_process_data
+2024-06-20 14:43:20,460 - ERROR: Error en funcion get_mesh_process_data
+2024-06-20 14:43:20,460 - ERROR: 'dict' object has no attribute 'close'
+2024-06-20 14:43:20,460 - ERROR: 'dict' object has no attribute 'close'
+2024-06-20 14:43:20,460 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process_2/command_mac_detail.py", line 44, in run_mac_detail
+    client.close()
+AttributeError: 'dict' object has no attribute 'close'
+
+2024-06-20 14:43:20,460 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process_2/command_mac_detail.py", line 44, in run_mac_detail
+    client.close()
+AttributeError: 'dict' object has no attribute 'close'
+
+2024-06-20 14:43:52,786 - ERROR: Error en funcion get_mesh_process_data
+2024-06-20 14:43:52,786 - ERROR: Error en funcion get_mesh_process_data
+2024-06-20 14:43:52,786 - ERROR: 'dict' object has no attribute 'close'
+2024-06-20 14:43:52,786 - ERROR: 'dict' object has no attribute 'close'
+2024-06-20 14:43:52,795 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process_2/command_mac_detail.py", line 44, in run_mac_detail
+    client.close()
+AttributeError: 'dict' object has no attribute 'close'
+
+2024-06-20 14:43:52,795 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process_2/command_mac_detail.py", line 44, in run_mac_detail
+    client.close()
+AttributeError: 'dict' object has no attribute 'close'
+
+2024-06-20 14:45:14,494 - ERROR: Error en funcion get_mesh_process_data
+2024-06-20 14:45:14,494 - ERROR: Error en funcion get_mesh_process_data
+2024-06-20 14:45:14,494 - ERROR: 'dict' object has no attribute 'close'
+2024-06-20 14:45:14,494 - ERROR: 'dict' object has no attribute 'close'
+2024-06-20 14:45:14,494 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process_2/command_mac_detail.py", line 44, in run_mac_detail
+    client.close()
+AttributeError: 'dict' object has no attribute 'close'
+
+2024-06-20 14:45:14,494 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process_2/command_mac_detail.py", line 44, in run_mac_detail
+    client.close()
+AttributeError: 'dict' object has no attribute 'close'
+
+2024-06-20 14:45:47,108 - ERROR: Error en funcion get_mesh_process_data
+2024-06-20 14:45:47,108 - ERROR: Error en funcion get_mesh_process_data
+2024-06-20 14:45:47,108 - ERROR: 'SSHClient' object is not subscriptable
+2024-06-20 14:45:47,108 - ERROR: 'SSHClient' object is not subscriptable
+2024-06-20 14:45:47,108 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process_2/command_mac_detail.py", line 31, in run_mac_detail
+    mac = client["current_mac"]
+TypeError: 'SSHClient' object is not subscriptable
+
+2024-06-20 14:45:47,108 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process_2/command_mac_detail.py", line 31, in run_mac_detail
+    mac = client["current_mac"]
+TypeError: 'SSHClient' object is not subscriptable
+
+2024-06-20 14:52:22,288 - ERROR: Error en funcion get_mesh_process_data
+2024-06-20 14:52:22,289 - ERROR: local variable 'client' referenced before assignment
+2024-06-20 14:52:22,289 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process_2/command_mac_detail copy.py", line 23, in run_mac_detail
+    mac = client["current_mac"]
+UnboundLocalError: local variable 'client' referenced before assignment
+
+2024-06-20 15:42:13,753 - ERROR: Error en funcion
+2024-06-20 15:42:13,762 - ERROR: 'dict' object has no attribute 'close'
+2024-06-20 15:42:13,763 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process_2/command_mac_detail copy.py", line 51, in run_mac_detail
+    client.close()
+AttributeError: 'dict' object has no attribute 'close'
+
+2024-06-28 11:22:42,095 - ERROR: Error en funcion
+2024-06-28 11:22:42,096 - ERROR: local variable 'mac_addresses' referenced before assignment
+2024-06-28 11:22:42,096 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process/command_mac_detail.py", line 110, in run_mac_detail
+    if len(mac_addresses) > 12:
+UnboundLocalError: local variable 'mac_addresses' referenced before assignment
+
+2024-06-29 10:16:39,918 - ERROR: Error en funcion
+2024-06-29 10:16:39,927 - ERROR: get_data_from_db() missing 1 required positional argument: 'ubication'
+2024-06-29 10:16:39,927 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process/command_mac_detail.py", line 102, in run_mac_detail
+    status_num_clients = get_data_from_db()
+TypeError: get_data_from_db() missing 1 required positional argument: 'ubication'
+
+2024-06-29 10:20:32,599 - ERROR: Error en funcion
+2024-06-29 10:20:32,599 - ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ', note <> 'NAT'' at line 1
+2024-06-29 10:20:32,601 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 611, in cmd_query
+    self._cmysql.query(
+_mysql_connector.MySQLInterfaceError: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ', note <> 'NAT'' at line 1
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process/command_mac_detail.py", line 102, in run_mac_detail
+    status_num_clients = get_data_from_db(ubication)
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process/command_mac_detail.py", line 51, in get_data_from_db
+    cursor.execute(query)
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/cursor_cext.py", line 330, in execute
+    result = self._cnx.cmd_query(
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 619, in cmd_query
+    raise get_mysql_exception(
+mysql.connector.errors.ProgrammingError: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ', note <> 'NAT'' at line 1
+
+2024-06-29 10:21:11,544 - ERROR: Error en funcion
+2024-06-29 10:21:11,544 - ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ', note != 'NAT'' at line 1
+2024-06-29 10:21:11,545 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 611, in cmd_query
+    self._cmysql.query(
+_mysql_connector.MySQLInterfaceError: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ', note != 'NAT'' at line 1
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process/command_mac_detail.py", line 102, in run_mac_detail
+    status_num_clients = get_data_from_db(ubication)
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process/command_mac_detail.py", line 51, in get_data_from_db
+    cursor.execute(query)
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/cursor_cext.py", line 330, in execute
+    result = self._cnx.cmd_query(
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 619, in cmd_query
+    raise get_mysql_exception(
+mysql.connector.errors.ProgrammingError: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ', note != 'NAT'' at line 1
+
+2024-06-30 12:30:37,544 - ERROR: Error en funcion Main
+2024-06-30 12:30:37,544 - ERROR: Error en funcion Main
+2024-06-30 12:30:37,544 - ERROR: Error en funcion Main
+2024-06-30 12:30:37,553 - ERROR: 'ip'
+2024-06-30 12:30:37,553 - ERROR: 'ip'
+2024-06-30 12:30:37,553 - ERROR: 'ip'
+2024-06-30 12:30:37,553 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process/main.py", line 206, in main
+    query = f"UPDATE dcs.mesh_process SET status = '{client['status']}', status_num_clients = '{client['status_num_clients']}' WHERE client = '{client['ip']}'"
+KeyError: 'ip'
+
+2024-06-30 12:30:37,553 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process/main.py", line 206, in main
+    query = f"UPDATE dcs.mesh_process SET status = '{client['status']}', status_num_clients = '{client['status_num_clients']}' WHERE client = '{client['ip']}'"
+KeyError: 'ip'
+
+2024-06-30 12:30:37,553 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process/main.py", line 206, in main
+    query = f"UPDATE dcs.mesh_process SET status = '{client['status']}', status_num_clients = '{client['status_num_clients']}' WHERE client = '{client['ip']}'"
+KeyError: 'ip'
+
+2024-06-30 12:31:09,266 - ERROR: Error en la funcion STATUS_PRTG
+2024-06-30 12:31:09,266 - ERROR: Error en la funcion STATUS_PRTG
+2024-06-30 12:31:09,266 - ERROR: Error en la funcion STATUS_PRTG
+2024-06-30 12:31:09,267 - ERROR: HTTPConnectionPool(host='localhost', port=3001): Max retries exceeded with url: /api/v1/candelaria/mesh (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f89a9816380>: Failed to establish a new connection: [Errno 111] Connection refused'))
+2024-06-30 12:31:09,267 - ERROR: HTTPConnectionPool(host='localhost', port=3001): Max retries exceeded with url: /api/v1/candelaria/mesh (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f89a9816380>: Failed to establish a new connection: [Errno 111] Connection refused'))
+2024-06-30 12:31:09,267 - ERROR: HTTPConnectionPool(host='localhost', port=3001): Max retries exceeded with url: /api/v1/candelaria/mesh (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f89a9816380>: Failed to establish a new connection: [Errno 111] Connection refused'))
+2024-06-30 12:31:09,272 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connection.py", line 200, in _new_conn
+    sock = connection.create_connection(
+  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/util/connection.py", line 85, in create_connection
+    raise err
+  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/util/connection.py", line 73, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 790, in urlopen
+    response = self._make_request(
+  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 496, in _make_request
+    conn.request(
+  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connection.py", line 388, in request
+    self.endheaders()
+  File "/usr/lib/python3.10/http/client.py", line 1278, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.10/http/client.py", line 1038, in _send_output
+    self.send(msg)
+  File "/usr/lib/python3.10/http/client.py", line 976, in send
+    self.connect()
+  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connection.py", line 236, in connect
+    self.sock = self._new_conn()
+  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connection.py", line 215, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x7f89a9816380>: Failed to establish a new connection: [Errno 111] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/donkami/.local/lib/python3.10/site-packages/requests/adapters.py", line 486, in send
+    resp = conn.urlopen(
+  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 844, in urlopen
+    retries = retries.increment(
+  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/util/retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='localhost', port=3001): Max retries exceeded with url: /api/v1/candelaria/mesh (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f89a9816380>: Failed to establish a new connection: [Errno 111] Connection refused'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process/status_prtg.py", line 109, in status_prtg
+    response_api_candelaria = requests.get(
+  File "/home/donkami/.local/lib/python3.10/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "/home/donkami/.local/lib/python3.10/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/home/donkami/.local/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/donkami/.local/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/donkami/.local/lib/python3.10/site-packages/requests/adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='localhost', port=3001): Max retries exceeded with url: /api/v1/candelaria/mesh (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f89a9816380>: Failed to establish a new connection: [Errno 111] Connection refused'))
+
+2024-06-30 12:31:09,272 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connection.py", line 200, in _new_conn
+    sock = connection.create_connection(
+  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/util/connection.py", line 85, in create_connection
+    raise err
+  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/util/connection.py", line 73, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 790, in urlopen
+    response = self._make_request(
+  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 496, in _make_request
+    conn.request(
+  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connection.py", line 388, in request
+    self.endheaders()
+  File "/usr/lib/python3.10/http/client.py", line 1278, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.10/http/client.py", line 1038, in _send_output
+    self.send(msg)
+  File "/usr/lib/python3.10/http/client.py", line 976, in send
+    self.connect()
+  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connection.py", line 236, in connect
+    self.sock = self._new_conn()
+  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connection.py", line 215, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x7f89a9816380>: Failed to establish a new connection: [Errno 111] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/donkami/.local/lib/python3.10/site-packages/requests/adapters.py", line 486, in send
+    resp = conn.urlopen(
+  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 844, in urlopen
+    retries = retries.increment(
+  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/util/retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='localhost', port=3001): Max retries exceeded with url: /api/v1/candelaria/mesh (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f89a9816380>: Failed to establish a new connection: [Errno 111] Connection refused'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process/status_prtg.py", line 109, in status_prtg
+    response_api_candelaria = requests.get(
+  File "/home/donkami/.local/lib/python3.10/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "/home/donkami/.local/lib/python3.10/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/home/donkami/.local/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/donkami/.local/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/donkami/.local/lib/python3.10/site-packages/requests/adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='localhost', port=3001): Max retries exceeded with url: /api/v1/candelaria/mesh (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f89a9816380>: Failed to establish a new connection: [Errno 111] Connection refused'))
+
+2024-06-30 12:31:09,272 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connection.py", line 200, in _new_conn
+    sock = connection.create_connection(
+  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/util/connection.py", line 85, in create_connection
+    raise err
+  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/util/connection.py", line 73, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 790, in urlopen
+    response = self._make_request(
+  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 496, in _make_request
+    conn.request(
+  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connection.py", line 388, in request
+    self.endheaders()
+  File "/usr/lib/python3.10/http/client.py", line 1278, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.10/http/client.py", line 1038, in _send_output
+    self.send(msg)
+  File "/usr/lib/python3.10/http/client.py", line 976, in send
+    self.connect()
+  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connection.py", line 236, in connect
+    self.sock = self._new_conn()
+  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connection.py", line 215, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x7f89a9816380>: Failed to establish a new connection: [Errno 111] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/donkami/.local/lib/python3.10/site-packages/requests/adapters.py", line 486, in send
+    resp = conn.urlopen(
+  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 844, in urlopen
+    retries = retries.increment(
+  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/util/retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='localhost', port=3001): Max retries exceeded with url: /api/v1/candelaria/mesh (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f89a9816380>: Failed to establish a new connection: [Errno 111] Connection refused'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process/status_prtg.py", line 109, in status_prtg
+    response_api_candelaria = requests.get(
+  File "/home/donkami/.local/lib/python3.10/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "/home/donkami/.local/lib/python3.10/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/home/donkami/.local/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/donkami/.local/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/donkami/.local/lib/python3.10/site-packages/requests/adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='localhost', port=3001): Max retries exceeded with url: /api/v1/candelaria/mesh (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f89a9816380>: Failed to establish a new connection: [Errno 111] Connection refused'))
+

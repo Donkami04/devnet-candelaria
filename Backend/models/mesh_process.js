@@ -44,6 +44,10 @@ const MeshProcess = sequelize.define(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    status_num_clients: {
+      type: DataTypes.STRING(10),
+      allowNull: false,
+    },
   },
   {
     tableName: "mesh_process",

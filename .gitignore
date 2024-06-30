@@ -2,8 +2,9 @@ node_modules/
 database/
 __pycache__
 venv/
+Mesh_Process_2/
 
-### VisualStudioCode ###
+### VisualStudioCode ###>
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json

@@ -59,7 +59,7 @@ def get_data():
         
         # lista de id de los grupos de prtg
         id_list = [15959, 18016, 8681, 4418, 14635, 10160, 14804, 14809, 14873,  16153, 16157, 17559, 14884, 14886, 18695, 18700]
-        optional_group_list_it = [14804, 14809, 14873,  16153, 16157, 17559, 14884, 14886, 18695, 18700]
+        optional_group_list_it = [14804, 14809, 14873,  16153, 16157, 17559, 14884, 14886]
         optional_group_list_ot = [18695, 18700]
 
         for id_group in id_list:

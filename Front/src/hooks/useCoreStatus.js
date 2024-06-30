@@ -1,8 +1,8 @@
 import { useDataInfGen } from "./useDataInfGen";
-const data = await useDataInfGen();
 // console.log(data)
 
 export const useCoreStatus = async () => {
+  const data = await useDataInfGen();
   const coreAdminUp = data.upElements.filter(
     (e) => e.name_switch === "SW CORE ADMIN" && e.status === "Up"
   );
