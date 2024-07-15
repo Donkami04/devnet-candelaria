@@ -1,5 +1,6 @@
 import warnings, requests, os, time, traceback, datetime, sched, re,logging, json
 import mysql.connector
+from requests.exceptions import Timeout
 from dotenv import load_dotenv
 from config import database
 
@@ -63,10 +64,19 @@ def get_devices_data():
         cctv_data = []
         
         for ip in cctv_list_servers:
-            CCTV_API = os.getenv('CCTV_BASE_URL').format(ip_server=ip)  
-            cctv_response = requests.get(CCTV_API, auth=auth).json()
-            data = cctv_response['data']
-            cctv_data = cctv_data + data
+            try:
+                CCTV_API = os.getenv('CCTV_BASE_URL').format(ip_server=ip)  
+                cctv_response = requests.get(CCTV_API, auth=auth, timeout=10).json()
+                data = cctv_response['data']
+                cctv_data = cctv_data + data
+
+            except Timeout:
+                logging.error(f"El servidor CCTV {ip} no responde: Time Out")
+                continue
+
+            except Exception as e:
+                logging.error(f"Ocurrió un error desconocido con el sevidor CCTV {ip}: {e}")
+                continue
         
         for device in devices:
             ip = device['ip']
