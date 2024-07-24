@@ -1,0 +1,123 @@
+2024-07-15 16:11:48,506 - ERROR: Error al obtener la informacion de los DISPOSITIVOS desde la API
+2024-07-15 16:11:48,509 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connection.py", line 200, in _new_conn
+    sock = connection.create_connection(
+  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/util/connection.py", line 85, in create_connection
+    raise err
+  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/util/connection.py", line 73, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 790, in urlopen
+    response = self._make_request(
+  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 496, in _make_request
+    conn.request(
+  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connection.py", line 388, in request
+    self.endheaders()
+  File "/usr/lib/python3.10/http/client.py", line 1278, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.10/http/client.py", line 1038, in _send_output
+    self.send(msg)
+  File "/usr/lib/python3.10/http/client.py", line 976, in send
+    self.connect()
+  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connection.py", line 236, in connect
+    self.sock = self._new_conn()
+  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connection.py", line 215, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x7fd634fd9690>: Failed to establish a new connection: [Errno 111] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/donkami/.local/lib/python3.10/site-packages/requests/adapters.py", line 486, in send
+    resp = conn.urlopen(
+  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 844, in urlopen
+    retries = retries.increment(
+  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/util/retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='localhost', port=3001): Max retries exceeded with url: /api/v1/candelaria/devices (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7fd634fd9690>: Failed to establish a new connection: [Errno 111] Connection refused'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Camaras/ups.py", line 108, in get_api_devices_data
+    data_devices = requests.get(API_DEVICES, verify=False).json()
+  File "/home/donkami/.local/lib/python3.10/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "/home/donkami/.local/lib/python3.10/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/home/donkami/.local/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/donkami/.local/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/donkami/.local/lib/python3.10/site-packages/requests/adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='localhost', port=3001): Max retries exceeded with url: /api/v1/candelaria/devices (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7fd634fd9690>: Failed to establish a new connection: [Errno 111] Connection refused'))
+
+2024-07-15 16:11:48,510 - ERROR: Error detallado:
+2024-07-15 16:11:48,510 - ERROR: HTTPConnectionPool(host='localhost', port=3001): Max retries exceeded with url: /api/v1/candelaria/devices (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7fd634fd9690>: Failed to establish a new connection: [Errno 111] Connection refused'))
+2024-07-15 16:11:48,511 - ERROR: Error al obtener la informacion de las UPS desde la API
+2024-07-15 16:11:48,511 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connection.py", line 200, in _new_conn
+    sock = connection.create_connection(
+  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/util/connection.py", line 85, in create_connection
+    raise err
+  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/util/connection.py", line 73, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 790, in urlopen
+    response = self._make_request(
+  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 496, in _make_request
+    conn.request(
+  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connection.py", line 388, in request
+    self.endheaders()
+  File "/usr/lib/python3.10/http/client.py", line 1278, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.10/http/client.py", line 1038, in _send_output
+    self.send(msg)
+  File "/usr/lib/python3.10/http/client.py", line 976, in send
+    self.connect()
+  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connection.py", line 236, in connect
+    self.sock = self._new_conn()
+  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connection.py", line 215, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x7fd634fda110>: Failed to establish a new connection: [Errno 111] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/donkami/.local/lib/python3.10/site-packages/requests/adapters.py", line 486, in send
+    resp = conn.urlopen(
+  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 844, in urlopen
+    retries = retries.increment(
+  File "/home/donkami/.local/lib/python3.10/site-packages/urllib3/util/retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='localhost', port=3001): Max retries exceeded with url: /api/v1/candelaria/ups (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7fd634fda110>: Failed to establish a new connection: [Errno 111] Connection refused'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Camaras/ups.py", line 92, in get_api_ups_data
+    data_ups = requests.get(API_UPS, verify=False).json()
+  File "/home/donkami/.local/lib/python3.10/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "/home/donkami/.local/lib/python3.10/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/home/donkami/.local/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/donkami/.local/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/donkami/.local/lib/python3.10/site-packages/requests/adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='localhost', port=3001): Max retries exceeded with url: /api/v1/candelaria/ups (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7fd634fda110>: Failed to establish a new connection: [Errno 111] Connection refused'))
+
+2024-07-15 16:11:48,511 - ERROR: Error detallado:
+2024-07-15 16:11:48,511 - ERROR: HTTPConnectionPool(host='localhost', port=3001): Max retries exceeded with url: /api/v1/candelaria/ups (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7fd634fda110>: Failed to establish a new connection: [Errno 111] Connection refused'))
+2024-07-15 16:11:48,511 - ERROR: Hubo un error en la funcion `define_ups_status`: Error al obtener la información de la API

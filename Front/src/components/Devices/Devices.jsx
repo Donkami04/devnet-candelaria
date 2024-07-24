@@ -15,6 +15,7 @@ import { FaQuestion } from "react-icons/fa";
 import { BsFillCameraVideoFill } from "react-icons/bs";
 import { StatusColor } from "../StatusColor/StatusColor";
 import { MdOutlineInfo } from "react-icons/md";
+import { useDeviceIcons } from "../../hooks/useDeviceIcons";
 
 import "./devices.css";
 
@@ -174,16 +175,6 @@ export function Devices() {
               {device.cisco_device_name}
             </div>
           )}
-          {/* {device.data_backup === "true" ? (
-            <div
-              onMouseOver={() => setShowColorMeans(true)}
-              onMouseOut={() => setShowColorMeans(false)}
-            >
-              ⚠️ {device.cisco_device_name} {showColorMeans && <StatusColor />}
-            </div>
-          ) : (
-            device.cisco_device_name
-          )} */}
         </td>
         <td>
           <a
@@ -216,39 +207,7 @@ export function Devices() {
             device.cisco_status
           )}
         </td>
-        <td>
-          {device.cctv_enabled === "N/A" ? (
-            ""
-          ) : device.cctv_enabled !== "N/A" &&
-            device.type === "Camara" &&
-            device.cctv_enabled === "True" &&
-            device.cctv_valid === "True" ? (
-            <BsFillCameraVideoFill
-              title={"CCTV ENABLED: True & CCTV VALID: True"}
-              fontSize="1.3rem"
-              color="green"
-            />
-          ) : device.cctv_enabled !== "N/A" &&
-            device.type === "Camara" &&
-            device.cctv_enabled === "True" &&
-            device.cctv_valid === "False" ? (
-            <BsFillCameraVideoFill
-              title={"CCTV ENABLED: True & CCTV VALID: False"}
-              fontSize="1.3rem"
-              color="orange"
-            />
-          ) : device.cctv_enabled !== "N/A" &&
-            device.type === "Camara" &&
-            device.cctv_enabled === "Not Found" ? (
-            <FaQuestion title={"CCTV Not Found"} fontSize="1rem" color="gray" />
-          ) : (
-            <BsFillCameraVideoFill
-              title={"CCTV ENABLED: False"}
-              fontSize="1.3rem"
-              color="red"
-            />
-          )}
-        </td>
+        <td>{useDeviceIcons(device)}</td>
       </tr>
     ));
   };

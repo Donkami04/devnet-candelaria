@@ -3,6 +3,7 @@ import mysql.connector
 from requests.exceptions import Timeout
 from dotenv import load_dotenv
 from config import database
+from ups import define_ups_status
 
 # Esto evita que las respuestas de las API tengan warnings.
 warnings.filterwarnings('ignore', message='Unverified HTTPS request')
@@ -121,22 +122,14 @@ def get_devices_data():
                         cctv_enabled = data.get('status', 'Error').get('enabled', 'Error')
                         cctv_valid = data.get('status', 'Error').get('valid', 'Error')
             
-            # if device['id_cctv'] != 'Not Found':
-            #     id_camera = device['id_cctv']
-            #     username_cctv = os.getenv('CCTV_USER')
-            #     password_cctv = os.getenv('CCT_PASS')
-            #     CCTV_DATA_SINGLE_CAMERA = os.getenv('CCTV_DATA_SINGLE_CAMERA').format(id_camera=id_camera)
-
-            #     auth = (username_cctv, password_cctv)
-            #     data_camera = requests.get(CCTV_DATA_SINGLE_CAMERA, auth=auth).json()
-            #     cctv_enabled = data_camera.get('data', 'Error').get('status', 'Error').get('enabled', 'Error')
-            #     cctv_valid = data_camera.get('data', 'Error').get('status', 'Error').get('valid', 'Error')
-            
-            
+    
             query = (f"INSERT INTO dcs.devices (host, type, site, dpto, prtg_name_device, prtg_id, prtg_sensorname, prtg_status, prtg_lastup, prtg_lastdown, cisco_device_ip, cisco_device_name, cisco_port, cisco_status, cisco_status_device, cisco_mac_address, data_backup, red, cctv_enabled, cctv_valid)"
                 f"VALUES ('{ip}', '{device_type}', '{site}', '{dpto}', '{prtg_name_device}', '{prtg_id_device}', '{prtg_name_sensor}', '{prtg_status}', '{prtg_lastup}', '{prtg_lastdown}', '{cisco_device_ip_adress}', '{cisco_device_name}', '{cisco_client_port}', '{cisco_client_status}', '{prtg_device_status}', '{cisco_client_mac_address}', '{is_databackup}', '{red_type}', '{cctv_enabled}', '{cctv_valid}')")
             cursor.execute(query)
             mydb.commit()
+            
+        # Finalmente actualizamos el estado de las UPS para cada dispositivo
+        ups_process_result = define_ups_status()
             
         now = datetime.datetime.now()
         fecha_y_hora = now.strftime("%Y-%m-%d %H:%M:%S")

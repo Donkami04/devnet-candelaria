@@ -84,6 +84,10 @@ const Devices = sequelize.define(
       type: DataTypes.STRING(10),
       allowNull: true,
     },
+    ups_status: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
   },
   {
     tableName: "devices",

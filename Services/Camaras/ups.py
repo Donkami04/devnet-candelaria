@@ -1,21 +1,15 @@
-import warnings
 import requests
 import os
-import time
 import traceback
-import datetime
-import sched
-import re
 import logging
 import mysql.connector
-import paramiko
 from dotenv import load_dotenv
 from config import database
 
 logging.basicConfig(
     level=logging.INFO, format="%(asctime)s - %(levelname)s: %(message)s"
 )
-file_handler = logging.FileHandler("/issues.log")
+file_handler = logging.FileHandler("issues.log")
 file_handler.setLevel(logging.WARNING)
 file_handler.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s: %(message)s"))
 logging.getLogger().addHandler(file_handler)
@@ -47,15 +41,13 @@ def database_connection():
 
 def define_ups_status():
     try:
-        logging.info("Iniciando actualizando del estado de UPS para cada dispositivo")
+        logging.info("Iniciando actualizacion del estado de UPS para cada dispositivo")
         # Obtenemos los datos actualizados de los Dispositivos y UPS de la API DevNet
         devices = get_api_devices_data()
         ups_list = get_api_ups_data()
         
         if devices == None or ups_list == None:
             raise ValueError("Error al obtener la información de la API")
-        
-
 
         for device in devices:
             device["ups_status"] = 0 # Inicializamos la llave 'ups_status'
@@ -65,15 +57,18 @@ def define_ups_status():
             name_switch = device["cisco_device_name"] # Obtenemos el nombre del SW sin el dominio lundin
 
             for ups in ups_list:
+                # Obtenemos el nombre de la UPS
                 name_ups = ups["name"]
-                if name_ups.upper() == f"{name_switch.upper()}-APC": # Comparamos el nombre de la UPS con el nombre del SW del Dispositivo
+                # Comparamos el nombre de la UPS con el nombre del SW del Dispositivo
+                # Para poder comparar agregamos la terminacion "-APC"
+                if name_ups.upper() == f"{name_switch.upper()}-APC": 
                     device["ups_status"] = ups["status_ups"] # Asignamos el estado de la UPS al dispositivo
                     
-        # Actualizamos el `Estado UPS` de cada dispositivo en la BD
+        # Actualizamos el `ups_status` de cada dispositivo en la BD
         mydb = database_connection()
         cursor = mydb.cursor()      
         for device in devices:
-            query = f"UPDATE dcs.devices SET ups_status = '{device['ups_status']}' WHERE host = '{device['host']}'"
+            query = f"UPDATE dcs.devices SET ups_status = '{device['ups_status']}' WHE RE host = '{device['host']}'"
             cursor.execute(query)
             mydb.commit()
 
