@@ -82,7 +82,8 @@ const iconConditions = [
     ),
   },
   {
-    condition: (device) => device.ups_status === 0,
+    condition: (device) =>
+      device.ups_status === 0 || device.ups_status === null,
     icon: null,
   },
   {
@@ -90,7 +91,8 @@ const iconConditions = [
       device.ups_status !== 2 &&
       device.ups_status !== 3 &&
       device.ups_status !== 7 &&
-      device.ups_status !== 0,
+      device.ups_status !== 0 &&
+      device.ups_status !== null,
     icon: (
       <IoMdBatteryCharging
         title={`UPS Status: Otro`}

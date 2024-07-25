@@ -9,11 +9,6 @@ import {
   CISCO_URL,
 } from "../../utils/Api-candelaria/api";
 import { Spinner } from "../Spinner/Spinner";
-import { MdOnlinePrediction } from "react-icons/md";
-import { IoCloseCircle } from "react-icons/io5";
-import { FaQuestion } from "react-icons/fa";
-import { BsFillCameraVideoFill } from "react-icons/bs";
-import { StatusColor } from "../StatusColor/StatusColor";
 import { MdOutlineInfo } from "react-icons/md";
 import { useDeviceIcons } from "../../hooks/useDeviceIcons";
 
@@ -53,11 +48,26 @@ export function Devices() {
 
   const filteredDevices = devices.filter((device) => {
     const searchValues = Object.values(device)
-      .map((value) => value.toString().toLowerCase())
+      .map((value) => {
+        // Verificar si value es null
+        if (value === null) {
+          return ""; // O manejar el caso de valor nulo de otra manera
+        }
+        return value.toString().toLowerCase();
+      })
       .join(" ");
     const hasDownPaused = searchValues.includes("down");
     return !filterDownPaused || (filterDownPaused && hasDownPaused);
   });
+
+  // const filteredDevices = devices.filter((device) => {
+  //   console.log(device);
+  //   const searchValues = Object.values(device)
+  //     .map((value) => value.toString().toLowerCase())
+  //     .join(" ");
+  //   const hasDownPaused = searchValues.includes("down");
+  //   return !filterDownPaused || (filterDownPaused && hasDownPaused);
+  // });
 
   const filteredSearchDevices = filteredDevices.filter(
     (device) =>

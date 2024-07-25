@@ -68,7 +68,7 @@ def define_ups_status():
         mydb = database_connection()
         cursor = mydb.cursor()      
         for device in devices:
-            query = f"UPDATE dcs.devices SET ups_status = '{device['ups_status']}' WHE RE host = '{device['host']}'"
+            query = f"UPDATE dcs.devices SET ups_status = '{device['ups_status']}' WHERE host = '{device['host']}'"
             cursor.execute(query)
             mydb.commit()
 
