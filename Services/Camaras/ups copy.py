@@ -39,31 +39,41 @@ def database_connection():
         logging.error(e)
 
 
-def define_ups_status(sw_name):
+def define_ups_status():
     try:
-        # logging.info("Iniciando actualizacion del estado de UPS para cada dispositivo")
+        logging.info("Iniciando actualizacion del estado de UPS para cada dispositivo")
         # Obtenemos los datos actualizados de los Dispositivos y UPS de la API DevNet
+        devices = get_api_devices_data()
         ups_list = get_api_ups_data()
         
-        if ups_list == None:
+        if devices == None or ups_list == None:
             raise ValueError("Error al obtener la información de la API")
 
+        for device in devices:
+            device["ups_status"] = 0 # Inicializamos la llave 'ups_status'
+            if ".lundinmining.local" in device["cisco_device_name"]: # Eliminamos el dominio lundin para la comparativa de nombres
+                device["cisco_device_name"] = device["cisco_device_name"].replace(".lundinmining.local", "")
+                
+            name_switch = device["cisco_device_name"] # Obtenemos el nombre del SW sin el dominio lundin
 
-        ups_status = 0 # Inicializamos la llave 'ups_status'
-        if ".lundinmining.local" in sw_name: # Eliminamos el dominio lundin para la comparativa de nombres
-            sw_name = sw_name.replace(".lundinmining.local", "")
-
-        for ups in ups_list:
-            # Obtenemos el nombre de la UPS
-            name_ups = ups["name"]
-            # Comparamos el nombre de la UPS con el nombre del SW del Dispositivo
-            # Para poder comparar agregamos la terminacion "-APC"
-            if name_ups.upper() == f"{sw_name.upper()}-APC": 
-                ups_status = ups["status_ups"] # Asignamos el estado de la UPS al dispositivo
+            for ups in ups_list:
+                # Obtenemos el nombre de la UPS
+                name_ups = ups["name"]
+                # Comparamos el nombre de la UPS con el nombre del SW del Dispositivo
+                # Para poder comparar agregamos la terminacion "-APC"
+                if name_ups.upper() == f"{name_switch.upper()}-APC": 
+                    device["ups_status"] = ups["status_ups"] # Asignamos el estado de la UPS al dispositivo
                     
-        # logging.info("Se ha actualizado el estado de las UPS correctamente")
+        # Actualizamos el `ups_status` de cada dispositivo en la BD
+        mydb = database_connection()
+        cursor = mydb.cursor()      
+        for device in devices:
+            query = f"UPDATE dcs.devices SET ups_status = '{device['ups_status']}' WHERE host = '{device['host']}'"
+            cursor.execute(query)
+            mydb.commit()
 
-        return ups_status
+        cursor.close()
+        logging.info("Se ha actualizado el estado de las UPS correctamente")
 
     except Exception as e:
         logging.error(f"Hubo un error en la funcion `define_ups_status`: {e}")
@@ -101,4 +111,4 @@ def get_api_devices_data():
         return None
 
 
-# define_ups_status()
+define_ups_status()

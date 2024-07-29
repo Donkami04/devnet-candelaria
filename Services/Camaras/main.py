@@ -79,9 +79,10 @@ def get_devices_data():
                 logging.error(f"Ocurrió un error desconocido con el sevidor CCTV {ip}: {e}")
                 continue
         
+        counter = 1
         for device in devices:
             ip = device['ip']
-            logging.info(ip)
+            logging.info(f"Numero de dispositivo en actualizacion: {counter}")
             device_type = device['type_device']
             site = device['site']
             dpto = device['dpto']
@@ -122,14 +123,17 @@ def get_devices_data():
                         cctv_enabled = data.get('status', 'Error').get('enabled', 'Error')
                         cctv_valid = data.get('status', 'Error').get('valid', 'Error')
             
-    
-            query = (f"INSERT INTO dcs.devices (host, type, site, dpto, prtg_name_device, prtg_id, prtg_sensorname, prtg_status, prtg_lastup, prtg_lastdown, cisco_device_ip, cisco_device_name, cisco_port, cisco_status, cisco_status_device, cisco_mac_address, data_backup, red, cctv_enabled, cctv_valid)"
-                f"VALUES ('{ip}', '{device_type}', '{site}', '{dpto}', '{prtg_name_device}', '{prtg_id_device}', '{prtg_name_sensor}', '{prtg_status}', '{prtg_lastup}', '{prtg_lastdown}', '{cisco_device_ip_adress}', '{cisco_device_name}', '{cisco_client_port}', '{cisco_client_status}', '{prtg_device_status}', '{cisco_client_mac_address}', '{is_databackup}', '{red_type}', '{cctv_enabled}', '{cctv_valid}')")
+            # Finalmente actualizamos el estado de las UPS para cada dispositivo
+            ups_status = define_ups_status(cisco_device_name)
+            if device == None:
+                ups_status = 0
+
+            query = (f"INSERT INTO dcs.devices (host, type, site, dpto, prtg_name_device, prtg_id, prtg_sensorname, prtg_status, prtg_lastup, prtg_lastdown, cisco_device_ip, cisco_device_name, cisco_port, cisco_status, cisco_status_device, cisco_mac_address, data_backup, red, cctv_enabled, cctv_valid, ups_status)"
+                f"VALUES ('{ip}', '{device_type}', '{site}', '{dpto}', '{prtg_name_device}', '{prtg_id_device}', '{prtg_name_sensor}', '{prtg_status}', '{prtg_lastup}', '{prtg_lastdown}', '{cisco_device_ip_adress}', '{cisco_device_name}', '{cisco_client_port}', '{cisco_client_status}', '{prtg_device_status}', '{cisco_client_mac_address}', '{is_databackup}', '{red_type}', '{cctv_enabled}', '{cctv_valid}', '{ups_status}')")
             cursor.execute(query)
             mydb.commit()
+            counter = counter + 1
             
-        # Finalmente actualizamos el estado de las UPS para cada dispositivo
-        ups_process_result = define_ups_status()
             
         now = datetime.datetime.now()
         fecha_y_hora = now.strftime("%Y-%m-%d %H:%M:%S")
