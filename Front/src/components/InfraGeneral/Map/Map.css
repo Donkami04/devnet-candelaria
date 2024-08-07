@@ -119,6 +119,46 @@
   right: 610px;
 }
 
+.status-wlc-negocio {
+  top: 200px;
+  right: 823px;
+}
+
+.status-wlc-mesh {
+  top: 603px;
+  right: 813px;
+}
+
+.fw-ot {
+  top: 408px;
+  right: 855px;
+}
+
+.cucm-pub {
+  top: 42px;
+  right: 945px;
+}
+
+.dist-adm {
+  top: 85px;
+  right: 770px;
+}
+
+.dist-conce {
+  top: 668px;
+  right: 795px;
+}
+
+.swCoreOtAdmin {
+  top: 330px;
+  right: 1015px;
+}
+
+.swCoreOtConce {
+  top: 460px;
+  right: 1020px;
+}
+
 .inf-gen-green {
   background-color: rgb(148, 247, 0);
 }
@@ -132,6 +172,7 @@
   background-color: yellow;
   animation: titilar-yellow 2s infinite;
 }
+
 
 @keyframes titilar {
   0% {

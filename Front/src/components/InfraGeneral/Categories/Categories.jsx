@@ -85,31 +85,31 @@ export function Categories() {
           if (e.name_switch === "FORTIGATE - CONCENTRADORA") {
             newFortigateConcenUp.push(e);
           }
-          if (e.group && e.group.toLowerCase().includes("certificado")) {
+          if (e.rol && e.rol.toLowerCase().includes("certificado")) {
             dataSslUp.push(e);
           }
-          if (e.group && e.group.toLowerCase().includes("telefonia")) {
+          if (e.rol && e.rol.toLowerCase().includes("telefonia")) {
             dataVoiceUp.push(e);
           }
-          if (e.group && e.group.toLowerCase().includes("ise")) {
+          if (e.rol && e.rol.toLowerCase().includes("ise")) {
             dataIseUp.push(e);
           }
-          if (e.group && e.group.toLowerCase().includes("inalambricas")) {
+          if (e.rol && e.rol.toLowerCase().includes("inalambricas")) {
             dataWirelessUp.push(e);
           }
           if (
-            (e.group && e.group.toLowerCase().includes("lte")) ||
-            (e.group && e.group.toLowerCase().includes("vmware"))
+            (e.rol && e.rol.toLowerCase().includes("lte")) ||
+            (e.rol && e.rol.toLowerCase().includes("vmware"))
           ) {
             dataLteUp.push(e);
           }
-          if (e.group && e.group.toLowerCase() === "cctv") {
+          if (e.rol && e.rol.toLowerCase() === "cctv") {
             dataCctvUp.push(e);
           }
-          if (e.group && e.group.toLowerCase() === "fw it") {
+          if (e.rol && e.rol.toLowerCase() === "fw it") {
             dataFwItUp.push(e);
           }
-          if (e.group && e.group.toLowerCase() === "fw ot") {
+          if (e.rol && e.rol.toLowerCase() === "fw ot") {
             dataFwOtUp.push(e);
           }
         });
@@ -127,31 +127,31 @@ export function Categories() {
           if (e.name_switch === "FORTIGATE - CONCENTRADORA") {
             newFortigateConcenDown.push(e);
           }
-          if (e.group && e.group.toLowerCase().includes("certificado")) {
+          if (e.rol && e.rol.toLowerCase().includes("certificado")) {
             dataSslDown.push(e);
           }
-          if (e.group && e.group.toLowerCase().includes("telefonia")) {
+          if (e.rol && e.rol.toLowerCase().includes("telefonia")) {
             dataVoiceDown.push(e);
           }
-          if (e.group && e.group.toLowerCase().includes("ise")) {
+          if (e.rol && e.rol.toLowerCase().includes("ise")) {
             dataIseDown.push(e);
           }
-          if (e.group && e.group.toLowerCase().includes("inalambricas")) {
+          if (e.rol && e.rol.toLowerCase().includes("inalambricas")) {
             dataWirelessDown.push(e);
           }
           if (
-            (e.group && e.group.toLowerCase().includes("lte")) ||
-            (e.group && e.group.toLowerCase().includes("vmware"))
+            (e.rol && e.rol.toLowerCase().includes("lte")) ||
+            (e.rol && e.rol.toLowerCase().includes("vmware"))
           ) {
             dataLteDown.push(e);
           }
-          if (e.group && e.group.toLowerCase() === "cctv") {
+          if (e.rol && e.rol.toLowerCase() === "cctv") {
             dataCctvDown.push(e);
           }
-          if (e.group && e.group.toLowerCase() === "fw it") {
+          if (e.rol && e.rol.toLowerCase() === "fw it") {
             dataFwItDown.push(e);
           }
-          if (e.group && e.group.toLowerCase() === "fw ot") {
+          if (e.rol && e.rol.toLowerCase() === "fw ot") {
             dataFwOtDown.push(e);
           }
         });

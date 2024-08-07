@@ -88,7 +88,7 @@ services:
     restart: always
     environment:
       - NODE_ENV=production
-    command: sh -c "npx sequelize-cli db:migrate && node index.js"
+    # command: sh -c "npx sequelize-cli db:migrate && node index.js"
       
   frontend-react:
     build:
@@ -170,16 +170,7 @@ services:
   #   environment:
   #     - ENVIRONMENT=production
 
-  mesh_process:
-    build:
-      context: Services/Mesh_Process
-    restart: always
-    depends_on:
-      - db
-    environment:
-      - ENVIRONMENT=production
-
-  # groups_prtg:
+  # mesh_process:
   #   build:
   #     context: Services/Mesh_Process
   #   restart: always
@@ -188,11 +179,11 @@ services:
   #   environment:
   #     - ENVIRONMENT=production
 
-  # groups_prtg:
-  #   build:
-  #     context: Services/Groups_Prtg
-  #   restart: always
-  #   depends_on:
-  #     - db
-  #   environment:
-  #     - ENVIRONMENT=production
+  groups_prtg:
+    build:
+      context: Services/Mesh_Process
+    restart: always
+    depends_on:
+      - db
+    environment:
+      - ENVIRONMENT=production

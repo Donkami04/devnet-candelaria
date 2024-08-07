@@ -29,7 +29,7 @@ function countStatus(data) {
       } else {
           const newItem = {
               device: curr.device,
-              group: curr.group,
+              group: curr.rol,
               up: curr.status === "Up" ? 1 : 0,
               down: curr.status === "Down" ? 1 : 0
           };

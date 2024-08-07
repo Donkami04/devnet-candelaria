@@ -355,3 +355,24 @@ mysql.connector.errors.DatabaseError: 1366 (HY000): Incorrect integer value: 'No
 
 2024-07-28 23:34:30,944 - ERROR: 10.225.5.98
 2024-07-28 23:34:30,944 - ERROR - 10.225.5.98
+Error
+list indices must be integers or slices, not str
+Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Groups_Prtg/main.py", line 89, in get_data
+    if data["sensors"] != []:
+TypeError: list indices must be integers or slices, not str
+
+Error
+list indices must be integers or slices, not str
+Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Groups_Prtg/main.py", line 89, in get_data
+    if len(data["sensors"]) != 0:
+TypeError: list indices must be integers or slices, not str
+
+Error
+list indices must be integers or slices, not str
+Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Groups_Prtg/main.py", line 89, in get_data
+    if len(data["sensors"]) != 0:
+TypeError: list indices must be integers or slices, not str
+

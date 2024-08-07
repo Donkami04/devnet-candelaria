@@ -18,7 +18,6 @@ def get_cande_data(eqmt):
 
     try:
         cursor.execute("SELECT TOP 1000 ([timestamp]), [Equipo], [GPS_Latitud], [GPS_Longitud], [GPS_Elevacion], [DSP_Status], [Status] FROM [Mina].[dbo].[ubicacion_equipos] order by [timestamp] desc")
-
         for row in cursor:
             if row["Equipo"] == eqmt:
                 # Convertir los valores a cadenas antes de aplicar expresiones regulares
@@ -44,4 +43,4 @@ def get_cande_data(eqmt):
     finally:
         conn.close()
         
-# get_cande_data("P10")
+# get_cande_data("P23")

@@ -160,7 +160,7 @@ export const Map = () => {
       </div>
       <main className={`background-infra-general zoom-${zoomLevel}`}>
         <div className="main-map-container">
-          <img src="/mapa-horizontal.jpg" alt="mapa-infra-general" />
+          <img src="/mapa-horizontal.png" alt="mapa-infra-general" />
 
           <div className="main-lights-container">
             <div className="status-light-map-container fw-santiago">
@@ -284,6 +284,78 @@ export const Map = () => {
                 <p
                   title={`El ${coreStatus.coreOjosUpPercent}% de los elementos está Up`}
                   className={`status-light-inf-gen inf-gen-${coreStatus.colorOjosCore}`}
+                ></p>
+              </Link>
+            </div>
+
+            <div className="status-light-map-container status-wlc-negocio">
+              <Link to="/monitoreo/infraestrucura-general/detalles?nombre=WLC">
+                <p
+                  title={`El ${coreStatus.wlcNegocioUpPercent}% de los elementos está Up`}
+                  className={`status-light-inf-gen inf-gen-${coreStatus.colorWlcNegocio}`}
+                ></p>
+              </Link>
+            </div>
+
+            <div className="status-light-map-container status-wlc-mesh">
+              <Link to="/monitoreo/infraestrucura-general?categoria=WLC%209800%20MESH">
+                <p
+                  title={`El ${coreStatus.wlcMeshUpPercent}% de los elementos está Up`}
+                  className={`status-light-inf-gen inf-gen-${coreStatus.colorWlcMesh}`}
+                ></p>
+              </Link>
+            </div>
+
+            <div className="status-light-map-container fw-ot">
+              <Link to="/monitoreo/infraestrucura-general/detalles?nombre=WLC">
+                <p
+                  title={`El ${coreStatus.fwOtUpPercent}% de los elementos está Up`}
+                  className={`status-light-inf-gen inf-gen-${coreStatus.colorFwOt}`}
+                ></p>
+              </Link>
+            </div>
+
+            <div className="status-light-map-container cucm-pub">
+              <Link to="/monitoreo/infraestrucura-general/detalles?nombre=WLC">
+                <p
+                  title={`El ${coreStatus.telefoniaUpPercent}% de los elementos está Up`}
+                  className={`status-light-inf-gen inf-gen-${coreStatus.colorTelefonia}`}
+                ></p>
+              </Link>
+            </div>
+
+            <div className="status-light-map-container dist-adm">
+              <Link to="/monitoreo/infraestrucura-general/detalles?nombre=WLC">
+                <p
+                  title={`El ${coreStatus.swDistAdmPercent}% de los elementos está Up`}
+                  className={`status-light-inf-gen inf-gen-${coreStatus.colorSwDistAdm}`}
+                ></p>
+              </Link>
+            </div>
+
+            <div className="status-light-map-container dist-conce">
+              <Link to="/monitoreo/infraestrucura-general/detalles?nombre=WLC">
+                <p
+                  title={`El ${coreStatus.swDistConceUpPercent}% de los elementos está Up`}
+                  className={`status-light-inf-gen inf-gen-${coreStatus.colorSwDistConce}`}
+                ></p>
+              </Link>
+            </div>
+
+            <div className="status-light-map-container swCoreOtAdmin">
+              <Link to="/monitoreo/infraestrucura-general/detalles?nombre=WLC">
+                <p
+                  title={`El ${coreStatus.swCoreOtAdminUpPercent}% de los elementos está Up`}
+                  className={`status-light-inf-gen inf-gen-${coreStatus.colorSwCoreOtAdmin}`}
+                ></p>
+              </Link>
+            </div>
+
+            <div className="status-light-map-container swCoreOtConce">
+              <Link to="/monitoreo/infraestrucura-general/detalles?nombre=WLC">
+                <p
+                  title={`El ${coreStatus.swCoreOtConceUpPercent}% de los elementos está Up`}
+                  className={`status-light-inf-gen inf-gen-${coreStatus.colorSwCoreOtConce}`}
                 ></p>
               </Link>
             </div>

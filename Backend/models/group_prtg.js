@@ -27,6 +27,10 @@ const GroupPrtg = sequelize.define(
     lastvalue: {
       type: DataTypes.STRING(100),
       allowNull: false,
+    },
+    rol: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
     }
   },
   {
