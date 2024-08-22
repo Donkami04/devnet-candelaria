@@ -100,9 +100,6 @@ export function MainTopology() {
     });
   });
 
-  const noResultsInfraGeneral = filteredPrtgGroups.length === 0;
-  const noResults = filteredPrtgGroups.length === 0;
-
   const handleClickPrtgGroup = (name) => {
     setNamePrtgGroup(name);
     setShowTablePrtgGroup(true);

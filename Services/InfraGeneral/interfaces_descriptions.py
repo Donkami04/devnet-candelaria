@@ -14,9 +14,11 @@ paramiko_logger = logging.getLogger("paramiko")
 paramiko_logger.setLevel(logging.WARNING)
 
 def get_interfaces_descriptions(switch):
+    print(f"Este es el SWITCH: {switch}")
     ip_switch = switch['ip']
-  
-    if ip_switch == "10.224.127.183" or ip_switch == "10.224.127.182"  or ip_switch == "10.224.126.89"  or ip_switch == "10.224.126.93":
+    ip_list = ["10.224.127.183", "10.224.127.182", "10.224.126.89", "10.224.126.93"]
+
+    if ip_switch in ip_list or (switch["is_eigrp"] == 0 and switch["is_bgp"] == 0 and switch["is_ospf"] == 0):
         pass
     else:
         try:

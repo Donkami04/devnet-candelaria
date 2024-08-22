@@ -8,7 +8,7 @@ import {
   getDefaultRoute,
   getDataInfGen,
   getAp,
-  getDataPrtgGroups
+  getDataPrtgGroups,
 } from "../utils/Api-candelaria/api";
 
 export async function useDataInfGen() {
@@ -24,7 +24,7 @@ export async function useDataInfGen() {
     ...dataDevicesHealth,
     ...dataNeighbors,
     ...dataRouteStatus,
-    ...dataPrtgGroups
+    ...dataPrtgGroups,
   ];
 
   const upElements = [];
@@ -78,17 +78,21 @@ export async function useDataInfGen() {
           downElements.push(element);
         }
         if (
-          element.status === "Up" &&
-          element.name.includes("Power Supplies") &&
-          element.lastvalue === "Normal"
+          (element.status === "Up" &&
+            element.name.includes("Power Supplies") &&
+            element.lastvalue === "Normal") ||
+          (element.status.toLowerCase().includes("paused") &&
+            element.name.includes("Power Supplies") &&
+            element.lastvalue === "-")
         ) {
           upElements.push(element);
         }
         if (
           (element.name.includes("Power Supplies") &&
-            element.lastvalue !== "Normal") ||
+            element.lastvalue !== "Normal" && 
+            element.lastvalue !== "-") ||
           (element.name.includes("Power Supplies") &&
-            element.status.includes("Down"))
+            element.status.includes("down"))
         ) {
           downElements.push(element);
         }
@@ -147,7 +151,6 @@ export async function useDataInfGen() {
       upElements.push(element);
     }
   });
-
 
   upOrDownInterface(allData);
   upOrDownNeighbors(allData);

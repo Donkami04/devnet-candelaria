@@ -68,7 +68,15 @@ export const Map = () => {
       (wanElement) => wanElement.sensor === sensorName
     );
     if (filteredWan.length > 0) {
-      return filteredWan[0].status === "Up" ? "inf-gen-green" : "inf-gen-red";
+      return filteredWan[0].status === "Up"
+        ? "inf-gen-green"
+        : filteredWan[0].status.toLowerCase().includes("paused")
+        ? "inf-gen-green"
+        : filteredWan[0].status.toLowerCase().includes("unusual")
+        ? "inf-gen-green"
+        : filteredWan[0].status.toLowerCase().includes("unknown")
+        ? "inf-gen-green"
+        : "inf-gen-red";
     }
     return "";
   };
@@ -243,19 +251,40 @@ export const Map = () => {
               </Link>
             </div>
 
-            <div className="status-light-map-container fw-admin">
+            <div
+              title={
+                colorLightWanAdmin === "inf-gen-red"
+                  ? "El sensor tipo Ping está Down en PRTG"
+                  : ""
+              }
+              className="status-light-map-container fw-admin"
+            >
               <Link to="/monitoreo/wan">
                 <p className={`status-light-inf-gen ${colorLightWanAdmin}`}></p>
               </Link>
             </div>
 
-            <div className="status-light-map-container fw-conce">
+            <div
+              title={
+                colorLightWanConce === "inf-gen-red"
+                  ? "El sensor tipo Ping está Down en PRTG"
+                  : ""
+              }
+              className="status-light-map-container fw-conce"
+            >
               <Link to="/monitoreo/wan">
                 <p className={`status-light-inf-gen ${colorLightWanConce}`}></p>
               </Link>
             </div>
 
-            <div className="status-light-map-container fw-ojos">
+            <div
+              title={
+                colorLightWanOjos === "inf-gen-red"
+                  ? "El sensor tipo Ping está Down en PRTG"
+                  : ""
+              }
+              className="status-light-map-container fw-ojos"
+            >
               <Link to="/monitoreo/wan">
                 <p className={`status-light-inf-gen ${colorLightWanOjos}`}></p>
               </Link>
@@ -265,7 +294,7 @@ export const Map = () => {
               <Link to="/monitoreo/infraestrucura-general/detalles?nombre=SW%20CORE%20ADMIN">
                 <p
                   title={`El ${coreStatus.coreAdminUpPercent}% de los elementos está Up`}
-                  className={`status-light-inf-gen inf-gen-${coreStatus.colorAdminCore}`}
+                  className={`status-light-inf-gen inf-gen-${coreStatus.colorCoreAdmin}`}
                 ></p>
               </Link>
             </div>
@@ -274,7 +303,7 @@ export const Map = () => {
               <Link to="/monitoreo/infraestrucura-general/detalles?nombre=SW%20CORE%20CONCE">
                 <p
                   title={`El ${coreStatus.coreConceUpPercent}% de los elementos está Up`}
-                  className={`status-light-inf-gen inf-gen-${coreStatus.colorConceCore}`}
+                  className={`status-light-inf-gen inf-gen-${coreStatus.colorCoreConce}`}
                 ></p>
               </Link>
             </div>
@@ -283,13 +312,13 @@ export const Map = () => {
               <Link to="/monitoreo/infraestrucura-general/detalles?nombre=SW%20CORE%20OJOS">
                 <p
                   title={`El ${coreStatus.coreOjosUpPercent}% de los elementos está Up`}
-                  className={`status-light-inf-gen inf-gen-${coreStatus.colorOjosCore}`}
+                  className={`status-light-inf-gen inf-gen-${coreStatus.colorCoreOjos}`}
                 ></p>
               </Link>
             </div>
 
             <div className="status-light-map-container status-wlc-negocio">
-              <Link to="/monitoreo/infraestrucura-general/detalles?nombre=WLC">
+              <Link to="/monitoreo/infraestrucura-general?categoria=WLC%209800%20NEGOCIO">
                 <p
                   title={`El ${coreStatus.wlcNegocioUpPercent}% de los elementos está Up`}
                   className={`status-light-inf-gen inf-gen-${coreStatus.colorWlcNegocio}`}
@@ -307,7 +336,7 @@ export const Map = () => {
             </div>
 
             <div className="status-light-map-container fw-ot">
-              <Link to="/monitoreo/infraestrucura-general/detalles?nombre=WLC">
+              <Link to="/monitoreo/infraestrucura-general?categoria=FW%20OT">
                 <p
                   title={`El ${coreStatus.fwOtUpPercent}% de los elementos está Up`}
                   className={`status-light-inf-gen inf-gen-${coreStatus.colorFwOt}`}
@@ -315,8 +344,26 @@ export const Map = () => {
               </Link>
             </div>
 
+            <div className="status-light-map-container coreOpitConce">
+              <Link to="/monitoreo/infraestrucura-general/detalles?nombre=CORE%20OPIT%20CONCE">
+                <p
+                  title={`El ${coreStatus.coreOpitConceUpPercent}% de los elementos está Up`}
+                  className={`status-light-inf-gen inf-gen-${coreStatus.colorCoreOpitConce}`}
+                ></p>
+              </Link>
+            </div>
+
+            <div className="status-light-map-container coreOpitAdmin">
+              <Link to="/monitoreo/infraestrucura-general/detalles?nombre=CORE%20OPIT%20ADMIN">
+                <p
+                  title={`El ${coreStatus.coreOpitAdminUpPercent}% de los elementos está Up`}
+                  className={`status-light-inf-gen inf-gen-${coreStatus.colorCoreOpitAdmin}`}
+                ></p>
+              </Link>
+            </div>
+
             <div className="status-light-map-container cucm-pub">
-              <Link to="/monitoreo/infraestrucura-general/detalles?nombre=WLC">
+              <Link to="/monitoreo/infraestrucura-general?categoria=cuc-pub">
                 <p
                   title={`El ${coreStatus.telefoniaUpPercent}% de los elementos está Up`}
                   className={`status-light-inf-gen inf-gen-${coreStatus.colorTelefonia}`}
@@ -324,17 +371,35 @@ export const Map = () => {
               </Link>
             </div>
 
-            <div className="status-light-map-container dist-adm">
-              <Link to="/monitoreo/infraestrucura-general/detalles?nombre=WLC">
+            <div className="status-light-map-container coreOtNxConce">
+              <Link to="/monitoreo/infraestrucura-general/detalles?nombre=CORE-OT-NX-CONC">
                 <p
-                  title={`El ${coreStatus.swDistAdmPercent}% de los elementos está Up`}
+                  title={`El ${coreStatus.coreOtNxConceUpPercent}% de los elementos (CORE-OT-NX-CONCE) está Up`}
+                  className={`status-light-inf-gen inf-gen-${coreStatus.colorCoreOtNxConce}`}
+                ></p>
+              </Link>
+            </div>
+
+            <div className="status-light-map-container coreOtNxAdmin">
+              <Link to="/monitoreo/infraestrucura-general/detalles?nombre=CORE-OT-NX-ADM">
+                <p
+                  title={`El ${coreStatus.coreOtNxAdminUpPercent}% de los elementos (CORE-OT-NX-ADMIN) está Up`}
+                  className={`status-light-inf-gen inf-gen-${coreStatus.colorCoreOtNxAdmin}`}
+                ></p>
+              </Link>
+            </div>
+
+            <div className="status-light-map-container dist-adm">
+              <Link to="/monitoreo/infraestrucura-general/detalles?nombre=SW%20DIST%20ADM">
+                <p
+                  title={`El ${coreStatus.swDistAdmUpPercent}% de los elementos está Up`}
                   className={`status-light-inf-gen inf-gen-${coreStatus.colorSwDistAdm}`}
                 ></p>
               </Link>
             </div>
 
             <div className="status-light-map-container dist-conce">
-              <Link to="/monitoreo/infraestrucura-general/detalles?nombre=WLC">
+              <Link to="/monitoreo/infraestrucura-general/detalles?nombre=SW%20DIST%20CONC">
                 <p
                   title={`El ${coreStatus.swDistConceUpPercent}% de los elementos está Up`}
                   className={`status-light-inf-gen inf-gen-${coreStatus.colorSwDistConce}`}
@@ -343,19 +408,197 @@ export const Map = () => {
             </div>
 
             <div className="status-light-map-container swCoreOtAdmin">
-              <Link to="/monitoreo/infraestrucura-general/detalles?nombre=WLC">
+              <Link to="/monitoreo/infraestrucura-general/detalles?nombre=SW-CORE-OT-ADMIN">
                 <p
                   title={`El ${coreStatus.swCoreOtAdminUpPercent}% de los elementos está Up`}
                   className={`status-light-inf-gen inf-gen-${coreStatus.colorSwCoreOtAdmin}`}
                 ></p>
               </Link>
             </div>
-
             <div className="status-light-map-container swCoreOtConce">
-              <Link to="/monitoreo/infraestrucura-general/detalles?nombre=WLC">
+              <Link to="/monitoreo/infraestrucura-general?categoria=SW-CORE-OT-CONCE">
                 <p
                   title={`El ${coreStatus.swCoreOtConceUpPercent}% de los elementos está Up`}
                   className={`status-light-inf-gen inf-gen-${coreStatus.colorSwCoreOtConce}`}
+                ></p>
+              </Link>
+            </div>
+
+            <div className="status-light-map-container coreUgAdmin">
+              <Link to="/monitoreo/infraestrucura-general/detalles?nombre=CORE%20UG%20ADMIN">
+                <p
+                  title={`El ${coreStatus.coreUgAdminUpPercent}% de los elementos está Up`}
+                  className={`status-light-inf-gen inf-gen-${coreStatus.colorCoreUgAdmin}`}
+                ></p>
+              </Link>
+            </div>
+
+            <div className="status-light-map-container coreUgAlcaparosa">
+              <Link to="/monitoreo/infraestrucura-general/detalles?nombre=CORE%20UG%20ALCAPAROSA">
+                <p
+                  title={`El ${coreStatus.coreUgAlcaparosaUpPercent}% de los elementos está Up`}
+                  className={`status-light-inf-gen inf-gen-${coreStatus.colorCoreUgAlcaparosa}`}
+                ></p>
+              </Link>
+            </div>
+
+            <div className="status-light-map-container coreUgSantos">
+              <Link to="/monitoreo/infraestrucura-general/detalles?nombre=CORE%20UG%20SANTOS">
+                <p
+                  title={`El ${coreStatus.coreUgSantosUpPercent}% de los elementos está Up`}
+                  className={`status-light-inf-gen inf-gen-${coreStatus.colorCoreUgSantos}`}
+                ></p>
+              </Link>
+            </div>
+
+            <div className="status-light-map-container coreUgOjos">
+              <Link to="/monitoreo/infraestrucura-general/detalles?nombre=CORE%20UG%20OJOS">
+                <p
+                  title={`El ${coreStatus.coreUgOjosUpPercent}% de los elementos está Up`}
+                  className={`status-light-inf-gen inf-gen-${coreStatus.colorCoreUgOjos}`}
+                ></p>
+              </Link>
+            </div>
+
+            <div className="status-light-map-container coreUgConce">
+              <Link to="/monitoreo/infraestrucura-general/detalles?nombre=CORE%20UG%20CONCE">
+                <p
+                  title={`El ${coreStatus.coreUgConceUpPercent}% de los elementos está Up`}
+                  className={`status-light-inf-gen inf-gen-${coreStatus.colorCoreUgConce}`}
+                ></p>
+              </Link>
+            </div>
+
+            <div className="status-light-map-container ccucm-sub">
+              <Link to="/monitoreo/infraestrucura-general?categoria=ccum-sub">
+                <p
+                  title={`El ${coreStatus.ccumSubUpUpPercent}% de los elementos está Up`}
+                  className={`status-light-inf-gen inf-gen-${coreStatus.colorCcumSub}`}
+                ></p>
+              </Link>
+            </div>
+
+            <div className="status-light-map-container uccx">
+              <Link to="/monitoreo/infraestrucura-general?categoria=uccx">
+                <p
+                  title={`El ${coreStatus.uccxUpPercent}% de los elementos está Up`}
+                  className={`status-light-inf-gen inf-gen-${coreStatus.colorUccx}`}
+                ></p>
+              </Link>
+            </div>
+
+            <div className="status-light-map-container admin-dna">
+              <Link to="/monitoreo/infraestrucura-general/detalles?nombre=CORE%20ADMIN%20DNA">
+                <p
+                  title={`El ${coreStatus.adminDnaUpPercent}% de los elementos está Up`}
+                  className={`status-light-inf-gen inf-gen-${coreStatus.colorAdminDna}`}
+                ></p>
+              </Link>
+            </div>
+
+            <div className="status-light-map-container conce-dna">
+              <Link to="/monitoreo/infraestrucura-general/detalles?nombre=CORE%20CONCE%20DNA">
+                <p
+                  title={`El ${coreStatus.conceDnaUpPercent}% de los elementos está Up`}
+                  className={`status-light-inf-gen inf-gen-${coreStatus.colorConceDna}`}
+                ></p>
+              </Link>
+            </div>
+
+            {/* CCTV ADMIN */}
+            <div className="status-light-map-container clcanasmsot01">
+              <Link to="/monitoreo/infraestrucura-general?categoria=CLCANASMSOT01%20-%2010.225.11.250">
+                <p
+                  title={`El ${coreStatus.clcanasmsot01UpPercent}% de los elementos está Up`}
+                  className={`status-light-inf-gen inf-gen-${coreStatus.colorClcanasmsot01}`}
+                ></p>
+              </Link>
+            </div>
+            <div className="status-light-map-container clcanasmsit01">
+              <Link to="/monitoreo/infraestrucura-general?categoria=CLCANASMSIT01%20-%2010.225.0.250">
+                <p
+                  title={`El ${coreStatus.clcanasmsit01UpPercent}% de los elementos está Up`}
+                  className={`status-light-inf-gen inf-gen-${coreStatus.colorClcanasmsit01}`}
+                ></p>
+              </Link>
+            </div>
+            <div className="status-light-map-container clcanasmsit02">
+              <Link to="/monitoreo/infraestrucura-general?categoria=CLCANASMSIT02%20-%2010.225.0.251">
+                <p
+                  title={`El ${coreStatus.clcanasmsit02UpPercent}% de los elementos está Up`}
+                  className={`status-light-inf-gen inf-gen-${coreStatus.colorClcanasmsit02}`}
+                ></p>
+              </Link>
+            </div>
+            <div className="status-light-map-container clcanasmccit01">
+              <Link to="/monitoreo/infraestrucura-general?categoria=CLCANASMCCIT01%20-%2010.225.30.6">
+                <p
+                  title={`El ${coreStatus.clcanasmccit01UpPercent}% de los elementos está Up`}
+                  className={`status-light-inf-gen inf-gen-${coreStatus.colorClcanasmccit01}`}
+                ></p>
+              </Link>
+            </div>
+            <div className="status-light-map-container cloiosasmccit01">
+              <Link to="/monitoreo/infraestrucura-general?categoria=CLOIOSASMCCIT01%20-%2010.225.30.7">
+                <p
+                  title={`El ${coreStatus.cloiosasmccit01UpPercent}% de los elementos está Up`}
+                  className={`status-light-inf-gen inf-gen-${coreStatus.colorCloiosasmccit01}`}
+                ></p>
+              </Link>
+            </div>
+            <div className="status-light-map-container clcanasmccot01">
+              <Link to="/monitoreo/infraestrucura-general?categoria=CLCANASMCCOT01%20-%20%2010.225.30.22">
+                <p
+                  title={`El ${coreStatus.clcanasmccot01UpPercent}% de los elementos está Up`}
+                  className={`status-light-inf-gen inf-gen-${coreStatus.colorClcanasmccot01}`}
+                ></p>
+              </Link>
+            </div>
+            <div className="status-light-map-container clojosasmccot01">
+              <Link to="/monitoreo/infraestrucura-general?categoria=CLOJOSASMCCOT01%20-%2010.225.30.23">
+                <p
+                  title={`El ${coreStatus.clojosasmccot01UpPercent}% de los elementos está Up`}
+                  className={`status-light-inf-gen inf-gen-${coreStatus.colorClojosasmccot01}`}
+                ></p>
+              </Link>
+            </div>
+            <div className="status-light-map-container clcanasmsot02">
+              <Link to="/monitoreo/infraestrucura-general?categoria=CLCANASMSOT02%20-%2010.225.11.251">
+                <p
+                  title={`El ${coreStatus.clcanasmsot02UpPercent}% de los elementos está Up`}
+                  className={`status-light-inf-gen inf-gen-${coreStatus.colorClcanasmsot02}`}
+                ></p>
+              </Link>
+            </div>
+            <div className="status-light-map-container clojosasmsit01">
+              <Link to="/monitoreo/infraestrucura-general?categoria=CLOJOSASMSIT01%20-%2010.231.0.250">
+                <p
+                  title={`El ${coreStatus.clojosasmsit01UpPercent}% de los elementos está Up`}
+                  className={`status-light-inf-gen inf-gen-${coreStatus.colorClojosasmsit01}`}
+                ></p>
+              </Link>
+            </div>
+            <div className="status-light-map-container clojosasmsit02">
+              <Link to="/monitoreo/infraestrucura-general?categoria=CLOJOSASMSIT02%20-%2010.231.0.251">
+                <p
+                  title={`El ${coreStatus.clojosasmsit02UpPercent}% de los elementos está Up`}
+                  className={`status-light-inf-gen inf-gen-${coreStatus.colorClojosasmsit02}`}
+                ></p>
+              </Link>
+            </div>
+            <div className="status-light-map-container clojosasmsot01">
+              <Link to="/monitoreo/infraestrucura-general?categoria=CLOJOSASMSOT01%20-%2010.231.10.250">
+                <p
+                  title={`El ${coreStatus.clojosasmsot01UpPercent}% de los elementos está Up`}
+                  className={`status-light-inf-gen inf-gen-${coreStatus.colorClojosasmsot01}`}
+                ></p>
+              </Link>
+            </div>
+            <div className="status-light-map-container clojosasmsot02">
+              <Link to="/monitoreo/infraestrucura-general?categoria=CLOJOSASMSOT02%20-%2010.231.10.251">
+                <p
+                  title={`El ${coreStatus.clojosasmsot02UpPercent}% de los elementos está Up`}
+                  className={`status-light-inf-gen inf-gen-${coreStatus.colorClojosasmsot02}`}
                 ></p>
               </Link>
             </div>

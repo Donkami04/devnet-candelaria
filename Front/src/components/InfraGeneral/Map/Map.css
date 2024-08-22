@@ -129,14 +129,89 @@
   right: 813px;
 }
 
+.clcanasmsot01 {
+  top: 680px;
+  right: 1370px;
+}
+.clcanasmsit01 {
+  top: 610px;
+  right: 1370px;
+}
+.clcanasmsit02 {
+  top: 610px;
+  right: 1299px;
+}
+.clcanasmccit01 {
+  top: 610px;
+  right: 1225px;
+}
+.clcanasmccot01 {
+  top: 680px;
+  right: 1225px;
+}
+.clcanasmsot02 {
+  top: 680px;
+  right: 1299px;
+}
+.cloiosasmccit01 {
+  top: 610px;
+  right: 980px;
+}
+.clojosasmccot01 {
+  top: 680px;
+  right: 980px;
+}
+.clojosasmsit01 {
+  top: 611px;
+  right: 1120px;
+}
+.clojosasmsit02 {
+  top: 611px;
+  right: 1048px;
+}
+.clojosasmsot01 {
+  top: 680px;
+  right: 1120px;
+}
+.clojosasmsot02 {
+  top: 680px;
+  right: 1048px;
+}
+
 .fw-ot {
   top: 408px;
   right: 855px;
 }
 
+.coreOpitConce {
+  top: 538px;
+  right: 815px;
+}
+.coreOpitAdmin {
+  top: 538px;
+  right: 875px;
+}
+.coreOtNxAdmin {
+  top: 538px;
+  right: 875px;
+}
+
 .cucm-pub {
   top: 42px;
   right: 945px;
+}
+.coreOtNxConce {
+  top: 245px;
+  right: 1102px;
+}
+.coreOtNxAdmin {
+  top: 245px;
+  right: 1152px;
+}
+
+.uccx {
+  top: 42px;
+  right: 900px;
 }
 
 .dist-adm {
@@ -144,19 +219,54 @@
   right: 770px;
 }
 
+.admin-dna {
+  top: 145px;
+  right: 655px;
+}
+
+.conce-dna {
+  top: 145px;
+  right: 605px;
+}
+
 .dist-conce {
   top: 668px;
   right: 795px;
+}
+
+.ccucm-sub {
+  top: 668px;
+  right: 670px;
 }
 
 .swCoreOtAdmin {
   top: 330px;
   right: 1015px;
 }
-
 .swCoreOtConce {
-  top: 460px;
-  right: 1020px;
+  top: 436px;
+  right: 1018px;
+}
+
+.coreUgAdmin {
+  top: 330px;
+  right: 1190px;
+}
+.coreUgAlcaparosa {
+  top: 330px;
+  right: 1277px;
+}
+.coreUgOjos {
+  top: 530px;
+  right: 1277px;
+}
+.coreUgConce {
+  top: 520px;
+  right: 1190px;
+}
+.coreUgSantos {
+  top: 424px;
+  right: 1330px;
 }
 
 .inf-gen-green {

@@ -23,7 +23,7 @@ function countStatus(data) {
       if (existingItem) {
           if (curr.status === "Up") {
               existingItem.up++;
-          } else if (curr.status === "Down") {
+          } else if (curr.status.toLowerCase().includes("down")) {
               existingItem.down++;
           }
       } else {
