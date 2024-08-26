@@ -14,7 +14,6 @@ paramiko_logger = logging.getLogger("paramiko")
 paramiko_logger.setLevel(logging.WARNING)
 
 def get_interfaces_descriptions(switch):
-    print(f"Este es el SWITCH: {switch}")
     ip_switch = switch['ip']
     ip_list = ["10.224.127.183", "10.224.127.182", "10.224.126.89", "10.224.126.93"]
 

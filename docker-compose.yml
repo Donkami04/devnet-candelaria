@@ -80,14 +80,14 @@ services:
   #   environment:
   #     - ENVIRONMENT=production
     
-  backend-api-rest:
-    build:
-      context: Backend
-    ports:
-      - '3001:3001'
-    restart: always
-    environment:
-      - NODE_ENV=production
+  # backend-api-rest:
+  #   build:
+  #     context: Backend
+  #   ports:
+  #     - '3001:3001'
+  #   restart: always
+  #   environment:
+  #     - NODE_ENV=production
     # command: sh -c "npx sequelize-cli db:migrate && node index.js"
       
   frontend-react:
@@ -116,14 +116,14 @@ services:
   #   environment:
   #     - ENVIRONMENT=production
 
-  # infraestructura-general:
-  #   build:
-  #     context: Services/InfraGeneral
-  #   restart: always
-  #   depends_on:
-  #     - db
-  #   environment:
-  #     - ENVIRONMENT=production
+  infraestructura-general:
+    build:
+      context: Services/InfraGeneral
+    restart: always
+    depends_on:
+      - db
+    environment:
+      - ENVIRONMENT=production
 
   # dcs-pac:
   #   build:
@@ -179,11 +179,11 @@ services:
   #   environment:
   #     - ENVIRONMENT=production
 
-  groups_prtg:
-    build:
-      context: Services/Mesh_Process
-    restart: always
-    depends_on:
-      - db
-    environment:
-      - ENVIRONMENT=production
+  # groups_prtg:
+  #   build:
+  #     context: Services/Mesh_Process
+  #   restart: always
+  #   depends_on:
+  #     - db
+  #   environment:
+  #     - ENVIRONMENT=production
