@@ -58,37 +58,36 @@ def get_data():
         prtg_data = []
         
         # lista de id de los grupos de prtg
-        id_list = [15959, 18016, 8681, 4418, 14635, 10160, 14804, 14809, 14873,  16153, 16157, 17559, 14884, 14886, 18695, 18700, 9812, 15235, 12942]
-        optional_group_list_it = [14804, 14809, 14873,  16153, 16157, 17559, 14884, 14886]
-        optional_group_list_ot = [18695, 18700]
-
-        for id_group in id_list:
-            logging.info(id_group)
-            api_endpoint = os.getenv("GROUP_PRTG").format(id_group=id_group)
+        cursor = mydb.cursor()
+        query = "SELECT * FROM dcs.data_prtg_groups"
+        cursor.execute(query)
+        
+        column_names = [column[0] for column in cursor.description]
+        data_prtg_groups = []
+        for row in cursor:
+            row_dict = {}
+            for i in range(len(column_names)):
+                row_dict[column_names[i]] = row[i]
+            data_prtg_groups.append(row_dict)
+            
+        counter = 1
+        for group_element in data_prtg_groups:
+            logging.info(f"#{counter}: {group_element['prtg_id']}")
+            api_endpoint = os.getenv("GROUP_PRTG").format(id_group=group_element["prtg_id"])
             api_request = requests.get(api_endpoint, verify=False).json()
             data = api_request["sensors"]
-            
-            # Estos sensores no tienen un grupo general, por esto lo agregamos aqui
-            for e in data:
-                if id_group in optional_group_list_it:
-                    e["group"] = "FW IT"
-                if id_group in optional_group_list_ot:
-                    e["group"] = "FW OT"
                     
-            if data:
-                prtg_data.extend(data)
-                
-        for item in prtg_data:
-            if "VMWARE" in item['group']:
-                item['group'] = "LTE"
-            if item['group'] == "Candelaria":
-                item['group'] = "CCTV"
+            if data != []:
+                for elem in data:
+                    elem["rol"] = group_element["rol"]
+                    prtg_data.append(elem)
             
-        # Guardamos en la base de datos
-        values = [(item["device"], item["group"], item["status"], item["objid"], item["sensor"], item["lastvalue"]) for item in prtg_data]
+            counter += 1
+                
+        values = [(item["device"], item["group"], item["status"], item["objid"], item["sensor"], item["lastvalue"], item["rol"]) for item in prtg_data]
         query = """
-                INSERT INTO dcs.prtg_groups (`device`, `group`, `status`, `id_prtg`, `sensor`, `lastvalue`)
-                VALUES (%s, %s, %s, %s, %s, %s)
+                INSERT INTO dcs.prtg_groups (`device`, `group`, `status`, `id_prtg`, `sensor`, `lastvalue`, `rol`)
+                VALUES (%s, %s, %s, %s, %s, %s, %s)
                 ON DUPLICATE KEY UPDATE `status` = VALUES(`status`), `lastvalue` = VALUES(`lastvalue`)
                 """
         cursor.executemany(query, values)
