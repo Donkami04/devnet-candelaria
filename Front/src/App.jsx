@@ -30,7 +30,6 @@ import { AdminAp } from "./components/AdminPanel/AdminViews/AdminAp";
 import { AdminHome } from "./components/AdminPanel/AdminHome/AdminHome";
 import { Actility } from "./components/AdminPanel/AdminForms/Actility/Actility";
 import { Login } from "./components/Login/Logins";
-// import { InfraGeneral } from "./components/InfraGeneral/InfraGeneral";
 import { DetailsCore } from "./components/InfraGeneral/DetailsCore/DetailsCore";
 import { Map } from "./components/InfraGeneral/Map/Map";
 import { MainTopology } from "./components/InfraGeneral/MainTopology/MainTopology";
@@ -48,6 +47,7 @@ import { Ise } from "./components/InfraGeneral/Group_Prtg/Ise";
 import { Wireless } from "./components/InfraGeneral/Group_Prtg/Wireless";
 import { Lte } from "./components/InfraGeneral/Group_Prtg/Lte";
 import { Cctv } from "./components/InfraGeneral/Group_Prtg/Cctv";
+import { AnilloUg } from "./components/AnilloUg/AnilloUg";
 import "./app.css";
 
 function App() {
@@ -151,6 +151,7 @@ function App() {
           path="/monitoreo/infraestrucura-general/cctv"
           element={<Cctv />}
         />
+        <Route path="/monitoreo/anillo/ug" element={<AnilloUg />} />
       </Routes>
 
       <div className="refresh-button-container">

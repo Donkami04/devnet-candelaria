@@ -1,10 +1,21 @@
 const express = require("express");
 const router = express.Router();
-const { getDataAnillo } = require("../controllers/anillo");
+const { getDataAnillo, getDataAnilloUg } = require("../controllers/anillos");
 
 router.get("/", async (req, res, next) => {
   try {
     const data = await getDataAnillo();
+    res.json(data);
+    
+  } catch (error) {
+    console.error(error)
+    next(error);
+  }
+});
+
+router.get("/ug", async (req, res, next) => {
+  try {
+    const data = await getDataAnilloUg();
     res.json(data);
     
   } catch (error) {
