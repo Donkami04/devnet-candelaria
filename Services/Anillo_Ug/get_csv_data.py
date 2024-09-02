@@ -1,15 +1,8 @@
 import requests
 import warnings
 import os
-import datetime
-import time
-import calendar
-import mysql.connector
 import logging
-import traceback
-import sched
 import csv
-from config import database
 from dotenv import load_dotenv
 
 
@@ -25,7 +18,7 @@ load_dotenv()
 env = os.getenv("ENVIRONMENT")
         
 def main():
-    ipList = ["10.224.127.180", "10.224.127.148", "172.31.250.26", "172.31.1.246", "10.123.128.239", "172.31.1.245", "172.31.1.244", "172.31.250.30", "10.224.127.147"]
+    ipList = ["10.224.127.180", "10.224.127.148", "172.31.250.26", "172.31.1.246", "10.123.128.239", "172.31.1.245", "172.31.1.244", "172.31.250.30", "10.224.127.147", "10.224.127.181"]
     final_data = []
     for ip in ipList:
         url_getId = f"https://10.224.241.25/api/table.json?content=devices&columns=objid,device,status&filter_host={ip}&username=canadmin&password=Carrera01&count=*"

@@ -11,4 +11,29 @@ async function getDataAnilloUg() {
   return data;
 }
 
-module.exports = { getDataAnillo, getDataAnilloUg };
+async function getDataAnilloUgUpDown() {
+  const response = await AnilloUg.findAll();
+
+  const upElements = [];
+  const downElements = [];
+
+  response.forEach((item) => {
+    const status = item.status.toLowerCase();
+    if (status.includes("up")) {
+      upElements.push(item);
+    } else if (status.includes("down")) {
+      downElements.push(item);
+    }
+  });
+
+  const totalElements = upElements.length + downElements.length;
+  const upPorcent = totalElements ? (upElements.length / totalElements) * 100 : 0;
+
+  return {
+    upElements,
+    downElements,
+    upPorcent: parseFloat(upPorcent.toFixed(1)),
+  };
+}
+
+module.exports = { getDataAnillo, getDataAnilloUg, getDataAnilloUgUpDown };

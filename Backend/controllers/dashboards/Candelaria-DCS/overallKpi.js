@@ -31,7 +31,7 @@ function overall(listAllClients) {
     const porcentajeRCS = parseFloat((((puntosTotalesRCS -  puntosRestarRCS) / puntosTotalesRCS)*100).toFixed(2));
     const porcentajeRC = parseFloat((((puntosTotalesRC - puntosRestarRC) / puntosTotalesRC)*100).toFixed(2));
     const porcentajeHSE = parseFloat((((puntosTotalesHSE - puntosRestarRHSE) / puntosTotalesHSE)*100).toFixed(2));
-    const resultado_overall = ((porcentajeRCS + porcentajeRC + porcentajeHSE)/3).toFixed(2);
+    const resultado_overall = parseFloat(((porcentajeRCS + porcentajeRC + porcentajeHSE)/3).toFixed(2));
 
     return {'indicador': resultado_overall, 'Red Cliente Servidor': porcentajeRCS, 'Red de Control': porcentajeRC, 'Red HSE': porcentajeHSE};
 }

@@ -4,6 +4,7 @@ import {
   getMeshIndicators,
   getDataBaseFim,
   getDataMeshProcess,
+  getAnilloUgUpDown,
 } from "../../utils/Api-candelaria/api";
 import { Navbar } from "../../components/Navbar/Navbar";
 import { DevicesDash } from "../../components/Devices/DevicesDash/DevicesDash";
@@ -36,6 +37,7 @@ export function Home() {
   const [openPitLoading, setOpenPitLoading] = useState(true);
   const [dataMeshProcessUp, setDataMeshProcessUp] = useState([]);
   const [dataMeshProcessDown, setDataMeshProcessDown] = useState([]);
+  const [upDownAnilloUg, setUpDownAnilloUg] = useState([]);
 
   // Estados de spinners
   const [spinnerDcsCandelaria, setSpinnerDcsCandelaria] = useState(true);
@@ -57,9 +59,10 @@ export function Home() {
         const dataDownAnillo = dataAnillo.filter((e) =>
           e.status.includes("Down")
         );
-
+        const dataAnilloUg = await getAnilloUgUpDown();
         setAnilloUp(dataUpAnillo);
         setAnilloDown(dataDownAnillo);
+        setUpDownAnilloUg(dataAnilloUg);
 
         // OPEN PIT
         const meshIndicators = await getMeshIndicators();
@@ -222,6 +225,21 @@ export function Home() {
                         </span>
                       </td>
                     </tr>
+                    <tr>
+                      <td>Anillo UG</td>
+                      <td>
+                        <span
+                          className={
+                            upDownAnilloUg.upPorcent < 99.95
+                              ? "kpi-red"
+                              : "kpi-green"
+                          }
+                        >
+                          {" "}
+                          {upDownAnilloUg.upPorcent}%{" "}
+                        </span>
+                      </td>
+                    </tr>
                   </tbody>
                 </table>
               </div>
@@ -240,6 +258,13 @@ export function Home() {
                   style={{ color: "white" }}
                 >
                   Switches
+                </Link>
+                <Link
+                  to="/monitoreo/anillo/ug"
+                  className="link-system button-switches button-link"
+                  style={{ color: "white" }}
+                >
+                  Anillo
                 </Link>
               </div>
             </>

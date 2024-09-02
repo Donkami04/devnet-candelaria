@@ -12,6 +12,7 @@ const {
   MeshProcess,
   Anillo,
 } = require("../models/status_system");
+const { DateTimeSystems } = require("../models/datetime_system");
 
 async function date_status_system() {
   const dcs_status = await StatusClients.findAll({
@@ -64,9 +65,8 @@ async function date_status_system() {
     limit: 1,
   });
 
-  
   const meshProcess = await MeshProcess.findAll();
-  
+
   const anillo = await Anillo.findAll();
 
   const data = {
@@ -81,10 +81,20 @@ async function date_status_system() {
     ig: ig_status,
     fim: fim_status,
     mesh_process: meshProcess,
-    anillo: anillo
+    anillo: anillo,
   };
 
   return data;
 }
 
-module.exports = { date_status_system };
+async function datetime_status_module() {
+  try {
+    const data = await DateTimeSystems.findAll();
+    return data
+  } catch (error) {
+    console.error(error)
+    return []
+  }
+}
+
+module.exports = { date_status_system, datetime_status_module };

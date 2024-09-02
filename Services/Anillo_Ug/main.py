@@ -36,17 +36,17 @@ def main():
         
         # Actualizamos los datos en la BD
         result = update_devnet_data(interface_status)
-        
+
         # Actualizamos registro datetime del sistema
-        if result == True:
-            datetime_register(system_name="anillo_ug", status="OK")
+        if result is True:
+            datetime_register(system_name="anillo-ug", status="OK")
         else:
-            datetime_register(system_name="anillo_ug", status="ERROR")
+            datetime_register(system_name="anillo-ug", status="ERROR")
             
         logging.info("Ciclo finalizado con exito!")
 
     except Exception as e:
-        datetime_register(system_name="anillo_ug", status="ERROR")
+        datetime_register(system_name="anillo-ug", status="ERROR")
         logging.error(traceback.format_exc())
         logging.error(e)
         logging.error(f"Error en la funcion `main` del archivo `main`")

@@ -80,14 +80,14 @@ services:
   #   environment:
   #     - ENVIRONMENT=production
     
-  # backend-api-rest:
-  #   build:
-  #     context: Backend
-  #   ports:
-  #     - '3001:3001'
-  #   restart: always
-  #   environment:
-  #     - NODE_ENV=production
+  backend-api-rest:
+    build:
+      context: Backend
+    ports:
+      - '3001:3001'
+    restart: always
+    environment:
+      - NODE_ENV=production
     # command: sh -c "npx sequelize-cli db:migrate && node index.js"
       
   frontend-react:
@@ -119,33 +119,6 @@ services:
   # infraestructura-general:
   #   build:
   #     context: Services/InfraGeneral
-  #   restart: always
-  #   depends_on:
-  #     - db
-  #   environment:
-  #     - ENVIRONMENT=production
-
-  # dcs-pac:
-  #   build:
-  #     context: Services/DcsPac
-  #   restart: always
-  #   depends_on:
-  #     - db
-  #   environment:
-  #     - ENVIRONMENT=production
-
-  # dcs-ojos:
-  #   build:
-  #     context: Services/DcsOjos
-  #   restart: always
-  #   depends_on:
-  #     - db
-  #   environment:
-  #     - ENVIRONMENT=production
-
-  # ap:
-  #   build:
-  #     context: Services/InfGen_Ap
   #   restart: always
   #   depends_on:
   #     - db
@@ -187,3 +160,17 @@ services:
   #     - db
   #   environment:
   #     - ENVIRONMENT=production
+
+  anillo_ug:
+    build:
+      context: Services/Anillo_Ug
+    restart: always
+    depends_on:
+      - db
+    environment:
+      - ENVIRONMENT=production
+      - PRTG_USERNAME=${PRTG_USERNAME}
+      - PRTG_PASSWORD=${PRTG_PASSWORD}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_DATABASE=${DB_DATABASE}

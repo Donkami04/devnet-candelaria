@@ -26,6 +26,20 @@ export const getStatusSystem = async () => {
     .catch((error) => {throw new Error('STATUS SYSTEM:Error del API REST Candealaria : ',error)});
 };
 
+export const getDatetimeModules = async () => {
+  return axios
+    .get(`${BASE_API_URL}/status/modules`)
+    .then((response) => response.data)
+    .catch((error) => {throw new Error('getDatetimeModules:Error del API REST Candealaria : ',error)});
+};
+
+export const getAnilloUgUpDown = async () => {
+  return axios
+    .get(`${BASE_API_URL}/anillo/ug/updown`)
+    .then((response) => response.data)
+    .catch((error) => {throw new Error('getAnilloUgUpDown (ANILLO UG):Error del API REST Candealaria : ',error)});
+};
+
 export const getIndicators = async () => {
   return axios
     .get(`${BASE_API_URL}/indicators/`)
@@ -234,4 +248,11 @@ export const getDataPrtgGroupsUpDown= async () => {
     .get(`${BASE_API_URL}/group-prtg/updown`)
     .then((response) => response.data)
     .catch((error) => {throw new Error('GRUOPS PRTG UP DOWN: Error del API REST Candealaria : ',error)});
+};
+
+export const getDataAnilloUg = async () => {
+  return axios
+    .get(`${BASE_API_URL}/anillo/ug`)
+    .then((response) => response.data)
+    .catch((error) => {throw new Error('ANILLO UG: Error del API REST Candealaria : ',error)});
 };
