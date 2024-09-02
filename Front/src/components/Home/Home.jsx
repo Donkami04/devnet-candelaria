@@ -225,21 +225,6 @@ export function Home() {
                         </span>
                       </td>
                     </tr>
-                    <tr>
-                      <td>Anillo UG</td>
-                      <td>
-                        <span
-                          className={
-                            upDownAnilloUg.upPorcent < 99.95
-                              ? "kpi-red"
-                              : "kpi-green"
-                          }
-                        >
-                          {" "}
-                          {upDownAnilloUg.upPorcent}%{" "}
-                        </span>
-                      </td>
-                    </tr>
                   </tbody>
                 </table>
               </div>
@@ -258,13 +243,6 @@ export function Home() {
                   style={{ color: "white" }}
                 >
                   Switches
-                </Link>
-                <Link
-                  to="/monitoreo/anillo/ug"
-                  className="link-system button-switches button-link"
-                  style={{ color: "white" }}
-                >
-                  Anillo
                 </Link>
               </div>
             </>
@@ -539,6 +517,48 @@ export function Home() {
               Detalles
             </Link>
           </div>
+        </section>
+
+        <section className="system-container">
+          {openPitLoading === true ? (
+            <div className="loader-openpit-container">
+              <PuffLoader color="red" />
+            </div>
+          ) : (
+            <div className="system-container-openpit">
+              <div className="name-system-container">
+                <h1>Redes Mina UG</h1>
+              </div>
+              <div className="home-kpi-container">
+                <table className="home-kpi-openpit">
+                  <thead>
+                    <tr>
+                      <th>Sistema</th>
+                      <th className="kpi-green">Up</th>
+                      <th className="kpi-red">Down</th>
+                      <th>Detalles</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Anillo UG</td>
+                      <td>{upDownAnilloUg.upElements.length}</td>
+                      <td>{upDownAnilloUg.downElements.length}</td>
+                      <td>
+                        <Link
+                          target="_blank"
+                          className="link-open-pit"
+                          to="/monitoreo/anillo/ug"
+                        >
+                          Ver
+                        </Link>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
         </section>
       </div>
     </>

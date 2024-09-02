@@ -11,7 +11,7 @@ export const useTabsName = (pathname) => {
     case "/monitoreo/vpn":
       return "VPN";
     case "/monitoreo/home":
-      return "Home";
+      return "DevNet Home";
     case "/monitoreo/ups":
       return "UPS";
     case "/monitoreo/candelaria/mesh":
@@ -36,9 +36,13 @@ export const useTabsName = (pathname) => {
       return "Anillo Candelaria";
     case "/monitoreo/infraestrucura-general/categorias":
       return "Categorias Infra. Gen.";
-    case "/monitoreo/infraestrucura-general/proceso-mesh":
-      return "Proceso Mesh.";
+    case "/monitoreo/infraestrucura-general/detalles":
+      return "Detalles Infra. Gen.";
+    case "/monitoreo/candelaria/proceso-mesh":
+      return "Proceso Mesh";
+    case "/monitoreo/anillo/ug":
+      return "Anillo UG";
     default:
-      return "Sistema de Monitoreo";
+      return "DevNet";
   }
 };

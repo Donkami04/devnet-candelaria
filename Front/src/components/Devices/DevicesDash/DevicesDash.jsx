@@ -28,7 +28,9 @@ export function DevicesDash() {
 
   // Determina el nombre de la clase de la tabla basado en la pestaña actual
   const tableClassName =
-    currentTab === "Home" ? "devices-dash-table-home" : "devices-dash-table";
+    currentTab === "DevNet Home"
+      ? "devices-dash-table-home"
+      : "devices-dash-table";
 
   const totalDevicesFake =
     indicatorsDevices &&

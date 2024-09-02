@@ -66,5 +66,5 @@ def write_csv(data):
 
     print(f'Archivo CSV "{filename}" creado con éxito.')
     
-data = main()
-write_csv(data)
+# data = main()
+# write_csv(data)
