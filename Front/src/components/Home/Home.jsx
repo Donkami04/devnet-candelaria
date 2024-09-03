@@ -225,21 +225,6 @@ export function Home() {
                         </span>
                       </td>
                     </tr>
-                    <tr>
-                      <td>Anillo UG</td>
-                      <td>
-                        <span
-                          className={
-                            upDownAnilloUg.upPorcent < 99.95
-                              ? "kpi-red"
-                              : "kpi-green"
-                          }
-                        >
-                          {" "}
-                          {upDownAnilloUg.upPorcent}%{" "}
-                        </span>
-                      </td>
-                    </tr>
                   </tbody>
                 </table>
               </div>
@@ -258,13 +243,6 @@ export function Home() {
                   style={{ color: "white" }}
                 >
                   Switches
-                </Link>
-                <Link
-                  to="/monitoreo/anillo/ug"
-                  className="link-system button-switches button-link"
-                  style={{ color: "white" }}
-                >
-                  Anillo
                 </Link>
               </div>
             </>
