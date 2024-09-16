@@ -256,3 +256,10 @@ export const getDataAnilloUg = async () => {
     .then((response) => response.data)
     .catch((error) => {throw new Error('ANILLO UG: Error del API REST Candealaria : ',error)});
 };
+
+export const getDataDockers = async () => {
+  return axios
+    .get(`${BASE_API_URL}/dockers`)
+    .then((response) => response.data)
+    .catch((error) => {throw new Error('Dockers: Error del API REST Candealaria : ',error)});
+};

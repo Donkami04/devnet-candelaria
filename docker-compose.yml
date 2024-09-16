@@ -80,14 +80,14 @@ services:
   #   environment:
   #     - ENVIRONMENT=production
     
-  # backend-api-rest:
-  #   build:
-  #     context: Backend
-  #   ports:
-  #     - '3001:3001'
-  #   restart: always
-  #   environment:
-  #     - NODE_ENV=production
+  backend-api-rest:
+    build:
+      context: Backend
+    ports:
+      - '3001:3001'
+    restart: always
+    environment:
+      - NODE_ENV=production
   #   # command: sh -c "npx sequelize-cli db:migrate && node index.js"
       
   frontend-react:
@@ -96,7 +96,7 @@ services:
     ports:
       - '4000:80'
     restart: always
-  #!   environment: Este se define en el archivo .env
+  # #!   environment: Este se define en el archivo .env
 
   # wan:
   #   build:
@@ -161,6 +161,18 @@ services:
   #   environment:
   #     - ENVIRONMENT=production
 
+  monitoreo_dockers:
+    container_name: monitoreo_dockers
+    build:
+      context: Services/Docker_Monitoring
+    restart: always
+    depends_on:
+      - db
+    environment:
+      - ENVIRONMENT=production
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      
   # anillo_ug:
   #   build:
   #     context: Services/Anillo_Ug

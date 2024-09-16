@@ -3,7 +3,7 @@ import { getDatetimeModules } from "../../utils/Api-candelaria/api";
 import { Message } from "../Message/Message";
 import "./DatetimeModules.css";
 
-export function DatetimeModules({ module }) {
+export function DatetimeModules({ module, name }) {
   const [moduleData, setModuleData] = useState({});
   const [message, setMessage] = useState("");
   const [color, setColor] = useState("");
@@ -13,28 +13,28 @@ export function DatetimeModules({ module }) {
     const fetchData = async () => {
       try {
         let data = await getDatetimeModules();
-        console.log(data);
+
         data = data.filter((e) => e.system_name === module);
 
         if (data.length > 0) {
           setModuleData(data[0]);
           if (data[0].status === "ERROR") {
             setMessage(
-              `Hay un error con el modulo ${module.toUpperCase()}, la información puede verse afectada.`
+              `Hay un error con el modulo ${name.toUpperCase()}, la información puede verse afectada.`
             );
             setColor("red-message");
             setShow(true);
           }
         } else {
           setModuleData({
-            system_name: module,
+            system_name: name,
             datetime: "Error DevNet",
             status: "Error DevNet",
           });
         }
       } catch (error) {
         setModuleData({
-          system_name: module,
+          system_name: name,
           datetime: "Error DevNet",
           status: "Error DevNet",
         });
@@ -55,7 +55,7 @@ export function DatetimeModules({ module }) {
       >
         {moduleData.system_name ? (
           <div>
-            <p>Info Sistema: {moduleData.system_name.toUpperCase()}</p>
+            <p>Info Sistema: {name.toUpperCase()}</p>
             <ul>
               <li>Última consulta: {moduleData.datetime}</li>
               <li>

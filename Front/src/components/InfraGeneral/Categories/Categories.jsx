@@ -35,11 +35,13 @@ export function Categories() {
   const [lteUp, setLteUp] = useState([]);
   const [lteDown, setLteDown] = useState([]);
   const [cctvUp, setCctvUp] = useState([]);
+  const [dockersUp, setDockersUp] = useState([]);
   const [fwItUp, setFwItUp] = useState([]);
   const [fwItDown, setFwItDown] = useState([]);
   const [fwOtUp, setFwOtUp] = useState([]);
   const [fwOtDown, setFwOtDown] = useState([]);
   const [cctvDown, setCctvDown] = useState([]);
+  const [dockersDown, setDockersDownp] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -58,6 +60,7 @@ export function Categories() {
         const dataCctvUp = [];
         const dataFwItUp = [];
         const dataFwOtUp = [];
+        const dataDockersUp = [];
 
         const newCoresDown = [];
         const newDistDown = [];
@@ -71,7 +74,8 @@ export function Categories() {
         const dataCctvDown = [];
         const dataFwItDown = [];
         const dataFwOtDown = [];
-        console.log(dataStatusInfGen);
+        const dataDockersDown = [];
+
         dataStatusInfGen.upElements.forEach((e) => {
           if (e.name_switch && e.name_switch.includes("CORE")) {
             newCoresUp.push(e);
@@ -114,6 +118,9 @@ export function Categories() {
           }
           if (e.rol && e.rol.toLowerCase() === "fw ot") {
             dataFwOtUp.push(e);
+          }
+          if (e.type && e.type === "docker") {
+            dataDockersUp.push(e);
           }
         });
 
@@ -160,6 +167,9 @@ export function Categories() {
           if (e.rol && e.rol.toLowerCase() === "fw ot") {
             dataFwOtDown.push(e);
           }
+          if (e.type && e.type === "docker") {
+            dataDockersDown.push(e);
+          }
         });
 
         setCoresUp(newCoresUp);
@@ -187,6 +197,8 @@ export function Categories() {
         setFwItDown(dataFwItDown);
         setFwOtUp(dataFwOtUp);
         setFwOtDown(dataFwOtDown);
+        setDockersUp(dataDockersUp);
+        setDockersDownp(dataDockersDown);
       } catch (error) {
         console.error(error);
         setIsLoading(false);
@@ -332,6 +344,16 @@ export function Categories() {
                 <td>{fwOtUp.length}</td>
                 <td>{fwOtDown.length}</td>
                 <td>{fwOtUp.length + fwOtDown.length}</td>
+              </tr>
+              <tr>
+                <td className="td-category-ig">
+                  <Link to="/monitoreo/infraestrucura-general/procesos-devnet">
+                    Procesos DevNet
+                  </Link>
+                </td>
+                <td>{dockersUp.length}</td>
+                <td>{dockersDown.length}</td>
+                <td>{dockersUp.length + dockersDown.length}</td>
               </tr>
             </tbody>
           </table>

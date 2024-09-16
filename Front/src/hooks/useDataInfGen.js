@@ -9,6 +9,7 @@ import {
   getDataInfGen,
   getAp,
   getDataPrtgGroups,
+  getDataDockers,
 } from "../utils/Api-candelaria/api";
 
 export async function useDataInfGen() {
@@ -16,7 +17,7 @@ export async function useDataInfGen() {
   const dataDevicesHealth = await getSystemHealth();
   const dataNeighbors = await getNeighbors();
   const dataRouteStatus = await getDefaultRoute();
-  // const dataAp = await getAp();
+  const dataDockers = await getDataDockers();
   const dataPrtgGroups = await getDataPrtgGroups();
 
   const allData = [
@@ -25,6 +26,7 @@ export async function useDataInfGen() {
     ...dataNeighbors,
     ...dataRouteStatus,
     ...dataPrtgGroups,
+    ...dataDockers.dataContainers,
   ];
 
   const upElements = [];
@@ -89,7 +91,7 @@ export async function useDataInfGen() {
         }
         if (
           (element.name.includes("Power Supplies") &&
-            element.lastvalue !== "Normal" && 
+            element.lastvalue !== "Normal" &&
             element.lastvalue !== "-") ||
           (element.name.includes("Power Supplies") &&
             element.status.includes("down"))
@@ -152,10 +154,32 @@ export async function useDataInfGen() {
     }
   });
 
+  const upOrDownDockers = (dataList) => {
+    dataList.forEach((element) => {
+      if (element.type === "docker") {
+        if (
+          element.status.includes("running") &&
+          element.cpu_usage_percent <= 70 &&
+          element.memory_usage_percent <= 60
+        ) {
+          upElements.push(element);
+        }
+        if (
+          !element.status.includes("running") ||
+          element.cpu_usage_percent > 70 ||
+          element.memory_usage_percent > 60
+        ) {
+          downElements.push(element);
+        }
+      }
+    });
+  };
+
   upOrDownInterface(allData);
   upOrDownNeighbors(allData);
   upOrDownSysHealth(allData);
   upOrDownRouteDefault(allData);
+  upOrDownDockers(allData);
 
   const data = {
     upElements: upElements,

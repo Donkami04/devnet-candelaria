@@ -71,7 +71,7 @@ export function AnilloUg() {
   return (
     <main className="main-container-anilloug">
       <Navbar title={"Anillo UG"} />
-      <DatetimeModules module={"anillo-ug"} />
+      <DatetimeModules module={"anillo-ug"} name={"Anillo UG"} />
       <div className="anilloug-image-container">
         <img className="anilloug-image" src="/mapa-ug.webp" alt="" />
         <div className="main-lights-anilloug-container">

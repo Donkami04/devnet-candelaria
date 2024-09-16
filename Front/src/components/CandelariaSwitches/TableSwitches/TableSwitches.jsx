@@ -96,8 +96,8 @@ export function TableSwitches() {
         Down / Paused
       </label>
 
-      <table >
-        <thead >
+      <table>
+        <thead>
           <tr className="table-switches">
             <th>DISPOSITIVO</th>
             <th>IP</th>

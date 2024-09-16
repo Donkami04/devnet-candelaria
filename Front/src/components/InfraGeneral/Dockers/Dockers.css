@@ -1,0 +1,29 @@
+.container-table-dockers {
+  height: calc(100vh - 4rem);
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.table-dockers {
+  max-height: 80%;
+  width: 70%;
+  margin-top: 4rem;
+  border-collapse: collapse;
+  overflow-y: auto;
+}
+
+.row-dockers-devnet th,
+.row-dockers-devnet td {
+  border: solid 1px black;
+}
+
+.row-dockers-devnet th {
+    height: 3rem;
+    background-color: black;
+    color: white;
+    border-right: solid 1px white
+}
+.row-dockers-devnet td {
+    height: 0.1rem;
+}

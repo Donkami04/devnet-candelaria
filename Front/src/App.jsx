@@ -48,6 +48,7 @@ import { Wireless } from "./components/InfraGeneral/Group_Prtg/Wireless";
 import { Lte } from "./components/InfraGeneral/Group_Prtg/Lte";
 import { Cctv } from "./components/InfraGeneral/Group_Prtg/Cctv";
 import { AnilloUg } from "./components/AnilloUg/AnilloUg";
+import { Dockers } from "./components/InfraGeneral/Dockers/Dockers";
 import "./app.css";
 
 function App() {
@@ -152,6 +153,10 @@ function App() {
           element={<Cctv />}
         />
         <Route path="/monitoreo/anillo/ug" element={<AnilloUg />} />
+        <Route
+          path="/monitoreo/infraestrucura-general/procesos-devnet"
+          element={<Dockers />}
+        />
       </Routes>
 
       <div className="refresh-button-container">
