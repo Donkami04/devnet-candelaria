@@ -18,6 +18,7 @@ def main():
 
         # Listar todos los contenedores (activos y detenidos)
         containers = client.containers.list(all=True)
+        
 
         # Lista para almacenar la información de los contenedores
         containers_info = []

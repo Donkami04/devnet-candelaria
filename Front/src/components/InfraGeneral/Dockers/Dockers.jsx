@@ -48,7 +48,11 @@ export function Dockers() {
             <tbody>
               {dockers.map((docker) => (
                 <tr className="row-dockers-devnet" key={docker.id}>
-                  <td>{docker.name.replace("devnet-candelaria-", "")}</td>
+                  <td>
+                    {docker.name
+                      .replace("devnet-candelaria_", "")
+                      .replace("_1", "")}
+                  </td>
                   <td
                     className={
                       docker.status.includes("running")
