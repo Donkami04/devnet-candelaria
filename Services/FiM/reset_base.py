@@ -29,14 +29,16 @@ def reset_base(ip_base):
         # Iniciar la conexión TELNET
         with ConnectHandler(**device) as telnet:
             output = telnet.send_command("reboot")
-            print(output)
             telnet.disconnect()
+            logging.info(f"Output {output}")
             logging.info(f"Base reiniciada en {ip_base}")
-
+        
+        return "OK", "OK"
+            
     except Exception as e:
         logging.error("Error en funcion Reset_Base")
         logging.error(e)
         logging.error(traceback.format_exc())
-        return "Error", e
+        return "ERROR", e
         
 # reset_base("10.224.89.10")
