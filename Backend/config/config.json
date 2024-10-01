@@ -1,10 +1,10 @@
 {
   "local": {
     "dialect": "mysql",
-    "host": "127.0.0.1",
-    "username": "candelaria",
-    "password": "candelaria",
-    "database": "dcs"
+    "host": "localhost",
+    "username": "devnet",
+    "password": "devnet.0",
+    "database": "devnet"
   },
   "development": {
     "dialect": "mysql",

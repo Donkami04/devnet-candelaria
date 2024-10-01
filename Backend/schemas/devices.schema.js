@@ -1,11 +1,11 @@
 const Joi = require("joi");
 
 const createDevicesSchema = Joi.object({
-  ip: Joi.string().ip().required().allow("").empty("").messages({
+  host: Joi.string().ip().required().allow("").empty("").messages({
     "string.ip": "La IP debe tener un formato valido",
     "any.required": "La IP es requerida",
   }),
-  type_device: Joi.string().required().allow("").empty("").max(100).messages({
+  type: Joi.string().required().allow("").empty("").max(100).messages({
     "any.required": "El tipo de dispositivo es requerido",
   }),
   site: Joi.string().required().allow("").empty("").max(100).messages({
@@ -27,11 +27,11 @@ const createDevicesSchema = Joi.object({
 });
 
 const editDevicesSchema = Joi.object({
-  ip: Joi.string().required().ip().allow("").empty("").messages({
+  host: Joi.string().required().ip().allow("").empty("").messages({
     "string.ip": "La IP debe tener un formato valido",
     "any.required": "La IP es requerida",
   }),
-  type_device: Joi.string().required().allow("").empty("").max(100).messages({
+  type: Joi.string().required().allow("").empty("").max(100).messages({
     "any.required": "El Tipo de dispositivo es requerido",
   }),
   site: Joi.string().required().max(100).allow("").empty("").messages({

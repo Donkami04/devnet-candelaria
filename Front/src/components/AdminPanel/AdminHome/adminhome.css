@@ -8,7 +8,7 @@
   align-items: center;
 }
 
-.buttons-admin-home-container {
+/* .buttons-admin-home-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
@@ -40,17 +40,42 @@
 
 .buttons-admin-home:hover {
   background-color: #5f00f740;
-}
+} */
 
 .main-admin-home {
+  margin-top: 10rem;
+  width: 30rem;
+  margin-left: auto;
+  margin-right: auto;
+  /* padding-top: 5rem; */
+  height: 20rem;
+}
+
+.form-admin-home {
   display: flex;
-  flex-direction: column;
+  justify-content: space-around;
   align-items: center;
-  justify-content: center;
-  min-height: 87vh;
+  flex-direction: column;
+  height: 12rem;
+}
+
+.form-admin-home button {
+  width: 50%;
+  height: 2rem;
+  border-radius: 22px;
+  border: none;
+  background-color: rgb(36, 106, 255);
 }
 
 .info-admin-home {
   text-align: center;
-  margin-bottom: 20px; /* Agregamos un margen inferior para separarlo del admin-panel */
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+}
+
+.admin-select-system {
+  width: 50%;
+  height: 2rem;
+  font-size: 1.2rem;
+  text-align: center;
 }

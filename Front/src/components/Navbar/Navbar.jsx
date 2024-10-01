@@ -38,7 +38,7 @@ export function Navbar(props) {
 
       {jwtToken ? (
         <div className="box-buttons-navbar">
-          {/* <Link
+          <Link
             to="/admin/home"
             className="admin-link"
             style={{ color: "white" }}
@@ -51,7 +51,7 @@ export function Navbar(props) {
             style={{ color: "white" }}
           >
             Log Out
-          </div> */}
+          </div>
         </div>
       ) : (
         <div className="box-buttons-navbar">

@@ -1,29 +1,32 @@
 import { Navbar } from "../../Navbar/Navbar";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 import "./adminhome.css";
 
 export const AdminHome = () => {
+  const [linkSelected, setLinkSelected] = useState("");
+
   const linksTables = [
-    "/admin/clients",
-    "/admin/switches",
-    "/admin/ups",
+    // "/admin/clients",
+    // "/admin/switches",
+    // "/admin/ups",
     "/admin/devices",
-    "/admin/wan",
-    "/admin/mesh",
-    "/admin/firewalls",
-    "/admin/users",
-    "/admin/actility",
+    // "/admin/wan",
+    // "/admin/mesh",
+    // "/admin/firewalls",
+    // "/admin/users",
+    // "/admin/actility",
   ];
   const titles = [
-    "DCS Clientes Candelaria",
-    "DCS Switches Candelaria",
-    "UPS",
+    // "DCS Clientes Candelaria",
+    // "DCS Switches Candelaria",
+    // "UPS",
     "Dispositivos",
-    "WAN",
-    "MESH",
-    "Firewalls - Canales Internet",
-    "Usuarios",
-    "Actility AP",
+    // "WAN",
+    // "MESH",
+    // "Firewalls - Canales Internet",
+    // "Usuarios",
+    // "Actility AP",
   ];
 
   return (
@@ -31,23 +34,33 @@ export const AdminHome = () => {
       <Navbar title={"Admin Home"} />
       <div className="main-admin-home">
         <div className="info-admin-home">
-          <h3>Seleccione uno de los sistemas que desea administrar.</h3>
+          <p>Seleccione uno de los sistemas que desea administrar.</p>
         </div>
-        <div className="admin-panel">
-          <div className="buttons-admin-home-container">
+        <form className="form-admin-home">
+          <select
+            className="admin-select-system"
+            value={linkSelected}
+            onChange={(e) => setLinkSelected(e.target.value)}
+          >
+            <option value=""></option>
             {titles.map((title, index) => (
-              <Link
-                to={linksTables[index]}
-                style={{ textDecoration: "none" }}
-                key={index}
-              >
-                <div className="buttons-admin-home">
-                  <h2>{title}</h2>
-                </div>
-              </Link>
+              <option key={index} value={linksTables[index]}>
+                {title}
+              </option>
             ))}
-          </div>
-        </div>
+          </select>
+          {linkSelected && (
+            <Link
+              className="admin-select-system"
+              style={{ color: "white" }}
+              to={linkSelected}
+            >
+              <button style={{ cursor: "pointer", color: "white" }}>
+                Seleccionar
+              </button>
+            </Link>
+          )}
+        </form>
       </div>
     </>
   );

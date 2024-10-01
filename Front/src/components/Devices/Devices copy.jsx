@@ -120,48 +120,48 @@ export function Devices() {
 
     return filteredSearchDevices.map((device) => (
       <tr key={device.id}>
-        <td>{device?.host || "Actualizando..."}</td>
-        <td>{device?.type || "Actualizando..."}</td>
-        <td>{device?.site || "Actualizando..."}</td>
-        <td>{device?.dpto || "Actualizando..."}</td>
-        <td>{device?.prtg_name_device || "Actualizando..."}</td>
-        <td>{device?.prtg_sensorname || "Actualizando..."}</td>
+        <td>{device.host}</td>
+        <td>{device.type}</td>
+        <td>{device.site}</td>
+        <td>{device.dpto}</td>
+        <td>{device.prtg_name_device}</td>
+        <td>{device.prtg_sensorname}</td>
         <td>
-          <a href={`${PRTG_URL}${device?.prtg_id || ""}`} target="_blank">
-            {device?.prtg_status || "Actualizando..."}
+          <a href={`${PRTG_URL}${device.prtg_id}`} target="_blank">
+            {device.prtg_status}
           </a>
         </td>
-        <td>{device?.prtg_lastup || "Actualizando..."}</td>
-        <td>{device?.prtg_lastdown || "Actualizando..."}</td>
+        <td>{device.prtg_lastup}</td>
+        <td>{device.prtg_lastdown}</td>
         <td style={{ width: "1%" }}>
-          {device?.data_backup === "true" ? (
+          {device.data_backup === "true" ? (
             <p
               className="warning-icon"
               title={
                 "Data Not Found, información extraida de registros antiguos."
               }
             >
-              ⚠️ {device?.cisco_device_ip || "Actualizando..."}
+              ⚠️ {device.cisco_device_ip}
             </p>
           ) : (
-            <p>{device?.cisco_device_ip || "Actualizando..."}</p>
+            <p>{device.cisco_device_ip}</p>
           )}
         </td>
         <td
           className={`${
-            device?.cisco_status_device?.includes("Up")
+            device.cisco_status_device.includes("Up")
               ? "kpi-green"
-              : device?.cisco_status_device?.includes("Down")
+              : device.cisco_status_device.includes("Down")
               ? "kpi-red"
-              : device?.cisco_status_device?.includes("Paused")
+              : device.cisco_status_device.includes("Paused")
               ? "kpi-blue"
-              : device?.cisco_status_device?.includes("Not Found") &&
-                device?.cisco_device_ip !== "Not Found"
+              : device.cisco_status_device.includes("Not Found") &&
+                device.cisco_device_ip !== "Not Found"
               ? "kpi-grey"
               : ""
           } td-name-cisco`}
         >
-          {device?.data_backup === "true" ? (
+          {device.data_backup === "true" ? (
             <div>
               <p
                 className="warning-icon"
@@ -171,52 +171,52 @@ export function Devices() {
               </p>{" "}
               <p
                 style={{ cursor: "help" }}
-                title={colorTitle(device?.cisco_status_device || "")}
+                title={colorTitle(device.cisco_status_device)}
               >
-                {device?.cisco_device_name || "Actualizando..."}
+                {device.cisco_device_name}
               </p>
             </div>
           ) : (
             <div
               style={{ cursor: "help" }}
-              title={colorTitle(device?.cisco_status_device || "")}
+              title={colorTitle(device.cisco_status_device)}
             >
-              {device?.cisco_device_name || "Actualizando..."}
+              {device.cisco_device_name}
             </div>
           )}
         </td>
         <td>
           <a
-            href={`${device?.red === "OT" ? CISCO_URL : CISCO_URL_IT}${
-              device?.host || ""
+            href={`${device.red === "OT" ? CISCO_URL : CISCO_URL_IT}${
+              device.host
             }&forceLoad=true`}
             target="_blank"
           >
-            {device?.data_backup === "true" ? (
+            {device.data_backup === "true" ? (
               <p
                 className="warning-icon"
                 title="Data Not Found, información extraida de registros antiguos."
               >
-                ⚠️ {device?.cisco_port || "Actualizando..."}
+                ⚠️ {device.cisco_port}
               </p>
             ) : (
-              device?.cisco_port || "Actualizando..."
+              device.cisco_port
             )}
           </a>
         </td>
         <td>
-          {device?.data_backup === "true" ? (
+          {device.data_backup === "true" ? (
             <p
               className="warning-icon"
               title="Data Not Found, información extraida de registros antiguos."
             >
-              ⚠️ {device?.cisco_status || "Actualizando..."}
+              ⚠️ {device.cisco_status}
             </p>
           ) : (
-            device?.cisco_status || "Actualizando..."
+            device.cisco_status
           )}
         </td>
-        <td>{useDeviceIcons(device) || "Actualizando..."}</td>
+        <td>{useDeviceIcons(device)}</td>
       </tr>
     ));
   };

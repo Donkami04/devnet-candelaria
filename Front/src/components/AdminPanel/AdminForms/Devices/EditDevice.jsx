@@ -4,11 +4,11 @@ import { BASE_API_URL } from "../../../../utils/Api-candelaria/api";
 import "../form.css";
 
 export const EditDevice = () => {
-  const [ip, setIp] = useState("");
+  const [host, setIp] = useState("");
   const [id, setId] = useState(0);
   const [dataDevice, setDataDevice] = useState({
-    ip: "",
-    type_device: "",
+    host: "",
+    type: "",
     site: "",
     dpto: "",
     red: "",
@@ -22,18 +22,26 @@ export const EditDevice = () => {
   };
 
   const handleGetDeviceInfo = async () => {
-    if (ip.trim() === "") {
+    if (host.trim() === "") {
       setMensaje("Por favor, ingrese un IP de dispositivo válido.");
       setShowEditFields(false);
       return;
     }
 
     try {
-      const response = await axios.get(`${BASE_API_URL}/devices/${ip}`);
+      const response = await axios.get(`${BASE_API_URL}/devices/${host}`);
 
-      const deviceData = response?.data?.data;
+      let deviceData = response?.data?.data;
       const message = response?.data?.message;
       const currentId = response?.data?.data.id;
+
+      deviceData = {
+        host: deviceData.host,
+        type: deviceData.type,
+        site: deviceData.site,
+        dpto: deviceData.dpto,
+        red: deviceData.red,
+      };
 
       if (deviceData) {
         setDataDevice(deviceData);
@@ -71,7 +79,6 @@ export const EditDevice = () => {
       // Crear una copia de los datos del dispositivo sin el campo "id"
       const deviceDataWithoutId = { ...dataDevice };
       delete deviceDataWithoutId.id;
-
       const response = await axios.put(
         `${BASE_API_URL}/devices/edit/${id}`,
         deviceDataWithoutId,
@@ -102,14 +109,14 @@ export const EditDevice = () => {
       <div className="form-container">
         <h2 className="form-title">Editar Dispositivo</h2>
         <div>
-          <label className="form-label" htmlFor="ip">
+          <label className="form-label" htmlFor="host">
             Buscar por IP:
           </label>
           <input
             className="form-input"
             type="text"
-            id="ip"
-            value={ip}
+            id="host"
+            value={host}
             onChange={handleIpChange}
           />
           <button
@@ -123,32 +130,32 @@ export const EditDevice = () => {
         {showEditFields && (
           <form onSubmit={handleEditDevice}>
             <div>
-              <label className="form-label" htmlFor="ip">
+              <label className="form-label" htmlFor="host">
                 IP:
               </label>
               <input
                 className="form-input"
                 type="text"
-                id="ip"
-                name="ip"
-                value={dataDevice.ip}
+                id="host"
+                name="host"
+                value={dataDevice.host}
                 onChange={(e) =>
-                  setDataDevice({ ...dataDevice, ip: e.target.value })
+                  setDataDevice({ ...dataDevice, host: e.target.value })
                 }
               />
             </div>
             <div>
-              <label className="form-label" htmlFor="type_device">
+              <label className="form-label" htmlFor="type">
                 Tipo de dispositivo:
               </label>
               <input
                 className="form-input"
                 type="text"
-                id="type_device"
-                name="type_device"
-                value={dataDevice.type_device}
+                id="type"
+                name="type"
+                value={dataDevice.type}
                 onChange={(e) =>
-                  setDataDevice({ ...dataDevice, type_device: e.target.value })
+                  setDataDevice({ ...dataDevice, type: e.target.value })
                 }
               />
             </div>

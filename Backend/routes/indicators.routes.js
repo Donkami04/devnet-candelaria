@@ -58,23 +58,28 @@ router.get("/mesh", async (req, res, next) => {
 router.get("/devices", async (req, res, next) => {
   try {
     const dataDevices = await dashboardDevices();
-    const devicesIndicators = {
-      numTotalDevices: dataDevices.numTotalDevices,
-      numTotalCameras: dataDevices.numTotalCameras,
-      numTotalAp: dataDevices.numTotalAp,
-      numTotalImpresoras: dataDevices.numTotalImpresoras,
-      numTotalOthers: dataDevices.numTotalOthers,
-      numCamerasUp: dataDevices.numCamerasUp,
-      numCamerasDown: dataDevices.numCamerasDown,
-      numApUp: dataDevices.numApUp,
-      numApDown: dataDevices.numApDown,
-      numApDown: dataDevices.numApDown,
-      numOthersUp: dataDevices.numOthersUp,
-      numOthersDown: dataDevices.numOthersDown,
-      numImpresorasUp: dataDevices.numImpresorasUp,
-      numImpresorasDown: dataDevices.numImpresorasDown
-    };
-    res.json(devicesIndicators);
+    // const devicesIndicators = {
+    //   numTotalDevices: dataDevices.numTotalDevices,
+    //   numTotalCameras: dataDevices.numTotalCameras,
+    //   numTotalAp: dataDevices.numTotalAp,
+    //   numTotalImpresoras: dataDevices.numTotalImpresoras,
+    //   numTotalOthers: dataDevices.numTotalOthers,
+    //   numCamerasUp: dataDevices.numCamerasUp,
+    //   numCamerasDown: dataDevices.numCamerasDown,
+    //   numApUp: dataDevices.numApUp,
+    //   numApDown: dataDevices.numApDown,
+    //   numApDown: dataDevices.numApDown,
+    //   numOthersUp: dataDevices.numOthersUp,
+    //   numOthersDown: dataDevices.numOthersDown,
+    //   numImpresorasUp: dataDevices.numImpresorasUp,
+    //   numImpresorasDown: dataDevices.numImpresorasDown
+    // };
+    res.status(dataDevices.statusCode).json({
+      statusCode: dataDevices.statusCode,
+      data: dataDevices.data,
+      message: dataDevices.message,
+      error: dataDevices.error,
+    });
   } catch (error) {
     console.error("Error con dashboard Camaras");
     console.error(error);

@@ -5,20 +5,24 @@ const Devices = sequelize.define(
   "Devices",
   {
     host: {
-      type: DataTypes.STRING(20),
-      allowNull: true,
+      type: DataTypes.STRING(100),
+      allowNull: false,
     },
     type: {
       type: DataTypes.STRING(100),
-      allowNull: true,
+      allowNull: false,
     },
     site: {
       type: DataTypes.STRING(100),
-      allowNull: true,
+      allowNull: false,
     },
     dpto: {
       type: DataTypes.STRING(100),
-      allowNull: true,
+      allowNull: false,
+    },
+    red: {
+      type: DataTypes.STRING(10),
+      allowNull: false,
     },
     prtg_name_device: {
       type: DataTypes.STRING(100),
@@ -69,10 +73,6 @@ const Devices = sequelize.define(
       allowNull: true,
     },
     data_backup: {
-      type: DataTypes.STRING(10),
-      allowNull: true,
-    },
-    red: {
       type: DataTypes.STRING(10),
       allowNull: true,
     },

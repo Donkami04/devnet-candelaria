@@ -6,16 +6,24 @@ import "./devicesdash.css";
 export function DevicesDash() {
   const [indicatorsDevices, setIndicatorsDevices] = useState(null);
   const [spinnerDevices, setSpinnerDevices] = useState(true);
+  const [showApiMessage, setShowApiMessage] = useState(false);
+  const [apiMessage, setApiMessage] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const indicators = await getDevicesIndicators();
-        setIndicatorsDevices(indicators);
-        setSpinnerDevices(false);
+        if (indicators.statusCode === 200) {
+          setIndicatorsDevices(indicators.data);
+          setSpinnerDevices(false);
+        } else {
+          setShowApiMessage(true);
+          setApiMessage(indicators.message);
+          console.error("Error al obtener los calculos de los dispositivos");
+        }
       } catch (error) {
         console.error(
-          "Error al obtener el listado de indicadores MESH:",
+          "Error al obtener el listado de indicadores de los dispositivos:",
           error
         );
       }
@@ -45,8 +53,9 @@ export function DevicesDash() {
 
   if (spinnerDevices) {
     return (
-      <div>
+      <div className="spiner-dashboard-devices-container">
         <PuffLoader color="red" />
+        {showApiMessage && <p>{apiMessage}</p>}
       </div>
     );
   }

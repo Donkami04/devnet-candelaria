@@ -5,8 +5,8 @@ import "../form.css";
 
 export const CreateDevice = () => {
   const [dataDevice, setDataDevice] = useState({
-    ip: "",
-    type_device: "",
+    host: "",
+    type: "",
     site: "",
     dpto: "",
     red: "",
@@ -39,8 +39,8 @@ export const CreateDevice = () => {
         }
       );
       setDataDevice({
-        ip: "",
-        type_device: "",
+        host: "",
+        type: "",
         site: "",
         dpto: "",
         red: "",
@@ -67,28 +67,28 @@ export const CreateDevice = () => {
       <h2 className="form-title">Registrar Dispositivo</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label className="form-label" htmlFor="ip">
+          <label className="form-label" htmlFor="host">
             IP:
           </label>
           <input
             className="form-input"
             type="text"
-            id="ip"
-            name="ip"
-            value={dataDevice.ip}
+            id="host"
+            name="host"
+            value={dataDevice.host}
             onChange={handleInputChange}
           />
         </div>
         <div>
-          <label className="form-label" htmlFor="type_device">
+          <label className="form-label" htmlFor="type">
             Tipo de Dispositivo:
           </label>
           <input
             className="form-input"
             type="text"
-            id="type_device"
-            name="type_device"
-            value={dataDevice.type_device}
+            id="type"
+            name="type"
+            value={dataDevice.type}
             onChange={handleInputChange}
           />
         </div>
@@ -134,8 +134,8 @@ export const CreateDevice = () => {
             <option value="OT">OT</option>
           </select>
         </div>
-        {/* {dataDevice.type_device.toLowerCase() === "camara" ||
-        dataDevice.type_device.toLowerCase() === "cámara" ? (
+        {/* {dataDevice.type.toLowerCase() === "camara" ||
+        dataDevice.type.toLowerCase() === "cámara" ? (
           <div>
             <label className="form-label" htmlFor="id_cctv">
               ID CCTV:
