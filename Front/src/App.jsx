@@ -41,7 +41,7 @@ import { DcsOjos } from "./components/DcsOjos/DcsOjos";
 import { BaseFim } from "./components/BaseFim/BaseFim";
 import { Anillo } from "./components/Anillo/Anillo";
 import { MeshProcess } from "./components/MeshProcess/MeshProcess";
-// import { Certificates } from "./components/InfraGeneral/Group_PrtgXX/Certificates";
+import { Certificates } from "./components/InfraGeneral/Group_Prtg/Certificates";
 // import { Voice } from "./components/InfraGeneral/Group_PrtgXX/Voice";
 // import { Ise } from "./components/InfraGeneral/Group_PrtgXX/Ise";
 // import { Wireless } from "./components/InfraGeneral/Group_PrtgXX/Wireless";
@@ -131,11 +131,11 @@ function App() {
           path="/monitoreo/candelaria/proceso-mesh"
           element={<MeshProcess />}
         />
-        {/* <Route
+        <Route
           path="/monitoreo/infraestrucura-general/certificados"
           element={<Certificates />}
         />
-        <Route
+        {/* <Route
           path="/monitoreo/infraestrucura-general/telefonia"
           element={<Voice />}
         />
