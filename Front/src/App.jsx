@@ -3,6 +3,8 @@ import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay, faPause } from "@fortawesome/free-solid-svg-icons";
+import { SiCisco } from "react-icons/si";
+import { BiSolidTachometer } from "react-icons/bi";
 
 // Custom Hooks
 import { useAutoRefresh } from "./hooks/useAutoRefresh";
@@ -49,6 +51,7 @@ import { Certificates } from "./components/InfraGeneral/Group_Prtg/Certificates"
 // import { Cctv } from "./components/InfraGeneral/Group_PrtgXX/Cctv";
 import { AnilloUg } from "./components/AnilloUg/AnilloUg";
 import { Dockers } from "./components/InfraGeneral/Dockers/Dockers";
+import { IconsPage } from "./components/IconsPage/IconsPage";
 import "./app.css";
 
 function App() {
@@ -160,6 +163,8 @@ function App() {
       </Routes>
 
       <div className="refresh-button-container">
+        <span className="refresh-button-container-2">Version 2.0.2</span>
+        <IconsPage />
         <button
           className="refresh-button"
           onClick={toggleTimer}
@@ -176,7 +181,6 @@ function App() {
           )}
         </button>
       </div>
-      <span className="refresh-button-container-2">Version 2.0.1</span>
     </div>
   );
 }
