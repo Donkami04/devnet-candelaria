@@ -89,6 +89,9 @@ def get_historic_cisco_data(ip):
         updated_client = get_historic_cisco_data(data)
         print(updated_client)
     """
+    
+    
+    data  = {}
     try:
         db_connector = historic_connection()
         
@@ -101,13 +104,13 @@ def get_historic_cisco_data(ip):
         query = f"""
                 SELECT * FROM `historic-devnet`.`devices`
                 WHERE host = '{ip}' AND 
-                cisco_device_name <> 'Not Found' 
+                cisco_device_name <> 'Not Found' AND
+                cisco_device_name <> 'Error Devnet'
                 ORDER BY id DESC LIMIT 1
                 """
         historic_db_cursor.execute(query)
         results = historic_db_cursor.fetchall()
         
-        data  = {}
         if results:
             data_backup = [dict(zip(historic_db_cursor.column_names, row)) for row in results][0]
             data["cisco_device_ip"] = data_backup['cisco_device_ip']

@@ -133,9 +133,10 @@ export function Devices() {
         </td>
         <td>{device?.prtg_lastup || "Actualizando..."}</td>
         <td>{device?.prtg_lastdown || "Actualizando..."}</td>
-        <td style={{ width: "1%" }}>
-          {device?.data_backup === "true" ? (
+        <td>
+          {device?.data_backup === 1 ? (
             <p
+              style={{ cursor: "help" }}
               className="warning-icon"
               title={
                 "Data Not Found, información extraida de registros antiguos."
@@ -161,7 +162,7 @@ export function Devices() {
               : ""
           } td-name-cisco`}
         >
-          {device?.data_backup === "true" ? (
+          {device?.data_backup === 1 ? (
             <div>
               <p
                 className="warning-icon"
@@ -192,7 +193,7 @@ export function Devices() {
             }&forceLoad=true`}
             target="_blank"
           >
-            {device?.data_backup === "true" ? (
+            {device?.data_backup === 1 ? (
               <p
                 className="warning-icon"
                 title="Data Not Found, información extraida de registros antiguos."
@@ -205,7 +206,7 @@ export function Devices() {
           </a>
         </td>
         <td>
-          {device?.data_backup === "true" ? (
+          {device?.data_backup === 1 ? (
             <p
               className="warning-icon"
               title="Data Not Found, información extraida de registros antiguos."

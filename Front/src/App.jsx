@@ -176,7 +176,7 @@ function App() {
           )}
         </button>
       </div>
-      <span className="refresh-button-container-2">Version 2.0.1</span>
+      <span className="refresh-button-container-2">Version 2.0.2</span>
     </div>
   );
 }
