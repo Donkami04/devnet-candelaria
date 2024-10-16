@@ -9,11 +9,18 @@
   position: fixed;
   bottom: 2px;
   right: 2px;
-  width: 12rem;
+  width: 100%;
   height: 1.5rem;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
+}
+
+.pause-and-icons-container {
+  display: flex;
+  align-items: center;
+  width: 7rem;
+  height: 100%;
 }
 
 .refresh-button-container-2 {
