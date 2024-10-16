@@ -163,31 +163,23 @@ function App() {
       </Routes>
 
       <div className="refresh-button-container">
-        <span
-          style={{ marginLeft: "10px" }}
-          className="refresh-button-container-2"
+        <button
+          className="refresh-button"
+          onClick={toggleTimer}
+          title={
+            timerActive
+              ? "Pausar Autorefresco de la página"
+              : "Activar Autorefresco de la página"
+          }
         >
-          Version 2.0.3
-        </span>
-        <div className="pause-and-icons-container">
-          <IconsPage />
-          <button
-            className="refresh-button"
-            onClick={toggleTimer}
-            title={
-              timerActive
-                ? "Pausar Autorefresco de la página"
-                : "Activar Autorefresco de la página"
-            }
-          >
-            {timerActive ? (
-              <FontAwesomeIcon icon={faPause} /> // Icono de Pause
-            ) : (
-              <FontAwesomeIcon icon={faPlay} /> // Icono de Play
-            )}
-          </button>
-        </div>
+          {timerActive ? (
+            <FontAwesomeIcon icon={faPause} /> // Icono de Pause
+          ) : (
+            <FontAwesomeIcon icon={faPlay} /> // Icono de Play
+          )}
+        </button>
       </div>
+      <span className="refresh-button-container-2">Version 2.0.0</span>
     </div>
   );
 }
