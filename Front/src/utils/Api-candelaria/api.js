@@ -96,6 +96,13 @@ export const getWan = async () => {
     .catch((error) => {throw new Error('WAN: Error del API REST Candealaria : ',error)});
 };
 
+export const geHistorictWan = async (ip) => {
+  return axios
+    .get(`${BASE_API_URL}/wan/historic/${ip}`)
+    .then((response) => response.data)
+    .catch((error) => {throw new Error('HISTORICO WAN: Error del API REST Candealaria : ', error)});
+};
+
 export const getDcsCandelariaIndicators = async () => {
   return axios
     .get(`${BASE_API_URL}/indicators/dcs-candelaria`)

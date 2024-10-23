@@ -21,6 +21,20 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+// Obtener todos las Wan
+router.get("/historic/:ip", async (req, res, next) => {
+  try {
+    const { ip } = req.params;
+    const response = await Wan.getHistoric(ip);
+    res.status(response.statusCode).json({
+      message: response.message,
+      data: response.data,
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
 // router.get("/:ip", async (req, res, next) => {
 //   try {
 //     const ip = req.params.ip;

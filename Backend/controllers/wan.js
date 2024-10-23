@@ -1,3 +1,4 @@
+const { WanHistoric } = require("../models/wanHistoric");
 const { Wan } = require("../models/wan");
 
 class WanService {
@@ -13,6 +14,44 @@ class WanService {
       throw new Error("Error al obtener la información de los elementos WAN");
     }
   }
+
+  async getHistoric(ip) {
+    try {
+      const data = await WanHistoric.findAll({
+        where: { ip: ip },
+      });
+  
+      // Función para obtener el nombre del mes y el año
+      const getMonthAndYear = (dateString) => {
+        const parts = dateString.split('-');
+        const monthIndex = parseInt(parts[1], 10) - 1; // Obtiene el índice del mes
+        const year = parts[0]; // Obtiene el año
+        const monthNames = [
+          "January", "February", "March", "April", "May", "June",
+          "July", "August", "September", "October", "November", "December"
+        ];
+        return `${monthNames[monthIndex]} ${year}`; // Retorna el nombre del mes seguido del año
+      };
+  
+      // Procesar los datos para agregar el nombre del mes y el año
+      const resultData = data.map(item => {
+        return {
+          ...item.toJSON(), // Convierte el objeto Sequelize a JSON
+          monthAndYear: getMonthAndYear(item.datetime), // Agrega el mes y el año
+        };
+      });
+  
+      return {
+        statusCode: 200,
+        message: "Histórico de los elementos WAN obtenido exitosamente",
+        data: resultData,
+      };
+    } catch (error) {
+      throw new Error("Error al obtener la información de los elementos WAN");
+    }
+  }
+  
+  
 }
 
 // async function getNumberWan() {

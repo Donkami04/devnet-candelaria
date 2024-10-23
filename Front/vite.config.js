@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     host: true,
     strictPort: true,
-    port: 4000
+    port: 4000,
   },
   build: {
     assetsDir: 'assets',
@@ -16,5 +16,8 @@ export default defineConfig({
         main: './index.html',
       },
     },
+  },
+  optimizeDeps: {
+    exclude: ['react-chartjs-2', 'chart.js'],
   },
 });

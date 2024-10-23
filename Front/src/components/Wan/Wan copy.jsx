@@ -1,12 +1,10 @@
-import { getWan, geHistorictWan } from "../../utils/Api-candelaria/api";
+import { getWan } from "../../utils/Api-candelaria/api";
 import { useEffect, useState } from "react";
 import { Navbar } from "../Navbar/Navbar";
 import { WanDashboard } from "./WanDashboard/WanDashboard";
 import { useWanDates } from "../../hooks/useWanDates";
 import { Spinner } from "../Spinner/Spinner";
 import { DatetimeModules } from "../DatetimeModules/DatetimeModules";
-import { Chart } from "./Chart/Chart";
-import { IoBarChart } from "react-icons/io5";
 import "./wan.css";
 
 export function Wan() {
@@ -15,9 +13,6 @@ export function Wan() {
   const [wanDates, setWanDates] = useState("");
   const [showAdditionalRows, setShowAdditionalRows] = useState(false);
   const [showSpinner, setShowSpinner] = useState(true);
-  const [historicWan, setHistoricWan] = useState([]);
-  const [historicChart, setHistoricChart] = useState(false);
-  const [loadingChart, setLoadingChart] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -80,30 +75,6 @@ export function Wan() {
     );
     adminUptimePorcentToday = Math.max(...toNumberUptimePorcentToday);
   }
-
-  // Peticion axios para obtener historico wan
-  const fetchHistoricWan = async (ip) => {
-    try {
-      setLoadingChart(true);
-      setHistoricChart(true);
-      const response = await geHistorictWan(ip);
-      setHistoricWan(response.data);
-      setLoadingChart(false);
-    } catch (error) {
-      console.error("Error al obtener el historico de WAN:", error);
-      setLoadingChart(false);
-      return error;
-    }
-  };
-
-  // useEffect(() => {
-  //   try {
-
-  //   } catch (error) {
-
-  //   }
-  // }, [historicWan])
-
   if (showSpinner) {
     return (
       <div>
@@ -117,13 +88,6 @@ export function Wan() {
     <>
       <Navbar title={"WAN"} />
       <DatetimeModules module={"wan"} name={"wan"} />
-      {historicChart && (
-        <Chart
-          uptimeData={historicWan}
-          closeChart={setHistoricChart}
-          loadingChart={loadingChart}
-        />
-      )}
       <WanDashboard previousMonthName={previousMonthName} />
       <table className="wan-table">
         <thead>
@@ -134,7 +98,6 @@ export function Wan() {
               UPTIME(%) MES ANTERIOR
               <br /> ({previousMonthName}){" "}
             </th>
-            <th>Historial</th>
             <th>
               UPTIME(s) MES ANTERIOR
               <br /> ({previousMonthName})
@@ -168,15 +131,6 @@ export function Wan() {
               >
                 {wan.last_uptime_percent} %
               </td>
-              <td>
-                <IoBarChart
-                  style={{ cursor: "pointer" }}
-                  onClick={() => fetchHistoricWan(wan.ip)}
-                  size="1rem"
-                  color="#352d9b"
-                  title={`Abrir registros del ${wan.sensor} en los ultimos 12 meses`}
-                />
-              </td>
               <td>{wan.last_uptime_days}</td>
               <td>{wan.last_down_percent} %</td>
               <td>{wan.last_down_days}</td>
@@ -206,7 +160,6 @@ export function Wan() {
             >
               {adminUptimePorcentLastMonth} %
             </td>
-            <td>Más detalles</td>
             <td>Más detalles</td>
             <td>{adminDowntimePorcentLastMonth} %</td>
             <td>Más detalles</td>
@@ -243,15 +196,6 @@ export function Wan() {
                   }
                 >
                   {adminWan.last_uptime_percent} %
-                </td>
-                <td>
-                  <IoBarChart
-                    style={{ cursor: "pointer" }}
-                    onClick={() => fetchHistoricWan(adminWan.ip)}
-                    size="1rem"
-                    color="#352d9b"
-                    title={`Abrir registros del ${adminWan.sensor} en los ultimos 12 meses`}
-                  />
                 </td>
                 <td>{adminWan.last_uptime_days}</td>
                 <td>{adminWan.last_down_percent} %</td>
