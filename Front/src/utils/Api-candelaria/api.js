@@ -263,3 +263,19 @@ export const getDataDockers = async () => {
     .then((response) => response.data)
     .catch((error) => {throw new Error('Dockers: Error del API REST Candealaria : ',error)});
 };
+
+export const getDataAnilloTetra = async () => {
+  return axios
+    .get(`${BASE_API_URL}/anillo-tetra`)
+    .then((response) => response.data)
+    .catch((error) => {throw new Error('ANILLO TETRA: Error del API REST Candealaria : ',error)});
+};
+
+export const getDataAnilloTetraUpDown = async () => {
+  return axios
+    .get(`${BASE_API_URL}/anillo-tetra/updown`)
+    .then((response) => response.data)
+    .catch((error) => {
+      throw new Error("ANILLO TETRA UP DOWN: Error del API REST Candealaria : ", error);
+    });
+};

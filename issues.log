@@ -6417,3 +6417,83 @@ mysql.connector.errors.ProgrammingError: 1064 (42000): You have an error in your
 
 2024-10-15 09:48:00,122 - ERROR - 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ORDER BY id DESC LIMIT 1' at line 5
 2024-10-15 09:48:00,122 - ERROR - Error en la funcion `get_historic_cisco_data` del archivo `db_get_data`
+Traceback (most recent call last):
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 291, in _open_connection
+    self._cmysql.connect(**cnx_kwargs)
+_mysql_connector.MySQLInterfaceError: Can't connect to MySQL server on 'localhost:3306' (111)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Anillo_Tetra/db_connection.py", line 30, in devnet_connection
+    db_connector = mysql.connector.connect(
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/pooling.py", line 293, in connect
+    return CMySQLConnection(*args, **kwargs)
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 120, in __init__
+    self.connect(**kwargs)
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/abstracts.py", line 1181, in connect
+    self._open_connection()
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 296, in _open_connection
+    raise get_mysql_exception(
+mysql.connector.errors.DatabaseError: 2003 (HY000): Can't connect to MySQL server on 'localhost:3306' (111)
+
+Error en la función `devnet_connection` en el archivo `db_connections`
+2003 (HY000): Can't connect to MySQL server on 'localhost:3306' (111)
+No se pudo establecer la conexión con la base de datos: el conector es None.
+Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Anillo_Tetra/get_data.py", line 31, in get_devnet_data
+    raise ValueError("No se pudo establecer la conexión con la base de datos: el conector es None.")
+ValueError: No se pudo establecer la conexión con la base de datos: el conector es None.
+
+Error al obtener datos de la base de datos
+Error en la funcion `get_data` en el archivo `get_data`
+Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Anillo_Tetra/main.py", line 22, in main
+    id_device_set = {item['id_device'] for item in db_devnet_data}
+TypeError: 'NoneType' object is not iterable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 291, in _open_connection
+    self._cmysql.connect(**cnx_kwargs)
+_mysql_connector.MySQLInterfaceError: Can't connect to MySQL server on 'localhost:3306' (111)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Anillo_Tetra/db_connection.py", line 30, in devnet_connection
+    db_connector = mysql.connector.connect(
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/pooling.py", line 293, in connect
+    return CMySQLConnection(*args, **kwargs)
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 120, in __init__
+    self.connect(**kwargs)
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/abstracts.py", line 1181, in connect
+    self._open_connection()
+  File "/home/donkami/.local/lib/python3.10/site-packages/mysql/connector/connection_cext.py", line 296, in _open_connection
+    raise get_mysql_exception(
+mysql.connector.errors.DatabaseError: 2003 (HY000): Can't connect to MySQL server on 'localhost:3306' (111)
+
+Error en la función `devnet_connection` en el archivo `db_connections`
+2003 (HY000): Can't connect to MySQL server on 'localhost:3306' (111)
+Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Anillo_Tetra/main.py", line 22, in main
+    id_device_set = {item['id_device'] for item in db_devnet_data}
+TypeError: 'NoneType' object is not iterable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Anillo_Tetra/db_update.py", line 87, in datetime_register
+    devnet_cursor = db_connector.cursor()
+AttributeError: 'NoneType' object has no attribute 'cursor'
+
+Error en la función `datetime_register` en el archivo `db_update_devnet`
+'NoneType' object has no attribute 'cursor'
+Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Anillo_Tetra/main.py", line 22, in main
+    id_device_set = {item['id_device'] for item in db_devnet_data}
+TypeError: 'NoneType' object is not iterable
+
+'NoneType' object is not iterable
+Error en la funcion `main` del archivo `main`

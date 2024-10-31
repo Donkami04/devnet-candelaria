@@ -42,6 +42,8 @@ export const useTabsName = (pathname) => {
       return "Proceso Mesh";
     case "/monitoreo/anillo/ug":
       return "Anillo UG";
+    case "/monitoreo/anillo/tetra":
+      return "Sistema Tetra";
     default:
       return "DevNet";
   }

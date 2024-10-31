@@ -6,6 +6,7 @@ import {
   getDataMeshProcess,
   getVpn,
   getAnilloUgUpDown,
+  getDataAnilloTetraUpDown
 } from "../../utils/Api-candelaria/api";
 import { Navbar } from "../../components/Navbar/Navbar";
 import { DevicesDash } from "../../components/Devices/DevicesDash/DevicesDash";
@@ -40,6 +41,7 @@ export function Home() {
   const [dataMeshProcessUp, setDataMeshProcessUp] = useState([]);
   const [dataMeshProcessDown, setDataMeshProcessDown] = useState([]);
   const [upDownAnilloUg, setUpDownAnilloUg] = useState([]);
+  const [upDownTetra, setUpDownTetra] = useState([]);
 
   // Estados de spinners
   const [spinnerDcsCandelaria, setSpinnerDcsCandelaria] = useState(true);
@@ -61,6 +63,7 @@ export function Home() {
         const dataDownAnillo = dataAnillo.data.filter((e) =>
           e.status.includes("Down")
         );
+        const dataUpDownTetra = await getDataAnilloTetraUpDown();
 
         const dataVpnCande = await getVpn();
         setVpnCandelaria(dataVpnCande.data);
@@ -89,6 +92,7 @@ export function Home() {
         setOpenPitLoading(false);
         setDataMeshProcessUp(allDataMeshProcessUp);
         setDataMeshProcessDown(allDataMeshProcessDown);
+        setUpDownTetra(dataUpDownTetra.data)
 
         const fimStatus = await getDataBaseFim();
         const downFim = fimStatus.data.fimStatus.filter((e) =>
@@ -428,6 +432,19 @@ export function Home() {
                         <Link
                           className="link-open-pit"
                           to="/monitoreo/candelaria/proceso-mesh"
+                        >
+                          Ver
+                        </Link>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Red Tetra</td>
+                      <td>{upDownTetra.upElements.length}</td>
+                      <td>{upDownTetra.downElements.length}</td>
+                      <td>
+                        <Link
+                          className="link-open-pit"
+                          to="/monitoreo/anillo/tetra"
                         >
                           Ver
                         </Link>

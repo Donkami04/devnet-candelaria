@@ -124,23 +124,23 @@ services:
   #     - DB_PASSWORD_HISTORIC=${DB_PASSWORD_HISTORIC}
   #     - DB_DATABASE_HISTORIC=${DB_DATABASE_HISTORIC}
 
-  wan:
-    container_name: wan
-    build:
-      context: Services/Wan
-    restart: always
-    environment:
-      - ENVIRONMENT=${ENVIRONMENT}
-      - PRTG_USERNAME=${PRTG_USERNAME}
-      - PRTG_PASSWORD=${PRTG_PASSWORD}
-      - DB_PROD_HOST=${DB_PROD_HOST}
-      - DB_PROD_USER=${DB_PROD_USER}
-      - DB_PROD_PASSWORD=${DB_PROD_PASSWORD}
-      - DB_PROD_DATABASE=${DB_PROD_DATABASE}
-      - DB_HOST_HISTORIC=${DB_HOST_HISTORIC}
-      - DB_USER_HISTORIC=${DB_USER_HISTORIC}
-      - DB_PASSWORD_HISTORIC=${DB_PASSWORD_HISTORIC}
-      - DB_DATABASE_HISTORIC=${DB_DATABASE_HISTORIC}
+  # wan:
+  #   container_name: wan
+  #   build:
+  #     context: Services/Wan
+  #   restart: always
+  #   environment:
+  #     - ENVIRONMENT=${ENVIRONMENT}
+  #     - PRTG_USERNAME=${PRTG_USERNAME}
+  #     - PRTG_PASSWORD=${PRTG_PASSWORD}
+  #     - DB_PROD_HOST=${DB_PROD_HOST}
+  #     - DB_PROD_USER=${DB_PROD_USER}
+  #     - DB_PROD_PASSWORD=${DB_PROD_PASSWORD}
+  #     - DB_PROD_DATABASE=${DB_PROD_DATABASE}
+  #     - DB_HOST_HISTORIC=${DB_HOST_HISTORIC}
+  #     - DB_USER_HISTORIC=${DB_USER_HISTORIC}
+  #     - DB_PASSWORD_HISTORIC=${DB_PASSWORD_HISTORIC}
+  #     - DB_DATABASE_HISTORIC=${DB_DATABASE_HISTORIC}
 
   # firewalls:
   #   container_name: firewalls_canales_internet
@@ -306,3 +306,24 @@ services:
   #     - DB_USER_HISTORIC=${DB_USER_HISTORIC}
   #     - DB_PASSWORD_HISTORIC=${DB_PASSWORD_HISTORIC}
   #     - DB_DATABASE_HISTORIC=${DB_DATABASE_HISTORIC}
+
+  tetra:
+    container_name: tetra
+    build:
+      context: Services/Anillo_Tetra
+    restart: always
+    environment:
+      - ENVIRONMENT=${ENVIRONMENT}
+      - PRTG_USERNAME=${PRTG_USERNAME}
+      - PRTG_PASSWORD=${PRTG_PASSWORD}
+      - CISCO_DEVICES_API_USERNAME_1=${CISCO_DEVICES_API_USERNAME_1}
+      - CISCO_DEVICES_API_USERNAME_2=${CISCO_DEVICES_API_USERNAME_2}
+      - CISCO_API_PASSWORD=${CISCO_API_PASSWORD}
+      - DB_PROD_HOST=${DB_PROD_HOST}
+      - DB_PROD_USER=${DB_PROD_USER}
+      - DB_PROD_PASSWORD=${DB_PROD_PASSWORD}
+      - DB_PROD_DATABASE=${DB_PROD_DATABASE}
+      - DB_HOST_HISTORIC=${DB_HOST_HISTORIC}
+      - DB_USER_HISTORIC=${DB_USER_HISTORIC}
+      - DB_PASSWORD_HISTORIC=${DB_PASSWORD_HISTORIC}
+      - DB_DATABASE_HISTORIC=${DB_DATABASE_HISTORIC}

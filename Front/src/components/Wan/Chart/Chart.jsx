@@ -116,6 +116,7 @@ export const Chart = ({ uptimeData, closeChart, loadingChart }) => {
                 </span>
                 <h2 className="title-wan-chart">{uptimeData[0].sensor}</h2>
                 <Bar data={chartData} options={options} />
+                <p className="footer-wan-chart" >Nota: para el cálculo del KPI, solo se contabiliza la disponibilidad de canales de comunicación y equipos de networking. Las fallas ocasionadas por eventos de energía o UPS se omiten en este cálculo.</p>
               </>
             )}
           </>

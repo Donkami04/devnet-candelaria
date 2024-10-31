@@ -53,6 +53,7 @@ import { AnilloUg } from "./components/AnilloUg/AnilloUg";
 import { Dockers } from "./components/InfraGeneral/Dockers/Dockers";
 import { IconsPage } from "./components/IconsPage/IconsPage";
 import "./app.css";
+import { AnilloTetra } from "./components/AnilloTetra/AnilloTetra";
 
 function App() {
   const location = useLocation();
@@ -156,6 +157,7 @@ function App() {
           element={<Cctv />}
         /> */}
         <Route path="/monitoreo/anillo/ug" element={<AnilloUg />} />
+        <Route path="/monitoreo/anillo/tetra" element={<AnilloTetra />} />
         <Route
           path="/monitoreo/infraestrucura-general/procesos-devnet"
           element={<Dockers />}
@@ -167,7 +169,7 @@ function App() {
           style={{ marginLeft: "10px" }}
           className="refresh-button-container-2"
         >
-          Version 2.0.3
+          Version 2.1.0
         </span>
         <div className="pause-and-icons-container">
           <IconsPage />
