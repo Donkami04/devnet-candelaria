@@ -44,6 +44,13 @@ export const getClients = async () => {
   return axios
     .get(`${BASE_API_URL}/clients`)
     .then((response) => response.data)
+    .catch((error) => {throw new Error('CLIENTES DESALADORA: Error del API REST Candealaria : ',error)});
+};
+
+export const getClientsDesaladora = async () => {
+  return axios
+    .get(`${BASE_API_URL}/clients/desaladora`)
+    .then((response) => response.data)
     .catch((error) => {throw new Error('CLIENTES: Error del API REST Candealaria : ',error)});
 };
 
@@ -106,6 +113,13 @@ export const geHistorictWan = async (ip) => {
 export const getDcsCandelariaIndicators = async () => {
   return axios
     .get(`${BASE_API_URL}/indicators/dcs-candelaria`)
+    .then((response) => response.data)
+    .catch((error) => {throw new Error('INDICADOR DCS CANDELARIA: Error del API REST Candealaria : ',error)});
+};
+
+export const getDcsCandelariaIndicatorsDesaladora = async () => {
+  return axios
+    .get(`${BASE_API_URL}/indicators/dcs-desaladora`)
     .then((response) => response.data)
     .catch((error) => {throw new Error('INDICADOR DCS CANDELARIA: Error del API REST Candealaria : ',error)});
 };
