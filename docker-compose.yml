@@ -329,7 +329,7 @@ services:
   #     - DB_PASSWORD_HISTORIC=${DB_PASSWORD_HISTORIC}
   #     - DB_DATABASE_HISTORIC=${DB_DATABASE_HISTORIC}
 
-  anillo_ug:
+  desaladora_clients:
     container_name: desaladora_clients
     build:
       context: Services/Dcs_Desaladora

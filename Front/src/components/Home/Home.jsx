@@ -60,8 +60,9 @@ export function Home() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const dataDcsCounter = await useCountDcsClients();
+        // const dataDcsCounter = await useCountDcsClients();
         const dataDcsIndicators = await useDcsIndicators();
+        console.log(dataDcsIndicators);
         const dcsCandelaria = await getDcsCandelariaIndicators();
         const dataAnillo = await getDataAnillo();
         const dataUpAnillo = dataAnillo.data.filter((e) => e.status === "Up");
