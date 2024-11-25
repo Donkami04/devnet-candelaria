@@ -31,6 +31,7 @@ def check_fim():
         for base in data:
             ip_base = base["ip"]
             logging.info(base["name"])
+            
             # Obtenemos ID de PRTG
             url_objid = os.getenv("URL_PRTG_GET_ID").format(ip=ip_base)
             response_objid = requests.get(url_objid, verify=False).json()
@@ -56,10 +57,15 @@ def check_fim():
                     base["mssg"] = mssg
                     save_down_register(base)
                     update_status_base(base)
+
+            for sensor in sensors:
+                if "portsensor" in sensor["tags"]:
+                    base["base_status"] = sensor["status"]
+                    
                     
         datetime_register(system_name="base_fim", status="OK")
         logging.info("Ciclo finalizado con Exito!")
-                    
+
     except Exception as e:
         logging.error(f"Error en la funcion principal - {base['name']}")
         logging.error(traceback.format_exc())

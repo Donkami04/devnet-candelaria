@@ -6,17 +6,17 @@ from db_connections import devnet_connection, historic_connection
 def get_data(table_name):
     """
     Obtiene los datos actuales de la tabla especificada en la base de datos `devnet`.
-
-    Conecta a la base de datos, ejecuta una consulta para seleccionar todos los registros
-    de la tabla indicada, y convierte los resultados en una lista de diccionarios, donde
+    
+    Conecta a la base de datos, ejecuta una consulta para seleccionar todos los registros 
+    de la tabla indicada, y convierte los resultados en una lista de diccionarios, donde 
     cada diccionario representa una fila con los nombres de las columnas como claves.
 
     Parámetros:
         table_name (str): El nombre de la tabla de la que se desea obtener los datos.
 
     Retorno:
-        list of dict: Una lista de diccionarios, donde cada diccionario representa una fila
-                      de la tabla, con los nombres de las columnas como claves y los valores
+        list of dict: Una lista de diccionarios, donde cada diccionario representa una fila 
+                      de la tabla, con los nombres de las columnas como claves y los valores 
                       correspondientes. Si ocurre un error durante el proceso, retorna `None`.
 
     Excepciones:
@@ -24,14 +24,14 @@ def get_data(table_name):
         Exception: Cualquier otra excepción que ocurra durante la ejecución.
 
     Ejemplo de uso:
-        data = get_data("candelaria_clients")
+        data = get_data("ups_data")
         if data:
             for record in data:
                 print(record)
     """
     try:
         db_connector = devnet_connection()
-
+        
         # En caso de que la conexion a las BD falle
         if db_connector is None:
             raise ValueError("No se pudo establecer la conexión con la base de datos: el conector es None.")
@@ -52,17 +52,17 @@ def get_data(table_name):
             for i in range(len(column_names)):
                 row_dict[column_names[i]] = row[i]
             data.append(row_dict)
-
+            
         db_connector.close()
-
+        
         return data
-
+        
     except Exception as e:
         logging.error(traceback.format_exc())
         logging.error(e)
         logging.error(f"Error al obtener datos de la base de datos")
         return None
-
+    
 def get_historic_cisco_data(client):
     """
     Busca en la base de datos histórica la información más reciente del cliente 
@@ -143,6 +143,6 @@ def get_historic_cisco_data(client):
         logging.error(f'Error con el Cliente {client["ip"]}')
         logging.error(f"Error en la funcion `get_historic_cisco_data` del archivo `db_get_data`")
         return client
-
+        
 # client = {"ip": "10.225.196.21"}
 # print(get_historic_cisco_data(client))
