@@ -117,7 +117,7 @@ export const getDcsCandelariaIndicators = async () => {
     .catch((error) => {throw new Error('INDICADOR DCS CANDELARIA: Error del API REST Candealaria : ',error)});
 };
 
-export const getDcsCandelariaIndicatorsDesaladora = async () => {
+export const getDcsDesaladoraIndicators= async () => {
   return axios
     .get(`${BASE_API_URL}/indicators/dcs-desaladora`)
     .then((response) => response.data)

@@ -10,7 +10,7 @@ def update_devnet_data(data):
 
     Esta función actualiza las columnas `status_prtg`, `lastup_prtg`, `lastdown_prtg`, `device_ip_cisco`, 
     `device_cisco`, `port_cisco`, `status_cisco`, `reachability_cisco`, `id_prtg`, `status_device_cisco` 
-    y `data_backup` en la tabla `candelaria_clients` de la base de datos `dcs` para las filas que coincidan 
+    y `data_backup` en la tabla `desaladora_clients` de la base de datos `dcs` para las filas que coincidan 
     con la dirección IP (`ip`) proporcionada en cada diccionario dentro de la lista `data`.
 
     En caso de que ocurra una excepción durante la ejecución:
@@ -82,7 +82,7 @@ def update_devnet_data(data):
             "Error en la función `update_devnet_data` en el archivo `db_update_devnet`"
         )
         
-        datetime_register(system_name="candelaria_clients",status="ERROR")
+        datetime_register(system_name="desaladora_clients",status="ERROR")
         return False
         
 

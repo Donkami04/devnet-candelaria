@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { SectionDash } from "../../CandelariaClients/SectionDash/SectionDash";
-import { getDcsCandelariaIndicatorsDesaladora } from "../../../utils/Api-candelaria/api";
+import { getDcsDesaladoraIndicators } from "../../../utils/Api-candelaria/api";
 import PuffLoader from "react-spinners/PuffLoader";
 import "./dashboard.css";
 
@@ -11,7 +11,7 @@ export function DashboardDesaladora() {
   useEffect(() => {
     const dataIndicators = async () => {
       try {
-        const allIndicators = await getDcsCandelariaIndicatorsDesaladora();
+        const allIndicators = await getDcsDesaladoraIndicators();
         setIndicators(allIndicators);
         setShowSpinner(false);
       } catch (error) {

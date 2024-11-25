@@ -9,7 +9,7 @@ export function DcsDesaladora() {
   return (
     <>
       <Navbar title={"DCS Desaladora"} />
-      <DatetimeModules module={"desaladora_dcs"} name={"DCS DESALADORA"} />
+      <DatetimeModules module={"desaladora_clients"} name={"DCS DESALADORA"} />
       <DashboardDesaladora />
       <TableClientsDesaladora />
     </>

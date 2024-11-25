@@ -28,42 +28,38 @@ def main():
             raise ValueError(
                 "No se pudo establecer la conexión con la base de datos: el conector es None."
             )
-    
+
         counter = 1
         clients_updated = []
         for client in clients:
             logging.info(f'Procesando Cliente # {counter} de {len(clients)}: {client["ip"]}')
             counter += 1
-        
+
             client = get_prtg_id(client) # Obtenemos Id de la API PRTG
             client = get_prtg_data(client) # Consultamos la data de la API PRTG
             client = get_cisco_id(client) # Obtenemos Id de la API CISCO
             client = get_cisco_data(client) # Consultamos la data de la API CISCO
             client["datetime"] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            
+
             clients_updated.append(client)
 
         devnet_bd_response = update_devnet_data(clients_updated)
-        # historic_bd_response = save_historic_data(clients_updated)
+        historic_bd_response = save_historic_data(clients_updated)
 
-        if devnet_bd_response is True:
+        if devnet_bd_response is True and historic_bd_response is True:
             datetime_register(system_name="desaladora_clients", status="OK")
         else:
             datetime_register(system_name="desaladora_clients", status="ERROR")
-        # if devnet_bd_response is True and historic_bd_response is True:
-        #     datetime_register(system_name="candelaria_clients", status="OK")
-        # else:
-        #     datetime_register(system_name="candelaria_clients", status="ERROR")
 
         logging.info("Ciclo finalizado con Exito!")
-                    
+
     except Exception:
         logging.error(traceback.format_exc())
         now = datetime.datetime.now()
         fecha_y_hora = now.strftime("%Y-%m-%d %H:%M:%S")
         fecha_y_hora = str(fecha_y_hora)
-        datetime_register(system_name="candelaria_clients",status="ERROR")
-                  
+        datetime_register(system_name="desaladora_clients", status="ERROR")
+
 def bucle(scheduler):
     main()
     scheduler.enter(300, 1, bucle, (scheduler,))
