@@ -77,18 +77,10 @@ export function Firewalls() {
         <td>{fw.ip}</td>
         <td
           className={
-            fw.num_users &&
-            fw.num_users.includes("Not Found") &&
-            fw.name !== "FW-Santiago"
-              ? "kpi-red"
-              : ""
+            fw.num_users && fw.num_users.includes("Not Found") ? "kpi-red" : ""
           }
         >
-          {!fw.num_users
-            ? "Actualizando..."
-            : fw.name === "FW-Santiago"
-            ? "Paused"
-            : fw.num_users}
+          {!fw.num_users ? "Actualizando..." : fw.num_users}
         </td>
         <td>{fw.channel}</td>
         <td>{fw.link}</td>
@@ -105,26 +97,19 @@ export function Firewalls() {
             fw.state &&
             (fw.state === "dead"
               ? "kpi-red"
-              : fw.state.toLowerCase().includes("error") &&
-                fw.name !== "FW-Santiago" // Medida temporal
-              ? "kpi-red" // Medida temporal
-              : fw.state === "Not Found" && fw.name !== "FW-Santiago"
+              : fw.state.toLowerCase().includes("error")
               ? "kpi-red"
-              : fw.name === "FW-Santiago"
-              ? "kpi-blue"
+              : fw.state === "Not Found"
+              ? "kpi-red"
               : "kpi-green")
           }
         >
-          {!fw.state
-            ? `Actualizando...`
-            : fw.name === "FW-Santiago"
-            ? "Paused"
-            : fw.state.toUpperCase()}
+          {!fw.state ? `Actualizando...` : fw.state.toUpperCase()}
         </td>
         <td
           className={
             fw.packet_loss &&
-            (!fw.packet_loss.includes(".") && fw.name !== "FW-Santiago"
+            (!fw.packet_loss.includes(".")
               ? "kpi-red"
               : parseFloat(fw.packet_loss) > 5
               ? "kpi-red"
@@ -133,19 +118,6 @@ export function Firewalls() {
               ? "kpi-yellow"
               : "")
           }
-          // className={
-          //   fw.packet_loss &&
-          //   (!fw.packet_loss.includes(".")
-          //     ? "kpi-red"
-          //     : parseFloat(fw.packet_loss) > 5
-          //     ? "kpi-red"
-          //     : parseFloat(fw.packet_loss) >= 2 &&
-          //       parseFloat(fw.packet_loss) <= 5
-          //     ? "kpi-yellow"
-          //     : fw.state.toLowerCase().includes("error") && fw.name === "FW-Santiago" // Medida temporal
-          //     ? "kpi-blue" // Medida temporal
-          //     : "")
-          // }
         >
           {/* {!fw.packet_loss.includes(".")
             ? fw.packet_loss
@@ -154,8 +126,6 @@ export function Firewalls() {
             : "Actualizando..."} */}
           {fw.packet_loss === null
             ? "Actualizando..."
-            : !fw.packet_loss.includes(".") && fw.name === "FW-Santiago"
-            ? "Paused"
             : !fw.packet_loss.includes(".")
             ? fw.packet_loss
             : fw.packet_loss + "%"}
@@ -163,25 +133,18 @@ export function Firewalls() {
         <td
           className={
             fw.latency &&
-            (!fw.latency.includes(".") && fw.name === "FW-Santiago"
-              ? ""
-              : !fw.latency.includes(".")
+            (!fw.latency.includes(".")
               ? "kpi-red"
               : parseFloat(fw.latency) > 100
               ? "kpi-red"
               : parseFloat(fw.latency) >= 50 && parseFloat(fw.latency) <= 100
               ? "kpi-yellow"
-              : fw.state.toLowerCase().includes("error") &&
-                fw.name === "FW-Santiago" // Medida temporal
-              ? "kpi-blue" // Medida temporal
               : "")
           }
         >
           {!fw.latency
             ? "Actualizando..."
-            : !fw.latency.includes(".") && fw.name === "FW-Santiago"
-            ? "Paused"
-            : !fw.latency.includes(".")
+            : !fw.latency.includes(".") && fw.latency
             ? fw.latency
             : fw.latency + " ms"}
           {/* {fw.latency &&
@@ -194,24 +157,17 @@ export function Firewalls() {
         <td
           className={
             fw.jitter &&
-            (!fw.jitter.includes(".") && fw.name === "FW-Santiago"
-              ? ""
-              : !fw.jitter.includes(".")
+            (!fw.jitter.includes(".")
               ? "kpi-red"
               : parseFloat(fw.jitter) > 30
               ? "kpi-red"
               : parseFloat(fw.jitter) >= 10 && parseFloat(fw.jitter) <= 30
               ? "kpi-yellow"
-              : fw.state.toLowerCase().includes("error") &&
-                fw.name === "FW-Santiago" // Medida temporal
-              ? "kpi-blue" // Medida temporal
               : "")
           }
         >
           {!fw.jitter
             ? "Actualizando..."
-            : !fw.jitter.includes(".") && fw.name === "FW-Santiago"
-            ? "Paused"
             : !fw.jitter.includes(".")
             ? fw.jitter
             : fw.jitter + " ms"}
@@ -227,8 +183,6 @@ export function Firewalls() {
             fw.status_gateway &&
             (fw.status_gateway.includes("Down")
               ? "IP Gateway PRTG: Down"
-              : fw.status_gateway.toLowerCase().includes("paused")
-              ? "IP Gateway PRTG: Paused"
               : "IP Gateway PRTG: Up")
           }
           style={{ cursor: "help" }}
@@ -245,9 +199,6 @@ export function Firewalls() {
               ? "kpi-green"
               : fw.status_gateway.includes("Not Found")
               ? "kpi-red"
-              : fw.state.toLowerCase().includes("error") &&
-                fw.name === "FW-Santiago" // Medida temporal
-              ? "kpi-blue" // Medida temporal
               : "")
           }
         >
