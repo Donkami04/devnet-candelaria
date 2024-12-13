@@ -30,6 +30,7 @@ def get_data(table_name):
                 print(record)
     """
     try:
+
         db_connector = devnet_connection()
         
         # En caso de que la conexion a las BD falle

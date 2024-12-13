@@ -6651,3 +6651,176 @@ AttributeError: 'NoneType' object has no attribute 'cursor'
 
 2024-11-20 21:20:36,378 - ERROR - Error en la función `datetime_register` en el archivo `db_update_devnet`
 2024-11-20 21:20:36,378 - ERROR - 'NoneType' object has no attribute 'cursor'
+2024-12-10 11:16:09,951 - ERROR - Error Controladora Device 10.117.115.110 en el intento 1: No se encontró la dirección IP en la salida del comando.
+2024-12-10 11:16:09,960 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/controladora.py", line 50, in get_data_controladora
+    raise ValueError(
+ValueError: No se encontró la dirección IP en la salida del comando.
+
+2024-12-10 11:16:09,960 - ERROR - Error en la funcion `get_data_controladora` del archivo `controladora`
+2024-12-10 11:16:18,897 - ERROR - Error Controladora Device 10.117.115.110 en el intento 2: No se encontró la dirección IP en la salida del comando.
+2024-12-10 11:16:18,897 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/controladora.py", line 50, in get_data_controladora
+    raise ValueError(
+ValueError: No se encontró la dirección IP en la salida del comando.
+
+2024-12-10 11:16:18,898 - ERROR - Error en la funcion `get_data_controladora` del archivo `controladora`
+2024-12-10 11:16:27,904 - ERROR - Error Controladora Device 10.117.115.110 en el intento 3: No se encontró la dirección IP en la salida del comando.
+2024-12-10 11:16:27,904 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/controladora.py", line 50, in get_data_controladora
+    raise ValueError(
+ValueError: No se encontró la dirección IP en la salida del comando.
+
+2024-12-10 11:16:27,905 - ERROR - Error en la funcion `get_data_controladora` del archivo `controladora`
+2024-12-10 11:16:53,773 - ERROR - Error Controladora Device 10.117.115.110 en el intento 1: No se encontró la dirección IP en la salida del comando.
+2024-12-10 11:16:53,774 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/controladora.py", line 51, in get_data_controladora
+    raise ValueError(
+ValueError: No se encontró la dirección IP en la salida del comando.
+
+2024-12-10 11:16:53,775 - ERROR - Error en la funcion `get_data_controladora` del archivo `controladora`
+2024-12-10 11:17:02,734 - ERROR - Error Controladora Device 10.117.115.110 en el intento 2: No se encontró la dirección IP en la salida del comando.
+2024-12-10 11:17:02,735 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/controladora.py", line 51, in get_data_controladora
+    raise ValueError(
+ValueError: No se encontró la dirección IP en la salida del comando.
+
+2024-12-10 11:17:02,735 - ERROR - Error en la funcion `get_data_controladora` del archivo `controladora`
+2024-12-10 11:17:18,601 - ERROR - Error Controladora Device 10.117.115.110 en el intento 1: No se encontró la dirección IP en la salida del comando.
+2024-12-10 11:17:18,603 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/controladora.py", line 51, in get_data_controladora
+    raise ValueError(
+ValueError: No se encontró la dirección IP en la salida del comando.
+
+2024-12-10 11:17:18,603 - ERROR - Error en la funcion `get_data_controladora` del archivo `controladora`
+2024-12-10 11:17:27,636 - ERROR - Error Controladora Device 10.117.115.110 en el intento 2: No se encontró la dirección IP en la salida del comando.
+2024-12-10 11:17:27,637 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/controladora.py", line 51, in get_data_controladora
+    "No se encontró la dirección IP en la salida del comando."
+ValueError: No se encontró la dirección IP en la salida del comando.
+
+2024-12-10 11:17:27,638 - ERROR - Error en la funcion `get_data_controladora` del archivo `controladora`
+2024-12-10 11:17:36,422 - ERROR - Error Controladora Device 10.117.115.110 en el intento 3: No se encontró la dirección IP en la salida del comando.
+2024-12-10 11:17:36,422 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/controladora.py", line 51, in get_data_controladora
+    "No se encontró la dirección IP en la salida del comando."
+ValueError: No se encontró la dirección IP en la salida del comando.
+
+2024-12-10 11:17:36,423 - ERROR - Error en la funcion `get_data_controladora` del archivo `controladora`
+2024-12-10 14:15:23,119 - ERROR - (20009, b'DB-Lib error message 20009, severity 9:\nUnable to connect: Adaptive Server is unavailable or does not exist (10.224.98.50)\nNet-Lib error during Connection timed out (110)\nDB-Lib error message 20009, severity 9:\nUnable to connect: Adaptive Server is unavailable or does not exist (10.224.98.50)\nNet-Lib error during Connection timed out (110)\n')
+2024-12-10 14:15:23,119 - ERROR - Traceback (most recent call last):
+  File "src/pymssql/_pymssql.pyx", line 647, in pymssql._pymssql.connect
+  File "src/pymssql/_mssql.pyx", line 2109, in pymssql._mssql.connect
+  File "src/pymssql/_mssql.pyx", line 701, in pymssql._mssql.MSSQLConnection.__init__
+  File "src/pymssql/_mssql.pyx", line 1818, in pymssql._mssql.maybe_raise_MSSQLDatabaseException
+  File "src/pymssql/_mssql.pyx", line 1835, in pymssql._mssql.raise_MSSQLDatabaseException
+pymssql._mssql.MSSQLDatabaseException: (20009, b'DB-Lib error message 20009, severity 9:\nUnable to connect: Adaptive Server is unavailable or does not exist (10.224.98.50)\nNet-Lib error during Connection timed out (110)\nDB-Lib error message 20009, severity 9:\nUnable to connect: Adaptive Server is unavailable or does not exist (10.224.98.50)\nNet-Lib error during Connection timed out (110)\n')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/cande_position.py", line 31, in get_cande_data
+    conn = pymssql.connect(server=server, user=user, password=password, database=database)
+  File "src/pymssql/_pymssql.pyx", line 653, in pymssql._pymssql.connect
+pymssql._pymssql.OperationalError: (20009, b'DB-Lib error message 20009, severity 9:\nUnable to connect: Adaptive Server is unavailable or does not exist (10.224.98.50)\nNet-Lib error during Connection timed out (110)\nDB-Lib error message 20009, severity 9:\nUnable to connect: Adaptive Server is unavailable or does not exist (10.224.98.50)\nNet-Lib error during Connection timed out (110)\n')
+
+2024-12-10 14:15:23,120 - ERROR - Error en la funcion `get_cande_data` del archivo `cande_position`
+2024-12-10 14:15:30,463 - ERROR - Error Controladora Device 10.117.115.110 en el intento 1: No se encontró la dirección IP en la salida del comando.
+2024-12-10 14:15:30,464 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/controladora.py", line 50, in get_data_controladora
+    raise ValueError(
+ValueError: No se encontró la dirección IP en la salida del comando.
+
+2024-12-10 14:15:30,464 - ERROR - Error en la funcion `get_data_controladora` del archivo `controladora`
+2024-12-10 14:15:39,117 - ERROR - Error Controladora Device 10.117.115.110 en el intento 2: No se encontró la dirección IP en la salida del comando.
+2024-12-10 14:15:39,117 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/controladora.py", line 50, in get_data_controladora
+    raise ValueError(
+ValueError: No se encontró la dirección IP en la salida del comando.
+
+2024-12-10 14:15:39,117 - ERROR - Error en la funcion `get_data_controladora` del archivo `controladora`
+2024-12-10 14:15:47,636 - ERROR - Error Controladora Device 10.117.115.110 en el intento 3: No se encontró la dirección IP en la salida del comando.
+2024-12-10 14:15:47,636 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/controladora.py", line 50, in get_data_controladora
+    raise ValueError(
+ValueError: No se encontró la dirección IP en la salida del comando.
+
+2024-12-10 14:15:47,637 - ERROR - Error en la funcion `get_data_controladora` del archivo `controladora`
+2024-12-10 14:16:29,186 - ERROR - Error Controladora Device 10.117.115.110 en el intento 1: No se encontró la dirección IP en la salida del comando.
+2024-12-10 14:16:29,187 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/controladora.py", line 50, in get_data_controladora
+    raise ValueError(
+ValueError: No se encontró la dirección IP en la salida del comando.
+
+2024-12-10 14:16:29,188 - ERROR - Error en la funcion `get_data_controladora` del archivo `controladora`
+2024-12-10 14:16:37,758 - ERROR - Error Controladora Device 10.117.115.110 en el intento 2: No se encontró la dirección IP en la salida del comando.
+2024-12-10 14:16:37,760 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/controladora.py", line 50, in get_data_controladora
+    raise ValueError(
+ValueError: No se encontró la dirección IP en la salida del comando.
+
+2024-12-10 14:16:37,760 - ERROR - Error en la funcion `get_data_controladora` del archivo `controladora`
+2024-12-10 14:16:46,256 - ERROR - Error Controladora Device 10.117.115.110 en el intento 3: No se encontró la dirección IP en la salida del comando.
+2024-12-10 14:16:46,257 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/controladora.py", line 50, in get_data_controladora
+    raise ValueError(
+ValueError: No se encontró la dirección IP en la salida del comando.
+
+2024-12-10 14:16:46,258 - ERROR - Error en la funcion `get_data_controladora` del archivo `controladora`
+2024-12-10 14:17:49,342 - ERROR - (20009, b'DB-Lib error message 20009, severity 9:\nUnable to connect: Adaptive Server is unavailable or does not exist (10.224.98.50)\nNet-Lib error during Connection timed out (110)\nDB-Lib error message 20009, severity 9:\nUnable to connect: Adaptive Server is unavailable or does not exist (10.224.98.50)\nNet-Lib error during Connection timed out (110)\n')
+2024-12-10 14:17:49,343 - ERROR - Traceback (most recent call last):
+  File "src/pymssql/_pymssql.pyx", line 647, in pymssql._pymssql.connect
+  File "src/pymssql/_mssql.pyx", line 2109, in pymssql._mssql.connect
+  File "src/pymssql/_mssql.pyx", line 701, in pymssql._mssql.MSSQLConnection.__init__
+  File "src/pymssql/_mssql.pyx", line 1818, in pymssql._mssql.maybe_raise_MSSQLDatabaseException
+  File "src/pymssql/_mssql.pyx", line 1835, in pymssql._mssql.raise_MSSQLDatabaseException
+pymssql._mssql.MSSQLDatabaseException: (20009, b'DB-Lib error message 20009, severity 9:\nUnable to connect: Adaptive Server is unavailable or does not exist (10.224.98.50)\nNet-Lib error during Connection timed out (110)\nDB-Lib error message 20009, severity 9:\nUnable to connect: Adaptive Server is unavailable or does not exist (10.224.98.50)\nNet-Lib error during Connection timed out (110)\n')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/cande_position.py", line 31, in get_cande_data
+    print("camilo creando conexion a la BD")
+  File "src/pymssql/_pymssql.pyx", line 653, in pymssql._pymssql.connect
+pymssql._pymssql.OperationalError: (20009, b'DB-Lib error message 20009, severity 9:\nUnable to connect: Adaptive Server is unavailable or does not exist (10.224.98.50)\nNet-Lib error during Connection timed out (110)\nDB-Lib error message 20009, severity 9:\nUnable to connect: Adaptive Server is unavailable or does not exist (10.224.98.50)\nNet-Lib error during Connection timed out (110)\n')
+
+2024-12-10 14:17:49,343 - ERROR - Error en la funcion `get_cande_data` del archivo `cande_position`
+2024-12-10 14:19:47,540 - ERROR - Error Controladora Device 10.117.115.110 en el intento 1: No se encontró la dirección IP en la salida del comando.
+2024-12-10 14:19:47,540 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/controladora.py", line 50, in get_data_controladora
+    raise ValueError(
+ValueError: No se encontró la dirección IP en la salida del comando.
+
+2024-12-10 14:19:47,540 - ERROR - Error en la funcion `get_data_controladora` del archivo `controladora`
+2024-12-10 14:19:58,352 - ERROR - Error Controladora Device 10.117.115.110 en el intento 2: No se encontró la dirección IP en la salida del comando.
+2024-12-10 14:19:58,353 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/controladora.py", line 50, in get_data_controladora
+    raise ValueError(
+ValueError: No se encontró la dirección IP en la salida del comando.
+
+2024-12-10 14:19:58,353 - ERROR - Error en la funcion `get_data_controladora` del archivo `controladora`
+2024-12-10 14:20:07,160 - ERROR - Error Controladora Device 10.117.115.110 en el intento 3: No se encontró la dirección IP en la salida del comando.
+2024-12-10 14:20:07,160 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/controladora.py", line 50, in get_data_controladora
+    raise ValueError(
+ValueError: No se encontró la dirección IP en la salida del comando.
+
+2024-12-10 14:20:07,160 - ERROR - Error en la funcion `get_data_controladora` del archivo `controladora`
+2024-12-10 14:21:10,221 - ERROR - (20009, b'DB-Lib error message 20009, severity 9:\nUnable to connect: Adaptive Server is unavailable or does not exist (10.224.98.50)\nNet-Lib error during Connection timed out (110)\nDB-Lib error message 20009, severity 9:\nUnable to connect: Adaptive Server is unavailable or does not exist (10.224.98.50)\nNet-Lib error during Connection timed out (110)\n')
+2024-12-10 14:21:10,221 - ERROR - Traceback (most recent call last):
+  File "src/pymssql/_pymssql.pyx", line 647, in pymssql._pymssql.connect
+  File "src/pymssql/_mssql.pyx", line 2109, in pymssql._mssql.connect
+  File "src/pymssql/_mssql.pyx", line 701, in pymssql._mssql.MSSQLConnection.__init__
+  File "src/pymssql/_mssql.pyx", line 1818, in pymssql._mssql.maybe_raise_MSSQLDatabaseException
+  File "src/pymssql/_mssql.pyx", line 1835, in pymssql._mssql.raise_MSSQLDatabaseException
+pymssql._mssql.MSSQLDatabaseException: (20009, b'DB-Lib error message 20009, severity 9:\nUnable to connect: Adaptive Server is unavailable or does not exist (10.224.98.50)\nNet-Lib error during Connection timed out (110)\nDB-Lib error message 20009, severity 9:\nUnable to connect: Adaptive Server is unavailable or does not exist (10.224.98.50)\nNet-Lib error during Connection timed out (110)\n')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh/cande_position.py", line 32, in get_cande_data
+    conn = pymssql.connect(server=server, user=user, password=password, database=database)
+  File "src/pymssql/_pymssql.pyx", line 653, in pymssql._pymssql.connect
+pymssql._pymssql.OperationalError: (20009, b'DB-Lib error message 20009, severity 9:\nUnable to connect: Adaptive Server is unavailable or does not exist (10.224.98.50)\nNet-Lib error during Connection timed out (110)\nDB-Lib error message 20009, severity 9:\nUnable to connect: Adaptive Server is unavailable or does not exist (10.224.98.50)\nNet-Lib error during Connection timed out (110)\n')
+
+2024-12-10 14:21:10,221 - ERROR - Error en la funcion `get_cande_data` del archivo `cande_position`

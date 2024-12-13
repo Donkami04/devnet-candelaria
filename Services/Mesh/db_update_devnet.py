@@ -50,7 +50,7 @@ def update_devnet_data(data):
             `datetime` = %s
         WHERE `ip` = %s
     """
-
+    print(data)
     # Crear una lista de tuplas con los valores correspondientes para cada fila a actualizar
     data_tuple = [
         (
