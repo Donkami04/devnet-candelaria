@@ -77,4 +77,9 @@ const Candelaria_Clients = sequelize.define("Candelaria_Clients", columns, {
   timestamps: false,
 });
 
-module.exports = { Candelaria_Clients };
+const Desaladora_Clients = sequelize.define("Desaladora_Clients", columns, {
+  tableName: "desaladora_clients",
+  timestamps: false,
+});
+
+module.exports = { Candelaria_Clients, Desaladora_Clients };

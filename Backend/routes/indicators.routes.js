@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { overall } = require("../controllers/dashboards/Candelaria-DCS/overallKpi");
+const { overallDesaladora } = require("../controllers/dashboards/Candelaria-Desaladora/overallKpi");
 const { ClientService } = require("../controllers/clients");
 const { SwitchesService } = require("../controllers/switches");
 const { getDisponibilidad } = require("../controllers/dashboards/Candelaria-DCS/disponibilidad");
@@ -25,6 +26,26 @@ router.get("/dcs-candelaria", async (req, res, next) => {
     const infraSolucion = getInfraSolucion(switches);
 
     res.status(201).json({ overallKpi, disponibilidad, infraSolucion });
+  } catch (error) {
+    console.error("Error con dashboard DCS Candelaria");
+    console.error(error);
+    next(error);
+  }
+});
+
+router.get("/dcs-desaladora", async (req, res, next) => {
+  try {
+    let clients = await Clients.getDesaladoraClients();
+    clients = clients.data.map((client) => client.toJSON());
+    // let switches = await Switches.getSwitches();
+    // switches = switches.data.map((switch_) => switch_.toJSON());
+
+    const overallKpi = overallDesaladora(clients);
+    const disponibilidad = getDisponibilidad(clients);
+    // const infraSolucion = getInfraSolucion(switches);
+
+    res.status(201).json({ overallKpi, disponibilidad });
+    // res.status(201).json({ overallKpi, disponibilidad, infraSolucion });
   } catch (error) {
     console.error("Error con dashboard DCS Candelaria");
     console.error(error);

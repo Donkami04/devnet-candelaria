@@ -24,6 +24,19 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+// Obtener todos los clientes de la desaladora
+router.get("/desaladora", async (req, res, next) => {
+  try {
+    const response = await Clients.getDesaladoraClients();
+    res.status(response.statusCode).json({
+      message: response.message,
+      data: response.data,
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
 // router.get("/:ip", async (req, res, next) => {
 //   try {
 //     const ip = req.params.ip;
