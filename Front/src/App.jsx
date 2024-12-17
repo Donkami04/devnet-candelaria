@@ -54,6 +54,7 @@ import { Dockers } from "./components/InfraGeneral/Dockers/Dockers";
 import { IconsPage } from "./components/IconsPage/IconsPage";
 import "./app.css";
 import { AnilloTetra } from "./components/AnilloTetra/AnilloTetra";
+import { FlotacionOt } from "./components/AnilloFlotacionOt/FlotacionOt";
 
 function App() {
   const location = useLocation();
@@ -161,6 +162,10 @@ function App() {
         <Route
           path="/monitoreo/infraestrucura-general/procesos-devnet"
           element={<Dockers />}
+        />
+        <Route
+          path="/monitoreo/flotacion/ot"
+          element={<FlotacionOt />}
         />
       </Routes>
 
