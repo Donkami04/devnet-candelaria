@@ -39,14 +39,12 @@ def main():
         logging.error(f"Error en la funcion `main` del archivo `main`")
 
 
-# def bucle(scheduler):
-#     main()
-#     scheduler.enter(300, 1, bucle, (scheduler,))
+def bucle(scheduler):
+    main()
+    scheduler.enter(300, 1, bucle, (scheduler,))
 
 
-# if __name__ == "__main__":
-#     s = sched.scheduler(time.time, time.sleep)
-#     s.enter(0, 1, bucle, (s,))
-#     s.run()
-
-main()
+if __name__ == "__main__":
+    s = sched.scheduler(time.time, time.sleep)
+    s.enter(0, 1, bucle, (s,))
+    s.run()
