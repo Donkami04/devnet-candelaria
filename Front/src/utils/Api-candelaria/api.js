@@ -285,6 +285,27 @@ export const getDataAnilloTetra = async () => {
     .catch((error) => {throw new Error('ANILLO TETRA: Error del API REST Candealaria : ',error)});
 };
 
+export const getDataFlotacionOt = async () => {
+  return axios
+    .get(`${BASE_API_URL}/flotacion-ot`)
+    .then((response) => response.data)
+    .catch((error) => {
+      throw new Error("RED OT FLOTACION: Error del API REST Candealaria : ", error);
+    });
+};
+
+export const getDataFlotacionOtUpDown = async () => {
+  return axios
+    .get(`${BASE_API_URL}/flotacion-ot/updown`)
+    .then((response) => response.data)
+    .catch((error) => {
+      throw new Error(
+        "RED OT FLOTACION: Error del API REST Candealaria : ",
+        error
+      );
+    });
+};
+
 export const getDataAnilloTetraUpDown = async () => {
   return axios
     .get(`${BASE_API_URL}/anillo-tetra/updown`)
