@@ -10,7 +10,8 @@ from db_connections import devnet_connection
 
 load_dotenv()
 env = os.getenv("ENVIRONMENT")
-     
+
+
 def save_down_register(data):
     # Guardar en una tabla las fechas en las que la base fim estuvo down
     mydb = devnet_connection()
@@ -22,7 +23,7 @@ def save_down_register(data):
     now = datetime.datetime.now()
     fecha_y_hora = now.strftime("%Y-%m-%d %H:%M:%S")
     fecha_y_hora = str(fecha_y_hora)
-    
+
     query_down = "INSERT INTO devnet.dates_down_fimbase (base_name, base_ip, date) VALUES (%s, %s, %s)"
     value_down = (base_name, base_ip, fecha_y_hora)
     cursor.execute(query_down, value_down)

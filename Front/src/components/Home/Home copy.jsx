@@ -6,8 +6,7 @@ import {
   getDataMeshProcess,
   getVpn,
   getAnilloUgUpDown,
-  getDataAnilloTetraUpDown,
-  getDataFlotacionOtUpDown
+  getDataAnilloTetraUpDown
 } from "../../utils/Api-candelaria/api";
 import { Navbar } from "../../components/Navbar/Navbar";
 import { DevicesDash } from "../../components/Devices/DevicesDash/DevicesDash";
@@ -21,8 +20,6 @@ import { useVpnCounter } from "../../hooks/useVpnCounter";
 import { InfraGeneralDash } from "../InfraGeneral/InfraGeneralDash/InfraGeneralDash";
 import PuffLoader from "react-spinners/PuffLoader";
 import { getDataAnillo } from "../../utils/Api-candelaria/api";
-import { useDcsIndicators } from "../../hooks/useDcsIndicators";
-import { useCountDcsClients } from "../../hooks/useCountDcsClients";
 import "./home.css";
 
 export function Home() {
@@ -45,9 +42,6 @@ export function Home() {
   const [dataMeshProcessDown, setDataMeshProcessDown] = useState([]);
   const [upDownAnilloUg, setUpDownAnilloUg] = useState([]);
   const [upDownTetra, setUpDownTetra] = useState([]);
-  const [dcsIndicators, setDcsIndicators] = useState({});
-  const [flotacionData, setFlotacionData] = useState({})
-  
 
   // Estados de spinners
   const [spinnerDcsCandelaria, setSpinnerDcsCandelaria] = useState(true);
@@ -63,24 +57,6 @@ export function Home() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Llamado a la funcion getDataFlotacionOtUpDown de flotacion recomiendo hacer console.log de lo que trae
-        
-        // Se actualiza el valor del estado con la respuesta de la api anterior
-
-        // Resumen
-        // 1. Creamos el estado (useState)
-        // 2. Hacer el llamado de la funcion getDataFlotacionOtUpDown()
-        // 2.1 Guardamos el resultado de llamadar a getDataFlotacionOtUpDown() en una const
-        // 2.2 console.log de la constante para ver la estructura del JSON
-        // 3. Actualizamos el valor del estado con la const anterior usando la herramienta para actualizarla
-        // 4. Crear la tabla debajo de lo que ya hay en el section del DCS que ahora se llamaara `Control Proceso`
-        // 5. Rellenar las celdas con las propiedades upElements.lenght y downElements.length
-        const flotacionDataUpDown= await getDataFlotacionOtUpDown();
-        console.log(flotacionDataUpDown);
-        setFlotacionData(flotacionDataUpDown.data)
-
-        const dataDcsIndicators = await useDcsIndicators();
-        
         const dcsCandelaria = await getDcsCandelariaIndicators();
         const dataAnillo = await getDataAnillo();
         const dataUpAnillo = dataAnillo.data.filter((e) => e.status === "Up");
@@ -95,8 +71,6 @@ export function Home() {
         setAnilloUp(dataUpAnillo);
         setAnilloDown(dataDownAnillo);
         setUpDownAnilloUg(dataAnilloUg.data);
-        setDcsIndicators(dataDcsIndicators);
-        
 
         // OPEN PIT
         const meshIndicators = await getMeshIndicators();
@@ -118,7 +92,7 @@ export function Home() {
         setOpenPitLoading(false);
         setDataMeshProcessUp(allDataMeshProcessUp);
         setDataMeshProcessDown(allDataMeshProcessDown);
-        setUpDownTetra(dataUpDownTetra.data);
+        setUpDownTetra(dataUpDownTetra.data)
 
         const fimStatus = await getDataBaseFim();
         const downFim = fimStatus.data.fimStatus.filter((e) =>
@@ -150,9 +124,6 @@ export function Home() {
 
             countUps++;
           });
-
-        
-          
 
         setDcsCandeIndicators(dcsCandelaria);
         setSpinnerDcsCandelaria(false);
@@ -198,158 +169,94 @@ export function Home() {
       </div>
       <div className="home-container">
         <section className="system-container">
-        <div className="name-system-container">
-        <h1>Control Proceso</h1>
-          </div>
           <div className="name-system-container">
-            <h2>DCS</h2>
+            <h1>DCS Candelaria</h1>
           </div>
           {spinnerDcsCandelaria ? (
             <div className="spinner-home-container">
               <div className="spinner-container">
                 <PuffLoader color="red" />
               </div>
+              <div className="link-system-container links-spinner-home">
+                <Link
+                  to="/monitoreo/candelaria/clients"
+                  className="link-system button-clients button-link"
+                  style={{ color: "white" }}
+                >
+                  Clientes
+                </Link>
+                <Link
+                  to="/monitoreo/candelaria/switches"
+                  className="link-system button-switches button-link"
+                  style={{ color: "white" }}
+                >
+                  Switches
+                </Link>
+              </div>
             </div>
           ) : (
-            <div className="home-kpi-dcs">
-              <table className="table-home-kpi-dcs">
-                <thead>
-                  <tr>
-                    <th title="Ubicación" style={{ cursor: "help" }}>
-                      Ubicación
-                    </th>
-                    <th title="Overall" style={{ cursor: "help" }}>
-                      Overall
-                    </th>
-                    <th title="Disponibilidad" style={{ cursor: "help" }}>
-                      Disp
-                    </th>
-                    <th
-                      title="Infraestructura Solución"
-                      style={{ cursor: "help" }}
-                    >
-                      Inf Sol
-                    </th>
-                    <th>Detalles</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Candelaria</td>
-                    <td
-                      className={
-                        dcsIndicators.dataDcsCandelaria.overallKpi.indicador <
-                        99.95
-                          ? "kpi-red"
-                          : "kpi-green"
-                      }
-                    >
-                      {dcsIndicators.dataDcsCandelaria.overallKpi.indicador}%
-                    </td>
-                    <td
-                      className={
-                        dcsIndicators.dataDcsCandelaria.disponibilidad
-                          .indicador < 99.95
-                          ? "kpi-red"
-                          : "kpi-green"
-                      }
-                    >
-                      {dcsIndicators.dataDcsCandelaria.disponibilidad.indicador}
-                      %
-                    </td>
-                    <td
-                      className={
-                        dcsIndicators.dataDcsCandelaria.infraSolucion
-                          .indicador < 99.95
-                          ? "kpi-red"
-                          : "kpi-green"
-                      }
-                    >
-                      {dcsIndicators.dataDcsCandelaria.infraSolucion.indicador}%
-                    </td>
-                    <td>
-                      <Link
-                        className="link-open-pit"
-                        to="/monitoreo/candelaria/clients"
-                      >
-                        Ver
-                      </Link>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Desaladora</td>
-                    <td
-                      className={
-                        dcsIndicators.dataDcsDesaladora.overallKpi.indicador
-                          .indicador < 99.95
-                          ? "kpi-red"
-                          : "kpi-green"
-                      }
-                    >
-                      {dcsIndicators.dataDcsDesaladora.overallKpi.indicador}%
-                    </td>
-                    <td
-                      className={
-                        dcsIndicators.dataDcsDesaladora.disponibilidad
-                          .indicador < 99.95
-                          ? "kpi-red"
-                          : "kpi-green"
-                      }
-                    >
-                      {dcsIndicators.dataDcsDesaladora.disponibilidad.indicador}
-                      %
-                    </td>
-                    <td>N/A</td>
-                    {/* <td>{dcsIndicators.dataDcsCandelaria.infraSolucion.indicador}%</td> */}
-                    <td>
-                      <Link
-                        className="link-open-pit"
-                        to="/monitoreo/desaladora/clients"
-                      >
-                        Ver
-                      </Link>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-                    
-              <div className="flotacion-table-container">
-                <div className="name-system-container">
-                <h2>Red OT Flotacion</h2>
-
-              </div >
-                <table className="home-kpi-openpit">
-                  <thead>
-                    <tr>
-                      <th>Sistema</th>
-                      <th className="kpi-green">Up</th>
-                      <th className="kpi-red">Down</th>
-                      <th>Detalles</th>
-                    </tr>
-                  </thead>
+            <>
+              <div className="home-kpi-container">
+                <table className="home-kpi-table">
                   <tbody>
                     <tr>
-                      <td>Flotacion</td>
-                      <td>{flotacionData.upElements.length}</td>
-                      <td>{flotacionData.downElements.length}</td>
+                      <td>Overall</td>
                       <td>
-                        <Link
-                          className="link-open-pit"
-                          to="/candelaria/monitoreo/flotacion/ot"
+                        <span
+                          className={overAll < 99.95 ? "kpi-red" : "kpi-green"}
                         >
-                          Ver
-                        </Link>
+                          {" "}
+                          {overAll}%{" "}
+                        </span>
                       </td>
                     </tr>
-                    
-                   
+                    <tr>
+                      <td>Disponibilidad</td>
+                      <td>
+                        <span
+                          className={
+                            disponibilidad < 99.95 ? "kpi-red" : "kpi-green"
+                          }
+                        >
+                          {" "}
+                          {disponibilidad}%{" "}
+                        </span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Infraestructura Solución</td>
+                      <td>
+                        <span
+                          className={
+                            infra_solucion < 99.95 ? "kpi-red" : "kpi-green"
+                          }
+                        >
+                          {" "}
+                          {infra_solucion}%{" "}
+                        </span>
+                      </td>
+                    </tr>
                   </tbody>
                 </table>
               </div>
-              
-              
 
-            </div>
+              <div className="link-system-container">
+                <Link
+                  to="/monitoreo/candelaria/clients"
+                  className="link-system button-clients button-link"
+                  style={{ color: "white" }}
+                >
+                  Clientes
+                </Link>
+                <Link
+                  to="/monitoreo/candelaria/switches"
+                  className="link-system button-switches button-link"
+                  style={{ color: "white" }}
+                >
+                  Switches
+                </Link>
+              </div>
+            </>
           )}
         </section>
 
