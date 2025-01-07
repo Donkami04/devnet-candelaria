@@ -6651,3 +6651,14 @@ AttributeError: 'NoneType' object has no attribute 'cursor'
 
 2024-11-20 21:20:36,378 - ERROR - Error en la función `datetime_register` en el archivo `db_update_devnet`
 2024-11-20 21:20:36,378 - ERROR - 'NoneType' object has no attribute 'cursor'
+2024-12-31 10:12:25,598 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Vpn_Candelaria/format_data.py", line 52, in format_data_funct
+    duration = int(user_data[4])
+ValueError: invalid literal for int() with base 10: '190.160.100.137'
+
+2024-12-31 10:12:25,598 - ERROR - Error en la función `format_data_funct` en el archivo `format_data`
+2024-12-31 10:12:25,598 - ERROR - invalid literal for int() with base 10: '190.160.100.137'
+2024-12-31 10:15:10,094 - WARNING - Línea ignorada por formato incorrecto: 
+2024-12-31 10:15:10,094 - WARNING - Línea ignorada por formato incorrecto:  
+2024-12-31 10:15:56,092 - WARNING - Línea ignorada por formato incorrecto: 
+2024-12-31 10:15:56,092 - WARNING - Línea ignorada por formato incorrecto:  

@@ -12,12 +12,14 @@
   border: 2px black solid;
   height: 20rem;
   overflow: hidden;
+  
 }
 
 .home-kpi-dcs {
   width: 95%;
   margin: auto;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   height: 60%;
@@ -27,12 +29,12 @@
 .table-home-kpi-dcs {
   border-collapse: collapse;
   width: 100%;
-  height: 7rem;
-  /* width: 24rem; */
+  height: 6rem;
+  width: 100%;
 }
 
 .table-home-kpi-dcs th {
-  height: 3rem;
+  height: 2rem;
 }
 
 .table-home-kpi-dcs th,
@@ -50,7 +52,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 3rem;
+  height: 2.5rem;
 }
 
 .system-container h1 {
@@ -68,6 +70,14 @@
   padding: 8px;
   text-align: center;
   font-size: 1rem;
+}
+
+.flotacion-table-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .home-kpi-openpit {

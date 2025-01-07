@@ -7,6 +7,7 @@ import {
   getVpn,
   getAnilloUgUpDown,
   getDataAnilloTetraUpDown,
+  getDataFlotacionOtUpDown
 } from "../../utils/Api-candelaria/api";
 import { Navbar } from "../../components/Navbar/Navbar";
 import { DevicesDash } from "../../components/Devices/DevicesDash/DevicesDash";
@@ -45,6 +46,8 @@ export function Home() {
   const [upDownAnilloUg, setUpDownAnilloUg] = useState([]);
   const [upDownTetra, setUpDownTetra] = useState([]);
   const [dcsIndicators, setDcsIndicators] = useState({});
+  const [flotacionData, setFlotacionData] = useState({})
+  
 
   // Estados de spinners
   const [spinnerDcsCandelaria, setSpinnerDcsCandelaria] = useState(true);
@@ -60,9 +63,24 @@ export function Home() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // const dataDcsCounter = await useCountDcsClients();
+        // Llamado a la funcion getDataFlotacionOtUpDown de flotacion recomiendo hacer console.log de lo que trae
+        
+        // Se actualiza el valor del estado con la respuesta de la api anterior
+
+        // Resumen
+        // 1. Creamos el estado (useState)
+        // 2. Hacer el llamado de la funcion getDataFlotacionOtUpDown()
+        // 2.1 Guardamos el resultado de llamadar a getDataFlotacionOtUpDown() en una const
+        // 2.2 console.log de la constante para ver la estructura del JSON
+        // 3. Actualizamos el valor del estado con la const anterior usando la herramienta para actualizarla
+        // 4. Crear la tabla debajo de lo que ya hay en el section del DCS que ahora se llamaara `Control Proceso`
+        // 5. Rellenar las celdas con las propiedades upElements.lenght y downElements.length
+        const flotacionDataUpDown= await getDataFlotacionOtUpDown();
+        console.log(flotacionDataUpDown);
+        setFlotacionData(flotacionDataUpDown.data)
+
         const dataDcsIndicators = await useDcsIndicators();
-        console.log(dataDcsIndicators);
+        
         const dcsCandelaria = await getDcsCandelariaIndicators();
         const dataAnillo = await getDataAnillo();
         const dataUpAnillo = dataAnillo.data.filter((e) => e.status === "Up");
@@ -78,6 +96,7 @@ export function Home() {
         setAnilloDown(dataDownAnillo);
         setUpDownAnilloUg(dataAnilloUg.data);
         setDcsIndicators(dataDcsIndicators);
+        
 
         // OPEN PIT
         const meshIndicators = await getMeshIndicators();
@@ -132,6 +151,9 @@ export function Home() {
             countUps++;
           });
 
+        
+          
+
         setDcsCandeIndicators(dcsCandelaria);
         setSpinnerDcsCandelaria(false);
         setSpinnerUps(false);
@@ -176,8 +198,11 @@ export function Home() {
       </div>
       <div className="home-container">
         <section className="system-container">
+        <div className="name-system-container">
+        <h1>Control Proceso</h1>
+          </div>
           <div className="name-system-container">
-            <h1>DCS</h1>
+            <h2>DCS</h2>
           </div>
           {spinnerDcsCandelaria ? (
             <div className="spinner-home-container">
@@ -190,18 +215,18 @@ export function Home() {
               <table className="table-home-kpi-dcs">
                 <thead>
                   <tr>
-                    <th title="Ubicación" style={{ cursor: "helper" }}>
+                    <th title="Ubicación" style={{ cursor: "help" }}>
                       Ubicación
                     </th>
-                    <th title="Overall" style={{ cursor: "helper" }}>
+                    <th title="Overall" style={{ cursor: "help" }}>
                       Overall
                     </th>
-                    <th title="Disponibilidad" style={{ cursor: "helper" }}>
+                    <th title="Disponibilidad" style={{ cursor: "help" }}>
                       Disp
                     </th>
                     <th
                       title="Infraestructura Solución"
-                      style={{ cursor: "helper" }}
+                      style={{ cursor: "help" }}
                     >
                       Inf Sol
                     </th>
@@ -287,6 +312,43 @@ export function Home() {
                   </tr>
                 </tbody>
               </table>
+                    
+              <div className="flotacion-table-container">
+                <div className="name-system-container">
+                <h2>Red OT Flotacion</h2>
+
+              </div >
+                <table className="home-kpi-openpit">
+                  <thead>
+                    <tr>
+                      <th>Sistema</th>
+                      <th className="kpi-green">Up</th>
+                      <th className="kpi-red">Down</th>
+                      <th>Detalles</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Flotacion</td>
+                      <td>{flotacionData.upElements.length}</td>
+                      <td>{flotacionData.downElements.length}</td>
+                      <td>
+                        <Link
+                          className="link-open-pit"
+                          to="/candelaria/monitoreo/flotacion/ot"
+                        >
+                          Ver
+                        </Link>
+                      </td>
+                    </tr>
+                    
+                   
+                  </tbody>
+                </table>
+              </div>
+              
+              
+
             </div>
           )}
         </section>

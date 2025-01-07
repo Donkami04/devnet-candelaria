@@ -169,7 +169,7 @@ function App() {
           element={<Dockers />}
         />
         <Route
-          path="/monitoreo/flotacion/ot"
+          path="/candelaria/monitoreo/flotacion/ot"
           element={<FlotacionOt />}
         />
       </Routes>

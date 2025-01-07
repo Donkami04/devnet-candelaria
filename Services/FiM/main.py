@@ -27,11 +27,9 @@ def check_fim():
     ]
 
     try:
-        general_status = "OK"
         for base in data:
             ip_base = base["ip"]
             logging.info(base["name"])
-            
             # Obtenemos ID de PRTG
             url_objid = os.getenv("URL_PRTG_GET_ID").format(ip=ip_base)
             response_objid = requests.get(url_objid, verify=False).json()
@@ -42,27 +40,22 @@ def check_fim():
             response_data_sensor = requests.get(url_data_sensor, verify=False).json()
             sensors = response_data_sensor.get("sensors")
 
-            # Actualizamos estado de la base en la BD
             for sensor in sensors:
-                if "portsensor" in sensor["tags"] and "Up" in sensor["status"]:
+                if "Servicio Web" in sensor["sensor"]:
                     base["base_status"] = sensor["status"]
-                    base["mssg"] = "OK"
+                    base["mssg"] = (
+                        "No se ha ejecutado un reboot de la maquina en la ultima consulta"
+                    )
+                    if "Down" in sensor["status"]:
+                        result, mssg = reset_base(ip_base)
+                        base["mssg"] = mssg
+                        logging.info(
+                            f'Resultado de reiniciar la base {base["name"]}: {result}'
+                        )
+                        save_down_register(base)
+
                     update_status_base(base)
 
-            # Reiniciamos la FIM y guardamos registro en caso de ser Down
-            for sensor in sensors:
-                if "portsensor" in sensor["tags"] and "Down" in sensor["status"]:
-                    result, mssg = reset_base(ip_base)
-                    base["base_status"] = result
-                    base["mssg"] = mssg
-                    save_down_register(base)
-                    update_status_base(base)
-
-            for sensor in sensors:
-                if "portsensor" in sensor["tags"]:
-                    base["base_status"] = sensor["status"]
-                    
-                    
         datetime_register(system_name="base_fim", status="OK")
         logging.info("Ciclo finalizado con Exito!")
 
