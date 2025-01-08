@@ -169,7 +169,8 @@ function App() {
           style={{ marginLeft: "10px" }}
           className="refresh-button-container-2"
         >
-          Version 2.1.0
+          {/* Cambio anillo Opit */}
+          Version 2.1.1
         </span>
         <div className="pause-and-icons-container">
           <IconsPage />
