@@ -44,6 +44,8 @@ export const useTabsName = (pathname) => {
       return "Anillo UG";
     case "/monitoreo/anillo/tetra":
       return "Sistema Tetra";
+    case "/monitoreo/flotacion/ot":
+      return "Red OT Flotacion";
     default:
       return "DevNet";
   }

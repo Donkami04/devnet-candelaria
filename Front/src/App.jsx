@@ -40,6 +40,7 @@ import { Categories } from "./components/InfraGeneral/Categories/Categories";
 // import { ApMesh } from "./components/InfraGeneral/Ap/ApMesh";
 import { DcsPac } from "./components/DcsPac/DcsPac";
 import { DcsOjos } from "./components/DcsOjos/DcsOjos";
+import { DcsDesaladora } from "./components/DcsDesaladora/DcsDesaladora";
 import { BaseFim } from "./components/BaseFim/BaseFim";
 import { Anillo } from "./components/Anillo/Anillo";
 import { MeshProcess } from "./components/MeshProcess/MeshProcess";
@@ -54,6 +55,7 @@ import { Dockers } from "./components/InfraGeneral/Dockers/Dockers";
 import { IconsPage } from "./components/IconsPage/IconsPage";
 import "./app.css";
 import { AnilloTetra } from "./components/AnilloTetra/AnilloTetra";
+import { FlotacionOt } from "./components/AnilloFlotacionOt/FlotacionOt";
 
 function App() {
   const location = useLocation();
@@ -86,6 +88,10 @@ function App() {
         <Route
           path="/monitoreo/candelaria/clients"
           element={<CandelariaClients />}
+        />
+        <Route
+          path="/monitoreo/desaladora/clients"
+          element={<DcsDesaladora />}
         />
         <Route path="/monitoreo/candelaria/switches" element={<Switches />} />
         <Route path="/monitoreo/ups" element={<Ups />} />
@@ -161,6 +167,10 @@ function App() {
         <Route
           path="/monitoreo/infraestrucura-general/procesos-devnet"
           element={<Dockers />}
+        />
+        <Route
+          path="/candelaria/monitoreo/flotacion/ot"
+          element={<FlotacionOt />}
         />
       </Routes>
 

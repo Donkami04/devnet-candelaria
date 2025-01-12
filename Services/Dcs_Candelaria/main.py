@@ -1,16 +1,9 @@
-import logger_config
-import requests
-import os
 import time
 import traceback
 import datetime
 import sched
 import logging
-import re
-import mysql.connector
 from dotenv import load_dotenv
-from config import database
-from db_connections import devnet_connection
 from db_get_data import get_data
 from api_cisco import get_cisco_id, get_cisco_data
 from api_prtg import get_prtg_id, get_prtg_data

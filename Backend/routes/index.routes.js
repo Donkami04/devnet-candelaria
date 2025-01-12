@@ -26,6 +26,7 @@ const dateTimeRoutes = require("./datetimes.routes");
 const dockersRoutes = require("./dockers.routes");
 const anilloUgRoutes = require("./anillo_ug.routes");
 const anilloTetraRoutes = require("./anillo_tetra.routes");
+const flotacionOtRoutes = require("./flotacion_ot.routes");
 const router = express.Router();
 
 const allRoutes = (app) => {
@@ -57,6 +58,7 @@ const allRoutes = (app) => {
   router.use("/dockers", dockersRoutes);
   router.use("/anillo-ug", anilloUgRoutes);
   router.use("/anillo-tetra", anilloTetraRoutes);
+  router.use("/flotacion-ot", flotacionOtRoutes);
 };
 
 module.exports = { allRoutes };
