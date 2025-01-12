@@ -315,10 +315,10 @@ export function Home() {
                     
               <div className="flotacion-table-container">
                 <div className="name-system-container">
-                <h2>Red OT Flotacion</h2>
+                <h2>Sistemas OT</h2>
 
               </div >
-                <table className="home-kpi-openpit">
+                <table className="table-home-kpi-dcs">
                   <thead>
                     <tr>
                       <th>Sistema</th>
