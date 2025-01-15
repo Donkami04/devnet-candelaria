@@ -56,6 +56,7 @@ import { IconsPage } from "./components/IconsPage/IconsPage";
 import "./app.css";
 import { AnilloTetra } from "./components/AnilloTetra/AnilloTetra";
 import { FlotacionOt } from "./components/AnilloFlotacionOt/FlotacionOt";
+import { Mra } from "./components/Mra/Mra";
 
 function App() {
   const location = useLocation();
@@ -171,6 +172,10 @@ function App() {
         <Route
           path="/candelaria/monitoreo/flotacion/ot"
           element={<FlotacionOt />}
+        />
+        <Route
+          path="/candelaria/monitoreo/mra"
+          element={<Mra />}
         />
       </Routes>
 
