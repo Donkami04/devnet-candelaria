@@ -11,6 +11,8 @@ import { Spinner } from "../Spinner/Spinner";
 import { MdOutlineInfo } from "react-icons/md";
 import { useDeviceIcons } from "../../hooks/useDeviceIcons";
 import { DatetimeModules } from "../DatetimeModules/DatetimeModules";
+import { MdOutlineDownloadForOffline } from "react-icons/md";
+import { BsFillCameraVideoFill } from "react-icons/bs";
 import "./devices.css";
 
 export function Devices() {
@@ -127,7 +129,7 @@ export function Devices() {
         <td>{device?.prtg_name_device || "Actualizando..."}</td>
         <td>{device?.prtg_sensorname || "Actualizando..."}</td>
         <td>
-          <a href={`${PRTG_URL}${device?.prtg_id || ""}`} target="_blank">
+        <a href={`${PRTG_URL}${device?.prtg_id || ""}`} target="_blank">
             {device?.prtg_status || "Actualizando..."}
           </a>
         </td>
@@ -234,32 +236,66 @@ export function Devices() {
       <Navbar title={"Dispositivos"} />
       <DatetimeModules module={"devices"} name={"Dispositivos Cande"} />
       <DevicesDash />
-      <input
-        className="filtro filtro-devices"
-        type="text"
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        placeholder="Buscar..."
-      />
 
-      <label style={{ marginRight: "10px" }}>
-        <input
-          className="checkbox-filter"
-          type="checkbox"
-          checked={filterDownPaused}
-          onChange={handleCheckboxChange}
-        />
-        Down
-      </label>
-      <label>
-        <input
-          className="checkbox-filter"
-          type="checkbox"
-          checked={filterNotFound}
-          onChange={handleNotFoundChange}
-        />
-        PRTG Estado Cisco IP: Not Found
-      </label>
+      <div className="filtros-devices-container">
+        <div className="filtros-checkbox-container">
+          <input
+            className="filtro filtro-devices"
+            type="text"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            placeholder="Buscar..."
+          />
+
+          <label style={{ marginRight: "10px" }}>
+            <input
+              className="checkbox-filter"
+              type="checkbox"
+              checked={filterDownPaused}
+              onChange={handleCheckboxChange}
+            />
+            Down
+          </label>
+
+          <label style={{ marginRight: "10px" }}>
+            <input
+              className="checkbox-filter"
+              type="checkbox"
+              checked={filterNotFound}
+              onChange={handleNotFoundChange}
+            />
+            PRTG Estado Cisco IP: Not Found
+          </label>
+
+          <label style={{ marginRight: "10px" }}>
+            <input
+              className="checkbox-filter"
+              type="checkbox"
+              checked={filterNotFound}
+              onChange={handleNotFoundChange}
+            />
+            Down Last 24h
+          </label>
+        </div>
+
+
+        <button 
+        title={"Descargar reporte csv de camaras"}
+        className="csv-button">
+          <BsFillCameraVideoFill
+  
+                  fontSize="1.3rem"
+                  color="white"
+                />
+          <div className="button-text">
+          Data<br/>Camaras
+          </div>
+          <MdOutlineDownloadForOffline
+            fontSize="1.6rem"
+            color="white"
+           />
+        </button>
+      </div>
 
       <div className="devices-container">
         <table>
