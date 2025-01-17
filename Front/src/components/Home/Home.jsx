@@ -7,7 +7,8 @@ import {
   getVpn,
   getAnilloUgUpDown,
   getDataAnilloTetraUpDown,
-  getDataFlotacionOtUpDown
+  getDataFlotacionOtUpDown,
+  getMraUpDown
 } from "../../utils/Api-candelaria/api";
 import { Navbar } from "../../components/Navbar/Navbar";
 import { DevicesDash } from "../../components/Devices/DevicesDash/DevicesDash";
@@ -47,6 +48,7 @@ export function Home() {
   const [upDownTetra, setUpDownTetra] = useState([]);
   const [dcsIndicators, setDcsIndicators] = useState({});
   const [flotacionData, setFlotacionData] = useState({})
+  const [mra, setMra] = useState({});
   
 
   // Estados de spinners
@@ -63,20 +65,9 @@ export function Home() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Llamado a la funcion getDataFlotacionOtUpDown de flotacion recomiendo hacer console.log de lo que trae
-        
-        // Se actualiza el valor del estado con la respuesta de la api anterior
-
-        // Resumen
-        // 1. Creamos el estado (useState)
-        // 2. Hacer el llamado de la funcion getDataFlotacionOtUpDown()
-        // 2.1 Guardamos el resultado de llamadar a getDataFlotacionOtUpDown() en una const
-        // 2.2 console.log de la constante para ver la estructura del JSON
-        // 3. Actualizamos el valor del estado con la const anterior usando la herramienta para actualizarla
-        // 4. Crear la tabla debajo de lo que ya hay en el section del DCS que ahora se llamaara `Control Proceso`
-        // 5. Rellenar las celdas con las propiedades upElements.lenght y downElements.length
+        const dataMra = await getMraUpDown();
+        setMra(dataMra.data)
         const flotacionDataUpDown= await getDataFlotacionOtUpDown();
-        console.log(flotacionDataUpDown);
         setFlotacionData(flotacionDataUpDown.data)
 
         const dataDcsIndicators = await useDcsIndicators();
@@ -329,7 +320,7 @@ export function Home() {
                   </thead>
                   <tbody>
                     <tr>
-                      <td>Flotacion</td>
+                      <td>Red OT Flotacion</td>
                       <td>{flotacionData.upElements.length}</td>
                       <td>{flotacionData.downElements.length}</td>
                       <td>
@@ -341,8 +332,19 @@ export function Home() {
                         </Link>
                       </td>
                     </tr>
-                    
-                   
+                    <tr>
+                      <td>MRA</td>
+                      <td>{mra.upElements.length}</td>
+                      <td>{mra.downElements.length}</td>
+                      <td>
+                        <Link
+                          className="link-open-pit"
+                          to="/candelaria/monitoreo/mra"
+                        >
+                          Ver
+                        </Link>
+                      </td>
+                    </tr>
                   </tbody>
                 </table>
               </div>

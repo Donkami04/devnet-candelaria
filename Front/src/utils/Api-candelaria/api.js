@@ -314,3 +314,25 @@ export const getDataAnilloTetraUpDown = async () => {
       throw new Error("ANILLO TETRA UP DOWN: Error del API REST Candealaria : ", error);
     });
 };
+
+
+export const getMra = async () => {
+  return axios
+    .get(`${BASE_API_URL}/mra`)
+    .then((response) => response.data)
+    .catch((error) => {
+      throw new Error("MRA: Error del API REST Candealaria : ", error);
+    });
+};
+
+export const getMraUpDown = async () => {
+  return axios
+    .get(`${BASE_API_URL}/mra/updown`)
+    .then((response) => response.data)
+    .catch((error) => {
+      throw new Error(
+        "MRA UP DOWN: Error del API REST Candealaria : ",
+        error
+      );
+    });
+};
