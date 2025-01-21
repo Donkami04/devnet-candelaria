@@ -43,9 +43,7 @@ def check_fim():
             for sensor in sensors:
                 if "Servicio Web" in sensor["sensor"]:
                     base["base_status"] = sensor["status"]
-                    base["mssg"] = (
-                        "No se ha ejecutado un reboot de la maquina en la ultima consulta"
-                    )
+                    base["mssg"] = ("No se ha ejecutado un reboot de la maquina en la ultima consulta")
                     if "Down" in sensor["status"]:
                         result, mssg = reset_base(ip_base)
                         base["mssg"] = mssg

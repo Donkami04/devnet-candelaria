@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Navbar } from "../Navbar/Navbar";
 import { DevicesDash } from "./DevicesDash/DevicesDash";
 import { getDevices } from "../../utils/Api-candelaria/api";
+import { formatDatePrtg, diffDates} from "../../hooks/formatDateDevice";
 import {
   PRTG_URL,
   CISCO_URL_IT,
@@ -11,6 +12,8 @@ import { Spinner } from "../Spinner/Spinner";
 import { MdOutlineInfo } from "react-icons/md";
 import { useDeviceIcons } from "../../hooks/useDeviceIcons";
 import { DatetimeModules } from "../DatetimeModules/DatetimeModules";
+import { MdOutlineDownloadForOffline } from "react-icons/md";
+import { BsFillCameraVideoFill } from "react-icons/bs";
 import "./devices.css";
 
 export function Devices() {
@@ -21,6 +24,7 @@ export function Devices() {
   const [showColorMeans, setShowColorMeans] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const [filterNotFound, setFilterNotFound] = useState(false);
+  const [last24HoursCheck, setLast24HoursCheck] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -45,6 +49,10 @@ export function Devices() {
     setFilterNotFound(e.target.checked);
   };
 
+  const handleLast24Hours = (e) => {
+    setLast24HoursCheck(e.target.checked);
+  };
+
   const filteredDevices = devices.filter((device) => {
     const searchValues = Object.values(device)
       .map((value) => {
@@ -59,14 +67,25 @@ export function Devices() {
     return !filterDownPaused || (filterDownPaused && hasDownPaused);
   });
 
-  // const filteredDevices = devices.filter((device) => {
-  //   console.log(device);
-  //   const searchValues = Object.values(device)
-  //     .map((value) => value.toString().toLowerCase())
-  //     .join(" ");
-  //   const hasDownPaused = searchValues.includes("down");
-  //   return !filterDownPaused || (filterDownPaused && hasDownPaused);
-  // });
+  const downDevsLast24hoursFunct = () => {
+    try {
+      const mutableArray = [...devices];
+      const last24hDown = mutableArray.map((device) => {
+        if (device.prtg_lastdown !== "-" && device.prtg_lastdown !== "Not Found") {
+          const formatedDate = formatDatePrtg(device.prtg_lastdown);
+          const isLessThan24h = diffDates(formatedDate);
+          if (isLessThan24h) {
+            return device;
+          }
+        }
+        return null;
+      })
+      .filter((device) => device !== null);
+    } catch (error) {
+      console.error(error)
+    }
+
+  }
 
   const filteredSearchDevices = filteredDevices.filter(
     (device) =>
@@ -120,48 +139,49 @@ export function Devices() {
 
     return filteredSearchDevices.map((device) => (
       <tr key={device.id}>
-        <td>{device.host}</td>
-        <td>{device.type}</td>
-        <td>{device.site}</td>
-        <td>{device.dpto}</td>
-        <td>{device.prtg_name_device}</td>
-        <td>{device.prtg_sensorname}</td>
+        <td>{device?.host || "Actualizando..."}</td>
+        <td>{device?.type || "Actualizando..."}</td>
+        <td>{device?.site || "Actualizando..."}</td>
+        <td>{device?.dpto || "Actualizando..."}</td>
+        <td>{device?.prtg_name_device || "Actualizando..."}</td>
+        <td>{device?.prtg_sensorname || "Actualizando..."}</td>
         <td>
-          <a href={`${PRTG_URL}${device.prtg_id}`} target="_blank">
-            {device.prtg_status}
+        <a href={`${PRTG_URL}${device?.prtg_id || ""}`} target="_blank">
+            {device?.prtg_status || "Actualizando..."}
           </a>
         </td>
-        <td>{device.prtg_lastup}</td>
-        <td>{device.prtg_lastdown}</td>
-        <td style={{ width: "1%" }}>
-          {device.data_backup === "true" ? (
+        <td>{device?.prtg_lastup || "Actualizando..."}</td>
+        <td>{device?.prtg_lastdown || "Actualizando..."}</td>
+        <td>
+          {device?.data_backup === 1 ? (
             <p
+              style={{ cursor: "help" }}
               className="warning-icon"
               title={
                 "Data Not Found, información extraida de registros antiguos."
               }
             >
-              ⚠️ {device.cisco_device_ip}
+              ⚠️ {device?.cisco_device_ip || "Actualizando..."}
             </p>
           ) : (
-            <p>{device.cisco_device_ip}</p>
+            <p>{device?.cisco_device_ip || "Actualizando..."}</p>
           )}
         </td>
         <td
           className={`${
-            device.cisco_status_device.includes("Up")
+            device?.cisco_status_device?.includes("Up")
               ? "kpi-green"
-              : device.cisco_status_device.includes("Down")
+              : device?.cisco_status_device?.includes("Down")
               ? "kpi-red"
-              : device.cisco_status_device.includes("Paused")
+              : device?.cisco_status_device?.includes("Paused")
               ? "kpi-blue"
-              : device.cisco_status_device.includes("Not Found") &&
-                device.cisco_device_ip !== "Not Found"
+              : device?.cisco_status_device?.includes("Not Found") &&
+                device?.cisco_device_ip !== "Not Found"
               ? "kpi-grey"
               : ""
           } td-name-cisco`}
         >
-          {device.data_backup === "true" ? (
+          {device?.data_backup === 1 ? (
             <div>
               <p
                 className="warning-icon"
@@ -171,52 +191,52 @@ export function Devices() {
               </p>{" "}
               <p
                 style={{ cursor: "help" }}
-                title={colorTitle(device.cisco_status_device)}
+                title={colorTitle(device?.cisco_status_device || "")}
               >
-                {device.cisco_device_name}
+                {device?.cisco_device_name || "Actualizando..."}
               </p>
             </div>
           ) : (
             <div
               style={{ cursor: "help" }}
-              title={colorTitle(device.cisco_status_device)}
+              title={colorTitle(device?.cisco_status_device || "")}
             >
-              {device.cisco_device_name}
+              {device?.cisco_device_name || "Actualizando..."}
             </div>
           )}
         </td>
         <td>
           <a
-            href={`${device.red === "OT" ? CISCO_URL : CISCO_URL_IT}${
-              device.host
+            href={`${device?.red === "OT" ? CISCO_URL : CISCO_URL_IT}${
+              device?.host || ""
             }&forceLoad=true`}
             target="_blank"
           >
-            {device.data_backup === "true" ? (
+            {device?.data_backup === 1 ? (
               <p
                 className="warning-icon"
                 title="Data Not Found, información extraida de registros antiguos."
               >
-                ⚠️ {device.cisco_port}
+                ⚠️ {device?.cisco_port || "Actualizando..."}
               </p>
             ) : (
-              device.cisco_port
+              device?.cisco_port || "Actualizando..."
             )}
           </a>
         </td>
         <td>
-          {device.data_backup === "true" ? (
+          {device?.data_backup === 1 ? (
             <p
               className="warning-icon"
               title="Data Not Found, información extraida de registros antiguos."
             >
-              ⚠️ {device.cisco_status}
+              ⚠️ {device?.cisco_status || "Actualizando..."}
             </p>
           ) : (
-            device.cisco_status
+            device?.cisco_status || "Actualizando..."
           )}
         </td>
-        <td>{useDeviceIcons(device)}</td>
+        <td>{useDeviceIcons(device) || "Actualizando..."}</td>
       </tr>
     ));
   };
@@ -233,32 +253,66 @@ export function Devices() {
       <Navbar title={"Dispositivos"} />
       <DatetimeModules module={"devices"} name={"Dispositivos Cande"} />
       <DevicesDash />
-      <input
-        className="filtro filtro-devices"
-        type="text"
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        placeholder="Buscar..."
-      />
 
-      <label style={{ marginRight: "10px" }}>
-        <input
-          className="checkbox-filter"
-          type="checkbox"
-          checked={filterDownPaused}
-          onChange={handleCheckboxChange}
-        />
-        Down
-      </label>
-      <label>
-        <input
-          className="checkbox-filter"
-          type="checkbox"
-          checked={filterNotFound}
-          onChange={handleNotFoundChange}
-        />
-        PRTG Estado Cisco IP: Not Found
-      </label>
+      <div className="filtros-devices-container">
+        <div className="filtros-checkbox-container">
+          <input
+            className="filtro filtro-devices"
+            type="text"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            placeholder="Buscar..."
+          />
+
+          <label style={{ marginRight: "10px" }}>
+            <input
+              className="checkbox-filter"
+              type="checkbox"
+              checked={filterDownPaused}
+              onChange={handleCheckboxChange}
+            />
+            Down
+          </label>
+
+          <label style={{ marginRight: "10px" }}>
+            <input
+              className="checkbox-filter"
+              type="checkbox"
+              checked={filterNotFound}
+              onChange={handleNotFoundChange}
+            />
+            PRTG Estado Cisco IP: Not Found
+          </label>
+
+          <label style={{ marginRight: "10px" }}>
+            <input
+              className="checkbox-filter"
+              type="checkbox"
+              checked={last24HoursCheck}
+              onChange={handleLast24Hours}
+            />
+            Down Last 24h
+          </label>
+        </div>
+
+
+        <button 
+        title={"Descargar reporte csv de camaras"}
+        className="csv-button">
+          <BsFillCameraVideoFill
+  
+                  fontSize="1.3rem"
+                  color="white"
+                />
+          <div className="button-text">
+          Data<br/>Camaras
+          </div>
+          <MdOutlineDownloadForOffline
+            fontSize="1.6rem"
+            color="white"
+           />
+        </button>
+      </div>
 
       <div className="devices-container">
         <table>

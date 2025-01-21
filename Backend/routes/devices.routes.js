@@ -106,4 +106,16 @@ router.delete(
   }
 );
 
+router.get("/camaras/csv", async (req, res, next) => {
+  try {
+    const response = await Devices.getCamarasCsv();
+    res.setHeader("Content-Type", "text/csv");
+    res.setHeader("Content-Disposition", 'attachment; filename="camaras.csv"');
+    res.status(response.statusCode).send(response.data);
+    // res.status(response.statusCode).send({data: response.data, message: response.message});
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;
