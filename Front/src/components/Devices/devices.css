@@ -60,8 +60,22 @@
   display: flex;
   justify-content: space-between;
   margin-right: 1.5rem;
+  align-items: center;
 }
 
+.csv-devices-msg {
+  font-size: 0.7rem;
+  text-align: center;
+  margin-bottom: "0px";
+  position: absolute;
+  top: -15px;
+  color: rgb(148, 0, 0);
+  width: 100%;
+}
+
+.csv-button-container {
+  position: relative;
+}
 
 .csv-button {
   height: 2.4rem;
@@ -79,6 +93,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 5px;
 }
 
 .csv-button text{
@@ -98,6 +113,11 @@
 .csv-button:active {
   transform: translateY(2px);
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.button-text {
+  display: grid;
+  place-content: center;
 }
 
 

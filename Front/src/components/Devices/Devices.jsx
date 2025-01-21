@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import { Navbar } from "../Navbar/Navbar";
 import { DevicesDash } from "./DevicesDash/DevicesDash";
 import { getDevices } from "../../utils/Api-candelaria/api";
+import { formatDatePrtg, diffDates } from "../../hooks/formatDateDevice";
 import {
   PRTG_URL,
   CISCO_URL_IT,
   CISCO_URL,
+  BASE_API_URL,
 } from "../../utils/Api-candelaria/api";
 import { Spinner } from "../Spinner/Spinner";
 import { MdOutlineInfo } from "react-icons/md";
@@ -13,6 +15,8 @@ import { useDeviceIcons } from "../../hooks/useDeviceIcons";
 import { DatetimeModules } from "../DatetimeModules/DatetimeModules";
 import { MdOutlineDownloadForOffline } from "react-icons/md";
 import { BsFillCameraVideoFill } from "react-icons/bs";
+import ClipLoader from "react-spinners/ClipLoader";
+import axios from "axios";
 import "./devices.css";
 
 export function Devices() {
@@ -23,6 +27,9 @@ export function Devices() {
   const [showColorMeans, setShowColorMeans] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const [filterNotFound, setFilterNotFound] = useState(false);
+  const [last24HoursCheck, setLast24HoursCheck] = useState(false);
+  const [csvBtnMssg, setCsvBtnMssg] = useState(false);
+  const [showSpinnerCsvBtn, setShowSpinnerCsvBtn] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -47,28 +54,116 @@ export function Devices() {
     setFilterNotFound(e.target.checked);
   };
 
-  const filteredDevices = devices.filter((device) => {
-    const searchValues = Object.values(device)
-      .map((value) => {
-        // Verificar si value es null
-        if (value === null) {
-          return ""; // O manejar el caso de valor nulo de otra manera
-        }
-        return value.toString().toLowerCase();
-      })
-      .join(" ");
-    const hasDownPaused = searchValues.includes("down");
-    return !filterDownPaused || (filterDownPaused && hasDownPaused);
-  });
+  const handleLast24Hours = (e) => {
+    setLast24HoursCheck(e.target.checked);
+  };
 
   // const filteredDevices = devices.filter((device) => {
-  //   console.log(device);
   //   const searchValues = Object.values(device)
-  //     .map((value) => value.toString().toLowerCase())
+  //     .map((value) => {
+  //       // Verificar si value es null
+  //       if (value === null) {
+  //         return ""; // O manejar el caso de valor nulo de otra manera
+  //       }
+  //       return value.toString().toLowerCase();
+  //     })
   //     .join(" ");
   //   const hasDownPaused = searchValues.includes("down");
   //   return !filterDownPaused || (filterDownPaused && hasDownPaused);
   // });
+
+  const downloadCsvRequest = async () => {
+    try {
+      setCsvBtnMssg(null);
+      setShowSpinnerCsvBtn(true);
+      const response = await axios.get(
+        `${BASE_API_URL}/devices/camaras/csv`,
+        {},
+        {
+          responseType: "blob", // Importante para manejar archivos binarios
+        }
+      );
+      
+      if (response.status !== 200) {
+        setCsvBtnMssg("Descarga fallida");
+        setShowSpinnerCsvBtn(false);
+        return;
+      }
+      // Crear un enlace temporal para descargar el archivo
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement("a");
+      link.href = url;
+
+      // Asignar un nombre al archivo descargado
+      link.setAttribute("download", "data_camaras.csv");
+
+      // Añadir el enlace al documento y simular un clic para iniciar la descarga
+      document.body.appendChild(link);
+      link.click();
+
+      // Eliminar el enlace después de la descarga
+      link.parentNode.removeChild(link);
+      setShowSpinnerCsvBtn(false);
+    } catch (error) {
+      console.error("Error al descargar el archivo:", error);
+    }
+  };
+
+  const filteredDevices = devices.filter((device) => {
+    const searchValues = Object.values(device)
+      .map((value) => (value === null ? "" : value.toString().toLowerCase()))
+      .join(" ");
+    const hasDownPaused = searchValues.includes("down");
+
+    // Lógica para filtrar por última caída en las últimas 24 horas
+    let isDownLast24Hours = true;
+    if (last24HoursCheck) {
+      if (
+        device.prtg_lastdown &&
+        device.prtg_lastdown !== "-" &&
+        device.prtg_lastdown !== "Not Found"
+      ) {
+        const formatedDate = formatDatePrtg(device.prtg_lastdown);
+        isDownLast24Hours = diffDates(formatedDate, device.prtg_status);
+      } else {
+        isDownLast24Hours = false;
+      }
+    }
+
+    // Combinación de filtros
+    return (
+      (!filterDownPaused || hasDownPaused) &&
+      (!last24HoursCheck || isDownLast24Hours) &&
+      (!filterNotFound ||
+        (device.cisco_status_device === "Not Found" &&
+          device.cisco_device_ip !== "Not Found")) &&
+      searchValues.includes(searchTerm.toLowerCase())
+    );
+  });
+
+  // const downDevsLast24hoursFunct = () => {
+  //   try {
+  //     const mutableArray = [...devices];
+  //     const last24hDown = mutableArray
+  //       .map((device) => {
+  //         if (
+  //           device.prtg_lastdown &&
+  //           device.prtg_lastdown !== "-" &&
+  //           device.prtg_lastdown !== "Not Found"
+  //         ) {
+  //           const formatedDate = formatDatePrtg(device.prtg_lastdown);
+  //           const isLessThan24h = diffDates(formatedDate);
+  //           if (isLessThan24h) {
+  //             return device;
+  //           }
+  //         }
+  //         return null;
+  //       })
+  //       .filter((device) => device !== null);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
   const filteredSearchDevices = filteredDevices.filter(
     (device) =>
@@ -128,8 +223,12 @@ export function Devices() {
         <td>{device?.dpto || "Actualizando..."}</td>
         <td>{device?.prtg_name_device || "Actualizando..."}</td>
         <td>{device?.prtg_sensorname || "Actualizando..."}</td>
-        <td>
-        <a href={`${PRTG_URL}${device?.prtg_id || ""}`} target="_blank">
+        <td
+          className={
+            device.prtg_status.toLowerCase().includes("down") ? "kpi-red" : ""
+          }
+        >
+          <a href={`${PRTG_URL}${device?.prtg_id || ""}`} target="_blank">
             {device?.prtg_status || "Actualizando..."}
           </a>
         </td>
@@ -261,10 +360,10 @@ export function Devices() {
             <input
               className="checkbox-filter"
               type="checkbox"
-              checked={filterNotFound}
-              onChange={handleNotFoundChange}
+              checked={last24HoursCheck}
+              onChange={handleLast24Hours}
             />
-            PRTG Estado Cisco IP: Not Found
+            Down Last 24h
           </label>
 
           <label style={{ marginRight: "10px" }}>
@@ -274,27 +373,34 @@ export function Devices() {
               checked={filterNotFound}
               onChange={handleNotFoundChange}
             />
-            Down Last 24h
+            PRTG Estado Cisco IP: Not Found
           </label>
         </div>
 
+        <div className="csv-button-container">
+          {csvBtnMssg && <p className="csv-devices-msg">{csvBtnMssg}</p>}
+          <button
+            onClick={downloadCsvRequest}
+            title={"Descargar reporte .CSV de camaras"}
+            className="csv-button"
+          >
+            <BsFillCameraVideoFill fontSize="1.3rem" color="white" />
+            {showSpinnerCsvBtn && (
+              <div className="button-text">
+                <ClipLoader size={"0.9rem"} color={"white"} />
+              </div>
+            )}
 
-        <button 
-        title={"Descargar reporte csv de camaras"}
-        className="csv-button">
-          <BsFillCameraVideoFill
-  
-                  fontSize="1.3rem"
-                  color="white"
-                />
-          <div className="button-text">
-          Data<br/>Camaras
-          </div>
-          <MdOutlineDownloadForOffline
-            fontSize="1.6rem"
-            color="white"
-           />
-        </button>
+            {!showSpinnerCsvBtn && (
+              <div className="button-text">
+                <span>Data</span>
+                <span>Camaras</span>
+              </div>
+            )}
+
+            <MdOutlineDownloadForOffline fontSize="1.6rem" color="white" />
+          </button>
+        </div>
       </div>
 
       <div className="devices-container">

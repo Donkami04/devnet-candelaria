@@ -1,4 +1,6 @@
 const { Devices } = require("../models/devices");
+const axios = require("axios")
+const { createObjectCsvStringifier } = require("csv-writer");
 
 class DevicesService {
   async getDevices() {
@@ -120,6 +122,83 @@ class DevicesService {
     } catch (error) {
       console.error(error);
       throw new Error("Error al eliminar el dispositivo");
+    }
+  }
+
+  async getCamarasCsv() {
+    try {
+      console.log("Entro añ service");
+      const cctv_list_servers = [
+        "10.225.0.253",
+        "10.231.0.253",
+        "10.225.11.253",
+        "10.231.10.253",
+        "10.224.116.199",
+      ];
+
+      const username = "roiss";
+      const password = "MNuqYXiugdfsY1NvKYdr";
+      const dataCamaras = [];
+
+      for (const ip of cctv_list_servers) {
+        try {
+          const response = await axios.get(`http://${ip}:8888/api/v2/cameras`, {
+            auth: {
+              username: username,
+              password: password,
+            },
+          });
+          console.log(response);
+          console.log(ip);
+
+          response.data.data.forEach(camara => {
+            const dataCamara = {
+              cctvServer: ip,
+              integrator: camara.integrator,
+              name: camara.name,
+              server: camara.server,
+              enabled: camara.status.enabled,
+              valid: camara.status.valid,
+              url: camara.url,
+            };
+
+            dataCamaras.push(dataCamara);
+          });
+        } catch (error) {
+          console.error(`Error al conectar con ${ip}:, ${error.message}`);
+        }
+      }
+
+      // Generar el archivo CSV en memoria con separador ;
+      const csvStringifier = createObjectCsvStringifier({
+        header: [
+          { id: "cctvServer", title: "CCTV Server" },
+          { id: "integrator", title: "Integrator" },
+          { id: "name", title: "Name" },
+          { id: "server", title: "Server" },
+          { id: "enabled", title: "Enabled" },
+          { id: "valid", title: "Valid" },
+          { id: "url", title: "URL" },
+        ],
+        fieldDelimiter: ";", // Aquí configuramos el separador
+      });
+
+      const csvContent =
+        csvStringifier.getHeaderString() +
+        csvStringifier.stringifyRecords(dataCamaras);
+
+      return {
+        statusCode: 200,
+        message: "Archivo CSV generado exitosamente",
+        data: csvContent
+      }; // Retornamos el contenido del CSV
+    } catch (error) {
+      console.error("Error al obtener las cámaras CSV:", error);
+      return {
+        statusCode: 500,
+        message: "Error generando el archivo CSV",
+        data: null,
+      };
     }
   }
 }
