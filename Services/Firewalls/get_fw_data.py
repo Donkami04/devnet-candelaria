@@ -164,9 +164,15 @@ def diagnose_fw(host, channel):
         }
 
         net_connect = ConnectHandler(**network_device_list)
-        output = net_connect.send_command(
-            "diagnose sys sdwan health-check Check_Internet"
-        )
+
+        output = None
+
+        if host == "10.224.26.133" or host == "10.230.6.7":        
+            output = net_connect.send_command("diagnose sys sdwan health-check status")
+            print(output)
+        else:
+            output = net_connect.send_command("diagnose sys sdwan health-check Check_Internet")
+            
         net_connect.disconnect()
 
         # Inicializamos return
@@ -343,3 +349,5 @@ def numUsers_fw(host):
         logging.error(e)
         logging.error("Error en el archivo VDOM funcion numUsers_fw_vdom")
         return "Not Found"
+
+# print(diagnose_fw(host="10.230.6.7", channel="wan1"))
