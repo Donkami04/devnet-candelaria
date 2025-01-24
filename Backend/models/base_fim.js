@@ -12,12 +12,20 @@ const FimBase = sequelize.define(
       type: DataTypes.STRING(100),
       allowNull: false,
     },
-    status: {
+    id_prtg: {
+      type: DataTypes.STRING(10),
+      allowNull: false,
+    },
+    status_http: {
       type: DataTypes.STRING(100),
       allowNull: false,
     },
-    error: {
+    status_ping: {
       type: DataTypes.STRING(100),
+      allowNull: false,
+    },
+    message: {
+      type: DataTypes.TEXT,
       allowNull: false,
     }
   },
@@ -39,6 +47,10 @@ const DatesFimBase = sequelize.define(
       allowNull: false,
     },
     date: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
+    },
+    status: {
       type: DataTypes.STRING(100),
       allowNull: false,
     }
