@@ -71,15 +71,53 @@ def diagnose_fw_vdom(host, vdom, channelFw, ssh_timeout=45):
             channel.send(command)
             time.sleep(1)  # Esperar para que el comando se procese
 
+        channel.close()
+        client.close()
         # Recopilar la salida
         output = ""
         while channel.recv_ready():
             output += channel.recv(1024).decode("utf-8")
+        # print(output)
+        # Verificar si ocurrió un fallo en el comando
+        if "Command fail" in output:
+            logging.warning("Fallo detectado, intentando enviar nuevos comandos.")
+            # Crear una instancia SSHClient de Paramiko
+            client = paramiko.SSHClient()
+            client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
-        # Cerrar el canal y la conexión
-        channel.close()
-        client.close()
-        print(output)
+            # Conectar al dispositivo
+            client.connect(
+                hostname=host,
+                port=2221,
+                username=NETMIKO_USER,
+                password=NETMIKO_PASSWORD,
+                timeout=ssh_timeout,
+            )
+
+            # Abrir un canal SSH
+            channel = client.invoke_shell()
+
+            # Enviar el comando 'config vdom'
+            channel.send("config vdom\n")
+            time.sleep(1)  # Esperar para que el comando se procese
+
+            # Enviar otros comandos dentro del contexto 'config vdom'
+            newcommands = [
+                f"edit {vdom}\n",
+                "diagnose sys sdwan health-check status\n",
+                "exit\n",  # Salir del contexto 'config vdom'
+            ]
+
+            for command in newcommands:
+                channel.send(command)
+                time.sleep(1)  # Esperar para que el comando se procese
+            channel.close()
+            client.close()
+
+            while channel.recv_ready():
+                output += channel.recv(1024).decode("utf-8")
+            logging.info(output)
+
         # Analizar la salida con regex
         pattern = r"Seq\(\d+ ([^\)]+)\): state\(([^)]+)\), packet-loss\(([^)]+)\)(?: latency\(([^)]+)\), jitter\(([^)]+)\))?.*"
         matches = re.findall(pattern, output)
@@ -166,13 +204,10 @@ def diagnose_fw(host, channel):
         net_connect = ConnectHandler(**network_device_list)
 
         output = None
-
-        if host == "10.224.26.133" or host == "10.230.6.7":        
+        output = net_connect.send_command("diagnose sys sdwan health-check Check_Internet")
+        if "Command fail" in output:
             output = net_connect.send_command("diagnose sys sdwan health-check status")
-            print(output)
-        else:
-            output = net_connect.send_command("diagnose sys sdwan health-check Check_Internet")
-            
+
         net_connect.disconnect()
 
         # Inicializamos return
@@ -350,4 +385,5 @@ def numUsers_fw(host):
         logging.error("Error en el archivo VDOM funcion numUsers_fw_vdom")
         return "Not Found"
 
-# print(diagnose_fw(host="10.230.6.7", channel="wan1"))
+
+# print(diagnose_fw_vdom(host="10.224.113.129", channelFw="port7", vdom="Villa"))

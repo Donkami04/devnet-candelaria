@@ -40,19 +40,22 @@ def check_fim():
             response_data_sensor = requests.get(url_data_sensor, verify=False).json()
             sensors = response_data_sensor.get("sensors")
 
+            base["status_http"] = "Not Found"
             for sensor in sensors:
-                if "Servicio Web" in sensor["sensor"]:
-                    base["base_status"] = sensor["status"]
-                    base["mssg"] = ("No se ha ejecutado un reboot de la maquina en la ultima consulta")
-                    if "Down" in sensor["status"]:
-                        result, mssg = reset_base(ip_base)
-                        base["mssg"] = mssg
-                        logging.info(
-                            f'Resultado de reiniciar la base {base["name"]}: {result}'
-                        )
-                        save_down_register(base)
+                if sensor['type'] == 'Ping':
+                    base['status_ping'] = sensor['status']
 
-                    update_status_base(base)
+                if sensor["type"] == "HTTP":
+                    base["status_http"] = sensor["status"]
+            
+            if "Down" in base["status_http"] and "Up" in base["status_ping"]:
+                result, mssg = reset_base(ip_base)
+                base["message"] = mssg
+                save_down_register(base, result)
+            else:
+                base['message'] = "Ok"
+
+            update_status_base(base)
 
         datetime_register(system_name="base_fim", status="OK")
         logging.info("Ciclo finalizado con Exito!")
