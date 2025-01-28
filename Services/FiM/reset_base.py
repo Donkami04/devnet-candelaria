@@ -21,6 +21,7 @@ def reset_base(ip_base):
 
     session_log = f"session_{ip_base.replace('.', '_')}.log"
     output = None
+    output = None
     try:
         logging.info(f"Iniciando Reinicio {ip_base}")
         device = {
