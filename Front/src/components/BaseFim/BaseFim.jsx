@@ -85,7 +85,7 @@ export function BaseFim() {
                   style={{ cursor: "help" }}
                   title={fim.message.toUpperCase()}
                   className={
-                    fim.status_ping.includes("Down") === "Down"
+                    fim.status_ping.includes("Down")
                       ? "kpi-red"
                       : fim.status_ping.includes("Paused")
                       ? "kpi-blue"
@@ -93,7 +93,7 @@ export function BaseFim() {
                       ? "kpi-orange"
                       : fim.status_ping.includes("Up")
                       ? "kpi-green"
-                      : "kpi-gray"
+                      : "kpi-grey"
                   }
                 >
                   {fim.status_ping}
@@ -102,7 +102,7 @@ export function BaseFim() {
                   style={{ cursor: "help" }}
                   title={fim.message.toUpperCase()}
                   className={
-                    fim.status_http.includes("Down") === "Down"
+                    fim.status_http.includes("Down")
                       ? "kpi-red"
                       : fim.status_http.includes("Paused")
                       ? "kpi-blue"
@@ -110,7 +110,7 @@ export function BaseFim() {
                       ? "kpi-ornage"
                       : fim.status_http.includes("Up")
                       ? "kpi-green"
-                      : "kpi-gray"
+                      : "kpi-grey"
                   }
                 >
                   {fim.status_http}

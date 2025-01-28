@@ -113,7 +113,7 @@ export function Home() {
 
         const fimStatus = await getDataBaseFim();
         const downFim = fimStatus.data.fimStatus.filter((e) =>
-          e.status.includes("Down")
+          e.status_http.includes("Down")
         );
         setFimhDownElem(downFim.length);
         const dates = useWanDates();

@@ -42,18 +42,21 @@ def check_fim():
 
             base["status_http"] = "Not Found"
             for sensor in sensors:
-                if sensor['type'] == 'Ping':
-                    base['status_ping'] = sensor['status']
+                if sensor["type"] == "Ping":
+                    base["status_ping"] = sensor["status"]
 
                 if sensor["type"] == "HTTP":
                     base["status_http"] = sensor["status"]
-            
+
             if "Down" in base["status_http"] and "Up" in base["status_ping"]:
                 result, mssg = reset_base(ip_base)
+                logging.info(
+                    f" ====== Data recibida desde la funcion del reinicio {result} {mssg}"
+                )
                 base["message"] = mssg
                 save_down_register(base, result)
             else:
-                base['message'] = "Ok"
+                base["message"] = "Ok"
 
             update_status_base(base)
 
