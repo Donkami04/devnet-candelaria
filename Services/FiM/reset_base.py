@@ -18,8 +18,9 @@ paramiko_logger.setLevel(logging.WARNING)
 
 
 def reset_base(ip_base):
-    
+
     session_log = f"session_{ip_base.replace('.', '_')}.log"
+    output = None
     output = None
     try:
         logging.info(f"Iniciando Reinicio {ip_base}")
@@ -47,11 +48,11 @@ def reset_base(ip_base):
         error_message = f"Error intentando el reinicio de la base {ip_base}: {str(e)}"
         logging.error(error_message)
         logging.error(traceback.format_exc())
+        logging.error("=============== Retornado Fail ==================")
         return "Fail", f"Reinicio automático fallido para {ip_base}: {str(e)}"
 
-    finally:
-        error_log = f"error_{ip_base.replace('.', '_')}.log"
-        if os.path.exists(output):
-            os.rename(session_log, error_log)
-            logging.error(f"Log detallado guardado en: {error_log}")
-
+    # finally:
+    #     error_log = f"error_{ip_base.replace('.', '_')}.log"
+    #     if os.path.exists(output):
+    #         os.rename(session_log, error_log)
+    #         logging.error(f"Log detallado guardado en: {error_log}")
