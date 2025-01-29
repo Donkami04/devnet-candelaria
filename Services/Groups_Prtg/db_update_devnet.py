@@ -30,6 +30,8 @@ def update_devnet_data(data):
                    o el cierre de la conexión.
     """
 
+    print(data)
+    print("@@@@@@")
     delete_query = "DELETE FROM devnet.prtg_groups"
 
     query = """
@@ -40,8 +42,10 @@ def update_devnet_data(data):
             `id_prtg`, 
             `sensor`, 
             `lastvalue`, 
-            `rol`)
-            VALUES (%s, %s, %s, %s, %s, %s, %s)
+            `rol`,
+            `first_down_datetime`
+            )
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
         """
 
     data_tuple = [
@@ -53,6 +57,7 @@ def update_devnet_data(data):
             item["sensor"],
             item["lastvalue"],
             item["rol"],
+            item["first_down_datetime"],
         )
         for item in data
     ]
@@ -133,20 +138,3 @@ def datetime_register(system_name, status):
         )
         logging.error(e)
 
-
-print(
-    update_devnet_data(
-        [
-            {
-                "id": 1,
-                "device": "Prueba Devnet",
-                "group": "Certificados Candelaria",
-                "status": "Up",
-                "objid": 15977,
-                "sensor": "SSL Certificate",
-                "lastvalue": "329 #",
-                "rol": "Certificados Candelaria",
-            },
-        ]
-    )
-)

@@ -1,0 +1,7 @@
+2025-01-28 14:02:43,357 - ERROR - 'status'
+2025-01-28 14:02:43,358 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Groups_Prtg/main.py", line 46, in main
+    if "Up" in group_element['status'] and "Down" in elem['status']:
+KeyError: 'status'
+
+2025-01-28 14:02:43,359 - ERROR - Error en main
