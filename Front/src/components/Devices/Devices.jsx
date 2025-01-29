@@ -123,7 +123,7 @@ export function Devices() {
         device.prtg_lastdown !== "-" &&
         device.prtg_lastdown !== "Not Found"
       ) {
-        const formatedDate = formatDatePrtg(device.prtg_lastdown);
+        const formatedDate = formatDatePrtg(device.prtg_lastup);
         isDownLast24Hours = diffDates(formatedDate, device.prtg_status);
       } else {
         isDownLast24Hours = false;
