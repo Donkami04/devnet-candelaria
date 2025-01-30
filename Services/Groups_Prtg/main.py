@@ -12,7 +12,7 @@ from config import database
 from dotenv import load_dotenv
 
 import logger_config
-from db_update_devnet import datetime_register, update_devnet_data
+from db_update_devnet import datetime_register, update_devnet_data, register_datetime_sensor_down
 from db_get_data import get_data
 
 
@@ -28,7 +28,9 @@ def main():
         # Obtenemos informacion de la BD de prod
         data_prtg_groups = get_data(table_name="data_prtg_groups")
         counter = 1
-        print(data_prtg_groups)
+        down_sensors = get_data(table_name="prtg_groups_down_datetimes")
+        # print(data_prtg_groups)
+        print(down_sensors)
         # En esta lista almacenamos todos los datos
         final_data = []
 
@@ -39,15 +41,36 @@ def main():
             api_request = requests.get(api_endpoint, verify=False).json()
             data = api_request["sensors"]
 
+            sensors_id_down = [sensor["id_prtg"] for sensor in down_sensors]
+            print(sensors_id_down)
             if data != []:
                 for elem in data:
                     elem["rol"] = group_element["rol"]
-                    elem["first_down_datetime"] = None
-                    if "Up" in group_element['status'] and "Down" in elem['status']:
-                        elem["first_down_datetime"] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-                    elif "Down" in group_element['status'] and "Down" not in elem['status']:
-                        elem["first_down_datetime"] = None
-                    print(elem)
+                    if "Down" in elem['status']:
+                        print("Esta down")
+                        is_first_down = str(elem["objid"]) in sensors_id_down
+                        print(f"is_first_down {is_first_down}")
+                        if is_first_down == True:
+                            pass
+                        else:
+                            elem["datetime"] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                            register_datetime_sensor_down(elem, "register")
+
+                    if "Up" in elem['status']:
+                        is_first_down = str(elem["objid"]) in sensors_id_down
+                        print(f"is_first_down {is_first_down}")
+                        if is_first_down == True:
+                            elem["datetime"] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                            register_datetime_sensor_down(elem, "delete")
+                        else:
+                            pass
+
+                    # elem["first_down_datetime"] = None
+                    # if "Up" in group_element['status'] and "Down" in elem['status']:
+                    #     elem["first_down_datetime"] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                    # elif "Down" in group_element['status'] and "Down" not in elem['status']:
+                    #     elem["first_down_datetime"] = None
+                    # print(elem)
                     final_data.append(elem)
 
         db_response = update_devnet_data(final_data)
