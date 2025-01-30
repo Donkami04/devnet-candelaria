@@ -30,6 +30,8 @@ def update_devnet_data(data):
                    o el cierre de la conexión.
     """
 
+    print(data)
+    print("@@@@@@")
     delete_query = "DELETE FROM devnet.prtg_groups"
 
     query = """
@@ -54,6 +56,7 @@ def update_devnet_data(data):
             item["sensor"],
             item["lastvalue"],
             item["rol"],
+            item["first_down_datetime"],
         )
         for item in data
     ]
