@@ -1,16 +1,56 @@
 const { GroupPrtg } = require("../models/group_prtg");
+const {
+  GroupPrtgDownDatetimes,
+} = require("../models/group_prtg_datetime_down");
 
 class GroupPrtgService {
   async getGroupPrtg() {
     try {
-      const data = await GroupPrtg.findAll();
+      const data = await GroupPrtg.findAll({ raw: true });
+      const dataDownRegister = await GroupPrtgDownDatetimes.findAll({
+        raw: true,
+      });
+
+      let updatedArray = data.map((obj1) => {
+        const match = dataDownRegister.find(
+          (obj2) => obj2.id_prtg === obj1.id_prtg
+        );
+        return match ? { ...obj1, datetime: match.datetime } : obj1;
+      });
+
       return {
         statusCode: 200,
-        message:
-          "Información de los Grupos de PRTG para Infraestructura General obtenida exitosamente",
-        data: data,
+        message: "Información de los Grupos de PRTG obtenida exitosamente",
+        data: updatedArray,
       };
     } catch (error) {
+      console.error(error);
+      throw new Error(
+        "Error al obtener la información de los Grupos de PRTG para Infraestructura General"
+      );
+    }
+  }
+  async getGroupPrtg() {
+    try {
+      const data = await GroupPrtg.findAll({ raw: true });
+      const dataDownRegister = await GroupPrtgDownDatetimes.findAll({
+        raw: true,
+      });
+
+      let updatedArray = data.map((obj1) => {
+        const match = dataDownRegister.find(
+          (obj2) => obj2.id_prtg === obj1.id_prtg
+        );
+        return match ? { ...obj1, datetime: match.datetime } : obj1;
+      });
+
+      return {
+        statusCode: 200,
+        message: "Información de los Grupos de PRTG obtenida exitosamente",
+        data: updatedArray,
+      };
+    } catch (error) {
+      console.error(error);
       throw new Error(
         "Error al obtener la información de los Grupos de PRTG para Infraestructura General"
       );
@@ -28,7 +68,7 @@ class GroupPrtgService {
         data: dataUpDown,
       };
     } catch (error) {
-        console.error(error)
+      console.error(error);
       throw new Error(
         "Error al obtener la información de los Grupos de PRTG Up y Down para Infraestructura General"
       );
@@ -65,6 +105,22 @@ class GroupPrtgService {
     }, []);
 
     return result;
+  }
+
+  async getDownRegister() {
+    try {
+      const data = await GroupPrtgDownDatetimes.findAll();
+      return {
+        statusCode: 200,
+        message:
+          "Información Down Register de los Grupos de PRTG para Infraestructura General obtenida exitosamente",
+        data: data,
+      };
+    } catch (error) {
+      throw new Error(
+        "Error al obtener la información Down Register de los Grupos de PRTG para Infraestructura General"
+      );
+    }
   }
 }
 

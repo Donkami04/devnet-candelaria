@@ -30,6 +30,19 @@ router.get("/updown", async (req, res, next) => {
   }
 });
 
+// Obtener registros DOnw las GroupPrtgService Up y Down
+router.get("/down-registers", async (req, res, next) => {
+  try {
+    const response = await GroupPrtg.getDownRegister();
+    res.status(response.statusCode).json({
+      message: response.message,
+      data: response.data,
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
 // router.get("/updown", async (req, res, next) => {
 //   try {
 //     const data = await getPrtgGroupUpDown();

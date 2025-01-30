@@ -63,7 +63,16 @@ export function TableGroupPrtg({ name, show }) {
                 >
                   {e.status}
                 </td>
-                <td>{e.lastvalue}</td>
+                <td
+                  style={e.lastvalue === "" ? { cursor: "help", color: "red" } : undefined}
+                  title={
+                    e.lastvalue === ""
+                      ? "Fecha del primer registro Down"
+                      : undefined
+                  }
+                >
+                  {e.lastvalue === "" ? e.datetime : e.lastvalue}
+                </td>
               </tr>
             ))}
           </tbody>

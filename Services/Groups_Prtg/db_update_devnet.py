@@ -30,8 +30,6 @@ def update_devnet_data(data):
                    o el cierre de la conexión.
     """
 
-    print(data)
-    print("@@@@@@")
     delete_query = "DELETE FROM devnet.prtg_groups"
 
     query = """
@@ -42,10 +40,9 @@ def update_devnet_data(data):
             `id_prtg`, 
             `sensor`, 
             `lastvalue`, 
-            `rol`,
-            `first_down_datetime`
+            `rol`            
             )
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+            VALUES (%s, %s, %s, %s, %s, %s, %s)
         """
 
     data_tuple = [
@@ -57,7 +54,6 @@ def update_devnet_data(data):
             item["sensor"],
             item["lastvalue"],
             item["rol"],
-            item["first_down_datetime"],
         )
         for item in data
     ]
@@ -87,6 +83,47 @@ def update_devnet_data(data):
 
         datetime_register(system_name="candelaria_switches", status="ERROR")
         return False
+
+
+def register_datetime_sensor_down(data, action):
+    try:
+        print(data)
+        db_connector = devnet_connection()
+        devnet_cursor = db_connector.cursor()
+
+        if action == "register":
+            insert_query = """
+                INSERT INTO devnet.prtg_groups_down_datetimes
+                (`id_prtg`, `datetime`)
+                VALUES (%s, %s)
+            """
+            values = (data["objid"], data["datetime"])  # Convertido a tupla
+            devnet_cursor.execute(insert_query, values)
+
+        elif action == "delete":
+            delete_query = """
+                DELETE FROM `devnet`.`prtg_groups_down_datetimes`
+                WHERE `id_prtg` = %s
+            """
+            devnet_cursor.execute(delete_query, (data["objid"],))  # Tupla correcta
+
+        db_connector.commit()
+        return True
+
+    except Exception as e:
+        logging.error(traceback.format_exc())
+        logging.error(e)
+        logging.error(
+            "Error en la función `register_datetime_sensor_down` en el archivo `db_update_devnet`"
+        )
+        datetime_register(system_name="candelaria_switches", status="ERROR")
+        return False
+
+    finally:
+        if "devnet_cursor" in locals() and devnet_cursor:
+            devnet_cursor.close()
+        if "db_connector" in locals() and db_connector:
+            db_connector.close()
 
 
 def datetime_register(system_name, status):
@@ -137,4 +174,3 @@ def datetime_register(system_name, status):
             "Error en la función `datetime_register` en el archivo `db_update_devnet`"
         )
         logging.error(e)
-
