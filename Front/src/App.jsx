@@ -57,6 +57,7 @@ import "./app.css";
 import { AnilloTetra } from "./components/AnilloTetra/AnilloTetra";
 import { FlotacionOt } from "./components/AnilloFlotacionOt/FlotacionOt";
 import { Mra } from "./components/Mra/Mra";
+import { Dragos } from "./components/Dragos/Dragos";
 
 function App() {
   const location = useLocation();
@@ -176,6 +177,10 @@ function App() {
         <Route
           path="/candelaria/monitoreo/mra"
           element={<Mra />}
+        />
+        <Route
+          path="/candelaria/monitoreo/dragos"
+          element={<Dragos />}
         />
       </Routes>
 
