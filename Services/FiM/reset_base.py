@@ -18,8 +18,10 @@ paramiko_logger.setLevel(logging.WARNING)
 
 
 def reset_base(ip_base):
-    session_log = f"session_{ip_base.replace('.', '_')}.log"
 
+    session_log = f"session_{ip_base.replace('.', '_')}.log"
+    output = None
+    output = None
     try:
         logging.info(f"Iniciando Reinicio {ip_base}")
         device = {
@@ -29,7 +31,6 @@ def reset_base(ip_base):
             "password": "netman",
             "port": 23,
             "session_log": session_log,  # Guarda el log de la sesión
-            "fast_cli": False,  # Evita configuraciones rápidas
             "timeout": 60,  # Aumentar el tiempo de espera general
             "blocking_timeout": 60,  # Tiempo de espera para operaciones bloqueantes
             "read_timeout_override": 60,  # Sobrescribir el timeout de lectura
@@ -37,30 +38,21 @@ def reset_base(ip_base):
 
         # Iniciar la conexión TELNET
         with ConnectHandler(**device) as telnet:
-            # Desactiva los ajustes automáticos de Netmiko
-            telnet.disable_paging(
-                command="set cli pager off"
-            )  # Evita comandos como "terminal length 0"
-
-            # Envía el comando de reinicio
             output = telnet.send_command("reboot", delay_factor=5)
             logging.info(f"Output: {output}")
-            logging.info(f"Base reiniciada en {ip_base}")
 
-        return "OK", "OK"
+        logging.info(f"Reinicio exitoso en {ip_base}. Detalles del output: {output}")
+        return "Successful", "Reinicio exitoso"
 
     except Exception as e:
-        logging.error("Error en función Reset_Base")
-        logging.error(e)
+        error_message = f"Error intentando el reinicio de la base {ip_base}: {str(e)}"
+        logging.error(error_message)
         logging.error(traceback.format_exc())
-        return "ERROR", e
+        logging.error("=============== Retornado Fail ==================")
+        return "Fail", f"Reinicio automático fallido para {ip_base}: {str(e)}"
 
-    finally:
-        error_log = f"error_{ip_base.replace('.', '_')}.log"
-        if os.path.exists(session_log):
-            os.rename(session_log, error_log)
-            logging.error(f"Log detallado guardado en: {error_log}")
-
-
-# Ejemplo de uso
-# reset_base("10.224.89.13")
+    # finally:
+    #     error_log = f"error_{ip_base.replace('.', '_')}.log"
+    #     if os.path.exists(output):
+    #         os.rename(session_log, error_log)
+    #         logging.error(f"Log detallado guardado en: {error_log}")

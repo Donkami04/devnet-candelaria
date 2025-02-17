@@ -184,8 +184,8 @@ function App() {
           style={{ marginLeft: "10px" }}
           className="refresh-button-container-2"
         >
-          {/* Integracion con Flotacion OT - Home - Cambios CSS al Home */}
-          Version 2.1.2
+          {/* Cambios a Radwin Base FIM */}
+          Version 2.1.3
         </span>
         <div className="pause-and-icons-container">
           <IconsPage />

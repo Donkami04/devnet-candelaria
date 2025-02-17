@@ -12,7 +12,7 @@ load_dotenv()
 env = os.getenv("ENVIRONMENT")
 
 
-def save_down_register(data):
+def save_down_register(data, status):
     # Guardar en una tabla las fechas en las que la base fim estuvo down
     mydb = devnet_connection()
     cursor = mydb.cursor()
@@ -24,8 +24,8 @@ def save_down_register(data):
     fecha_y_hora = now.strftime("%Y-%m-%d %H:%M:%S")
     fecha_y_hora = str(fecha_y_hora)
 
-    query_down = "INSERT INTO devnet.dates_down_fimbase (base_name, base_ip, date) VALUES (%s, %s, %s)"
-    value_down = (base_name, base_ip, fecha_y_hora)
+    query_down = "INSERT INTO devnet.dates_down_fimbase (base_name, base_ip, date, status) VALUES (%s, %s, %s, %s)"
+    value_down = (base_name, base_ip, fecha_y_hora, status)
     cursor.execute(query_down, value_down)
     mydb.commit()
     cursor.close()
@@ -37,10 +37,11 @@ def update_status_base(data):
     cursor = mydb.cursor()
 
     base_ip = data["ip"]
-    base_status = data["base_status"]
-    mssg = data["mssg"]
+    status_http = data["status_http"]
+    status_ping = data["status_ping"]
+    message = data["message"]
 
-    query_update = f"UPDATE devnet.fim_base SET status = '{base_status}', error = '{mssg}' WHERE base_ip = '{base_ip}'"
+    query_update = f"UPDATE devnet.fim_base SET status_http = '{status_http}', status_ping = '{status_ping}', message = '{message}' WHERE base_ip = '{base_ip}'"
 
     cursor.execute(query_update)
     mydb.commit()

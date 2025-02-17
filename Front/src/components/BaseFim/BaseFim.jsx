@@ -4,6 +4,8 @@ import { DatesReset } from "./DatesReset";
 import { Spinner } from "../Spinner/Spinner";
 import { Navbar } from "../Navbar/Navbar";
 import { DatetimeModules } from "../DatetimeModules/DatetimeModules";
+import { FaEye } from "react-icons/fa6";
+import { PRTG_URL } from "../../utils/Api-candelaria/api";
 import "./BaseFim.css";
 
 export function BaseFim() {
@@ -23,8 +25,8 @@ export function BaseFim() {
           e.showDetails = false; // Agregar una propiedad showDetails a cada elemento de baseFim
           e.listDown = datesResets
             .reverse()
-            .filter((date) => date.base_name === e.base_name)
-            .map((date) => date.date);
+            .filter((elem) => elem.base_name === e.base_name)
+            .map((elem) => elem);
           e.counterDown = e.listDown.length;
         });
 
@@ -63,25 +65,67 @@ export function BaseFim() {
             <tr>
               <th>Nombre</th>
               <th>Ip</th>
-              <th>Estado</th>
-              <th>Contador Reset</th>
+              <th>Estado PING</th>
+              <th>Estado HTTP</th>
+              <th>Num. de Reinicios</th>
+              <th>Mensaje</th>
             </tr>
           </thead>
           <tbody>
             {baseFim.map((fim) => (
               <tr key={fim.id}>
                 <td>{fim.base_name}</td>
-                <td>{fim.base_ip}</td>
+                <td>
+                  {" "}
+                  <a href={`${PRTG_URL}${fim?.id_prtg || ""}`} target="_blank">
+                    {fim.base_ip}
+                  </a>{" "}
+                </td>
                 <td
                   style={{ cursor: "help" }}
-                  title={fim.error.toUpperCase()}
-                  className={fim.status === "Down" ? "kpi-red" : "kpi-green"}
+                  title={fim.message.toUpperCase()}
+                  className={
+                    fim.status_ping.includes("Down")
+                      ? "kpi-red"
+                      : fim.status_ping.includes("Paused")
+                      ? "kpi-blue"
+                      : fim.status_ping.includes("Unusual")
+                      ? "kpi-orange"
+                      : fim.status_ping.includes("Up")
+                      ? "kpi-green"
+                      : "kpi-grey"
+                  }
                 >
-                  {fim.status}
+                  {fim.status_ping}
                 </td>
-                <td style={{ cursor: "pointer" }} onClick={() => fimData(fim)}>
-                  {fim.counterDown}
+                <td
+                  style={{ cursor: "help" }}
+                  title={fim.message.toUpperCase()}
+                  className={
+                    fim.status_http.includes("Down")
+                      ? "kpi-red"
+                      : fim.status_http.includes("Paused")
+                      ? "kpi-blue"
+                      : fim.status_http.includes("Unusual")
+                      ? "kpi-ornage"
+                      : fim.status_http.includes("Up")
+                      ? "kpi-green"
+                      : "kpi-grey"
+                  }
+                >
+                  {fim.status_http}
                 </td>
+                <td>
+                  <div className="counter-reset-td">
+                    {fim.counterDown}{" "}
+                    <FaEye
+                      title={"Ver historial de intento de reinicios"}
+                      style={{ cursor: "pointer" }}
+                      onClick={() => fimData(fim)}
+                    />
+                  </div>
+                </td>
+                <td>{fim.message}</td>
               </tr>
             ))}
           </tbody>
@@ -90,7 +134,7 @@ export function BaseFim() {
       {showDatesReset && (
         <div className="dates-reset-container-fim">
           <DatesReset
-            listDownSelected={listDownSelected}
+            dataDownSelected={listDownSelected}
             baseName={baseName}
             setShowDatesReset={setShowDatesReset}
           />
