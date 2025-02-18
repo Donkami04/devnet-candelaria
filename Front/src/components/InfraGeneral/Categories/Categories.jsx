@@ -34,6 +34,8 @@ export function Categories() {
   const [fwOtDown, setFwOtDown] = useState([]);
   const [cctvDown, setCctvDown] = useState([]);
   const [dockersDown, setDockersDownp] = useState([]);
+  const [seguridadUp, setSeguridadUp] = useState([]);
+  const [seguridadDown, setSeguridadDown] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -53,6 +55,7 @@ export function Categories() {
         const dataFwItUp = [];
         const dataFwOtUp = [];
         const dataDockersUp = [];
+        const dataSeguridadUp = [];
 
         const newCoresDown = [];
         const newDistDown = [];
@@ -67,7 +70,8 @@ export function Categories() {
         const dataFwItDown = [];
         const dataFwOtDown = [];
         const dataDockersDown = [];
-
+        const dataSeguridadDown = [];
+        console.log(dataStatusInfGen)
         dataStatusInfGen.upElements.forEach((e) => {
           if (e.name_switch && e.name_switch.includes("CORE")) {
             newCoresUp.push(e);
@@ -113,6 +117,9 @@ export function Categories() {
           }
           if (e.type && e.type === "docker") {
             dataDockersUp.push(e);
+          }
+          if (e.name_switch && e.name_switch.toLowerCase().includes("fac")) {
+            dataSeguridadUp.push(e);
           }
         });
 
@@ -162,6 +169,9 @@ export function Categories() {
           if (e.type && e.type === "docker") {
             dataDockersDown.push(e);
           }
+          if (e.name_switch && e.name_switch.toLowerCase().includes("fac")) {
+            dataSeguridadDown.push(e);
+          }
         });
 
         setCoresUp(newCoresUp);
@@ -191,6 +201,8 @@ export function Categories() {
         setFwOtDown(dataFwOtDown);
         setDockersUp(dataDockersUp);
         setDockersDownp(dataDockersDown);
+        setSeguridadUp(dataSeguridadUp);
+        setSeguridadDown(dataSeguridadDown);
       } catch (error) {
         console.error(error);
         setIsLoading(false);
@@ -355,6 +367,16 @@ export function Categories() {
                 <td>{dockersUp.length}</td>
                 <td>{dockersDown.length}</td>
                 <td>{dockersUp.length + dockersDown.length}</td>
+              </tr>
+              <tr>
+                <td className="td-category-ig">
+                  <Link to="/monitoreo/infraestrucura-general?categoria=seguridad">
+                    Seguridad
+                  </Link>
+                </td>
+                <td>{seguridadUp.length}</td>
+                <td>{seguridadDown.length}</td>
+                <td>{seguridadUp.length + seguridadDown.length}</td>
               </tr>
             </tbody>
           </table>

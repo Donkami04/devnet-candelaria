@@ -133,7 +133,6 @@ def get_data_interfaces(ip_switch, id_switch, red, name_switch):
 
 # Obtiene Datos de los System Health
 def system_health(ip_switch, id_switch, red, name_switch):
-
     devices_systemhealth_notFound = [
         {
             "name": "No Devices Found",
@@ -147,9 +146,14 @@ def system_health(ip_switch, id_switch, red, name_switch):
     ]
 
     try:
-        url_system_health = os.getenv("URL_PRTG_GET_STATUS_SYSTEM_HEALTH").format(
-            id_switch=id_switch, username=PRTG_USERNAME, password=PRTG_PASSWORD
-        )
+
+        url_system_health = None
+        security_ips = ["10.224.116.5", "10.224.116.69"]
+        if ip_switch in security_ips: 
+            url_system_health = os.getenv("URL_PRTG_GET_DATA_WITHOUT_TYPE").format(id_switch=id_switch, username=PRTG_USERNAME, password=PRTG_PASSWORD)
+        else:
+            url_system_health = os.getenv("URL_PRTG_GET_STATUS_SYSTEM_HEALTH").format(id_switch=id_switch, username=PRTG_USERNAME, password=PRTG_PASSWORD)
+        
         response_systemhealth = requests.get(url_system_health, verify=False).json()
         devices_systemhealth = response_systemhealth.get(
             "sensors", devices_systemhealth_notFound

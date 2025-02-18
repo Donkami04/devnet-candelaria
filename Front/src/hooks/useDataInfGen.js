@@ -65,7 +65,7 @@ export async function useDataInfGen() {
   const upOrDownSysHealth = (dataList) => {
     dataList.forEach((element) => {
       // Primer If es porque los neighbors no tienen `name`
-      if (element.name && element.name.includes("System Health")) {
+      if (element.name && element.name.includes("System Health") || (element.name_switch && element.name_switch.includes("FAC"))) {
         if (
           element.status === "Up" &&
           element.name.includes("CPU") &&
@@ -124,6 +124,45 @@ export async function useDataInfGen() {
           (element.name.includes("Memory") &&
             element.name_switch === "WLC 9800 NEGOCIO" &&
             element.status.includes("Down"))
+        ) {
+          downElements.push(element);
+        }
+        if (
+          element.name.toLowerCase().includes("ping") &&
+          element.status.toLowerCase().includes("up")
+        ) {
+          upElements.push(element);
+        }
+        if (
+          element.name.toLowerCase().includes("ping") &&
+          element.status.toLowerCase().includes("down")
+        ) {
+          downElements.push(element);
+        }
+        if (element.status === "Up" && element.name.includes("Disk") && parseInt(element.lastvalue) <= 90) {
+          upElements.push(element);
+        }
+        if (
+          (element.name.includes("Disk") && parseInt(element.lastvalue) > 90) ||
+          (element.name.includes("Disk") && element.status.includes("Down"))
+        ) {
+          downElements.push(element);
+        }
+        if (element.status === "Up" && element.name.includes("Memory") && parseInt(element.lastvalue) <= 90) {
+          upElements.push(element);
+        }
+        if (
+          (element.name.includes("Memory") && parseInt(element.lastvalue) > 90) ||
+          (element.name.includes("Memory") && element.status.includes("Down"))
+        ) {
+          downElements.push(element);
+        }
+        if (element.status === "Up" && element.name.includes("Usuarios") && parseInt(element.lastvalue) > 50) {
+          upElements.push(element);
+        }
+        if (
+          (element.name.includes("Usuarios") && parseInt(element.lastvalue) <= 50) ||
+          (element.name.includes("Usuarios") && element.status.includes("Down"))
         ) {
           downElements.push(element);
         }
