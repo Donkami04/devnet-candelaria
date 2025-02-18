@@ -148,12 +148,12 @@ export async function useDataInfGen() {
         ) {
           downElements.push(element);
         }
-        if (element.status === "Up" && element.name.includes("Memory") && parseInt(element.lastvalue) <= 90) {
+        if (element.status === "Up" && element.name.includes("Memory Usage") && parseInt(element.lastvalue) <= 90) {
           upElements.push(element);
         }
         if (
-          (element.name.includes("Memory") && parseInt(element.lastvalue) > 90) ||
-          (element.name.includes("Memory") && element.status.includes("Down"))
+          (element.name.includes("Memory Usage") && parseInt(element.lastvalue) > 90) ||
+          (element.name.includes("Memory Usage") && element.status.includes("Down"))
         ) {
           downElements.push(element);
         }
