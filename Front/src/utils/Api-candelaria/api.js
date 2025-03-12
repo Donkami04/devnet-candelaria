@@ -285,6 +285,13 @@ export const getDataAnilloTetra = async () => {
     .catch((error) => {throw new Error('ANILLO TETRA: Error del API REST Candealaria : ',error)});
 };
 
+export const getDataDragos = async () => {
+  return axios
+    .get(`${BASE_API_URL}/dragos`)
+    .then((response) => response)
+    .catch((error) => {throw new Error('DRAGOS: Error del API REST Candealaria : ',error)});
+};
+
 export const getDataFlotacionOt = async () => {
   return axios
     .get(`${BASE_API_URL}/flotacion-ot`)

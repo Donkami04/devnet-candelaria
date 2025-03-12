@@ -50,6 +50,10 @@
   background-color:white;
 }
 
+.anillo-grey {
+  background-color:rgb(156, 156, 156);
+}
+
 .anillo-orange {
   background-color: orange;
   /* animation: titilar-yellow 2s infinite; */
