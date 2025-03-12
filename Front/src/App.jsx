@@ -87,14 +87,8 @@ function App() {
       </Helmet>
       <Routes location={location}>
         <Route path="/monitoreo/home" element={<Home />} />
-        <Route
-          path="/monitoreo/candelaria/clients"
-          element={<CandelariaClients />}
-        />
-        <Route
-          path="/monitoreo/desaladora/clients"
-          element={<DcsDesaladora />}
-        />
+        <Route path="/monitoreo/candelaria/clients" element={<CandelariaClients />} />
+        <Route path="/monitoreo/desaladora/clients" element={<DcsDesaladora />} />
         <Route path="/monitoreo/candelaria/switches" element={<Switches />} />
         <Route path="/monitoreo/ups" element={<Ups />} />
         <Route path="/monitoreo/candelaria/mesh" element={<Mesh />} />
@@ -116,14 +110,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/monitoreo/pac/clientes" element={<DcsPac />} />
         <Route path="/monitoreo/ojos/clientes" element={<DcsOjos />} />
-        <Route
-          path="/monitoreo/infraestrucura-general"
-          element={<DetailsCategory />}
-        />
-        <Route
-          path="/monitoreo/infraestrucura-general/categorias"
-          element={<Categories />}
-        />
+        <Route path="/monitoreo/infraestrucura-general" element={<DetailsCategory />} />
+        <Route path="/monitoreo/infraestrucura-general/categorias" element={<Categories />} />
         {/* <Route
           path="/monitoreo/infraestrucura-general/detalles/ap/negocio"
           element={<ApNegocio />}
@@ -132,21 +120,12 @@ function App() {
           path="/monitoreo/infraestrucura-general/detalles/ap/mesh"
           element={<ApMesh />}
         /> */}
-        <Route
-          path="/monitoreo/infraestrucura-general/detalles"
-          element={<Details />}
-        />
+        <Route path="/monitoreo/infraestrucura-general/detalles" element={<Details />} />
         <Route path="/monitoreo/infraestrucura-general/map" element={<Map />} />
         <Route path="/monitoreo/candelaria/fim" element={<BaseFim />} />
         <Route path="/monitoreo/candelaria/anillo" element={<Anillo />} />
-        <Route
-          path="/monitoreo/candelaria/proceso-mesh"
-          element={<MeshProcess />}
-        />
-        <Route
-          path="/monitoreo/infraestrucura-general/certificados"
-          element={<Certificates />}
-        />
+        <Route path="/monitoreo/candelaria/proceso-mesh" element={<MeshProcess />} />
+        <Route path="/monitoreo/infraestrucura-general/certificados" element={<Certificates />} />
         {/* <Route
           path="/monitoreo/infraestrucura-general/telefonia"
           element={<Voice />}
@@ -166,42 +145,22 @@ function App() {
         /> */}
         <Route path="/monitoreo/anillo/ug" element={<AnilloUg />} />
         <Route path="/monitoreo/anillo/tetra" element={<AnilloTetra />} />
-        <Route
-          path="/monitoreo/infraestrucura-general/procesos-devnet"
-          element={<Dockers />}
-        />
-        <Route
-          path="/candelaria/monitoreo/flotacion/ot"
-          element={<FlotacionOt />}
-        />
-        <Route
-          path="/candelaria/monitoreo/mra"
-          element={<Mra />}
-        />
-        <Route
-          path="/candelaria/monitoreo/dragos"
-          element={<Dragos />}
-        />
+        <Route path="/monitoreo/infraestrucura-general/procesos-devnet" element={<Dockers />} />
+        <Route path="/candelaria/monitoreo/flotacion/ot" element={<FlotacionOt />} />
+        <Route path="/candelaria/monitoreo/mra" element={<Mra />} />
+        <Route path="/candelaria/monitoreo/dragos" element={<Dragos />} />
       </Routes>
 
       <div className="refresh-button-container">
-        <span
-          style={{ marginLeft: "10px" }}
-          className="refresh-button-container-2"
-        >
-          {/* Cambios a Radwin Base FIM */}
-          Version 2.1.3
+        <span title={"Dragos"} style={{ marginLeft: "10px" }} className="refresh-button-container-2">
+          Version 2.2.0
         </span>
         <div className="pause-and-icons-container">
           <IconsPage />
           <button
             className="refresh-button"
             onClick={toggleTimer}
-            title={
-              timerActive
-                ? "Pausar Autorefresco de la página"
-                : "Activar Autorefresco de la página"
-            }
+            title={timerActive ? "Pausar Autorefresco de la página" : "Activar Autorefresco de la página"}
           >
             {timerActive ? (
               <FontAwesomeIcon icon={faPause} /> // Icono de Pause
