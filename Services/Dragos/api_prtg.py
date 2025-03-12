@@ -23,6 +23,7 @@ def get_status_prtg(idList):
     
     try:
         for id_device in idList:
+            logging.info(f"Obteniendo datos para el id {id_device}")
             api_endpoint = os.getenv("DATA_INTERFACE").format(
                 id_device=id_device, username=PRTG_USERNAME, password=PRTG_PASSWORD
             )

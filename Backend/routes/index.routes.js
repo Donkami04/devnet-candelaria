@@ -29,6 +29,7 @@ const anilloTetraRoutes = require("./anillo_tetra.routes");
 const dragosRoutes = require("./dragos.routes");
 const flotacionOtRoutes = require("./flotacion_ot.routes");
 const mraRoutes = require("./mra.routes");
+const licenciamientosRoutes = require("./licenciamientos.routes");
 const router = express.Router();
 
 const allRoutes = (app) => {
@@ -63,6 +64,7 @@ const allRoutes = (app) => {
   router.use("/dragos", dragosRoutes);
   router.use("/flotacion-ot", flotacionOtRoutes);
   router.use("/mra", mraRoutes);
+  router.use("/licenciamientos", licenciamientosRoutes);
 };
 
 module.exports = { allRoutes };
