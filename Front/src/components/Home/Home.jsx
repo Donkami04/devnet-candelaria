@@ -8,7 +8,7 @@ import {
   getAnilloUgUpDown,
   getDataAnilloTetraUpDown,
   getDataFlotacionOtUpDown,
-  getMraUpDown
+  getMraUpDown,
 } from "../../utils/Api-candelaria/api";
 import { Navbar } from "../../components/Navbar/Navbar";
 import { DevicesDash } from "../../components/Devices/DevicesDash/DevicesDash";
@@ -24,6 +24,7 @@ import PuffLoader from "react-spinners/PuffLoader";
 import { getDataAnillo } from "../../utils/Api-candelaria/api";
 import { useDcsIndicators } from "../../hooks/useDcsIndicators";
 import { useCountDcsClients } from "../../hooks/useCountDcsClients";
+import { HomeDragos } from "../Dragos/Home";
 import "./home.css";
 
 export function Home() {
@@ -47,9 +48,8 @@ export function Home() {
   const [upDownAnilloUg, setUpDownAnilloUg] = useState([]);
   const [upDownTetra, setUpDownTetra] = useState([]);
   const [dcsIndicators, setDcsIndicators] = useState({});
-  const [flotacionData, setFlotacionData] = useState({})
+  const [flotacionData, setFlotacionData] = useState({});
   const [mra, setMra] = useState({});
-  
 
   // Estados de spinners
   const [spinnerDcsCandelaria, setSpinnerDcsCandelaria] = useState(true);
@@ -66,18 +66,16 @@ export function Home() {
     const fetchData = async () => {
       try {
         const dataMra = await getMraUpDown();
-        setMra(dataMra.data)
-        const flotacionDataUpDown= await getDataFlotacionOtUpDown();
-        setFlotacionData(flotacionDataUpDown.data)
+        setMra(dataMra.data);
+        const flotacionDataUpDown = await getDataFlotacionOtUpDown();
+        setFlotacionData(flotacionDataUpDown.data);
 
         const dataDcsIndicators = await useDcsIndicators();
-        
+
         const dcsCandelaria = await getDcsCandelariaIndicators();
         const dataAnillo = await getDataAnillo();
         const dataUpAnillo = dataAnillo.data.filter((e) => e.status === "Up");
-        const dataDownAnillo = dataAnillo.data.filter((e) =>
-          e.status.includes("Down")
-        );
+        const dataDownAnillo = dataAnillo.data.filter((e) => e.status.includes("Down"));
         const dataUpDownTetra = await getDataAnilloTetraUpDown();
 
         const dataVpnCande = await getVpn();
@@ -87,7 +85,6 @@ export function Home() {
         setAnilloDown(dataDownAnillo);
         setUpDownAnilloUg(dataAnilloUg.data);
         setDcsIndicators(dataDcsIndicators);
-        
 
         // OPEN PIT
         const meshIndicators = await getMeshIndicators();
@@ -98,12 +95,8 @@ export function Home() {
         meshElementsUp += meshIndicators.palasOk + meshIndicators.palasWarnings;
         meshElementsUp += meshIndicators.caexOk + meshIndicators.caexWarnings;
         const allDataMeshProcess = await getDataMeshProcess();
-        const allDataMeshProcessUp = allDataMeshProcess.data.filter(
-          (e) => e.status === "ok"
-        );
-        const allDataMeshProcessDown = allDataMeshProcess.data.filter(
-          (e) => e.status === "fail"
-        );
+        const allDataMeshProcessUp = allDataMeshProcess.data.filter((e) => e.status === "ok");
+        const allDataMeshProcessDown = allDataMeshProcess.data.filter((e) => e.status === "fail");
         setMeshUpElem(meshElementsUp);
         setMeshDownElem(meshElementsDown);
         setOpenPitLoading(false);
@@ -112,9 +105,7 @@ export function Home() {
         setUpDownTetra(dataUpDownTetra.data);
 
         const fimStatus = await getDataBaseFim();
-        const downFim = fimStatus.data.fimStatus.filter((e) =>
-          e.status_http.includes("Down")
-        );
+        const downFim = fimStatus.data.fimStatus.filter((e) => e.status_http.includes("Down"));
         setFimhDownElem(downFim.length);
         const dates = useWanDates();
         const allUps = await getUps();
@@ -141,9 +132,6 @@ export function Home() {
 
             countUps++;
           });
-
-        
-          
 
         setDcsCandeIndicators(dcsCandelaria);
         setSpinnerDcsCandelaria(false);
@@ -189,8 +177,8 @@ export function Home() {
       </div>
       <div className="home-container">
         <section className="system-container">
-        <div className="name-system-container">
-        <h1>Control Proceso</h1>
+          <div className="name-system-container">
+            <h1>Control Proceso</h1>
           </div>
           <div className="name-system-container">
             <h2>DCS</h2>
@@ -215,10 +203,7 @@ export function Home() {
                     <th title="Disponibilidad" style={{ cursor: "help" }}>
                       Disp
                     </th>
-                    <th
-                      title="Infraestructura Solución"
-                      style={{ cursor: "help" }}
-                    >
+                    <th title="Infraestructura Solución" style={{ cursor: "help" }}>
                       Inf Sol
                     </th>
                     <th>Detalles</th>
@@ -228,41 +213,26 @@ export function Home() {
                   <tr>
                     <td>Candelaria</td>
                     <td
-                      className={
-                        dcsIndicators.dataDcsCandelaria.overallKpi.indicador <
-                        99.95
-                          ? "kpi-red"
-                          : "kpi-green"
-                      }
+                      className={dcsIndicators.dataDcsCandelaria.overallKpi.indicador < 99.95 ? "kpi-red" : "kpi-green"}
                     >
                       {dcsIndicators.dataDcsCandelaria.overallKpi.indicador}%
                     </td>
                     <td
                       className={
-                        dcsIndicators.dataDcsCandelaria.disponibilidad
-                          .indicador < 99.95
-                          ? "kpi-red"
-                          : "kpi-green"
+                        dcsIndicators.dataDcsCandelaria.disponibilidad.indicador < 99.95 ? "kpi-red" : "kpi-green"
                       }
                     >
-                      {dcsIndicators.dataDcsCandelaria.disponibilidad.indicador}
-                      %
+                      {dcsIndicators.dataDcsCandelaria.disponibilidad.indicador}%
                     </td>
                     <td
                       className={
-                        dcsIndicators.dataDcsCandelaria.infraSolucion
-                          .indicador < 99.95
-                          ? "kpi-red"
-                          : "kpi-green"
+                        dcsIndicators.dataDcsCandelaria.infraSolucion.indicador < 99.95 ? "kpi-red" : "kpi-green"
                       }
                     >
                       {dcsIndicators.dataDcsCandelaria.infraSolucion.indicador}%
                     </td>
                     <td>
-                      <Link
-                        className="link-open-pit"
-                        to="/monitoreo/candelaria/clients"
-                      >
+                      <Link className="link-open-pit" to="/monitoreo/candelaria/clients">
                         Ver
                       </Link>
                     </td>
@@ -271,44 +241,33 @@ export function Home() {
                     <td>Desaladora</td>
                     <td
                       className={
-                        dcsIndicators.dataDcsDesaladora.overallKpi.indicador
-                          .indicador < 99.95
-                          ? "kpi-red"
-                          : "kpi-green"
+                        dcsIndicators.dataDcsDesaladora.overallKpi.indicador.indicador < 99.95 ? "kpi-red" : "kpi-green"
                       }
                     >
                       {dcsIndicators.dataDcsDesaladora.overallKpi.indicador}%
                     </td>
                     <td
                       className={
-                        dcsIndicators.dataDcsDesaladora.disponibilidad
-                          .indicador < 99.95
-                          ? "kpi-red"
-                          : "kpi-green"
+                        dcsIndicators.dataDcsDesaladora.disponibilidad.indicador < 99.95 ? "kpi-red" : "kpi-green"
                       }
                     >
-                      {dcsIndicators.dataDcsDesaladora.disponibilidad.indicador}
-                      %
+                      {dcsIndicators.dataDcsDesaladora.disponibilidad.indicador}%
                     </td>
                     <td>N/A</td>
                     {/* <td>{dcsIndicators.dataDcsCandelaria.infraSolucion.indicador}%</td> */}
                     <td>
-                      <Link
-                        className="link-open-pit"
-                        to="/monitoreo/desaladora/clients"
-                      >
+                      <Link className="link-open-pit" to="/monitoreo/desaladora/clients">
                         Ver
                       </Link>
                     </td>
                   </tr>
                 </tbody>
               </table>
-                    
+
               <div className="flotacion-table-container">
                 <div className="name-system-container">
-                <h2>Sistemas OT</h2>
-
-              </div >
+                  <h2>Sistemas OT</h2>
+                </div>
                 <table className="table-home-kpi-dcs">
                   <thead>
                     <tr>
@@ -324,10 +283,7 @@ export function Home() {
                       <td>{flotacionData.upElements.length}</td>
                       <td>{flotacionData.downElements.length}</td>
                       <td>
-                        <Link
-                          className="link-open-pit"
-                          to="/candelaria/monitoreo/flotacion/ot"
-                        >
+                        <Link className="link-open-pit" to="/candelaria/monitoreo/flotacion/ot">
                           Ver
                         </Link>
                       </td>
@@ -337,10 +293,7 @@ export function Home() {
                       <td>{mra.upElements.length}</td>
                       <td>{mra.downElements.length}</td>
                       <td>
-                        <Link
-                          className="link-open-pit"
-                          to="/candelaria/monitoreo/mra"
-                        >
+                        <Link className="link-open-pit" to="/candelaria/monitoreo/mra">
                           Ver
                         </Link>
                       </td>
@@ -348,9 +301,6 @@ export function Home() {
                   </tbody>
                 </table>
               </div>
-              
-              
-
             </div>
           )}
         </section>
@@ -365,11 +315,7 @@ export function Home() {
                 <PuffLoader color="red" />
               </div>
               <div className="link-system-container links-spinner-home">
-                <Link
-                  to="/monitoreo/ups"
-                  className="link-system button-link"
-                  style={{ color: "white" }}
-                >
+                <Link to="/monitoreo/ups" className="link-system button-link" style={{ color: "white" }}>
                   Ver detalles
                 </Link>
               </div>
@@ -387,8 +333,7 @@ export function Home() {
                     </tr>
                     <tr>
                       <td>
-                        <p className="light-indicator yellow-light"></p>Usando
-                        batería
+                        <p className="light-indicator yellow-light"></p>Usando batería
                       </td>
                       <td>{usandoBateriaCount}</td>
                     </tr>
@@ -412,11 +357,7 @@ export function Home() {
               </div>
 
               <div className="link-system-container">
-                <Link
-                  to="/monitoreo/ups"
-                  className="link-system button-link"
-                  style={{ color: "white" }}
-                >
+                <Link to="/monitoreo/ups" className="link-system button-link" style={{ color: "white" }}>
                   Ver detalles
                 </Link>
               </div>
@@ -449,11 +390,7 @@ export function Home() {
           </div>
 
           <div className="link-system-container">
-            <Link
-              to="/monitoreo/vpn"
-              className="link-system button-link"
-              style={{ color: "white" }}
-            >
+            <Link to="/monitoreo/vpn" className="link-system button-link" style={{ color: "white" }}>
               Ver detalles
             </Link>
           </div>
@@ -485,10 +422,7 @@ export function Home() {
                       <td>{meshUpElem}</td>
                       <td>{meshDownElem}</td>
                       <td>
-                        <Link
-                          className="link-open-pit"
-                          to="/monitoreo/candelaria/mesh"
-                        >
+                        <Link className="link-open-pit" to="/monitoreo/candelaria/mesh">
                           Ver
                         </Link>
                       </td>
@@ -498,10 +432,7 @@ export function Home() {
                       <td>{4 - fimDownElem}</td>
                       <td>{fimDownElem}</td>
                       <td>
-                        <Link
-                          className="link-open-pit"
-                          to="/monitoreo/candelaria/fim"
-                        >
+                        <Link className="link-open-pit" to="/monitoreo/candelaria/fim">
                           Ver
                         </Link>
                       </td>
@@ -511,10 +442,7 @@ export function Home() {
                       <td>{anilloUp.length}</td>
                       <td>{anilloDown.length}</td>
                       <td>
-                        <Link
-                          className="link-open-pit"
-                          to="/monitoreo/candelaria/anillo"
-                        >
+                        <Link className="link-open-pit" to="/monitoreo/candelaria/anillo">
                           Ver
                         </Link>
                       </td>
@@ -524,10 +452,7 @@ export function Home() {
                       <td>{dataMeshProcessUp.length}</td>
                       <td>{dataMeshProcessDown.length}</td>
                       <td>
-                        <Link
-                          className="link-open-pit"
-                          to="/monitoreo/candelaria/proceso-mesh"
-                        >
+                        <Link className="link-open-pit" to="/monitoreo/candelaria/proceso-mesh">
                           Ver
                         </Link>
                       </td>
@@ -537,10 +462,7 @@ export function Home() {
                       <td>{upDownTetra.upElements.length}</td>
                       <td>{upDownTetra.downElements.length}</td>
                       <td>
-                        <Link
-                          className="link-open-pit"
-                          to="/monitoreo/anillo/tetra"
-                        >
+                        <Link className="link-open-pit" to="/monitoreo/anillo/tetra">
                           Ver
                         </Link>
                       </td>
@@ -561,11 +483,7 @@ export function Home() {
             <DevicesDash />
           </div>
           <div className="link-system-container">
-            <Link
-              to="/monitoreo/devices"
-              className="link-system button-link"
-              style={{ color: "white" }}
-            >
+            <Link to="/monitoreo/devices" className="link-system button-link" style={{ color: "white" }}>
               Ver detalles
             </Link>
           </div>
@@ -581,11 +499,7 @@ export function Home() {
           </div>
 
           <div className="link-system-container">
-            <Link
-              to="/monitoreo/firewalls"
-              className="link-system button-link"
-              style={{ color: "white" }}
-            >
+            <Link to="/monitoreo/firewalls" className="link-system button-link" style={{ color: "white" }}>
               Ver detalles
             </Link>
           </div>
@@ -601,40 +515,22 @@ export function Home() {
           </div>
 
           <div className="link-system-container">
-            <Link
-              to="/monitoreo/wan"
-              className="link-system button-link"
-              style={{ color: "white" }}
-            >
+            <Link to="/monitoreo/wan" className="link-system button-link" style={{ color: "white" }}>
               Ver detalles
             </Link>
           </div>
         </section>
 
         <section className="system-container">
-          <div className="name-system-container">
-            <h1>Infraestructura General</h1>
-          </div>
-
-          <div className="home-kpi-container">
-            <InfraGeneralDash />
-          </div>
-
-          <div className="link-system-container">
-            <Link
-              to="/monitoreo/infraestrucura-general/map"
-              className="link-system button-link"
-              style={{ color: "white" }}
-            >
-              Mapa
-            </Link>
-            <Link
-              to="/monitoreo/infraestrucura-general/categorias"
-              className="link-system button-link"
-              style={{ color: "white" }}
-            >
-              Detalles
-            </Link>
+          <div className="home-tables-container-infra-dragos">
+            <div>
+              <h1 style={{ textAlign: "center" }}>Infraestructura General</h1>
+              <InfraGeneralDash />
+            </div>
+            <div>
+              <h1 style={{ textAlign: "center" }}>Dragos</h1>
+              <HomeDragos />
+            </div>
           </div>
         </section>
 
@@ -664,11 +560,7 @@ export function Home() {
                       <td>{upDownAnilloUg.upElements.length}</td>
                       <td>{upDownAnilloUg.downElements.length}</td>
                       <td>
-                        <Link
-                          target="_blank"
-                          className="link-open-pit"
-                          to="/monitoreo/anillo/ug"
-                        >
+                        <Link target="_blank" className="link-open-pit" to="/monitoreo/anillo/ug">
                           Ver
                         </Link>
                       </td>

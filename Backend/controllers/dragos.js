@@ -6,12 +6,12 @@ class DragosService {
       const data = await Dragos.findAll();
       return {
         statusCode: 200,
-        message: "Información del Anillo tetra obtenida exitosamente",
+        message: "Información del Dragos  obtenida exitosamente",
         data: data,
       };
     } catch (error) {
         console.error(error);
-      throw new Error("Error al obtener la información del Anillo tetra");
+      throw new Error("Error al obtener la información del Dragos ");
     }
   }
 
@@ -48,12 +48,12 @@ class DragosService {
 
       return {
         statusCode: 200,
-        message: "Información del Anillo tetra obtenida exitosamente Up Down",
+        message: "Información del Dragos  obtenida exitosamente Up Down",
         data: data,
       };
     } catch (error) {
         console.error(error);
-      throw new Error("Error al obtener la información del Anillo tetra Up Down");
+      throw new Error("Error al obtener la información del Dragos  Up Down");
     }
   }
 }

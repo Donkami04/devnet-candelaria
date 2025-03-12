@@ -220,6 +220,15 @@
   place-content: center;
 }
 
+.home-tables-container-infra-dragos {
+  height: 100%;
+  display: grid;
+}
+
+.home-tables-container-infra-dragos h1 {
+  margin-bottom: 20px;
+}
+
 @media (max-width: 1200px) {
   .name-system-container h1 {
     font-size: 1.7rem;

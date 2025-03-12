@@ -12,7 +12,8 @@ export function Dragos() {
     const fetchData = async () => {
       try {
         const response = await getDataDragos();
-        setAnilloData(response.data);
+        console.log(response)
+        setAnilloData(response.data.data);
       } catch (error) {
         console.error(error);
       }
@@ -163,7 +164,76 @@ export function Dragos() {
             </p>
           </div>
         </div>
+
+        <div className="main-lights-dragos-container">
+          <div className="status-light-anillo-container">
+            <p title={statusTitle("20368")} className={`status-light-dragos id20368 ${statusLight("20368")}`}>
+              <a style={{ color: "black" }} href={`${PRTG_URL}20368&tabid=1`} target="_blank">
+              Gi1/0/2
+              </a>
+            </p>
+          </div>
+        </div>
      
+        <div className="main-lights-dragos-container">
+          <div className="status-light-anillo-container">
+            <p title={statusTitle("20367")} className={`status-light-dragos id20367 ${statusLight("20367")}`}>
+              <a style={{ color: "black" }} href={`${PRTG_URL}20367&tabid=1`} target="_blank">
+              Gi0/19
+              </a>
+            </p>
+          </div>
+        </div>
+     
+        <div className="main-lights-dragos-container">
+          <div className="status-light-anillo-container">
+            <p title={statusTitle("20364")} className={`status-light-dragos id20364 ${statusLight("20364")}`}>
+              <a style={{ color: "black" }} href={`${PRTG_URL}20364&tabid=1`} target="_blank">
+              G1/0/31
+              </a>
+            </p>
+          </div>
+        </div>
+     
+        <div className="main-lights-dragos-container">
+          <div className="status-light-anillo-container">
+            <p title={statusTitle("20365")} className={`status-light-dragos id20365 ${statusLight("20365")}`}>
+              <a style={{ color: "black" }} href={`${PRTG_URL}20365&tabid=1`} target="_blank">
+              G1/0/31
+              </a>
+            </p>
+          </div>
+        </div>
+     
+        <div className="main-lights-dragos-container">
+          <div className="status-light-anillo-container">
+            <p title={statusTitle("20366")} className={`status-light-dragos id20366 ${statusLight("20366")}`}>
+              <a style={{ color: "black" }} href={`${PRTG_URL}20366&tabid=1`} target="_blank">
+              Te1/2
+              </a>
+            </p>
+          </div>
+        </div>
+     
+        <div className="main-lights-dragos-container">
+          <div className="status-light-anillo-container">
+            <p title={statusTitle("20360")} className={`status-light-dragos id20360 ${statusLight("20360")}`}>
+              <a style={{ color: "black" }} href={`${PRTG_URL}20360&tabid=1`} target="_blank">
+              G1/0/12
+              </a>
+            </p>
+          </div>
+        </div>
+     
+        <div className="main-lights-dragos-container">
+          <div className="status-light-anillo-container">
+            <p title={statusTitle("20361")} className={`status-light-dragos id20361 ${statusLight("20361")}`}>
+              <a style={{ color: "black" }} href={`${PRTG_URL}20361&tabid=1`} target="_blank">
+              G1/0/6
+              </a>
+            </p>
+          </div>
+        </div>
      
       </div>
     </main>
