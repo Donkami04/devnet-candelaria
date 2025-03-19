@@ -10,6 +10,7 @@ import {
   getAp,
   getDataPrtgGroups,
   getDataDockers,
+  getLicenciamientos,
 } from "../utils/Api-candelaria/api";
 
 export async function useDataInfGen() {
@@ -19,6 +20,7 @@ export async function useDataInfGen() {
   const dataRouteStatus = await getDefaultRoute();
   const dataDockers = await getDataDockers();
   const dataPrtgGroups = await getDataPrtgGroups();
+  const licenciamientos = await getLicenciamientos();
 
   const allData = [
     ...dataInterfaces.data,
@@ -31,6 +33,17 @@ export async function useDataInfGen() {
 
   const upElements = [];
   const downElements = [];
+
+  const licenciamientosUpOrDown = (dataList) => {
+    dataList.forEach((element) => {
+      if (element.status === "Up" || element.status === "Warning") {
+        upElements.push(element);
+      }
+      if (element.status === "Down") {
+        downElements.push(element);
+      }
+    });
+  }
 
   const upOrDownInterface = (dataList) => {
     dataList.forEach((element) => {
@@ -219,6 +232,7 @@ export async function useDataInfGen() {
   upOrDownSysHealth(allData);
   upOrDownRouteDefault(allData);
   upOrDownDockers(allData);
+  licenciamientosUpOrDown(licenciamientos.data);
 
   const data = {
     upElements: upElements,

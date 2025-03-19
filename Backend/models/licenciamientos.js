@@ -4,11 +4,6 @@ const { Sequelize, DataTypes } = require("sequelize");
 const Licenciamientos = sequelize.define(
   "Licenciamientos",
   {
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      allowNull: false,
-    },
     equipo: {
       type: DataTypes.STRING(100),
       allowNull: true,

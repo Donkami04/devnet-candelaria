@@ -1,9 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const { loginSchema } = require("../schemas/auth.schema")
+const { loginSchema } = require("../schemas/auth.schema");
 const { validateData } = require("../middlewares/validator.handler");
 const passport = require("passport");
 const { signToken } = require("../controllers/auth");
+const { checkRoles } = require("../middlewares/auth.handler");
 
 // const jwt = require('jsonwebtoken');
 // const SECRET = process.env.JWT_SECRET;
@@ -30,10 +31,26 @@ router.post(
           error: user.error,
           data: {
             user: user.data,
-            token: tokenData.token // Agrega el token generado
-          }
+            token: tokenData.token, // Agrega el token generado
+          },
         });
       }
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
+router.get(
+  "/check-tkn",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res, next) => {
+    try {
+      console.log(req.user);
+      res.status(200).json({
+        message: "El token se verifico y el rol cumple con el permiso",
+        statusCode: 200
+      });
     } catch (error) {
       next(error);
     }

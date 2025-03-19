@@ -36,6 +36,8 @@ export function Categories() {
   const [dockersDown, setDockersDownp] = useState([]);
   const [seguridadUp, setSeguridadUp] = useState([]);
   const [seguridadDown, setSeguridadDown] = useState([]);
+  const [licenciamientosUpState, setLicenciamientosUpState ] = useState([]);
+  const [licenciamientosDownState, seLlicenciamientosDownState] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -56,6 +58,7 @@ export function Categories() {
         const dataFwOtUp = [];
         const dataDockersUp = [];
         const dataSeguridadUp = [];
+        const licenciamientosUp = [];
 
         const newCoresDown = [];
         const newDistDown = [];
@@ -71,6 +74,8 @@ export function Categories() {
         const dataFwOtDown = [];
         const dataDockersDown = [];
         const dataSeguridadDown = [];
+        const licenciamientosDown = [];
+
         console.log(dataStatusInfGen)
         dataStatusInfGen.upElements.forEach((e) => {
           if (e.name_switch && e.name_switch.includes("CORE")) {
@@ -120,6 +125,9 @@ export function Categories() {
           }
           if (e.name_switch && e.name_switch.toLowerCase().includes("fac")) {
             dataSeguridadUp.push(e);
+          }
+          if (e.equipo && e.status === "Up" || e.status === "Warning") {
+            licenciamientosUp.push(e);
           }
         });
 
@@ -172,6 +180,9 @@ export function Categories() {
           if (e.name_switch && e.name_switch.toLowerCase().includes("fac")) {
             dataSeguridadDown.push(e);
           }
+          if (e.equipo && e.status === "Down") {
+            licenciamientosDown.push(e);
+          }
         });
 
         setCoresUp(newCoresUp);
@@ -203,6 +214,8 @@ export function Categories() {
         setDockersDownp(dataDockersDown);
         setSeguridadUp(dataSeguridadUp);
         setSeguridadDown(dataSeguridadDown);
+        setLicenciamientosUpState(licenciamientosUp);
+        seLlicenciamientosDownState(licenciamientosDown);
       } catch (error) {
         console.error(error);
         setIsLoading(false);
@@ -377,6 +390,16 @@ export function Categories() {
                 <td>{seguridadUp.length}</td>
                 <td>{seguridadDown.length}</td>
                 <td>{seguridadUp.length + seguridadDown.length}</td>
+              </tr>
+              <tr>
+                <td className="td-category-ig">
+                  <Link to="/monitoreo/infraestrucura-general/licenciamientos">
+                    Licenciamientos
+                  </Link>
+                </td>
+                <td>{licenciamientosUpState.length}</td>
+                <td>{licenciamientosDownState.length}</td>
+                <td>{licenciamientosUpState.length + licenciamientosDownState.length}</td>
               </tr>
             </tbody>
           </table>

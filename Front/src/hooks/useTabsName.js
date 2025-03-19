@@ -46,6 +46,10 @@ export const useTabsName = (pathname) => {
       return "Sistema Tetra";
     case "/monitoreo/flotacion/ot":
       return "Red OT Flotacion";
+    case "/monitoreo/infraestrucura-general/licenciamientos":
+      return "Licenciamientos";
+    case "/candelaria/monitoreo/dragos":
+      return "Dragos";
     default:
       return "DevNet";
   }

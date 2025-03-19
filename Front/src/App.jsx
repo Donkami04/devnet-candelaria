@@ -58,6 +58,7 @@ import { AnilloTetra } from "./components/AnilloTetra/AnilloTetra";
 import { FlotacionOt } from "./components/AnilloFlotacionOt/FlotacionOt";
 import { Mra } from "./components/Mra/Mra";
 import { Dragos } from "./components/Dragos/Dragos";
+import { Licenciamientos } from "./components/InfraGeneral/Licenciamientos/Licenciamientos";
 
 function App() {
   const location = useLocation();
@@ -149,6 +150,7 @@ function App() {
         <Route path="/candelaria/monitoreo/flotacion/ot" element={<FlotacionOt />} />
         <Route path="/candelaria/monitoreo/mra" element={<Mra />} />
         <Route path="/candelaria/monitoreo/dragos" element={<Dragos />} />
+        <Route path="/monitoreo/infraestrucura-general/licenciamientos" element={<Licenciamientos />} />
       </Routes>
 
       <div className="refresh-button-container">
