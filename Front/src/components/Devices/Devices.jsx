@@ -225,7 +225,7 @@ export function Devices() {
         <td>{device?.prtg_sensorname || "Actualizando..."}</td>
         <td
           className={
-            device.prtg_status.toLowerCase().includes("down") ? "kpi-red" : ""
+            device?.prtg_status?.toLowerCase().includes("down") ? "kpi-red" : ""
           }
         >
           <a href={`${PRTG_URL}${device?.prtg_id || ""}`} target="_blank">
