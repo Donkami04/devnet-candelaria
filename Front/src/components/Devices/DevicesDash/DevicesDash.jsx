@@ -22,10 +22,7 @@ export function DevicesDash() {
           console.error("Error al obtener los calculos de los dispositivos");
         }
       } catch (error) {
-        console.error(
-          "Error al obtener el listado de indicadores de los dispositivos:",
-          error
-        );
+        console.error("Error al obtener el listado de indicadores de los dispositivos:", error);
       }
     };
     fetchData();
@@ -35,10 +32,7 @@ export function DevicesDash() {
   const currentTab = document.title;
 
   // Determina el nombre de la clase de la tabla basado en la pestaña actual
-  const tableClassName =
-    currentTab === "DevNet Home"
-      ? "devices-dash-table-home"
-      : "devices-dash-table";
+  const tableClassName = currentTab === "DevNet Home" ? "devices-dash-table-home" : "devices-dash-table";
 
   const totalDevicesFake =
     indicatorsDevices &&
@@ -49,7 +43,12 @@ export function DevicesDash() {
       indicatorsDevices.numCamerasDown +
       indicatorsDevices.numApDown +
       indicatorsDevices.numOthersDown +
-      indicatorsDevices.numImpresorasDown;
+      indicatorsDevices.numImpresorasDown +
+      indicatorsDevices.numImpresorasDown +
+      indicatorsDevices.numMagicUp +
+      indicatorsDevices.numMagicDown +
+      indicatorsDevices.numBarreraUp +
+      indicatorsDevices.numBarreraDown 
 
   if (spinnerDevices) {
     return (
@@ -89,6 +88,18 @@ export function DevicesDash() {
             <td>{indicatorsDevices && indicatorsDevices.numImpresorasUp}</td>
             <td>{indicatorsDevices && indicatorsDevices.numImpresorasDown}</td>
             <td>{indicatorsDevices && indicatorsDevices.numTotalImpresoras}</td>
+          </tr>
+          <tr>
+            <td>MAGIC INFO</td>
+            <td>{indicatorsDevices && indicatorsDevices.numMagicUp}</td>
+            <td>{indicatorsDevices && indicatorsDevices.numMagicDown}</td>
+            <td>{indicatorsDevices && indicatorsDevices.numTotalMagic}</td>
+          </tr>
+          <tr>
+            <td>CTRL DE ACCESO</td>
+            <td>{indicatorsDevices && indicatorsDevices.numBarreraUp}</td>
+            <td>{indicatorsDevices && indicatorsDevices.numBarreraDown}</td>
+            <td>{indicatorsDevices && indicatorsDevices.numTotalBarrera}</td>
           </tr>
           <tr>
             <td>OTROS</td>

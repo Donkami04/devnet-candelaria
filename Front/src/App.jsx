@@ -154,8 +154,8 @@ function App() {
       </Routes>
 
       <div className="refresh-button-container">
-        <span title={"Dragos"} style={{ marginLeft: "10px" }} className="refresh-button-container-2">
-          Version 2.2.0
+        <span title={"Magic TV - Barreras - Licenciamientos"} style={{ marginLeft: "10px" }} className="refresh-button-container-2">
+          Version 2.3.0
         </span>
         <div className="pause-and-icons-container">
           <IconsPage />
