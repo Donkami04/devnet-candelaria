@@ -1,5 +1,5 @@
 .dates-reset-fw {
-    background-color: rgb(240, 22, 22);
+    background-color: rgb(213, 213, 249);
     position: absolute;
     right: 0;
     top: 8rem;
@@ -14,7 +14,7 @@
     border-bottom: black solid 1px;
     max-height: 80vh;
     overflow-y: auto;
-    color: white;
+    color: black;
     border-radius: 20px;
 }
 

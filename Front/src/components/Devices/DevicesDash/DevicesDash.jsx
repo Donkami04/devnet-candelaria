@@ -15,6 +15,7 @@ export function DevicesDash() {
         const indicators = await getDevicesIndicators();
         if (indicators.statusCode === 200) {
           setIndicatorsDevices(indicators.data);
+          
           setSpinnerDevices(false);
         } else {
           setShowApiMessage(true);

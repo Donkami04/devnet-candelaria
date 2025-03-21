@@ -8,6 +8,8 @@ import { FailHistoryFw } from "./FailHistoryFw";
 import { DatetimeModules } from "../DatetimeModules/DatetimeModules";
 import BeatLoader from "react-spinners/BeatLoader";
 import PuffLoader from "react-spinners/PuffLoader";
+import BarLoader  from "react-spinners/BarLoader";
+import { FaEye } from "react-icons/fa";
 import axios from "axios";
 import "./firewalls.css";
 
@@ -32,12 +34,8 @@ export function Firewalls() {
         setFirewalls(firewallsList.data);
 
         // Filtrar los arreglos después de obtener los datos
-        const corporateFirewalls = firewallsList.data.filter(
-          (fw) => fw.ubication === "corporate"
-        );
-        const communityFirewalls = firewallsList.data.filter(
-          (fw) => fw.ubication === "community"
-        );
+        const corporateFirewalls = firewallsList.data.filter((fw) => fw.ubication === "corporate");
+        const communityFirewalls = firewallsList.data.filter((fw) => fw.ubication === "community");
         setFwCorporate(corporateFirewalls);
         setFwCommunity(communityFirewalls);
         setShowSpinner(false);
@@ -75,21 +73,13 @@ export function Firewalls() {
       <tr key={fw.id}>
         <td>{fw.name}</td>
         <td>{fw.ip}</td>
-        <td
-          className={
-            fw.num_users && fw.num_users.includes("Not Found") ? "kpi-red" : ""
-          }
-        >
+        <td className={fw.num_users && fw.num_users.includes("Not Found") ? "kpi-red" : ""}>
           {!fw.num_users ? "Actualizando..." : fw.num_users}
         </td>
         <td>{fw.channel}</td>
         <td>{fw.link}</td>
         <td
-          title={
-            fw.fail_datetime !== "No fail reported"
-              ? `Falló desde ${fw.fail_datetime}`
-              : ""
-          }
+          title={fw.fail_datetime !== "No fail reported" ? `Falló desde ${fw.fail_datetime}` : ""}
           style={{
             cursor: fw.fail_datetime !== "No fail reported" ? "help" : "",
           }}
@@ -113,8 +103,7 @@ export function Firewalls() {
               ? "kpi-red"
               : parseFloat(fw.packet_loss) > 5
               ? "kpi-red"
-              : parseFloat(fw.packet_loss) >= 2 &&
-                parseFloat(fw.packet_loss) <= 5
+              : parseFloat(fw.packet_loss) >= 2 && parseFloat(fw.packet_loss) <= 5
               ? "kpi-yellow"
               : "")
           }
@@ -142,11 +131,7 @@ export function Firewalls() {
               : "")
           }
         >
-          {!fw.latency
-            ? "Actualizando..."
-            : !fw.latency.includes(".") && fw.latency
-            ? fw.latency
-            : fw.latency + " ms"}
+          {!fw.latency ? "Actualizando..." : !fw.latency.includes(".") && fw.latency ? fw.latency : fw.latency + " ms"}
           {/* {fw.latency &&
             (!fw.latency.includes(".")
               ? fw.latency
@@ -166,11 +151,7 @@ export function Firewalls() {
               : "")
           }
         >
-          {!fw.jitter
-            ? "Actualizando..."
-            : !fw.jitter.includes(".")
-            ? fw.jitter
-            : fw.jitter + " ms"}
+          {!fw.jitter ? "Actualizando..." : !fw.jitter.includes(".") ? fw.jitter : fw.jitter + " ms"}
           {/* {fw.jitter &&
             (!fw.jitter.includes(".")
               ? fw.jitter
@@ -180,10 +161,7 @@ export function Firewalls() {
         </td>
         <td
           title={
-            fw.status_gateway &&
-            (fw.status_gateway.includes("Down")
-              ? "IP Gateway PRTG: Down"
-              : "IP Gateway PRTG: Up")
+            fw.status_gateway && (fw.status_gateway.includes("Down") ? "IP Gateway PRTG: Down" : "IP Gateway PRTG: Up")
           }
           style={{ cursor: "help" }}
           className={
@@ -194,8 +172,7 @@ export function Firewalls() {
               ? "kpi-blue"
               : fw.status_gateway.includes("Down")
               ? "kpi-red"
-              : fw.status_gateway.includes("Not Found") &&
-                fw.gateway.includes("100.64.0.1")
+              : fw.status_gateway.includes("Not Found") && fw.gateway.includes("100.64.0.1")
               ? "kpi-green"
               : fw.status_gateway.includes("Not Found")
               ? "kpi-red"
@@ -209,7 +186,12 @@ export function Firewalls() {
           onClick={fw.failed_before === "Si" ? () => getHistoryFail(fw) : null}
           style={{ cursor: fw.failed_before === "Si" ? "pointer" : "default" }}
         >
-          {!fw.failed_before ? "No" : fw.failed_before}
+          {!fw.failed_before || fw.failed_before === "No"
+            ? "No"
+            : showLoadingButton
+            ? <div style={{display: "grid", placeContent: "center"}}><BarLoader color="red" /></div> // Muestra el mensaje de carga
+            : "Si, ver registro"}{" "}
+          {fw.failed_before === "Si" && !showLoadingButton && <FaEye color="red" />}
         </td>
       </tr>
     ));
@@ -233,11 +215,7 @@ export function Firewalls() {
         <td>{fw.channel}</td>
         <td>{fw.link}</td>
         <td
-          title={
-            fw.fail_datetime && fw.fail_datetime !== "No fail reported"
-              ? fw.fail_datetime
-              : ""
-          }
+          title={fw.fail_datetime && fw.fail_datetime !== "No fail reported" ? fw.fail_datetime : ""}
           style={{
             cursor: fw.fail_datetime !== "No fail reported" ? "help" : "",
           }}
@@ -261,17 +239,12 @@ export function Firewalls() {
               ? "kpi-red"
               : parseFloat(fw.packet_loss) > 5
               ? "kpi-red"
-              : parseFloat(fw.packet_loss) >= 2 &&
-                parseFloat(fw.packet_loss) <= 5
+              : parseFloat(fw.packet_loss) >= 2 && parseFloat(fw.packet_loss) <= 5
               ? "kpi-yellow"
               : "")
           }
         >
-          {!fw.packet_loss
-            ? "Actualizando..."
-            : fw.packet_loss === "Not Found"
-            ? "Not Found"
-            : fw.packet_loss + "%"}
+          {!fw.packet_loss ? "Actualizando..." : fw.packet_loss === "Not Found" ? "Not Found" : fw.packet_loss + "%"}
           {/* {fw.packet_loss === "Not Found" ? "Not Found" : fw.packet_loss + "%"} */}
         </td>
         <td
@@ -286,11 +259,7 @@ export function Firewalls() {
               : "")
           }
         >
-          {!fw.latency
-            ? "Actualizando..."
-            : !fw.latency.includes(".") && fw.latency
-            ? fw.latency
-            : fw.latency + " ms"}
+          {!fw.latency ? "Actualizando..." : !fw.latency.includes(".") && fw.latency ? fw.latency : fw.latency + " ms"}
         </td>
         <td
           className={
@@ -304,11 +273,7 @@ export function Firewalls() {
               : "")
           }
         >
-          {!fw.jitter
-            ? "Actualizando..."
-            : !fw.jitter.includes(".")
-            ? fw.jitter
-            : fw.jitter + " ms"}
+          {!fw.jitter ? "Actualizando..." : !fw.jitter.includes(".") ? fw.jitter : fw.jitter + " ms"}
         </td>
         <td
           className={
@@ -356,12 +321,9 @@ export function Firewalls() {
       ubication: dataFw.ubication,
     });
     try {
-      const request = await axios.post(
-        `${BASE_API_URL}/firewalls/history-fail`,
-        {
-          ...dataFw,
-        }
-      );
+      const request = await axios.post(`${BASE_API_URL}/firewalls/history-fail`, {
+        ...dataFw,
+      });
       if (request.status === 200) {
         setArrayHistoryFail(request.data.data);
         setShowHistoryTable(true);
@@ -386,7 +348,7 @@ export function Firewalls() {
       )}
       <Navbar title={"Firewalls - Canales Internet"} />
 
-      {showLoadingButton && <BeatLoader className="charging-bar" color="red" />}
+      {/* {showLoadingButton && <BeatLoader className="charging-bar" color="red" />} */}
       {/* {showHistoryButton && (
         <button
           style={{ cursor: "pointer" }}
