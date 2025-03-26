@@ -221,8 +221,8 @@ export function Devices() {
         <td>{device?.type || "Actualizando..."}</td>
         <td>{device?.site || "Actualizando..."}</td>
         <td>{device?.dpto || "Actualizando..."}</td>
-        <td>{device?.prtg_name_device || "Actualizando..."}</td>
         <td>{device?.prtg_sensorname || "Actualizando..."}</td>
+        <td>{device?.prtg_name_device || "Actualizando..."}</td>
         <td
           className={
             device?.prtg_status?.toLowerCase().includes("down") ? "kpi-red" : ""

@@ -154,8 +154,8 @@ function App() {
       </Routes>
 
       <div className="refresh-button-container">
-        <span title={"Magic TV - Barreras - Licenciamientos"} style={{ marginLeft: "10px" }} className="refresh-button-container-2">
-          Version 2.3.0
+        <span title={"Se intercambian columnas en la tabla devices, Col: Devices - Sensor"} style={{ marginLeft: "10px" }} className="refresh-button-container-2">
+          Version 2.3.1
         </span>
         <div className="pause-and-icons-container">
           <IconsPage />
