@@ -14,17 +14,17 @@ paramiko_logger = logging.getLogger("paramiko")
 paramiko_logger.setLevel(logging.WARNING)
 
 def ospf_function(switch, max_attempts=5):
-    
+
     ip_switch = switch['ip']
     red = switch['red']
     name = switch['name_switch']
     is_ospf = switch['is_ospf']
-    
+
     if is_ospf == 0:
         return []
-    
+
     attempts = 0
-    
+
     while attempts < max_attempts:
         try:
             client = paramiko.SSHClient()
@@ -46,10 +46,11 @@ def ospf_function(switch, max_attempts=5):
                 output += channel.recv(1024).decode('utf-8')
             channel.close()
             client.close()
-            
+            print("#############", output)
             # Utilizar una expresión regular para capturar la IP y la interfaz
-            neighbor_list = re.findall(r'(\d+\.\d+\.\d+\.\d+)\s+\d+\s+(FULL/\w+)\s+\d+:\d+:\d+\s+(\d+\.\d+\.\d+\.\d+)\s+(\w+)', output)
-            
+            neighbor_list = re.findall(r'(\d+\.\d+\.\d+\.\d+)\s+\d+\s+(\S+)\s+\d+:\d+:\d+\s+(\d+\.\d+\.\d+\.\d+)\s+(\S+)', output)
+            # neighbor_list = re.findall(r'(\d+\.\d+\.\d+\.\d+)\s+\d+\s+(FULL/\w+)\s+\d+:\d+:\d+\s+(\d+\.\d+\.\d+\.\d+)\s+(\w+)', output)
+
             data_list = []
             for match in neighbor_list:
                 ip, state, neighbor_ip, interface = match
@@ -62,7 +63,7 @@ def ospf_function(switch, max_attempts=5):
                     'interface': interface
                 }
                 data_list.append(neighbor_data)
-                
+
             if len(data_list) > 0:
                 return data_list
             else:
@@ -90,6 +91,6 @@ def ospf_function(switch, max_attempts=5):
     return data
 
 
-# prueba = {'ip': '10.224.127.148', 'red': 'it', 'name_switch':'prueba', 'is_ospf': 1}
+# prueba = {"ip": "10.224.127.147", "red": "it", "name_switch": "prueba", "is_ospf": 1}
 # resultado_prueba = ospf_function(prueba)
 # print(resultado_prueba)
