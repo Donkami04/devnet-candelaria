@@ -62,7 +62,7 @@ def process_neighbors(data_switches):
         logging.error(
             f"Error en la funcion `process_neighbors` en el archivo neighbors"
         )
-        
+
 
 def status_neighbor(current_neighbors):
     try:
@@ -86,8 +86,9 @@ def status_neighbor(current_neighbors):
         logging.error(
             f"Error en la funcion `status_neighbor` en el archivo neighbors"
         )
-        
+
 def get_interfaces_descriptions(data_switches):
+    print("Entrando a get_interfaces_descriptions", data_switches)
     data_interfaces = []
     for element in data_switches:
         ip_switch = element["ip"]
@@ -99,6 +100,7 @@ def get_interfaces_descriptions(data_switches):
             pass
         else:
             try:
+                print("Entrando a try <================")
                 client = paramiko.SSHClient()
                 client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
                 client.connect(
@@ -117,7 +119,7 @@ def get_interfaces_descriptions(data_switches):
                     output += channel.recv(1024).decode("utf-8")
                 channel.close()
                 client.close()
-
+                print('output', output)
                 # Parsear el output
                 parsed_output = []
                 lines = output.strip().split("\n")
@@ -147,9 +149,9 @@ def get_interfaces_descriptions(data_switches):
                 logging.error(e)
                 logging.error("Error en funcion get_interfaces_description en el archivo neighbors")
                 return []
-            
+    print("data_interfaces", data_interfaces)
     return data_interfaces
-            
+
 def set_interfaces_descriptions(interfaces_description, status_data_neighbors):
     try:
         for element in status_data_neighbors:
@@ -172,10 +174,20 @@ def set_interfaces_descriptions(interfaces_description, status_data_neighbors):
                 ):
                     element["interface_descrip"] = item["descrip"]
                     break
-                
+
         return status_data_neighbors
 
     except Exception as e:
         logging.error(traceback.format_exc())
         logging.error(e)
         logging.error("Error en funcion set_interfaces_description en el archivo neighbors")
+
+get_interfaces_descriptions(
+[    {
+        "ip": "10.224.127.1",
+        "is_eigrp": 1,
+        "is_bgp": 1,
+        "is_ospf": 1,
+        "name_switch": "SW1",
+    }]
+)

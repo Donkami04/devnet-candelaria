@@ -5,7 +5,9 @@ import { Spinner } from "../Spinner/Spinner";
 import { Navbar } from "../Navbar/Navbar";
 import { DatetimeModules } from "../DatetimeModules/DatetimeModules";
 import { FaEye } from "react-icons/fa6";
-import { PRTG_URL } from "../../utils/Api-candelaria/api";
+import { PRTG_URL, BASE_API_URL } from "../../utils/Api-candelaria/api";
+import moment from "moment";
+import axios from "axios";
 import "./BaseFim.css";
 
 export function BaseFim() {
@@ -15,15 +17,26 @@ export function BaseFim() {
   const [baseName, setBaseName] = useState("");
   const [showDatesReset, setShowDatesReset] = useState(false);
 
+  const [sdate, setSdate] = useState(moment().startOf("month").format("YYYY-MM-DD"));
+  const [edate, setEdate] = useState(moment().endOf("month").format("YYYY-MM-DD"));
+  const [month, setMonth] = useState(moment().format("MMMM"));
+  // const sdate = moment().startOf("month").format("YYYY-MM-DD");
+  // const edate = moment().endOf("month").format("YYYY-MM-DD");
+  // const currentMonth = moment().format("MMMM");
+  const currentMonth = new Date().toLocaleDateString('es-ES', { month: 'long' });
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await getDataBaseFim();
         const fimStatus = response.data.fimStatus;
-        const datesResets = response.data.datesResets;
+        const datesResets = await axios.post(`${BASE_API_URL}/fim/range`, {
+          sdate,
+          edate,
+        });
         fimStatus.forEach((e) => {
           e.showDetails = false; // Agregar una propiedad showDetails a cada elemento de baseFim
-          e.listDown = datesResets
+          e.listDown = datesResets?.data?.data?.datesResets
             .reverse()
             .filter((elem) => elem.base_name === e.base_name)
             .map((elem) => elem);
@@ -44,6 +57,36 @@ export function BaseFim() {
     setListDownSelected(fimData.listDown);
     setBaseName(fimData.base_name);
     setShowDatesReset(true);
+  };
+
+  const changeMonth = async (baseName) => {
+    try {
+      const currentYear = moment().year();
+      const date = moment(`${month} ${currentYear}`, "MMMM YYYY");
+      const firstDay = date.clone().startOf("month").format("YYYY-MM-DD");
+      const lastDay = date.clone().endOf("month").format("YYYY-MM-DD");
+
+      const response = await getDataBaseFim();
+      const fimStatus = response.data.fimStatus;
+      const datesResets = await axios.post(`${BASE_API_URL}/fim/range`, {
+        sdate: firstDay,
+        edate: lastDay,
+      });
+      const datesFilteredByName = datesResets?.data?.data?.datesResets.filter(
+        (elem) => elem.base_name === baseName
+      )
+      setListDownSelected(datesFilteredByName)
+      fimStatus.forEach((e) => {
+        e.showDetails = false; // Agregar una propiedad showDetails a cada elemento de baseFim
+        e.listDown = datesResets?.data?.data?.datesResets
+          .reverse()
+          .filter((elem) => elem.base_name === baseName)
+          .map((elem) => elem);
+        e.counterDown = e.listDown.length;
+      });
+    } catch (error) {
+      console.error("Error al obtener la data de las base FIM:", error);
+    }
   };
 
   if (showSpinner) {
@@ -67,7 +110,9 @@ export function BaseFim() {
               <th>Ip</th>
               <th>Estado PING</th>
               <th>Estado HTTP</th>
-              <th>Num. de Reinicios</th>
+              <th>
+                Num. de Reinicios <p>{currentMonth}</p>
+              </th>
               <th>Mensaje</th>
             </tr>
           </thead>
@@ -82,8 +127,6 @@ export function BaseFim() {
                   </a>{" "}
                 </td>
                 <td
-                  style={{ cursor: "help" }}
-                  title={fim.message.toUpperCase()}
                   className={
                     fim.status_ping.includes("Down")
                       ? "kpi-red"
@@ -99,8 +142,6 @@ export function BaseFim() {
                   {fim.status_ping}
                 </td>
                 <td
-                  style={{ cursor: "help" }}
-                  title={fim.message.toUpperCase()}
                   className={
                     fim.status_http.includes("Down")
                       ? "kpi-red"
@@ -134,6 +175,9 @@ export function BaseFim() {
       {showDatesReset && (
         <div className="dates-reset-container-fim">
           <DatesReset
+            month={currentMonth}
+            setMonth={setMonth}
+            changeMonth={changeMonth}
             dataDownSelected={listDownSelected}
             baseName={baseName}
             setShowDatesReset={setShowDatesReset}

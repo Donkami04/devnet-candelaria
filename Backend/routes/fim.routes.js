@@ -18,12 +18,13 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-router.get("/range",
+router.post("/range",
   validateData(getBaseBtwDate),
   async (req, res, next) => {
   try {
-    const { sdate, edate, base_ip } = req.body;
-    const response = await FimBase.getDatesDownBetween(sdate, edate, base_ip);
+    const { sdate, edate } = req.body;
+    // const { sdate, edate, base_ip } = req.body;
+    const response = await FimBase.getDatesDownBetween(sdate, edate);
     res.status(response.statusCode).json({
       message: response.message,
       data: response.data,

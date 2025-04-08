@@ -59,7 +59,6 @@ def update_interfaces(data):
 
 
 def update_sysHealth(data):
-    print("data dedse la DB", data)
     delete_query = "DELETE FROM devnet.system_health"
 
     query = """

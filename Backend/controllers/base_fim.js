@@ -22,14 +22,14 @@ class FimService {
     }
   }
 
-  async getDatesDownBetween(sdate, edate, base_ip) {
+  async getDatesDownBetween(sdate, edate) {
     try {
       const datesResets = await DatesFimBase.findAll({
         where: {
           date: {
             [Op.between]: [`${sdate} 00:00:00`, `${edate} 23:59:59`],
           },
-          base_ip, // Filtrar por dirección IP
+          // base_ip,
         },
       });
       console.log("#####################",datesResets);

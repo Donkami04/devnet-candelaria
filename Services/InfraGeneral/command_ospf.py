@@ -46,7 +46,7 @@ def ospf_function(switch, max_attempts=5):
                 output += channel.recv(1024).decode('utf-8')
             channel.close()
             client.close()
-            print("#############", output)
+            
             # Utilizar una expresión regular para capturar la IP y la interfaz
             neighbor_list = re.findall(r'(\d+\.\d+\.\d+\.\d+)\s+\d+\s+(\S+)\s+\d+:\d+:\d+\s+(\d+\.\d+\.\d+\.\d+)\s+(\S+)', output)
             # neighbor_list = re.findall(r'(\d+\.\d+\.\d+\.\d+)\s+\d+\s+(FULL/\w+)\s+\d+:\d+:\d+\s+(\d+\.\d+\.\d+\.\d+)\s+(\w+)', output)

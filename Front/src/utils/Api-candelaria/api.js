@@ -290,6 +290,15 @@ export const getDataBaseFim = async () => {
     });
 };
 
+// export const getDataBaseFimDatesRange = async () => {
+//   return axios
+//     .get(`${BASE_API_URL}/fim/range`)
+//     .then((response) => response.data)
+//     .catch((error) => {
+//       throw new Error("FIM: Error del API REST Candealaria : ", error);
+//     });
+// };
+
 export const getDataAnillo = async () => {
   return axios
     .get(`${BASE_API_URL}/anillo-opit`)
