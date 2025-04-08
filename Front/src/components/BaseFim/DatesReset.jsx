@@ -1,10 +1,19 @@
 import { MdArrowForwardIos } from "react-icons/md";
-import moment from "moment";
+import BeatLoader from "react-spinners/BeatLoader";
 import "./BaseFim.css";
 
-export function DatesReset({ month, setMonth, changeMonth, dataDownSelected, baseName, setShowDatesReset }) {
+export function DatesReset({
+  months,
+  month,
+  setMonth,
+  changeMonth,
+  dataDownSelected,
+  baseName,
+  setShowDatesReset,
+  loadingNewDataRangeDate,
+}) {
   dataDownSelected = dataDownSelected.sort((a, b) => b.id - a.id);
-  const months = moment.months();
+
   return (
     <div className="dates-reset">
       <MdArrowForwardIos
@@ -18,27 +27,31 @@ export function DatesReset({ month, setMonth, changeMonth, dataDownSelected, bas
       />
       <h2 style={{ textAlign: "center" }}>Fechas de reinicio en el mes de {month}</h2>
       <div style={{ marginTop: "30px" }}>
-        <h3 style={{marginBottom: "1rem"}} >{baseName}</h3>
-        {/* <p style={{fontSize: "0.9rem"}}>Total de reinicios en {month}: {dataDownSelected.length}</p>
-        <p style={{ marginTop: "0.5rem", fontSize: "0.9rem", marginBottom: "0.5rem" }}>Selecciona el mes</p>
+        <h3 style={{ marginBottom: "1rem" }}>{baseName}</h3>
         <select
-          value={moment().month(month).month()} // Establece el mes como índice (0-11)
-          onChange={(e) => {
-            const selectedIndex = Number(e.target.value);
-            const selectedMonthName = moment().month(selectedIndex).format("MMMM");
-            setMonth(selectedMonthName);
-            console.log("eeeeeeeeeee", e.target.value);
-            changeMonth(baseName);
-          }}
           style={{ marginBottom: "1rem" }}
+          value={month}
+          onChange={(e) => {
+            setMonth(e.target.value);
+            changeMonth(baseName, e.target.value);
+          }}
         >
-          {months.map((m, index) => (
-            <option key={index} value={index}>
-              {m.charAt(0).toUpperCase() + m.slice(1)}
+          <option value="">Selecciona un mes</option>
+          {months.map((mes, index) => (
+            <option key={index} value={mes}>
+              {mes}
             </option>
           ))}
-        </select> */}
-        {dataDownSelected.length === 0 ? (
+        </select>
+        <p style={{ fontSize: "0.9rem", marginBottom: "1rem" }}>
+          Total de reinicios en <span style={{ fontWeight: "bolder" }}>{month}</span>: {dataDownSelected.length}
+        </p>
+
+        {loadingNewDataRangeDate ? (
+          <div style={{ marginTop: "8rem" }}>
+            <BeatLoader />
+          </div>
+        ) : dataDownSelected.length === 0 ? (
           <p style={{ marginTop: "2rem" }}>No hay registros de intentos de reinicio</p>
         ) : (
           dataDownSelected.map((e) => (

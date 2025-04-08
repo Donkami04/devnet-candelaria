@@ -16,14 +16,26 @@ export function BaseFim() {
   const [listDownSelected, setListDownSelected] = useState([]);
   const [baseName, setBaseName] = useState("");
   const [showDatesReset, setShowDatesReset] = useState(false);
-
   const [sdate, setSdate] = useState(moment().startOf("month").format("YYYY-MM-DD"));
   const [edate, setEdate] = useState(moment().endOf("month").format("YYYY-MM-DD"));
-  const [month, setMonth] = useState(moment().format("MMMM"));
-  // const sdate = moment().startOf("month").format("YYYY-MM-DD");
-  // const edate = moment().endOf("month").format("YYYY-MM-DD");
-  // const currentMonth = moment().format("MMMM");
-  const currentMonth = new Date().toLocaleDateString('es-ES', { month: 'long' });
+  const currentMonth = new Date().toLocaleDateString("es-ES", { month: "long" });
+  const [month, setMonth] = useState(currentMonth);
+  const [loadingNewDataRangeDate, setLoadingNewDataRangeDate] = useState(false);
+
+  const months = [
+    "Enero",
+    "Febrero",
+    "Marzo",
+    "Abril",
+    "Mayo",
+    "Junio",
+    "Julio",
+    "Agosto",
+    "Septiembre",
+    "Octubre",
+    "Noviembre",
+    "Diciembre",
+  ];
 
   useEffect(() => {
     const fetchData = async () => {
@@ -59,32 +71,32 @@ export function BaseFim() {
     setShowDatesReset(true);
   };
 
-  const changeMonth = async (baseName) => {
+  const changeMonth = async (baseName, monthSelected) => {
     try {
+      setLoadingNewDataRangeDate(true)
+      const monthIndex = months.indexOf(monthSelected);
       const currentYear = moment().year();
-      const date = moment(`${month} ${currentYear}`, "MMMM YYYY");
-      const firstDay = date.clone().startOf("month").format("YYYY-MM-DD");
-      const lastDay = date.clone().endOf("month").format("YYYY-MM-DD");
-
+      const firstDay = moment({ currentYear, month: monthIndex }).startOf('month').format('YYYY-MM-DD');
+      const lastDay = moment({ currentYear, month: monthIndex }).endOf('month').format('YYYY-MM-DD');
       const response = await getDataBaseFim();
       const fimStatus = response.data.fimStatus;
       const datesResets = await axios.post(`${BASE_API_URL}/fim/range`, {
         sdate: firstDay,
         edate: lastDay,
       });
-      const datesFilteredByName = datesResets?.data?.data?.datesResets.filter(
-        (elem) => elem.base_name === baseName
-      )
-      setListDownSelected(datesFilteredByName)
+      const datesFilteredByName = datesResets?.data?.data?.datesResets.filter((elem) => elem.base_name === baseName);
+      setListDownSelected(datesFilteredByName);
       fimStatus.forEach((e) => {
-        e.showDetails = false; // Agregar una propiedad showDetails a cada elemento de baseFim
+        e.showDetails = false;
         e.listDown = datesResets?.data?.data?.datesResets
           .reverse()
           .filter((elem) => elem.base_name === baseName)
           .map((elem) => elem);
         e.counterDown = e.listDown.length;
       });
+      setLoadingNewDataRangeDate(false)
     } catch (error) {
+      setLoadingNewDataRangeDate(false)
       console.error("Error al obtener la data de las base FIM:", error);
     }
   };
@@ -162,7 +174,10 @@ export function BaseFim() {
                     <FaEye
                       title={"Ver historial de intento de reinicios"}
                       style={{ cursor: "pointer" }}
-                      onClick={() => fimData(fim)}
+                      onClick={() => {
+                        fimData(fim);
+                        setMonth(currentMonth);
+                      }}
                     />
                   </div>
                 </td>
@@ -175,12 +190,14 @@ export function BaseFim() {
       {showDatesReset && (
         <div className="dates-reset-container-fim">
           <DatesReset
-            month={currentMonth}
+            month={month}
+            months={months}
             setMonth={setMonth}
             changeMonth={changeMonth}
             dataDownSelected={listDownSelected}
             baseName={baseName}
             setShowDatesReset={setShowDatesReset}
+            loadingNewDataRangeDate={loadingNewDataRangeDate}
           />
         </div>
       )}
