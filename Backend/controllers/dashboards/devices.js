@@ -38,14 +38,14 @@ const dashboardDevices = async () => {
     const numBarreraUp = devices.filter(
       (device) =>
         device.type &&
-        device.type.toLowerCase().includes("barrera") &&
+        device.type.toLowerCase().includes("ctrl") &&
         device.prtg_status &&
         device.prtg_status.includes("Up")
     );
     const numBarreraDown = devices.filter(
       (device) =>
         device.type &&
-        device.type.toLowerCase().includes("barrera") &&
+        device.type.toLowerCase().includes("ctrl") &&
         device.prtg_status &&
         device.prtg_status.includes("Down")
     );
@@ -59,7 +59,7 @@ const dashboardDevices = async () => {
         device.type.toLowerCase() !== "impresora" &&
         device.type.toLowerCase() !== "access point red negocio" &&
         device.type.toLowerCase() !== "magic tv" &&
-        !device.type.toLowerCase().includes("barrera") &&
+        !device.type.toLowerCase().includes("ctrl") &&
         device.prtg_status &&
         device.prtg_status.includes("Up")
     );
@@ -70,7 +70,7 @@ const dashboardDevices = async () => {
         device.type.toLowerCase() !== "impresora" &&
         device.type.toLowerCase() !== "access point red negocio" &&
         device.type.toLowerCase() !== "magic tv" &&
-        !device.type.toLowerCase().includes("barrera") &&
+        !device.type.toLowerCase().includes("ctrl") &&
         device.prtg_status &&
         device.prtg_status.includes("Down")
     );
