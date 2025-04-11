@@ -19,14 +19,14 @@ from neighbors import (
 
 def main():
     try:
+        logging.info(f"Iniciando proceso")
+        
         # Obtenemos los datos de la BD de produccion
         data_switches = get_data(table_name="data_inf_gen")
 
         # Eliminamos del listado la concentradora inalambrica
         data_switches = [sw for sw in data_switches if sw["category"] != "AP"]
         
-        logging.info(f"Iniciando proceso")
-
         # Actualizamos la informacion referente a PRTG
         update_prtg_data(data_switches)
 
