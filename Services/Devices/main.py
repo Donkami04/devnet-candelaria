@@ -64,7 +64,7 @@ def get_devices_data():
         devices = get_data(table_name="devices")
         cctv_data = get_cctv_data()
 
-        bloques = [devices[:250], devices[250:500], devices[500:]]
+        bloques = [devices[:250], devices[250:500], devices[500:750], devices[750:]]
 
         final_data = []
 
