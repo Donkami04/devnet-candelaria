@@ -62,7 +62,7 @@ def main():
 
 def bucle(scheduler):
     main()
-    scheduler.enter(7200, 1, bucle, (scheduler,))
+    scheduler.enter(300, 1, bucle, (scheduler,))
 
 
 if __name__ == "__main__":

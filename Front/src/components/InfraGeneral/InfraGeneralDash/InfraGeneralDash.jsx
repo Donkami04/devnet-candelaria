@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-// import { useInfGenDash } from '../../../hooks/useInfGenDash';
+import { FaInfoCircle } from "react-icons/fa";
 import { useDataInfGen } from "../../../hooks/useDataInfGen";
 import PuffLoader from "react-spinners/PuffLoader";
 import "./InfraGeneralDash.css";
@@ -11,11 +11,27 @@ export function InfraGeneralDash() {
   const [infGenDashUp, setIinfGenDashUp] = useState({});
   const [infGenDashDown, setIinfGenDashDown] = useState({});
   const [spinnerInfra, setSpinnerInfra] = useState(true);
+  const [tempSensUp, setTempSensUp] = useState([]);
+  const [tempSensDown, setTempSensDown] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const result = await useDataInfGen();
+        const elementsTempUp = [];
+        const elementsTempDown = [];
+        result.upElements.forEach((element) => {
+          if (element.name && element.name.includes("Temperatures")) {
+            elementsTempUp.push(element);
+          }
+        });
+        result.downElements.forEach((element) => {
+          if (element.name && element.name.includes("Temperatures")) {
+            elementsTempDown.push(element);
+          }
+        });
+        setTempSensUp(elementsTempUp);
+        setTempSensDown(elementsTempDown);
         setIinfGenDashUp(result.upElements.length);
         setIinfGenDashDown(result.downElements.length);
         setSpinnerInfra(false);
@@ -29,7 +45,7 @@ export function InfraGeneralDash() {
 
   if (spinnerInfra) {
     return (
-      <div>
+      <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
         <PuffLoader color="red" />
       </div>
     );
@@ -40,6 +56,7 @@ export function InfraGeneralDash() {
       <table className="infra-dash-table">
         <thead>
           <tr>
+            <th><FaInfoCircle color="#545454" /></th>
             <th className="kpi-green">Up</th>
             <th className="kpi-red">Down</th>
             <th>Detalles</th>
@@ -47,6 +64,7 @@ export function InfraGeneralDash() {
         </thead>
         <tbody>
           <tr>
+            <td>General</td>
             <td>{infGenDashUp}</td>
             <td>{infGenDashDown}</td>
             <td>
@@ -68,6 +86,21 @@ export function InfraGeneralDash() {
                   <FaEye />
                 </Link>
               </div>
+            </td>
+          </tr>
+          <tr>
+            <td>Temperaturas</td>
+            <td>{tempSensUp.length}</td>
+            <td>{tempSensDown.length}</td>
+            <td>
+              <Link
+                title={"Ver detalles"}
+                style={{ width: "20px" }}
+                className="link-open-pit"
+                to="/monitoreo/infraestrucura-general/detalles?nombre=System%20Health%20Temperatures"
+              >
+                <FaEye />
+              </Link>
             </td>
           </tr>
         </tbody>

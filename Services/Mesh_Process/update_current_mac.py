@@ -32,6 +32,8 @@ def update_mac(last_data, current_data):
 
 def check_ip_in_output(last_data, current_data):
     try:
+        print("last_data ###### ======>", last_data)
+        print("current_data ###### ======>", current_data)
         data_updated = last_data
         ips = [data["ip"] for data in current_data]
 

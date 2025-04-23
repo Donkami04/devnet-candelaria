@@ -291,11 +291,15 @@ export function Firewalls() {
         </td>
 
         <td
-          className={fw.failed_before === "Si" ? "kpi-yellow" : ""}
           onClick={fw.failed_before === "Si" ? () => getHistoryFail(fw) : null}
           style={{ cursor: fw.failed_before === "Si" ? "pointer" : "default" }}
         >
-          {fw.failed_before}
+          {!fw.failed_before || fw.failed_before === "No"
+            ? "No"
+            : showLoadingButton
+            ? <div style={{display: "grid", placeContent: "center"}}><BarLoader color="red" /></div> // Muestra el mensaje de carga
+            : "Si, ver registro"}{" "}
+          {fw.failed_before === "Si" && !showLoadingButton && <FaEye color="red" />}
         </td>
       </tr>
     ));

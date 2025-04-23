@@ -9,10 +9,13 @@
   table-layout: fixed;
 }
 
-.table-dragos-home th,
+.table-dragos-home th {
+  border: 1px solid black;
+  padding: 6px;
+}
 .table-dragos-home td {
   border: 1px solid black;
-  padding: 8px;
+  padding: 3px;
 }
 
 .table-dragos-home th {
