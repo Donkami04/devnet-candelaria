@@ -448,7 +448,7 @@ export function Home() {
                       </td>
                     </tr>
                     <tr>
-                      <td>Clientes Mesh</td>
+                      <td>Clientes Open Pit</td>
                       <td>{dataMeshProcessUp.length}</td>
                       <td>{dataMeshProcessDown.length}</td>
                       <td>

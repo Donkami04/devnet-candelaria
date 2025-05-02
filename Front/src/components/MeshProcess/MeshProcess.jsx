@@ -39,14 +39,10 @@ export function MeshProcess() {
   // Lógica para filtrar los dispositivos marcados como "down" si el filtro está activado
   const filteredProcessMesh = processMesh.filter((device) => {
     const includesSearchTerm =
-      Object.values(device).some((value) =>
-        value.toString().toLowerCase().includes(searchTerm.toLowerCase())
-      ) || searchTerm === "";
+      Object.values(device).some((value) => value.toString().toLowerCase().includes(searchTerm.toLowerCase())) ||
+      searchTerm === "";
 
-    return (
-      includesSearchTerm &&
-      (!filterDown || device.prtg_status.toLowerCase().includes("down"))
-    );
+    return includesSearchTerm && (!filterDown || device.prtg_status.toLowerCase().includes("down"));
   });
 
   const handleFilterDownChange = (event) => {
@@ -55,7 +51,7 @@ export function MeshProcess() {
 
   return (
     <div>
-      <Navbar title={"Proceso Mesh"} />
+      <Navbar title={"Clientes Open Pit"} />
       <DatetimeModules module={"mesh_process"} name={"Clientes Mesh"} />
       <div className="filtres-processmesh-container">
         <input
@@ -82,77 +78,52 @@ export function MeshProcess() {
               <th>Ubicación</th>
               <th>Dispositivo</th>
               <th>Cliente</th>
-              <th>Mac Anterior</th>
-              <th>Mac Actual</th>
-              <th>Fecha Última Cambio MAC</th>
+              <th>MAC</th>
             </tr>
           </thead>
           <tbody>
             {filteredProcessMesh.map((device) => (
-              <tr key={device.id}>
-                <td>{device.ubication}</td>
+              <tr key={device?.id ?? Math.random()}>
+                <td>{device?.ubication ?? "—"}</td>
+                <td>{device?.device ?? "—"}</td>
                 <td
                   className={
-                    device.device === "Cisco AP"
-                      ? device.status_num_clients === "fail"
-                        ? "kpi-red"
-                        : device.status === "fail"
-                        ? "kpi-red"
-                        : ""
-                      : ""
-                  }
-                  title={
-                    device.device === "Cisco AP"
-                      ? device.status_num_clients === "fail"
-                        ? "Este AP reporta más de 12 clientes"
-                        : device.status === "fail"
-                        ? "Este AP reporta clientes pertenecientes a otra ubicación"
-                        : ""
-                      : ""
-                  }
-                >
-                  {device.device}
-                </td>
-                <td
-                  className={
-                    device.prtg_status.toLowerCase().includes("up")
+                    device?.prtg_status?.toLowerCase?.().includes("up")
                       ? "kpi-green"
-                      : device.prtg_status.toLowerCase().includes("down")
+                      : device?.prtg_status?.toLowerCase?.().includes("down")
                       ? "kpi-red"
-                      : device.prtg_status.toLowerCase().includes("paused")
+                      : device?.prtg_status?.toLowerCase?.().includes("paused")
                       ? "kpi-blue"
-                      : device.prtg_status.toLowerCase().includes("warning")
+                      : device?.prtg_status?.toLowerCase?.().includes("warning")
                       ? "kpi-yelllow"
-                      : device.prtg_status.toLowerCase().includes("unusual")
+                      : device?.prtg_status?.toLowerCase?.().includes("unusual")
                       ? "kpi-orange"
                       : ""
                   }
                   title={
-                    device.prtg_status.includes("operando")
+                    device?.prtg_status?.includes("operando")
                       ? "Pala no operativa"
-                      : `PRTG: ${device.prtg_status}`
+                      : `PRTG: ${device?.prtg_status ?? "Desconocido"}`
                   }
                   style={{ cursor: "help" }}
                 >
-                  {device.client}
+                  {device?.client ?? "—"}
                 </td>
-                <td>{device.last_mac}</td>
                 <td
                   className={
-                    device.status === "fail" && device.device !== "Cisco AP"
+                    device?.status === "fail"
                       ? "kpi-red"
                       : ""
                   }
-                  style={device.status === "fail" ? { cursor: "help" } : {}}
-                  title={
-                    device.status === "fail" && device.device !== "Cisco AP"
-                      ? "El valor de esta MAC pertenece a otra Ubicación"
-                      : ""
+                  style={
+                    device?.status === "fail"
+                      ? { cursor: "help" }
+                      : {}
                   }
+
                 >
-                  {device.current_mac}
+                  {device?.current_mac ?? "—"}
                 </td>
-                <td>{device.last_change_date}</td>
               </tr>
             ))}
           </tbody>
@@ -160,4 +131,5 @@ export function MeshProcess() {
       </div>
     </div>
   );
+  
 }

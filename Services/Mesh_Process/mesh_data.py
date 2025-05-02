@@ -44,10 +44,11 @@ def get_mesh_process_data():
                 resultado.append({'ip': ip, 'mac': mac})
 
         return resultado
-            
 
     except Exception as e:
         logging.error("Error en funcion get_mesh_process_data")
         logging.error(e)
         logging.error(traceback.format_exc())
-        return []
+        return False
+
+# get_mesh_process_data()

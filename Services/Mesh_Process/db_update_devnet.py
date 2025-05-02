@@ -45,7 +45,6 @@ def update_devnet_data(data):
         db_connector.commit()
 
         db_connector.close()
-
         return True
 
     except Exception as e:
