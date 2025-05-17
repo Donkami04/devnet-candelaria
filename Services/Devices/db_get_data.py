@@ -62,7 +62,7 @@ def get_data(table_name):
         logging.error(e)
         logging.error(f"Error al obtener datos de la base de datos")
         return None
-    
+
 def get_historic_cisco_data(ip):
     """
     Busca en la base de datos histórica la información más reciente del cliente 
@@ -89,28 +89,30 @@ def get_historic_cisco_data(ip):
         updated_client = get_historic_cisco_data(data)
         print(updated_client)
     """
-    
-    
+
     data  = {}
     try:
         db_connector = historic_connection()
-        
+
         # En caso de que la conexión a la BD falle
         if db_connector is None:
             raise ValueError("`get_historic_cisco_data` - `db_get_data` No se pudo establecer la conexión con la base de datos: el conector es None.")
 
         historic_db_cursor = db_connector.cursor()
-        
+
         query = f"""
-                SELECT * FROM `historic-devnet`.`devices`
-                WHERE host = '{ip}' AND 
+            SELECT * FROM `historic-devnet`.`devices`
+            WHERE host = '{ip}' AND 
+                cisco_device_name IS NOT NULL AND
                 cisco_device_name <> 'Not Found' AND
-                cisco_device_name <> 'Error Devnet'
-                ORDER BY id DESC LIMIT 1
-                """
+                cisco_device_name <> 'Error Devnet' AND
+                STR_TO_DATE(`datetime`, '%Y-%m-%d %H:%i:%s') >= NOW() - INTERVAL 1 MONTH
+            ORDER BY id DESC
+            LIMIT 1
+        """
         historic_db_cursor.execute(query)
         results = historic_db_cursor.fetchall()
-        
+
         if results:
             data_backup = [dict(zip(historic_db_cursor.column_names, row)) for row in results][0]
             data["cisco_device_ip"] = data_backup['cisco_device_ip']
@@ -130,7 +132,7 @@ def get_historic_cisco_data(ip):
             data["cisco_status_device"] = "Not Found"
             data["data_backup"] = False
             return data
-            
+
     except Exception as e:
         # En caso de error, se asignan valores por defecto y se registra el error
         data["cisco_device_ip"] = "Error Devnet"
@@ -140,7 +142,6 @@ def get_historic_cisco_data(ip):
         data["cisco_mac_address"] = "Error Devnet"
         data["cisco_status_device"] = "Error Devnet"
         data["data_backup"] = False
-        
         logging.error(traceback.format_exc())
         logging.error(e)
         logging.error(f"Error en la funcion `get_historic_cisco_data` del archivo `db_get_data`")

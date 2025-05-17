@@ -16,7 +16,7 @@ PRTG_USERNAME = os.getenv("PRTG_USERNAME")
 PRTG_PASSWORD = os.getenv("PRTG_PASSWORD")
 
 
-def get_cisco_data(red, ip):
+def get_cisco_data(red, ip, cisco_id):
     """
     Obtiene datos de un dispositivo de Cisco utilizando la dirección IP y la red proporcionada.
 
@@ -57,22 +57,24 @@ def get_cisco_data(red, ip):
         red = "10.224.241.14"
 
     try:
-        URL_CISCO_GET_ID = os.getenv("URL_CISCO_IP").format(
-            red=red,
-            ip=ip,
-            cisco_username_2=CISCO_DEVICES_API_USERNAME_2,
-            cisco_password=CISCO_API_PASSWORD,
-        )
-        response_cisco_get_id = requests.get(URL_CISCO_GET_ID, verify=False).json()
-        cisco_id_device = (
-            response_cisco_get_id.get("queryResponse", {"queryResponse": "Not Found"})
-            .get("entityId", [{}])[0]
-            .get("$", "Not Found")
-        )
+        cisco_id_device = cisco_id
+        if cisco_id == "Not Found" or cisco_id is None:
+            URL_CISCO_GET_ID = os.getenv("URL_CISCO_IP").format(
+                red=red,
+                ip=ip,
+                cisco_username_2=CISCO_DEVICES_API_USERNAME_2,
+                cisco_password=CISCO_API_PASSWORD,
+            )
+            response_cisco_get_id = requests.get(URL_CISCO_GET_ID, verify=False).json()
+            cisco_id_device = (
+                response_cisco_get_id.get("queryResponse", {"queryResponse": "Not Found"})
+                .get("entityId", [{}])[0]
+                .get("$", "Not Found")
+            )
         if cisco_id_device == "Not Found":
             cisco_data = get_historic_cisco_data(ip)
+            cisco_data["cisco_id"] = cisco_id_device
             return cisco_data
-
         else:
             URL_CISCO_ID = os.getenv("URL_CISCO_ID").format(
                 red=red,
@@ -91,6 +93,7 @@ def get_cisco_data(red, ip):
 
             if cisco_client_data == "Not Found":
                 cisco_data = get_historic_cisco_data(ip)
+                cisco_data["cisco_id"] = cisco_id_device
                 return cisco_data
 
             cisco_data["cisco_port"] = cisco_client_data["clientInterface"]
@@ -100,6 +103,7 @@ def get_cisco_data(red, ip):
             cisco_data["cisco_device_ip"] = cisco_client_data["deviceIpAddress"][
                 "address"
             ]
+            cisco_data["cisco_id"] = cisco_id_device
 
             # ? Obtencion del estado del sensor ping en PRTG correspondiente al deviceIpAdress
             prtg_device_ip_url = os.getenv("URL_PRTG_IP").format(
@@ -126,7 +130,6 @@ def get_cisco_data(red, ip):
                 cisco_data["cisco_status_device"] = prtg_device_status_response[
                     "sensors"
                 ][0]["status"]
-
             return cisco_data
 
     except Exception as e:

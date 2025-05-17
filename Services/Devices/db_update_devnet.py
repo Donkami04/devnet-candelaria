@@ -33,7 +33,7 @@ def update_devnet_data(data):
     query = (
         "UPDATE `devnet`.devices SET prtg_name_device = %s, prtg_id = %s, prtg_sensorname = %s, prtg_status = %s, "
         "prtg_lastup = %s, prtg_lastdown = %s, cisco_device_name = %s, cisco_port = %s, cisco_status = %s, cisco_status_device = %s, cisco_mac_address = %s, "
-        "data_backup = %s, red = %s, cctv_enabled = %s, cctv_valid = %s, ups_status = %s, cisco_device_ip = %s WHERE host = %s"
+        "data_backup = %s, red = %s, cctv_enabled = %s, cctv_valid = %s, ups_status = %s, cisco_id = %s, cisco_device_ip = %s WHERE host = %s"
     )
 
     # Estructura de datos para el query
@@ -55,6 +55,7 @@ def update_devnet_data(data):
             device.get("cctv_enabled", ""),
             device.get("cctv_valid", ""),
             device.get("ups_status", ""),
+            device.get("cisco_id", ""),
             device.get("cisco_device_ip", ""),
             device.get("host", ""),  # Este es el campo IP para el WHERE
         )
@@ -134,54 +135,31 @@ def datetime_register(system_name, status):
 
 
 # dataTest = [
-#     {
-#         "id": 8472234,
-#         "host": "10.225.5.55",
-#         "type": "Camara",
-#         "site": "Padrones",
-#         "dpto": "DPI",
-#         "prtg_name_device": "Admin_Romana",
-#         "prtg_id": "FUNCIONAAAA",
-#         "prtg_sensorname": "FUNCIONAAAA",
-#         "prtg_status": "Up",
-#         "prtg_lastup": "29-07-2024 0:40:13 [23 s ago]",
-#         "prtg_lastdown": "28-05-2024 17:40:14 [61 d ago]",
-#         "cisco_device_ip": "10.224.112.230",
-#         "cisco_device_name": "CDCSSWDESAL-PPADR-ROMPUERTO-35.lundinmining.local",
-#         "cisco_port": "GigabitEthernet1/0/10",
-#         "cisco_status": "ASSOCIATED",
-#         "cisco_status_device": "Up",
-#         "cisco_mac_address": "14a78b152516",
-#         "data_backup": True,
-#         "red": "IT",
-#         "cctv_enabled": "True",
-#         "cctv_valid": "True",
-#         "ups_status": 0,
-#     },
-#     {
-#         "id": 8472233,
-#         "host": "10.225.5.98",
-#         "type": "Camara",
-#         "site": "Padrones",
-#         "dpto": "DPI",
-#         "prtg_name_device": "Ingreso Vehiculos",
-#         "prtg_id": "15355",
-#         "prtg_sensorname": "FUNCIONAAAA",
-#         "prtg_status": "Up",
-#         "prtg_lastup": "29-07-2024 0:40:02 [27 s ago]",
-#         "prtg_lastdown": "28-05-2024 17:41:03 [61 d ago]",
-#         "cisco_device_ip": "10.224.112.253",
-#         "cisco_device_name": "CDBUSSWDESAL-GaritaPuerto-81.lundinmining.local",
-#         "cisco_port": "GigabitEthernet0/5",
-#         "cisco_status": "ASSOCIATED",
-#         "cisco_status_device": "Up",
-#         "cisco_mac_address": "4cbd8f4364a8",
-#         "data_backup": True,
-#         "red": "IT",
-#         "cctv_enabled": "True",
-#         "cctv_valid": "True",
-#         "ups_status": 0,
-#     },
+# {
+#     "id": 1,
+#     "host": "10.225.5.98",
+#     "type": "Camara",
+#     "site": "Padrones",
+#     "dpto": "DPI",
+#     "red": "IT",
+#     "prtg_name_device": "Ping 360",
+#     "prtg_id": "15355",
+#     "prtg_sensorname": "Ingreso Vehiculos",
+#     "prtg_status": "Up",
+#     "prtg_lastup": "17-05-2025 14:01:09 [46 s ago]",
+#     "prtg_lastdown": "26-02-2025 3:08:16 [80 d ago]",
+#     "cisco_device_ip": "10.224.112.253",
+#     "cisco_device_name": "CDBUSSWDESAL-GaritaPuerto-81.lundinmining.local",
+#     "cisco_port": "GigabitEthernet0/5",
+#     "cisco_status": "ASSOCIATED",
+#     "cisco_status_device": "Up",
+#     "cisco_mac_address": "4cbd8f4364a8",
+#     "data_backup": 0,
+#     "cctv_enabled": "1",
+#     "cctv_valid": "1",
+#     "ups_status": 0,
+#     "cisco_id": 1111,
+# }
 # ]
 
-# update_devnet_data(dataTest)
+# print(update_devnet_data(dataTest))

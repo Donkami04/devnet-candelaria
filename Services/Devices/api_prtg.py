@@ -11,7 +11,7 @@ PRTG_USERNAME = os.getenv("PRTG_USERNAME")
 PRTG_PASSWORD = os.getenv("PRTG_PASSWORD")
 
 
-def get_prtg_data(ip):
+def get_prtg_data(ip, prtg_id):
     """
     Obtiene información de un dispositivo de la API de PRTG utilizando su dirección IP.
 
@@ -39,7 +39,6 @@ def get_prtg_data(ip):
     Raises:
         Registra los errores utilizando logging cuando no se pueden obtener los datos correctamente.
     """
-
     prtg_data = {
         "prtg_name_device": "Not Found",
         "prtg_id": "Not Found",
@@ -49,16 +48,16 @@ def get_prtg_data(ip):
         "prtg_lastdown": "Not Found",
     }
     try:
-
-        URL_PRTG_GET_ID = os.getenv("URL_PRTG_IP").format(
-            ip=ip, username=PRTG_USERNAME, password=PRTG_PASSWORD
-        )
-        response_prtg_get_id = requests.get(URL_PRTG_GET_ID, verify=False).json()
-        if len(response_prtg_get_id["devices"]) == 0:
-            return prtg_data
-
+        response_prtg_get_id = None
+        if prtg_id == "Not Found" or prtg_id == None:
+            URL_PRTG_GET_ID = os.getenv("URL_PRTG_IP").format(
+                ip=ip, username=PRTG_USERNAME, password=PRTG_PASSWORD
+            )
+            response_prtg_get_id = requests.get(URL_PRTG_GET_ID, verify=False).json()
+            if len(response_prtg_get_id["devices"]) == 0:
+                return prtg_data
         else:
-            prtg_id = response_prtg_get_id["devices"][0]["objid"]
+            # prtg_id = response_prtg_get_id["devices"][0]["objid"]
             URL_PRTG_GET_DATA = os.getenv("URL_PRTG_ID").format(id_device=prtg_id, username=PRTG_USERNAME, password=PRTG_PASSWORD)
             response_prtg_data = requests.get(URL_PRTG_GET_DATA, verify=False).json()
             try:

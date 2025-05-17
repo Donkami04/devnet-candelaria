@@ -13,30 +13,38 @@ from db_insert_historic import save_historic_data
 from db_update_devnet import update_devnet_data, datetime_register
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-def process_devices_block(devices, cctv_data):
+
+def process_devices_block(devices, cctv_data, bloque_id):
     """
-    Procesa un bloque de dispositivos actualizando su información con datos de las APIs de PRTG y Cisco,
-    y actualiza el estado de CCTV si corresponde. También determina el estado de las UPS.
+    Procesa un bloque de dispositivos, registrando su origen (bloque) e índice local en los logs.
 
     Args:
-        devices (list of dict): Lista de diccionarios que representan los dispositivos a procesar.
-        cctv_data (dict): Datos actuales de CCTV.
+        devices (list of dict): Dispositivos a procesar.
+        cctv_data (dict): Datos de CCTV.
+        bloque_id (str): Identificador del bloque (ej. "0-250").
 
     Returns:
-        list of dict: Lista de dispositivos actualizados con la información de las APIs y el estado de las UPS.
+        list of dict: Dispositivos actualizados.
     """
     final_data = []
-    for device in devices:
+    start_time = time.time()
+    for idx, device in enumerate(devices, start=1):
         ip = device["host"]
         type = device["type"]
         red = device["red"]
+        site = device["site"]
+        prtg_id = device["prtg_id"]
+        cisco_id = device["cisco_id"]
 
-        logging.info(f"Actualizando dispositivo {ip}")
+        # logging.info(f"dispositivo {ip} - {type} - {site}")
+        logging.info(
+            f"[Bloque {bloque_id} - Dispositivo # {idx}] Actualizando dispositivo {ip} - {type} - {site}"
+        )
 
-        prtg_data = get_prtg_data(ip)
+        prtg_data = get_prtg_data(ip, prtg_id)
         device.update(prtg_data)
 
-        cisco_data = get_cisco_data(red, ip)
+        cisco_data = get_cisco_data(red, ip, cisco_id)
         device.update(cisco_data)
 
         cctv_status = {"cctv_enabled": "N/A", "cctv_valid": "N/A"}
@@ -48,7 +56,12 @@ def process_devices_block(devices, cctv_data):
 
         final_data.append(device)
 
+    end_time = time.time()
+    logging.info(
+        f"Tiempo de ejecución: {end_time - start_time:.2f} segundos Bloque # {bloque_id}"
+    )
     return final_data
+
 
 def get_devices_data():
     """
@@ -64,12 +77,26 @@ def get_devices_data():
         devices = get_data(table_name="devices")
         cctv_data = get_cctv_data()
 
-        bloques = [devices[:250], devices[250:500], devices[500:750], devices[750:]]
+        bloques = [
+            (devices[:100], "0-99"),
+            (devices[100:200], "100-199"),
+            (devices[200:300], "200-299"),
+            (devices[300:400], "300-399"),
+            (devices[400:500], "400-499"),
+            (devices[500:600], "500-599"),
+            (devices[600:700], "600-699"),
+            (devices[700:800], "700-799"),
+            (devices[800:], "800+"),
+        ]
+
 
         final_data = []
 
         with ThreadPoolExecutor() as executor:
-            futures = [executor.submit(process_devices_block, bloque, cctv_data) for bloque in bloques]
+            futures = [
+                executor.submit(process_devices_block, bloque, cctv_data, bloque_id)
+                for bloque, bloque_id in bloques
+            ]
 
             for future in as_completed(futures):
                 final_data.extend(future.result())
@@ -89,6 +116,7 @@ def get_devices_data():
         logging.error(traceback.format_exc())
         logging.error(e)
 
+
 def bucle(scheduler):
     """
     Función que ejecuta el ciclo de actualización de dispositivos y programa su próxima ejecución en 5 minutos.
@@ -98,6 +126,7 @@ def bucle(scheduler):
     """
     get_devices_data()
     scheduler.enter(300, 1, bucle, (scheduler,))
+
 
 if __name__ == "__main__":
     s = sched.scheduler(time.time, time.sleep)
