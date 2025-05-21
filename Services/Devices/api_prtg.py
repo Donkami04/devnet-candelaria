@@ -48,16 +48,16 @@ def get_prtg_data(ip, prtg_id):
         "prtg_lastdown": "Not Found",
     }
     try:
-        response_prtg_get_id = None
         if prtg_id == "Not Found" or prtg_id == None:
             URL_PRTG_GET_ID = os.getenv("URL_PRTG_IP").format(
                 ip=ip, username=PRTG_USERNAME, password=PRTG_PASSWORD
             )
             response_prtg_get_id = requests.get(URL_PRTG_GET_ID, verify=False).json()
+            prtg_id = response_prtg_get_id["devices"][0]["objid"]
             if len(response_prtg_get_id["devices"]) == 0:
                 return prtg_data
-        
-        prtg_id = response_prtg_get_id["devices"][0]["objid"]
+
+        # prtg_id = response_prtg_get_id["devices"][0]["objid"]
         URL_PRTG_GET_DATA = os.getenv("URL_PRTG_ID").format(id_device=prtg_id, username=PRTG_USERNAME, password=PRTG_PASSWORD)
         response_prtg_data = requests.get(URL_PRTG_GET_DATA, verify=False).json()
         try:
