@@ -75,6 +75,7 @@ def get_devices_data():
         load_dotenv()
 
         devices = get_data(table_name="devices")
+        
         cctv_data = get_cctv_data()
 
         bloques = [
@@ -89,7 +90,6 @@ def get_devices_data():
             (devices[800:], "800+"),
         ]
 
-
         final_data = []
 
         with ThreadPoolExecutor() as executor:
@@ -97,7 +97,6 @@ def get_devices_data():
                 executor.submit(process_devices_block, bloque, cctv_data, bloque_id)
                 for bloque, bloque_id in bloques
             ]
-
             for future in as_completed(futures):
                 final_data.extend(future.result())
 

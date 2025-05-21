@@ -14021,3 +14021,423 @@ KeyError: 'clientInterface'
 2025-05-17 13:23:00,836 - ERROR: Error en la funcion `get_cisco_data` del archivo `api_cisco`
 2025-05-17 13:23:00,836 - ERROR - Ip del emento que causo el error 10.224.73.246
 2025-05-17 13:23:00,836 - ERROR: Ip del emento que causo el error 10.224.73.246
+2025-05-21 15:15:30,436 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/main.py", line 127, in get_devices_data
+    final_data.extend(future.result())
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/main.py", line 37, in process_devices_block
+    cisco_id = device["cisco_id"]
+KeyError: 'cisco_id'
+
+2025-05-21 15:15:30,436 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/main.py", line 127, in get_devices_data
+    final_data.extend(future.result())
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/main.py", line 37, in process_devices_block
+    cisco_id = device["cisco_id"]
+KeyError: 'cisco_id'
+
+2025-05-21 15:15:30,436 - ERROR - 'cisco_id'
+2025-05-21 15:15:30,436 - ERROR: 'cisco_id'
+2025-05-21 15:20:34,313 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/main.py", line 127, in get_devices_data
+    final_data.extend(future.result())
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/main.py", line 37, in process_devices_block
+    cisco_id = device["cisco_id"]
+KeyError: 'cisco_id'
+
+2025-05-21 15:20:34,313 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/main.py", line 127, in get_devices_data
+    final_data.extend(future.result())
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/main.py", line 37, in process_devices_block
+    cisco_id = device["cisco_id"]
+KeyError: 'cisco_id'
+
+2025-05-21 15:20:34,313 - ERROR - 'cisco_id'
+2025-05-21 15:20:34,313 - ERROR: 'cisco_id'
+2025-05-21 15:21:30,244 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/main.py", line 128, in get_devices_data
+    final_data.extend(future.result())
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/main.py", line 37, in process_devices_block
+    cisco_id = device["cisco_id"]
+KeyError: 'cisco_id'
+
+2025-05-21 15:21:30,244 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/main.py", line 128, in get_devices_data
+    final_data.extend(future.result())
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/main.py", line 37, in process_devices_block
+    cisco_id = device["cisco_id"]
+KeyError: 'cisco_id'
+
+2025-05-21 15:21:30,244 - ERROR - 'cisco_id'
+2025-05-21 15:21:30,244 - ERROR: 'cisco_id'
+2025-05-21 15:22:31,258 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/main.py", line 128, in get_devices_data
+    final_data.extend(future.result())
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/main.py", line 38, in process_devices_block
+    cisco_id = device["cisco_id"]
+KeyError: 'cisco_id'
+
+2025-05-21 15:22:31,258 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/main.py", line 128, in get_devices_data
+    final_data.extend(future.result())
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/main.py", line 38, in process_devices_block
+    cisco_id = device["cisco_id"]
+KeyError: 'cisco_id'
+
+2025-05-21 15:22:31,258 - ERROR - 'cisco_id'
+2025-05-21 15:22:31,258 - ERROR: 'cisco_id'
+2025-05-21 15:27:24,237 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/main.py", line 129, in get_devices_data
+    final_data.extend(future.result())
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/main.py", line 38, in process_devices_block
+    cisco_id = device["cisco_id"]
+KeyError: 'cisco_id'
+
+2025-05-21 15:27:24,237 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/main.py", line 129, in get_devices_data
+    final_data.extend(future.result())
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/main.py", line 38, in process_devices_block
+    cisco_id = device["cisco_id"]
+KeyError: 'cisco_id'
+
+2025-05-21 15:27:24,238 - ERROR - 'cisco_id'
+2025-05-21 15:27:24,238 - ERROR: 'cisco_id'
+2025-05-21 15:27:50,198 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/main.py", line 130, in get_devices_data
+    final_data.extend(future.result())
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/main.py", line 46, in process_devices_block
+    device.update(prtg_data)
+TypeError: 'NoneType' object is not iterable
+
+2025-05-21 15:27:50,198 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/main.py", line 130, in get_devices_data
+    final_data.extend(future.result())
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/main.py", line 46, in process_devices_block
+    device.update(prtg_data)
+TypeError: 'NoneType' object is not iterable
+
+2025-05-21 15:27:50,198 - ERROR - 'NoneType' object is not iterable
+2025-05-21 15:27:50,198 - ERROR: 'NoneType' object is not iterable
+2025-05-21 15:28:18,815 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/main.py", line 130, in get_devices_data
+    print("future", future.result())
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/main.py", line 46, in process_devices_block
+    device.update(prtg_data)
+TypeError: 'NoneType' object is not iterable
+
+2025-05-21 15:28:18,815 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/main.py", line 130, in get_devices_data
+    print("future", future.result())
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/main.py", line 46, in process_devices_block
+    device.update(prtg_data)
+TypeError: 'NoneType' object is not iterable
+
+2025-05-21 15:28:18,815 - ERROR - 'NoneType' object is not iterable
+2025-05-21 15:28:18,815 - ERROR: 'NoneType' object is not iterable
+2025-05-21 15:29:23,658 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/main.py", line 130, in get_devices_data
+    print("future", future.result())
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/main.py", line 46, in process_devices_block
+    device.update(prtg_data)
+TypeError: 'NoneType' object is not iterable
+
+2025-05-21 15:29:23,658 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/main.py", line 130, in get_devices_data
+    print("future", future.result())
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/main.py", line 46, in process_devices_block
+    device.update(prtg_data)
+TypeError: 'NoneType' object is not iterable
+
+2025-05-21 15:29:23,659 - ERROR - 'NoneType' object is not iterable
+2025-05-21 15:29:23,659 - ERROR: 'NoneType' object is not iterable
+2025-05-21 15:31:30,669 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/main.py", line 130, in get_devices_data
+    print("future", future.result())
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/main.py", line 46, in process_devices_block
+    device.update(prtg_data)
+TypeError: 'NoneType' object is not iterable
+
+2025-05-21 15:31:30,669 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/main.py", line 130, in get_devices_data
+    print("future", future.result())
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/main.py", line 46, in process_devices_block
+    device.update(prtg_data)
+TypeError: 'NoneType' object is not iterable
+
+2025-05-21 15:31:30,669 - ERROR - 'NoneType' object is not iterable
+2025-05-21 15:31:30,669 - ERROR: 'NoneType' object is not iterable
+2025-05-21 15:32:17,434 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/main.py", line 130, in get_devices_data
+    print("future", future.result())
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/main.py", line 46, in process_devices_block
+    device.update(prtg_data)
+TypeError: 'NoneType' object is not iterable
+
+2025-05-21 15:32:17,434 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/main.py", line 130, in get_devices_data
+    print("future", future.result())
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/main.py", line 46, in process_devices_block
+    device.update(prtg_data)
+TypeError: 'NoneType' object is not iterable
+
+2025-05-21 15:32:17,434 - ERROR - 'NoneType' object is not iterable
+2025-05-21 15:32:17,434 - ERROR: 'NoneType' object is not iterable
+2025-05-21 15:33:51,417 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/main.py", line 130, in get_devices_data
+    print("future", future.result())
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/main.py", line 46, in process_devices_block
+    device.update(prtg_data)
+TypeError: 'NoneType' object is not iterable
+
+2025-05-21 15:33:51,417 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/main.py", line 130, in get_devices_data
+    print("future", future.result())
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/main.py", line 46, in process_devices_block
+    device.update(prtg_data)
+TypeError: 'NoneType' object is not iterable
+
+2025-05-21 15:33:51,418 - ERROR - 'NoneType' object is not iterable
+2025-05-21 15:33:51,418 - ERROR: 'NoneType' object is not iterable
+2025-05-21 15:34:28,340 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/main.py", line 129, in get_devices_data
+    final_data.extend(future.result())
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/main.py", line 46, in process_devices_block
+    device.update(prtg_data)
+TypeError: 'NoneType' object is not iterable
+
+2025-05-21 15:34:28,340 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/main.py", line 129, in get_devices_data
+    final_data.extend(future.result())
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/main.py", line 46, in process_devices_block
+    device.update(prtg_data)
+TypeError: 'NoneType' object is not iterable
+
+2025-05-21 15:34:28,340 - ERROR - 'NoneType' object is not iterable
+2025-05-21 15:34:28,340 - ERROR: 'NoneType' object is not iterable
+2025-05-21 15:50:44,391 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/main.py", line 129, in get_devices_data
+    final_data.extend(future.result())
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/main.py", line 46, in process_devices_block
+    device.update(prtg_data)
+TypeError: 'NoneType' object is not iterable
+
+2025-05-21 15:50:44,391 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/main.py", line 129, in get_devices_data
+    final_data.extend(future.result())
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/main.py", line 46, in process_devices_block
+    device.update(prtg_data)
+TypeError: 'NoneType' object is not iterable
+
+2025-05-21 15:50:44,391 - ERROR - 'NoneType' object is not iterable
+2025-05-21 15:50:44,391 - ERROR: 'NoneType' object is not iterable
+2025-05-21 15:51:22,501 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/main.py", line 129, in get_devices_data
+    final_data.extend(future.result())
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/main.py", line 46, in process_devices_block
+    device.update(prtg_data)
+TypeError: 'NoneType' object is not iterable
+
+2025-05-21 15:51:22,501 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/main.py", line 129, in get_devices_data
+    final_data.extend(future.result())
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/main.py", line 46, in process_devices_block
+    device.update(prtg_data)
+TypeError: 'NoneType' object is not iterable
+
+2025-05-21 15:51:22,501 - ERROR - 'NoneType' object is not iterable
+2025-05-21 15:51:22,501 - ERROR: 'NoneType' object is not iterable
+2025-05-21 15:51:56,093 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/main.py", line 129, in get_devices_data
+    final_data.extend(future.result())
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/main.py", line 46, in process_devices_block
+    device.update(prtg_data)
+TypeError: 'NoneType' object is not iterable
+
+2025-05-21 15:51:56,093 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/main.py", line 129, in get_devices_data
+    final_data.extend(future.result())
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/usr/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/main.py", line 46, in process_devices_block
+    device.update(prtg_data)
+TypeError: 'NoneType' object is not iterable
+
+2025-05-21 15:51:56,093 - ERROR - 'NoneType' object is not iterable
+2025-05-21 15:51:56,093 - ERROR: 'NoneType' object is not iterable

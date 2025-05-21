@@ -56,27 +56,27 @@ def get_prtg_data(ip, prtg_id):
             response_prtg_get_id = requests.get(URL_PRTG_GET_ID, verify=False).json()
             if len(response_prtg_get_id["devices"]) == 0:
                 return prtg_data
-        else:
-            # prtg_id = response_prtg_get_id["devices"][0]["objid"]
-            URL_PRTG_GET_DATA = os.getenv("URL_PRTG_ID").format(id_device=prtg_id, username=PRTG_USERNAME, password=PRTG_PASSWORD)
-            response_prtg_data = requests.get(URL_PRTG_GET_DATA, verify=False).json()
-            try:
-                sensor = response_prtg_data["sensors"][0]
-                prtg_data["prtg_id"] = prtg_id
-                prtg_data["prtg_name_device"] = sensor.get("name", "Not Found")
-                prtg_data["prtg_sensorname"] = sensor.get("device", "Not Found")
-                prtg_data["prtg_status"] = sensor.get("status", "Not Found")
-                prtg_data["prtg_lastup"] = re.sub(
-                    re.compile(r"<.*?>"), "", sensor.get("lastup", "Not Found")
-                )
-                prtg_data["prtg_lastdown"] = re.sub(
-                    re.compile(r"<.*?>"), "", sensor.get("lastdown", "Not Found")
-                )
-                return prtg_data
+        
+        prtg_id = response_prtg_get_id["devices"][0]["objid"]
+        URL_PRTG_GET_DATA = os.getenv("URL_PRTG_ID").format(id_device=prtg_id, username=PRTG_USERNAME, password=PRTG_PASSWORD)
+        response_prtg_data = requests.get(URL_PRTG_GET_DATA, verify=False).json()
+        try:
+            sensor = response_prtg_data["sensors"][0]
+            prtg_data["prtg_id"] = prtg_id
+            prtg_data["prtg_name_device"] = sensor.get("name", "Not Found")
+            prtg_data["prtg_sensorname"] = sensor.get("device", "Not Found")
+            prtg_data["prtg_status"] = sensor.get("status", "Not Found")
+            prtg_data["prtg_lastup"] = re.sub(
+                re.compile(r"<.*?>"), "", sensor.get("lastup", "Not Found")
+            )
+            prtg_data["prtg_lastdown"] = re.sub(
+                re.compile(r"<.*?>"), "", sensor.get("lastdown", "Not Found")
+            )
+            return prtg_data
 
-            except:
-                prtg_data["prtg_id"] = prtg_id
-                return prtg_data
+        except:
+            prtg_data["prtg_id"] = prtg_id
+            return prtg_data
 
     except Exception as e:
         prtg_data = {
