@@ -75,7 +75,7 @@ def get_devices_data():
         load_dotenv()
 
         devices = get_data(table_name="devices")
-        
+
         cctv_data = get_cctv_data()
 
         bloques = [
@@ -98,6 +98,7 @@ def get_devices_data():
                 for bloque, bloque_id in bloques
             ]
             for future in as_completed(futures):
+                print(future.result())
                 final_data.extend(future.result())
 
         devnet_bd_response = update_devnet_data(final_data)

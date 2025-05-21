@@ -48,7 +48,7 @@ def get_prtg_data(ip, prtg_id):
         "prtg_lastdown": "Not Found",
     }
     try:
-        if prtg_id == "Not Found" or prtg_id == None:
+        if prtg_id == "Not Found" or prtg_id == None or prtg_id == "Error DevNet":
             URL_PRTG_GET_ID = os.getenv("URL_PRTG_IP").format(
                 ip=ip, username=PRTG_USERNAME, password=PRTG_PASSWORD
             )
