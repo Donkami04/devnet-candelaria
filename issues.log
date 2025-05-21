@@ -14587,3 +14587,67 @@ KeyError: 'cisco_id'
 
 2025-05-21 16:24:03,318 - ERROR - 'cisco_id'
 2025-05-21 16:24:03,318 - ERROR: 'cisco_id'
+2025-05-21 17:07:14,669 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/api_cisco.py", line 99, in get_cisco_data
+    cisco_data["cisco_port"] = cisco_client_data["clientInterface"]
+KeyError: 'clientInterface'
+
+2025-05-21 17:07:14,669 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/api_cisco.py", line 99, in get_cisco_data
+    cisco_data["cisco_port"] = cisco_client_data["clientInterface"]
+KeyError: 'clientInterface'
+
+2025-05-21 17:07:14,669 - ERROR - 'clientInterface'
+2025-05-21 17:07:14,669 - ERROR: 'clientInterface'
+2025-05-21 17:07:14,669 - ERROR - Error en la funcion `get_cisco_data` del archivo `api_cisco`
+2025-05-21 17:07:14,669 - ERROR: Error en la funcion `get_cisco_data` del archivo `api_cisco`
+2025-05-21 17:07:14,669 - ERROR - Ip del emento que causo el error 10.224.72.13
+2025-05-21 17:07:14,669 - ERROR: Ip del emento que causo el error 10.224.72.13
+2025-05-21 17:07:34,319 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/api_cisco.py", line 99, in get_cisco_data
+    cisco_data["cisco_port"] = cisco_client_data["clientInterface"]
+KeyError: 'clientInterface'
+
+2025-05-21 17:07:34,319 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/api_cisco.py", line 99, in get_cisco_data
+    cisco_data["cisco_port"] = cisco_client_data["clientInterface"]
+KeyError: 'clientInterface'
+
+2025-05-21 17:07:34,319 - ERROR - 'clientInterface'
+2025-05-21 17:07:34,319 - ERROR: 'clientInterface'
+2025-05-21 17:07:34,320 - ERROR - Error en la funcion `get_cisco_data` del archivo `api_cisco`
+2025-05-21 17:07:34,320 - ERROR: Error en la funcion `get_cisco_data` del archivo `api_cisco`
+2025-05-21 17:07:34,320 - ERROR - Ip del emento que causo el error 10.224.72.239
+2025-05-21 17:07:34,320 - ERROR: Ip del emento que causo el error 10.224.72.239
+2025-05-21 17:17:45,548 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/api_cisco.py", line 99, in get_cisco_data
+    cisco_data["cisco_port"] = cisco_client_data["clientInterface"]
+KeyError: 'clientInterface'
+
+2025-05-21 17:17:45,548 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/api_cisco.py", line 99, in get_cisco_data
+    cisco_data["cisco_port"] = cisco_client_data["clientInterface"]
+KeyError: 'clientInterface'
+
+2025-05-21 17:17:45,550 - ERROR - 'clientInterface'
+2025-05-21 17:17:45,550 - ERROR: 'clientInterface'
+2025-05-21 17:17:45,550 - ERROR - Error en la funcion `get_cisco_data` del archivo `api_cisco`
+2025-05-21 17:17:45,550 - ERROR: Error en la funcion `get_cisco_data` del archivo `api_cisco`
+2025-05-21 17:17:45,550 - ERROR - Ip del emento que causo el error 10.224.72.13
+2025-05-21 17:17:45,550 - ERROR: Ip del emento que causo el error 10.224.72.13
+2025-05-21 17:18:05,285 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/api_cisco.py", line 99, in get_cisco_data
+    cisco_data["cisco_port"] = cisco_client_data["clientInterface"]
+KeyError: 'clientInterface'
+
+2025-05-21 17:18:05,285 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Devices/api_cisco.py", line 99, in get_cisco_data
+    cisco_data["cisco_port"] = cisco_client_data["clientInterface"]
+KeyError: 'clientInterface'
+
+2025-05-21 17:18:05,285 - ERROR - 'clientInterface'
+2025-05-21 17:18:05,285 - ERROR: 'clientInterface'
+2025-05-21 17:18:05,287 - ERROR - Error en la funcion `get_cisco_data` del archivo `api_cisco`
+2025-05-21 17:18:05,287 - ERROR: Error en la funcion `get_cisco_data` del archivo `api_cisco`
+2025-05-21 17:18:05,287 - ERROR - Ip del emento que causo el error 10.224.72.239
+2025-05-21 17:18:05,287 - ERROR: Ip del emento que causo el error 10.224.72.239
