@@ -16,7 +16,7 @@ def get_mesh_process_data():
         client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         client.connect(hostname="10.224.114.65", port=22, username='roadmin', password='C4nd3*2023')
         channel = client.invoke_shell()
-
+        logging.info("##### Conectado al dispositivo")
         commands = [
             f"terminal length 0\n",
             "show ip arp | in Vlan112\n"

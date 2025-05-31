@@ -14651,3 +14651,228 @@ KeyError: 'clientInterface'
 2025-05-21 17:18:05,287 - ERROR: Error en la funcion `get_cisco_data` del archivo `api_cisco`
 2025-05-21 17:18:05,287 - ERROR - Ip del emento que causo el error 10.224.72.239
 2025-05-21 17:18:05,287 - ERROR: Ip del emento que causo el error 10.224.72.239
+2025-05-30 20:25:43,045 - ERROR - Error en funcion get_mesh_process_data
+2025-05-30 20:25:43,045 - ERROR: Error en funcion get_mesh_process_data
+2025-05-30 20:25:43,046 - ERROR - Authentication failed: transport shut down or saw EOF
+2025-05-30 20:25:43,046 - ERROR: Authentication failed: transport shut down or saw EOF
+2025-05-30 20:25:43,050 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process/mesh_data.py", line 17, in get_mesh_process_data
+    client.connect(hostname="10.224.114.65", port=22, username='roadmin', password='C4nd3*2023')
+  File "/home/donkami/.local/lib/python3.10/site-packages/paramiko/client.py", line 485, in connect
+    self._auth(
+  File "/home/donkami/.local/lib/python3.10/site-packages/paramiko/client.py", line 818, in _auth
+    raise saved_exception
+  File "/home/donkami/.local/lib/python3.10/site-packages/paramiko/client.py", line 805, in _auth
+    self._transport.auth_password(username, password)
+  File "/home/donkami/.local/lib/python3.10/site-packages/paramiko/transport.py", line 1587, in auth_password
+    return self.auth_handler.wait_for_response(my_event)
+  File "/home/donkami/.local/lib/python3.10/site-packages/paramiko/auth_handler.py", line 248, in wait_for_response
+    raise e
+paramiko.ssh_exception.AuthenticationException: Authentication failed: transport shut down or saw EOF
+
+2025-05-30 20:25:43,050 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process/mesh_data.py", line 17, in get_mesh_process_data
+    client.connect(hostname="10.224.114.65", port=22, username='roadmin', password='C4nd3*2023')
+  File "/home/donkami/.local/lib/python3.10/site-packages/paramiko/client.py", line 485, in connect
+    self._auth(
+  File "/home/donkami/.local/lib/python3.10/site-packages/paramiko/client.py", line 818, in _auth
+    raise saved_exception
+  File "/home/donkami/.local/lib/python3.10/site-packages/paramiko/client.py", line 805, in _auth
+    self._transport.auth_password(username, password)
+  File "/home/donkami/.local/lib/python3.10/site-packages/paramiko/transport.py", line 1587, in auth_password
+    return self.auth_handler.wait_for_response(my_event)
+  File "/home/donkami/.local/lib/python3.10/site-packages/paramiko/auth_handler.py", line 248, in wait_for_response
+    raise e
+paramiko.ssh_exception.AuthenticationException: Authentication failed: transport shut down or saw EOF
+
+2025-05-30 20:25:43,050 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process/update_current_mac.py", line 94, in update_mac
+    ip_to_mac = {item["ip"]: item["mac"] for item in current_data}
+TypeError: 'bool' object is not iterable
+
+2025-05-30 20:25:43,050 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process/update_current_mac.py", line 94, in update_mac
+    ip_to_mac = {item["ip"]: item["mac"] for item in current_data}
+TypeError: 'bool' object is not iterable
+
+2025-05-30 20:25:43,050 - ERROR - Error en la función `update_mac` en el archivo `db_update_devnet`
+2025-05-30 20:25:43,050 - ERROR: Error en la función `update_mac` en el archivo `db_update_devnet`
+2025-05-30 20:25:43,050 - ERROR - 'bool' object is not iterable
+2025-05-30 20:25:43,050 - ERROR: 'bool' object is not iterable
+2025-05-30 20:25:43,050 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process/validate_status.py", line 14, in validate_status
+    mac_list = [item["current_mac"] for item in devices]
+TypeError: 'bool' object is not iterable
+
+2025-05-30 20:25:43,050 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process/validate_status.py", line 14, in validate_status
+    mac_list = [item["current_mac"] for item in devices]
+TypeError: 'bool' object is not iterable
+
+2025-05-30 20:26:46,350 - ERROR - Error en funcion get_mesh_process_data
+2025-05-30 20:26:46,350 - ERROR: Error en funcion get_mesh_process_data
+2025-05-30 20:26:46,351 - ERROR - Authentication failed: transport shut down or saw EOF
+2025-05-30 20:26:46,351 - ERROR: Authentication failed: transport shut down or saw EOF
+2025-05-30 20:26:46,357 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process/mesh_data.py", line 17, in get_mesh_process_data
+    client.connect(hostname="10.224.114.65", port=22, username='roadmin', password='C4nd3*2023')
+  File "/home/donkami/.local/lib/python3.10/site-packages/paramiko/client.py", line 485, in connect
+    self._auth(
+  File "/home/donkami/.local/lib/python3.10/site-packages/paramiko/client.py", line 818, in _auth
+    raise saved_exception
+  File "/home/donkami/.local/lib/python3.10/site-packages/paramiko/client.py", line 805, in _auth
+    self._transport.auth_password(username, password)
+  File "/home/donkami/.local/lib/python3.10/site-packages/paramiko/transport.py", line 1587, in auth_password
+    return self.auth_handler.wait_for_response(my_event)
+  File "/home/donkami/.local/lib/python3.10/site-packages/paramiko/auth_handler.py", line 248, in wait_for_response
+    raise e
+paramiko.ssh_exception.AuthenticationException: Authentication failed: transport shut down or saw EOF
+
+2025-05-30 20:26:46,357 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process/mesh_data.py", line 17, in get_mesh_process_data
+    client.connect(hostname="10.224.114.65", port=22, username='roadmin', password='C4nd3*2023')
+  File "/home/donkami/.local/lib/python3.10/site-packages/paramiko/client.py", line 485, in connect
+    self._auth(
+  File "/home/donkami/.local/lib/python3.10/site-packages/paramiko/client.py", line 818, in _auth
+    raise saved_exception
+  File "/home/donkami/.local/lib/python3.10/site-packages/paramiko/client.py", line 805, in _auth
+    self._transport.auth_password(username, password)
+  File "/home/donkami/.local/lib/python3.10/site-packages/paramiko/transport.py", line 1587, in auth_password
+    return self.auth_handler.wait_for_response(my_event)
+  File "/home/donkami/.local/lib/python3.10/site-packages/paramiko/auth_handler.py", line 248, in wait_for_response
+    raise e
+paramiko.ssh_exception.AuthenticationException: Authentication failed: transport shut down or saw EOF
+
+2025-05-30 20:26:46,358 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process/update_current_mac.py", line 94, in update_mac
+    ip_to_mac = {item["ip"]: item["mac"] for item in current_data}
+TypeError: 'bool' object is not iterable
+
+2025-05-30 20:26:46,358 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process/update_current_mac.py", line 94, in update_mac
+    ip_to_mac = {item["ip"]: item["mac"] for item in current_data}
+TypeError: 'bool' object is not iterable
+
+2025-05-30 20:26:46,358 - ERROR - Error en la función `update_mac` en el archivo `db_update_devnet`
+2025-05-30 20:26:46,358 - ERROR: Error en la función `update_mac` en el archivo `db_update_devnet`
+2025-05-30 20:26:46,359 - ERROR - 'bool' object is not iterable
+2025-05-30 20:26:46,359 - ERROR: 'bool' object is not iterable
+2025-05-30 20:26:46,360 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process/validate_status.py", line 14, in validate_status
+    mac_list = [item["current_mac"] for item in devices]
+TypeError: 'bool' object is not iterable
+
+2025-05-30 20:26:46,360 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process/validate_status.py", line 14, in validate_status
+    mac_list = [item["current_mac"] for item in devices]
+TypeError: 'bool' object is not iterable
+
+2025-05-30 20:28:42,046 - ERROR - Error en funcion get_mesh_process_data
+2025-05-30 20:28:42,046 - ERROR: Error en funcion get_mesh_process_data
+2025-05-30 20:28:42,046 - ERROR - Authentication failed: transport shut down or saw EOF
+2025-05-30 20:28:42,046 - ERROR: Authentication failed: transport shut down or saw EOF
+2025-05-30 20:28:42,047 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process/mesh_data.py", line 17, in get_mesh_process_data
+    client.connect(hostname="10.224.114.65", port=22, username='roadmin', password='C4nd3*2023')
+  File "/home/donkami/.local/lib/python3.10/site-packages/paramiko/client.py", line 485, in connect
+    self._auth(
+  File "/home/donkami/.local/lib/python3.10/site-packages/paramiko/client.py", line 818, in _auth
+    raise saved_exception
+  File "/home/donkami/.local/lib/python3.10/site-packages/paramiko/client.py", line 805, in _auth
+    self._transport.auth_password(username, password)
+  File "/home/donkami/.local/lib/python3.10/site-packages/paramiko/transport.py", line 1587, in auth_password
+    return self.auth_handler.wait_for_response(my_event)
+  File "/home/donkami/.local/lib/python3.10/site-packages/paramiko/auth_handler.py", line 248, in wait_for_response
+    raise e
+paramiko.ssh_exception.AuthenticationException: Authentication failed: transport shut down or saw EOF
+
+2025-05-30 20:28:42,047 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process/mesh_data.py", line 17, in get_mesh_process_data
+    client.connect(hostname="10.224.114.65", port=22, username='roadmin', password='C4nd3*2023')
+  File "/home/donkami/.local/lib/python3.10/site-packages/paramiko/client.py", line 485, in connect
+    self._auth(
+  File "/home/donkami/.local/lib/python3.10/site-packages/paramiko/client.py", line 818, in _auth
+    raise saved_exception
+  File "/home/donkami/.local/lib/python3.10/site-packages/paramiko/client.py", line 805, in _auth
+    self._transport.auth_password(username, password)
+  File "/home/donkami/.local/lib/python3.10/site-packages/paramiko/transport.py", line 1587, in auth_password
+    return self.auth_handler.wait_for_response(my_event)
+  File "/home/donkami/.local/lib/python3.10/site-packages/paramiko/auth_handler.py", line 248, in wait_for_response
+    raise e
+paramiko.ssh_exception.AuthenticationException: Authentication failed: transport shut down or saw EOF
+
+2025-05-30 20:28:42,047 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process/update_current_mac.py", line 94, in update_mac
+    ip_to_mac = {item["ip"]: item["mac"] for item in current_data}
+TypeError: 'bool' object is not iterable
+
+2025-05-30 20:28:42,047 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process/update_current_mac.py", line 94, in update_mac
+    ip_to_mac = {item["ip"]: item["mac"] for item in current_data}
+TypeError: 'bool' object is not iterable
+
+2025-05-30 20:28:42,047 - ERROR - Error en la función `update_mac` en el archivo `db_update_devnet`
+2025-05-30 20:28:42,047 - ERROR: Error en la función `update_mac` en el archivo `db_update_devnet`
+2025-05-30 20:28:42,048 - ERROR - 'bool' object is not iterable
+2025-05-30 20:28:42,048 - ERROR: 'bool' object is not iterable
+2025-05-30 20:28:42,048 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process/validate_status.py", line 14, in validate_status
+    mac_list = [item["current_mac"] for item in devices]
+TypeError: 'bool' object is not iterable
+
+2025-05-30 20:28:42,048 - ERROR: Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process/validate_status.py", line 14, in validate_status
+    mac_list = [item["current_mac"] for item in devices]
+TypeError: 'bool' object is not iterable
+
+2025-05-30 20:28:59,750 - ERROR - Error en funcion get_mesh_process_data
+2025-05-30 20:28:59,751 - ERROR - Authentication failed: transport shut down or saw EOF
+2025-05-30 20:28:59,754 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process/mesh_data.py", line 17, in get_mesh_process_data
+    client.connect(hostname="10.224.114.65", port=22, username='roadmin', password='C4nd3*2023')
+  File "/home/donkami/.local/lib/python3.10/site-packages/paramiko/client.py", line 485, in connect
+    self._auth(
+  File "/home/donkami/.local/lib/python3.10/site-packages/paramiko/client.py", line 818, in _auth
+    raise saved_exception
+  File "/home/donkami/.local/lib/python3.10/site-packages/paramiko/client.py", line 805, in _auth
+    self._transport.auth_password(username, password)
+  File "/home/donkami/.local/lib/python3.10/site-packages/paramiko/transport.py", line 1587, in auth_password
+    return self.auth_handler.wait_for_response(my_event)
+  File "/home/donkami/.local/lib/python3.10/site-packages/paramiko/auth_handler.py", line 248, in wait_for_response
+    raise e
+paramiko.ssh_exception.AuthenticationException: Authentication failed: transport shut down or saw EOF
+
+2025-05-30 20:32:17,416 - ERROR - Error en funcion get_mesh_process_data
+2025-05-30 20:32:17,426 - ERROR - Authentication failed: transport shut down or saw EOF
+2025-05-30 20:32:17,432 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process/mesh_data.py", line 17, in get_mesh_process_data
+    client.connect(hostname="10.224.114.65", port=22, username='roadmin', password='C4nd3*2023')
+  File "/home/donkami/.local/lib/python3.10/site-packages/paramiko/client.py", line 485, in connect
+    self._auth(
+  File "/home/donkami/.local/lib/python3.10/site-packages/paramiko/client.py", line 818, in _auth
+    raise saved_exception
+  File "/home/donkami/.local/lib/python3.10/site-packages/paramiko/client.py", line 805, in _auth
+    self._transport.auth_password(username, password)
+  File "/home/donkami/.local/lib/python3.10/site-packages/paramiko/transport.py", line 1587, in auth_password
+    return self.auth_handler.wait_for_response(my_event)
+  File "/home/donkami/.local/lib/python3.10/site-packages/paramiko/auth_handler.py", line 248, in wait_for_response
+    raise e
+paramiko.ssh_exception.AuthenticationException: Authentication failed: transport shut down or saw EOF
+
+2025-05-30 20:38:06,873 - ERROR - Error en funcion get_mesh_process_data
+2025-05-30 20:38:06,874 - ERROR - Authentication failed: transport shut down or saw EOF
+2025-05-30 20:38:06,877 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Mesh_Process/mesh_data.py", line 17, in get_mesh_process_data
+    client.connect(hostname="10.224.114.65", port=22, username='roadmin', password='C4nd3*2023')
+  File "/home/donkami/.local/lib/python3.10/site-packages/paramiko/client.py", line 485, in connect
+    self._auth(
+  File "/home/donkami/.local/lib/python3.10/site-packages/paramiko/client.py", line 818, in _auth
+    raise saved_exception
+  File "/home/donkami/.local/lib/python3.10/site-packages/paramiko/client.py", line 805, in _auth
+    self._transport.auth_password(username, password)
+  File "/home/donkami/.local/lib/python3.10/site-packages/paramiko/transport.py", line 1587, in auth_password
+    return self.auth_handler.wait_for_response(my_event)
+  File "/home/donkami/.local/lib/python3.10/site-packages/paramiko/auth_handler.py", line 248, in wait_for_response
+    raise e
+paramiko.ssh_exception.AuthenticationException: Authentication failed: transport shut down or saw EOF
+
