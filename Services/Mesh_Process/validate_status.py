@@ -11,7 +11,7 @@ def validate_status(devices):
         special_clients = ["10.117.112.25", "10.117.112.21", "10.117.112.20"]
         
         # Paso 1: contar las MACs
-        mac_list = [item["current_mac"] for item in devices]
+        mac_list = [item["current_mac"] for item in devices if item["current_mac"] != "Not Found"]
         mac_count = Counter(mac_list)
 
         # Paso 2: actualizar el status según las reglas
