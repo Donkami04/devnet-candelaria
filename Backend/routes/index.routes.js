@@ -30,6 +30,7 @@ const dragosRoutes = require("./dragos.routes");
 const flotacionOtRoutes = require("./flotacion_ot.routes");
 const mraRoutes = require("./mra.routes");
 const licenciamientosRoutes = require("./licenciamientos.routes");
+const emailRoutes = require("./email.routes");
 const router = express.Router();
 
 const allRoutes = (app) => {
@@ -65,6 +66,7 @@ const allRoutes = (app) => {
   router.use("/flotacion-ot", flotacionOtRoutes);
   router.use("/mra", mraRoutes);
   router.use("/licenciamientos", licenciamientosRoutes);
+  router.use("/email", emailRoutes);
 };
 
 module.exports = { allRoutes };

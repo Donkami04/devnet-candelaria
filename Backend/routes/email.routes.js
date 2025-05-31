@@ -1,23 +1,33 @@
+// utils/sendEmail.js
 const express = require("express");
+const axios = require("axios");
 const router = express.Router();
-const transporter = require("../config/smtp");
+const { Resend } = require("resend");
+const { fetchDataDevices } = require("../utils/email/devices");
+const { fetchDataDcs } = require("../utils/email/dcs");
 
-router.post("/send-email", async (req, res) => {
-  const { to, subject, text, html } = req.body;
+const resend = new Resend("re_ZDwv46aq_PTxJzvX1NLzdbZpDLyX7zJ1d");
 
+router.post("/send-report", async (req, res) => {
   try {
-    const info = await transporter.sendMail({
-      from: '"Devnet" <email>',
-      to,
-      subject,
-      text,
-      html,
+
+    const dashDevices = await fetchDataDevices();
+    const dashDcs = await fetchDataDcs();
+
+
+    // Enviar el correo
+    const result = await resend.emails.send({
+      from: "Devnet <onboarding@resend.dev>",
+      to: "juan.munera@sgtnetworks.com",
+      subject: "Reporte Devnet Candelaria",
+      html: dashDevices + dashDcs,
     });
 
-    return res.json({ message: "Correo enviado", messageId: info.messageId });
+    console.log("Respuesta de Resend:", result);
+    res.status(200).json({ message: "Correo enviado correctamente" });
   } catch (error) {
-    console.error("Error al enviar correo:", error);
-    return res.status(500).json({ error: "No se pudo enviar el correo" });
+    console.error("Error enviando correo:", error);
+    res.status(500).json({ error: "No se pudo enviar el correo" });
   }
 });
 
