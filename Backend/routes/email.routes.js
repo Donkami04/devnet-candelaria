@@ -1,29 +1,35 @@
 // utils/sendEmail.js
 const express = require("express");
-const axios = require("axios");
+const nodemailer = require("nodemailer");
 const router = express.Router();
-const { Resend } = require("resend");
 const { fetchDataDevices } = require("../utils/email/devices");
 const { fetchDataDcs } = require("../utils/email/dcs");
 
-const resend = new Resend("re_ZDwv46aq_PTxJzvX1NLzdbZpDLyX7zJ1d");
+// CONFIGURA aquí tu relay SMTP:
+const transporter = nodemailer.createTransport({
+  host: "10.224.98.53", // IP de tu relay SMTP
+  // port: 25, // o 587 o 465 según tu relay
+  secure: false, // true si usas puerto 465
+  // auth: {
+  //     user: 'usuario',  // si tu relay pide autenticación
+  //     pass: 'contraseña'
+  // }
+});
 
 router.post("/send-report", async (req, res) => {
   try {
-
     const dashDevices = await fetchDataDevices();
     const dashDcs = await fetchDataDcs();
 
-
     // Enviar el correo
-    const result = await resend.emails.send({
-      from: "Devnet <onboarding@resend.dev>",
+    const info = await transporter.sendMail({
+      from: "Devnet <v-j.munera@lundinmining.com>", // Usa un remitente válido para tu relay
       to: "juan.munera@sgtnetworks.com",
       subject: "Reporte Devnet Candelaria",
       html: dashDevices + dashDcs,
     });
 
-    console.log("Respuesta de Resend:", result);
+    console.log("Correo enviado:", info.response);
     res.status(200).json({ message: "Correo enviado correctamente" });
   } catch (error) {
     console.error("Error enviando correo:", error);
