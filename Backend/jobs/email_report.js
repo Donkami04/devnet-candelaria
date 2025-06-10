@@ -1,5 +1,5 @@
 // utils/sendEmail.js
-const { Resend } = require("resend");
+const nodemailer = require("nodemailer");
 const { fetchDataDevices } = require("../utils/email/devices");
 const { fetchDataDcs } = require("../utils/email/dcs");
 const { navbar } = require("../utils/email/title");
@@ -16,8 +16,6 @@ const transporter = nodemailer.createTransport({
   port: 25,
   secure: false,
 });
-
-
 
 const sendEmailReport = async () => {
   try {
@@ -41,7 +39,14 @@ const sendEmailReport = async () => {
     // Enviar el correo
     const result = await transporter.sendMail({
       from: "Devnet <devnet@lundinmining.com>",
-      to: ["juan.munera@sgtnetworks.com"],
+      to: [
+        "juan.munera@sgtnetworks.com",
+        "julio.coral@sgtnetworks.com",
+        "adriana.franco@sgtnetworks.com",
+        "jorge.torres@lundinmining.com",
+        "luis.alfaro@lundinmining.com",
+        "alvaro.pardo@lundinmining.com",
+      ],
       subject: "Reporte Devnet Candelaria",
       html:
         title +
