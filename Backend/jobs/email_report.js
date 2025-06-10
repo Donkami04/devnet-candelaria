@@ -1,5 +1,5 @@
-
-const nodemailer = require("nodemailer");
+// utils/sendEmail.js
+const { Resend } = require("resend");
 const { fetchDataDevices } = require("../utils/email/devices");
 const { fetchDataDcs } = require("../utils/email/dcs");
 const { navbar } = require("../utils/email/title");
@@ -17,7 +17,9 @@ const transporter = nodemailer.createTransport({
   secure: false,
 });
 
-router.post("/send-report", async (req, res) => {
+
+
+const sendEmailReport = async () => {
   try {
     const dashDevices = await fetchDataDevices();
     const dashDcs = await fetchDataDcs();
@@ -37,7 +39,7 @@ router.post("/send-report", async (req, res) => {
     `;
 
     // Enviar el correo
-    const info = await transporter.sendMail({
+    const result = await transporter.sendMail({
       from: "Devnet <devnet@lundinmining.com>",
       to: ["juan.munera@sgtnetworks.com"],
       subject: "Reporte Devnet Candelaria",
@@ -55,12 +57,12 @@ router.post("/send-report", async (req, res) => {
         footer,
     });
 
-    console.log("Correo enviado:", info.response);
-    res.status(200).json({ message: "Correo enviado correctamente" });
+    console.log("Respuesta enviada correctamente", result);
+    return { statusCode: 200, message: "Correo enviado correctamente" };
   } catch (error) {
     console.error("Error enviando correo:", error);
-    res.status(500).json({ error: "No se pudo enviar el correo" });
+    return { statusCode: 500, message: "Error enviando correo" };
   }
-});
+};
 
-module.exports = router;
+module.exports = { sendEmailReport };

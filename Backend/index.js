@@ -4,6 +4,7 @@ const app = express();
 const port = process.env.NODE_PORT;
 const cors = require("cors");
 const { allRoutes } = require("./routes/index.routes");
+require("./jobs/index");
 const {
   logErrors,
   errorHandler,

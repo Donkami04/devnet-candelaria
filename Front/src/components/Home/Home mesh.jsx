@@ -83,7 +83,7 @@ export function Home() {
 
     fetchData();
   }, []);
-
+  
   useEffect(() => {
     if (logoutParam && !token) {
       setHomeMessage("Has cerrado sesión.");

@@ -1,5 +1,6 @@
-
-const nodemailer = require("nodemailer");
+// utils/sendEmail.js
+const express = require("express");
+const { Resend } = require("resend");
 const { fetchDataDevices } = require("../utils/email/devices");
 const { fetchDataDcs } = require("../utils/email/dcs");
 const { navbar } = require("../utils/email/title");
@@ -11,14 +12,11 @@ const { fetchDataInfraGen } = require("../utils/email/infra_general");
 const { fetchDataDragos } = require("../utils/email/dragos");
 const { fetchDataUG } = require("../utils/email/mina_ug");
 
-const transporter = nodemailer.createTransport({
-  host: "10.224.98.53",
-  port: 25,
-  secure: false,
-});
+const resend = new Resend("re_ZDwv46aq_PTxJzvX1NLzdbZpDLyX7zJ1d");
 
-router.post("/send-report", async (req, res) => {
+const sendEmailReport = async () => {
   try {
+
     const dashDevices = await fetchDataDevices();
     const dashDcs = await fetchDataDcs();
     const title = navbar();
@@ -37,9 +35,9 @@ router.post("/send-report", async (req, res) => {
     `;
 
     // Enviar el correo
-    const info = await transporter.sendMail({
-      from: "Devnet <devnet@lundinmining.com>",
-      to: ["juan.munera@sgtnetworks.com"],
+    const result = await resend.emails.send({
+      from: "Devnet <onboarding@resend.dev>",
+      to: "juan.munera@sgtnetworks.com",
       subject: "Reporte Devnet Candelaria",
       html:
         title +
@@ -52,15 +50,16 @@ router.post("/send-report", async (req, res) => {
         dashInfraGen +
         dashDragos +
         dashUG +
-        footer,
+        footer
     });
 
-    console.log("Correo enviado:", info.response);
-    res.status(200).json({ message: "Correo enviado correctamente" });
+    console.log("Respuesta de Resend:", result);
+    return { statusCode: 200, message: "Correo enviado correctamente" };
+
   } catch (error) {
     console.error("Error enviando correo:", error);
-    res.status(500).json({ error: "No se pudo enviar el correo" });
+    return { statusCode: 500, message: "Error enviando correo" };
   }
-});
+};
 
-module.exports = router;
+module.exports = { sendEmailReport };

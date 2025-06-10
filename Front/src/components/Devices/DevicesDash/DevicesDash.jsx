@@ -38,18 +38,17 @@ export function DevicesDash() {
   const totalDevicesFake =
     indicatorsDevices &&
     indicatorsDevices.numCamerasUp +
-      indicatorsDevices.numApUp +
-      indicatorsDevices.numOthersUp +
-      indicatorsDevices.numImpresorasUp +
-      indicatorsDevices.numCamerasDown +
-      indicatorsDevices.numApDown +
-      indicatorsDevices.numOthersDown +
-      indicatorsDevices.numImpresorasDown +
-      indicatorsDevices.numImpresorasDown +
-      indicatorsDevices.numMagicUp +
-      indicatorsDevices.numMagicDown +
-      indicatorsDevices.numBarreraUp +
-      indicatorsDevices.numBarreraDown 
+    indicatorsDevices.numCamerasDown +
+    indicatorsDevices.numApUp +
+    indicatorsDevices.numApDown +
+    indicatorsDevices.numOthersUp +
+    indicatorsDevices.numOthersDown +
+    indicatorsDevices.numImpresorasUp +
+    indicatorsDevices.numImpresorasDown +
+    indicatorsDevices.numMagicUp +
+    indicatorsDevices.numMagicDown +
+    indicatorsDevices.numBarreraUp +
+    indicatorsDevices.numBarreraDown;
 
   if (spinnerDevices) {
     return (
