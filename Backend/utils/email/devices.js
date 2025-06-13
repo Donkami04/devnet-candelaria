@@ -36,8 +36,8 @@ const fetchDataDevices = async () => {
           </thead>
           <tbody>
             ${rows
-              .map(
-                (row) => `
+        .map(
+          (row) => `
               <tr>
                 <td style="border: 1px solid #ddd; padding: 2px; text-align: center;">${row.name}</td>
                 <td style="border: 1px solid #ddd; padding: 2px; text-align: center;">${row.up}</td>
@@ -45,13 +45,13 @@ const fetchDataDevices = async () => {
                 <td style="border: 1px solid #ddd; padding: 2px; text-align: center;">${row.total}</td>
               </tr>
             `
-              )
-              .join("")}
+        )
+        .join("")}
           </tbody>
         </table>
       </div>
     </div>
-    <hr style=" max-width: 600px; margin: 20px auto; border: none; height: 1px; background-color: #ddd;">
+    
   `;
 
     return dashDevices;

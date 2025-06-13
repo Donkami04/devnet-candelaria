@@ -5,6 +5,7 @@ const port = process.env.NODE_PORT;
 const cors = require("cors");
 const { allRoutes } = require("./routes/index.routes");
 require("./jobs/index");
+// require("./routes/email.routescopy2")
 const {
   logErrors,
   errorHandler,

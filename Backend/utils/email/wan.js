@@ -51,7 +51,7 @@ const fetchDataWan = async () => {
           </tbody>
         </table>
       </div>
-      <hr style=" max-width: 600px; margin: 20px auto; border: none; height: 1px; background-color: #ddd;">
+      
     `;
 
     return wan;

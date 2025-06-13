@@ -16,7 +16,7 @@ const resend = new Resend("re_ZDwv46aq_PTxJzvX1NLzdbZpDLyX7zJ1d");
 
 const sendEmailReport = async () => {
   try {
-
+    console.log("Enviando reporte por correo...");
     const dashDevices = await fetchDataDevices();
     const dashDcs = await fetchDataDcs();
     const title = navbar();
@@ -61,5 +61,6 @@ const sendEmailReport = async () => {
     return { statusCode: 500, message: "Error enviando correo" };
   }
 };
+sendEmailReport();
 
 module.exports = { sendEmailReport };

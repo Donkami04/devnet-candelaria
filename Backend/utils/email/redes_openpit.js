@@ -76,7 +76,7 @@ const fetchDataOpenPit = async () => {
             </table>
           </div>
         </div>
-        <hr style=" max-width: 600px; margin: 20px auto; border: none; height: 1px; background-color: #ddd;">
+        
       `;
 
     // const openPitTable = "XD"
