@@ -59,6 +59,7 @@ import { FlotacionOt } from "./components/AnilloFlotacionOt/FlotacionOt";
 import { Mra } from "./components/Mra/Mra";
 import { Dragos } from "./components/Dragos/Dragos";
 import { Licenciamientos } from "./components/InfraGeneral/Licenciamientos/Licenciamientos";
+import { Anillov2 } from "./components/Anillo/Anillov2";
 
 function App() {
   const location = useLocation();
@@ -125,6 +126,7 @@ function App() {
         <Route path="/monitoreo/infraestrucura-general/map" element={<Map />} />
         <Route path="/monitoreo/candelaria/fim" element={<BaseFim />} />
         <Route path="/monitoreo/candelaria/anillo" element={<Anillo />} />
+        <Route path="/monitoreo/candelaria/anillo/v2" element={<Anillov2 />} />
         <Route path="/monitoreo/candelaria/proceso-mesh" element={<MeshProcess />} />
         <Route path="/monitoreo/infraestrucura-general/certificados" element={<Certificates />} />
         {/* <Route
