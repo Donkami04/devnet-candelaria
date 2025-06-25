@@ -76,7 +76,6 @@ export function Categories() {
         const dataSeguridadDown = [];
         const licenciamientosDown = [];
 
-        console.log(dataStatusInfGen)
         dataStatusInfGen.upElements.forEach((e) => {
           if (e.name_switch && e.name_switch.includes("CORE")) {
             newCoresUp.push(e);

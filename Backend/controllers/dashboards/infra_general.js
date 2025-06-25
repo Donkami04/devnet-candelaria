@@ -230,7 +230,7 @@ async function useDataInfGen() {
     upElements: upElements,
     downElements: downElements,
   };
-
+  
   return data;
 }
 
