@@ -107,6 +107,21 @@
 .background-anillo.zoom-4 {
   transform: scale(2); /* Puedes ajustar el valor según sea necesario */
 }
+.background-anillo.zoom-5 {
+  transform: scale(2.2);
+}
+
+.background-anillo.zoom-6 {
+  transform: scale(2.7); /* Puedes ajustar el valor según sea necesario */
+}
+
+.background-anillo.zoom-7 {
+  transform: scale(3); /* Puedes ajustar el valor según sea necesario */
+}
+
+.background-anillo.zoom-8 {
+  transform: scale(3.2); /* Puedes ajustar el valor según sea necesario */
+}
 
 .background-anillo {
   transition: transform 0.3s ease;
