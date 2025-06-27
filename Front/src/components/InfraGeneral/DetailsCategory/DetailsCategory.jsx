@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import {
   getDataPrtgGroupsUpDown,
   getDataInfGen,
+  getKpiInfGenDevices
 } from "../../../utils/Api-candelaria/api";
 import { Navbar } from "../../Navbar/Navbar";
 import { useDataInfGen } from "../../../hooks/useDataInfGen";
@@ -27,6 +28,8 @@ export function DetailsCategory() {
     const fetchData = async () => {
       try {
         setLoading(true);
+        const kp = await getKpiInfGenDevices()
+        console.log(kp);
         const response = await getDataInfGen();
         let dataInfraGeneral = response.data;
         const dataStatusInfGen = await useDataInfGen();
