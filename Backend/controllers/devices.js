@@ -127,7 +127,7 @@ class DevicesService {
 
   async getCamarasCsv() {
     try {
-      console.log("Entro añ service");
+
       const cctv_list_servers = [
         "10.225.0.253",
         "10.231.0.253",
@@ -148,8 +148,7 @@ class DevicesService {
               password: password,
             },
           });
-          console.log(response);
-          console.log(ip);
+
 
           response.data.data.forEach(camara => {
             const dataCamara = {

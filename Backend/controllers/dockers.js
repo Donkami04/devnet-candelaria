@@ -35,9 +35,14 @@ async function getDockersData() {
     totalMemoryPercent += parseFloat(docker.memory_usage_percent);
   });
 
+  const total = data.length;
+  const runningCount = data.filter(c => c.status === "running").length;
+  const percentageRunning = Number(((runningCount / total) * 100).toFixed(2));
+
   return {
     totalCpuPercent: totalCpuPercent.toFixed(2),
     totalMemoryPercent: totalMemoryPercent.toFixed(2),
+    kpi: percentageRunning,
     dataContainers: modifiedData,
   };
 }

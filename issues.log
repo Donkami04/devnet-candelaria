@@ -15278,3 +15278,15 @@ ValueError: Error al obtener la información de la API
 
 2025-06-16 10:21:46,755 - ERROR - Hubo un error en la funcion `define_ups_status`: Error al obtener la información de la API
 2025-06-16 10:21:46,755 - ERROR: Hubo un error en la funcion `define_ups_status`: Error al obtener la información de la API
+2025-07-03 16:09:03,306 - WARNING - Línea ignorada por formato incorrecto: 
+2025-07-03 16:09:39,682 - ERROR - Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Vpn_Candelaria/get_fw_data.py", line 46, in get_users_data
+    net_connect = ConnectHandler(**network_device_list)
+  File "/home/donkami/.local/lib/python3.10/site-packages/netmiko/ssh_dispatcher.py", line 365, in ConnectHandler
+    return ConnectionClass(*args, **kwargs)
+  File "/home/donkami/.local/lib/python3.10/site-packages/netmiko/base_connection.py", line 312, in __init__
+    self.host = host.strip()
+AttributeError: 'dict' object has no attribute 'strip'
+
+2025-07-03 16:09:39,682 - ERROR - Error en la función `get_users_data` en el archivo `get_fw_data`
+2025-07-03 16:09:39,682 - ERROR - 'dict' object has no attribute 'strip'

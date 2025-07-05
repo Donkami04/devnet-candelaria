@@ -23,13 +23,14 @@ export function DetailsCategory() {
   const [loading, setLoading] = useState(true);
   const [namePrtgGroup, setNamePrtgGroup] = useState("");
   const [showTablePrtgGroup, setShowTablePrtgGroup] = useState(false);
+  const [kpiDevices, setKpiDevices] = useState(null)
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const kp = await getKpiInfGenDevices()
-        console.log(kp);
+        const kpi = await getKpiInfGenDevices()
+        setKpiDevices(kpi.data.data);
         const response = await getDataInfGen();
         let dataInfraGeneral = response.data;
         const dataStatusInfGen = await useDataInfGen();
@@ -77,7 +78,6 @@ export function DetailsCategory() {
         }
 
         dataInfraGeneral.sort(sortByFailFirst);
-        console.log(dataInfraGeneral);
         setInfraGeneral(dataInfraGeneral);
         setSearchTerm(getCategoriaQueryParam(location.search));
         setLoading(false);
@@ -106,12 +106,15 @@ export function DetailsCategory() {
     });
   });
 
-  console.log(filteredPrtgGroups);
 
   const handleClickPrtgGroup = (name) => {
     setNamePrtgGroup(name);
     setShowTablePrtgGroup(true);
   };
+
+  function findByName(array, name) {
+  return array.find(item => item.name === name);
+}
 
   return (
     <div>
@@ -171,7 +174,7 @@ export function DetailsCategory() {
                             {e.upElem.length - e.downElem.length} /{" "}
                             {e.upElem.length}
                           </td>
-                          <td>{((e.upElem.length/(e.upElem.length + e.downElem.length)).toFixed(2)) * 100}%</td>
+                          <td>{findByName(kpiDevices.infraestructura_general, e.name_switch)?.percentUp ?? 0}%</td>
                           <td>{e.rol}</td>
                           <td>{e.ip}</td>
                         </tr>
@@ -189,7 +192,7 @@ export function DetailsCategory() {
                     <td className={e.down >= 1 ? "kpi-red" : "kpi-green"}>
                       {e.up} / {e.down + e.up}
                     </td>
-                    <td>{((e.up/(e.down + e.up)).toFixed(2)) * 100}%</td>
+                    <td>{findByName(kpiDevices.grupos_prtg, e.device)?.percentUp ?? 0}%</td>
                     <td>{e.group.toUpperCase()}</td>
                     <td>N/A</td>
                   </tr>

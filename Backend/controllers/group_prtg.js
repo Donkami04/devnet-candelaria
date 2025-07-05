@@ -30,32 +30,69 @@ class GroupPrtgService {
       );
     }
   }
-  async getGroupPrtg() {
-    try {
-      const data = await GroupPrtg.findAll({ raw: true });
-      const dataDownRegister = await GroupPrtgDownDatetimes.findAll({
-        raw: true,
-      });
 
-      let updatedArray = data.map((obj1) => {
-        const match = dataDownRegister.find(
-          (obj2) => obj2.id_prtg === obj1.id_prtg
-        );
-        return match ? { ...obj1, datetime: match.datetime } : obj1;
-      });
 
-      return {
-        statusCode: 200,
-        message: "Información de los Grupos de PRTG obtenida exitosamente",
-        data: updatedArray,
-      };
-    } catch (error) {
-      console.error(error);
-      throw new Error(
-        "Error al obtener la información de los Grupos de PRTG para Infraestructura General"
-      );
-    }
+async getCertificadosGroupPrtg() {
+  try {
+    const data = await GroupPrtg.findAll({
+      where: {
+        rol: "Certificados Candelaria"
+      }
+    });
+
+    const countDown = data.filter(item =>
+      Object.values(item).some(val =>
+        typeof val === "string" && val.toLowerCase().includes("down")
+      )
+    ).length;
+
+    const total = data.length;
+    const percentage = Number((((total - countDown ) / total) * 100).toFixed(2));
+
+    return {
+      statusCode: 200,
+      message: "Información de los Certificados Candelaria obtenida exitosamente",
+      data: {
+        kpi: percentage,
+        certificados: data
+      },
+    };
+  } catch (error) {
+    console.error(error);
+    throw new Error(
+      "Error al obtener la información de los Certificados Candelaria"
+    );
   }
+}
+
+
+
+  // async getGroupPrtg() {
+  //   try {
+  //     const data = await GroupPrtg.findAll({ raw: true });
+  //     const dataDownRegister = await GroupPrtgDownDatetimes.findAll({
+  //       raw: true,
+  //     });
+
+  //     let updatedArray = data.map((obj1) => {
+  //       const match = dataDownRegister.find(
+  //         (obj2) => obj2.id_prtg === obj1.id_prtg
+  //       );
+  //       return match ? { ...obj1, datetime: match.datetime } : obj1;
+  //     });
+
+  //     return {
+  //       statusCode: 200,
+  //       message: "Información de los Grupos de PRTG obtenida exitosamente",
+  //       data: updatedArray,
+  //     };
+  //   } catch (error) {
+  //     console.error(error);
+  //     throw new Error(
+  //       "Error al obtener la información de los Grupos de PRTG para Infraestructura General"
+  //     );
+  //   }
+  // }
 
   async getPrtgGroupUpDown() {
     try {

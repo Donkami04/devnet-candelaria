@@ -15,8 +15,8 @@ def main():
     # Esta es la informacion de los FW donde los usuarios se conectan mediante VPN
     fw_data = [
         {"host": "10.224.126.89", "fw": 1},
-        {"host": "10.224.126.93", "fw": 2},
-        {"host": "10.224.126.97", "fw": 3},
+        # {"host": "10.224.126.93", "fw": 2},
+        # {"host": "10.224.126.97", "fw": 3},
     ]
 
     try:
@@ -53,7 +53,7 @@ def main():
 
             # Agregamos la data formateada a final_data
             final_data.extend(data_formated)
-
+        print(data_formated) 
         devnet_bd_response = update_devnet_data(final_data)
         historic_bd_response = save_historic_data(final_data)
 

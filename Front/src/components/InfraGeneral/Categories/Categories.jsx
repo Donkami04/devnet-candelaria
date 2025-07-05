@@ -5,6 +5,7 @@ import { useDataInfGen } from "../../../hooks/useDataInfGen";
 import { Spinner } from "../../Spinner/Spinner";
 import { DatetimeModules } from "../../DatetimeModules/DatetimeModules";
 import { InfGenDatetime } from "../../DatetimeModules/InfGenDatetime";
+import { getKpiInfGenByCategory, getKpiCertificados, getDataDockers, getLicenciamientos } from "../../../utils/Api-candelaria/api"
 import "./Categories.css";
 
 export function Categories() {
@@ -39,11 +40,18 @@ export function Categories() {
   const [licenciamientosUpState, setLicenciamientosUpState ] = useState([]);
   const [licenciamientosDownState, seLlicenciamientosDownState] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [kpiCategories, setKpiCategories] = useState(null);
+  const [kpiCertificados, setKpiCertificados] = useState(null);
+  const [kpiProcesosDevNet, setKpiProcesosDevNet] = useState(null);
+  const [kpiLicenciamientos, setKpiLicenciamientos] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const dataStatusInfGen = await useDataInfGen();
+        const dataCertificados = await getKpiCertificados();
+        const dataDockers = await getDataDockers();
+        const dataKpiLicencamientos = await getLicenciamientos();
         const newCoresUp = [];
         const newDistUp = [];
         const newFortigateAdminUp = [];
@@ -183,7 +191,7 @@ export function Categories() {
             licenciamientosDown.push(e);
           }
         });
-
+        console.log(dataKpiLicencamientos);
         setCoresUp(newCoresUp);
         setDistUp(newDistUp);
         setCoresDown(newCoresDown);
@@ -215,6 +223,9 @@ export function Categories() {
         setSeguridadDown(dataSeguridadDown);
         setLicenciamientosUpState(licenciamientosUp);
         seLlicenciamientosDownState(licenciamientosDown);
+        setKpiCertificados(dataCertificados.data.data.kpi);
+        setKpiProcesosDevNet(dataDockers.kpi)
+        setKpiLicenciamientos(dataKpiLicencamientos.data.kpi)
       } catch (error) {
         console.error(error);
         setIsLoading(false);
@@ -224,18 +235,22 @@ export function Categories() {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    const fetchKpi = async () => {
+      try {
+        const kpiData = await getKpiInfGenByCategory();
+        setKpiCategories(kpiData.data.data);
+      } catch (error) {
+        console.error(error)
+      }
+    };
+    fetchKpi();
+  }, [])
+  
+  
   return (
     <div>
       <Navbar title={"Categorias Inf. Gen."} />
-      {/* <div className="datetimes_inf_gen_container">
-        <DatetimeModules module={"inf_gen_interfaces"} name={"interfaces"} />
-        <DatetimeModules module={"inf_gen_sysHealth"} name={"system health"} />
-        <DatetimeModules module={"inf_gen_neighbors"} name={"neighbors"} />
-        <DatetimeModules
-          module={"inf_gen_routeDefault"}
-          name={"route default"}
-        />
-      </div> */}
       <InfGenDatetime />
       {isLoading ? (
         <Spinner />
@@ -246,6 +261,9 @@ export function Categories() {
               <tr>
                 <th style={{ backgroundColor: "#444444", color: "white" }}>
                   Categoria
+                </th>
+                <th style={{ backgroundColor: "#444444", color: "white" }}>
+                  KPI
                 </th>
                 <th className="kpi-green">Up</th>
                 <th className="kpi-red">Down</th>
@@ -261,6 +279,7 @@ export function Categories() {
                     CORE
                   </Link>
                 </td>
+                <td className={`${kpiCategories.core < 100 ? "kpi-red" : "kpi-green"}`}>{kpiCategories.core}%</td>
                 <td>{coresUp.length}</td>
                 <td>{coresDown.length}</td>
                 <td>{coresUp.length + coresDown.length}</td>
@@ -271,6 +290,7 @@ export function Categories() {
                     DIST
                   </Link>
                 </td>
+                <td className={`${kpiCategories.dist < 100 ? "kpi-red" : "kpi-green"}`}>{kpiCategories.dist}%</td>
                 <td>{distUp.length}</td>
                 <td>{distDown.length}</td>
                 <td>{distUp.length + distDown.length}</td>
@@ -281,6 +301,7 @@ export function Categories() {
                     VPN SITE TO SITE
                   </Link>
                 </td>
+                <td className={`${kpiCategories.vpnSite < 100 ? "kpi-red" : "kpi-green"}`}>{kpiCategories.vpnSite}%</td>
                 <td>{fortigateAdminUp.length + fortigateConceUp.length}</td>
                 <td>{fortigateAdminDown.length + fortigateConceDown.length}</td>
                 <td>
@@ -296,6 +317,7 @@ export function Categories() {
                     Certificados Candelaria
                   </Link>
                 </td>
+                <td className={`${kpiCertificados < 100 ? "kpi-red" : "kpi-green"}`}>{kpiCertificados}%</td>
                 <td>{sslUp.length}</td>
                 <td>{sslDown.length}</td>
                 <td>{sslUp.length + sslDown.length}</td>
@@ -306,6 +328,7 @@ export function Categories() {
                     Telefonia IP
                   </Link>
                 </td>
+                <td  className={`${kpiCategories.telefonia < 100 ? "kpi-red" : "kpi-green"}`}>{kpiCategories.telefonia}%</td>
                 <td>{voiceUp.length}</td>
                 <td>{voiceDown.length}</td>
                 <td>{voiceUp.length + voiceDown.length}</td>
@@ -316,6 +339,7 @@ export function Categories() {
                     Servidores ISE y PRIME
                   </Link>
                 </td>
+                <td  className={`${kpiCategories.servidoresIsePrime < 100 ? "kpi-red" : "kpi-green"}`}>{kpiCategories.servidoresIsePrime}%</td>
                 <td>{iseUp.length}</td>
                 <td>{iseDown.length}</td>
                 <td>{iseUp.length + iseDown.length}</td>
@@ -326,6 +350,7 @@ export function Categories() {
                     Controladoras Inalambricas
                   </Link>
                 </td>
+                <td  className={`${kpiCategories.controladoras < 100 ? "kpi-red" : "kpi-green"}`}>{kpiCategories.controladoras}%</td>
                 <td>{wirelessUp.length}</td>
                 <td>{wirelessDown.length}</td>
                 <td>{wirelessUp.length + wirelessDown.length}</td>
@@ -336,6 +361,7 @@ export function Categories() {
                     LTE
                   </Link>
                 </td>
+                <td  className={`${kpiCategories.lte < 100 ? "kpi-red" : "kpi-green"}`}>{kpiCategories.lte}%</td>
                 <td>{lteUp.length}</td>
                 <td>{lteDown.length}</td>
                 <td>{lteUp.length + lteDown.length}</td>
@@ -346,6 +372,7 @@ export function Categories() {
                     Sistema CCTV
                   </Link>
                 </td>
+                <td  className={`${kpiCategories.cctv < 100 ? "kpi-red" : "kpi-green"}`}>{kpiCategories.cctv}%</td>
                 <td>{cctvUp.length}</td>
                 <td>{cctvDown.length}</td>
                 <td>{cctvUp.length + cctvDown.length}</td>
@@ -356,6 +383,7 @@ export function Categories() {
                     Firewalls IT
                   </Link>
                 </td>
+                <td  className={`${kpiCategories.fwit < 100 ? "kpi-red" : "kpi-green"}`}>{kpiCategories.fwit}%</td>
                 <td>{fwItUp.length}</td>
                 <td>{fwItDown.length}</td>
                 <td>{fwItUp.length + fwItDown.length}</td>
@@ -366,6 +394,7 @@ export function Categories() {
                     Firewalls OT
                   </Link>
                 </td>
+                <td  className={`${kpiCategories.fwot < 100 ? "kpi-red" : "kpi-green"}`}>{kpiCategories.fwot}%</td>
                 <td>{fwOtUp.length}</td>
                 <td>{fwOtDown.length}</td>
                 <td>{fwOtUp.length + fwOtDown.length}</td>
@@ -376,6 +405,7 @@ export function Categories() {
                     Procesos DevNet
                   </Link>
                 </td>
+                <td className={`${kpiProcesosDevNet < 100 ? "kpi-red" : "kpi-green"}`}>{kpiProcesosDevNet}%</td>
                 <td>{dockersUp.length}</td>
                 <td>{dockersDown.length}</td>
                 <td>{dockersUp.length + dockersDown.length}</td>
@@ -386,6 +416,7 @@ export function Categories() {
                     Seguridad
                   </Link>
                 </td>
+                <td  className={`${kpiCategories.seguridad < 100 ? "kpi-red" : "kpi-green"}`}>{kpiCategories.seguridad}%</td>
                 <td>{seguridadUp.length}</td>
                 <td>{seguridadDown.length}</td>
                 <td>{seguridadUp.length + seguridadDown.length}</td>
@@ -396,6 +427,7 @@ export function Categories() {
                     Licenciamientos
                   </Link>
                 </td>
+                <td className={`${kpiLicenciamientos < 100 ? "kpi-red" : "kpi-green"}`}>{kpiLicenciamientos}%</td>
                 <td>{licenciamientosUpState.length}</td>
                 <td>{licenciamientosDownState.length}</td>
                 <td>{licenciamientosUpState.length + licenciamientosDownState.length}</td>

@@ -22,11 +22,37 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+router.get("/kpi", async (req, res, next) => {
+  try {
+    const response = await InfraGeneral.getPercentUpGeneral();
+    res.status(response.statusCode).json({
+      statusCode: response.statusCode,
+      message: response.message,
+      data: response.data,
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
 router.get("/kpi/devices", async (req, res, next) => {
   try {
-    console.log("Si es aqui");
+
     const response = await InfraGeneral.getPercentUpDevices();
     res.status(response.statusCode).json({
+      message: response.message,
+      data: response.data,
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get("/kpi/categories", async (req, res, next) => {
+  try {
+    const response = await InfraGeneral.getPercentUpByCategory();
+    res.status(response.statusCode).json({
+      statusCode: response.statusCode,
       message: response.message,
       data: response.data,
     });

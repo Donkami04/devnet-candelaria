@@ -49,7 +49,6 @@ async function extractInfraestructuraData() {
         getData("dockers"),
         getData("licenciamientos")
     ]);
-    console.log(interfaces);
     const upElements = [];
     const downElements = [];
 
