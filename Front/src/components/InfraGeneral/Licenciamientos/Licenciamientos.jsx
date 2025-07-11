@@ -34,9 +34,9 @@ export const Licenciamientos = () => {
   const fetchData = async () => {
     try {
       const data = await getLicenciamientos();
-      if (data && data.data && data.data.length > 0) {
-        setDataLicen(data.data);
-        setTotal(data.data.length);
+      if (data && data.data && data.data.data.length > 0) {
+        setDataLicen(data.data.data);
+        setTotal(data.data.data.length);
       } else {
         setErrorLicen(data.data.message);
         setDataLicen([]);
@@ -93,7 +93,6 @@ export const Licenciamientos = () => {
     // Funcion para cuando se da click al icono de editar
     // Setea los el formulario con los datos del elemento seleccionado
 
-    console.log(data);
     if (data.expiracion !== "Perpetuas") {
       const [day, month, year] = data.expiracion.split("/");
       const [daySpt, monthSpt, yearSpt] = data.expiracion_soporte.split("/");
@@ -136,8 +135,6 @@ export const Licenciamientos = () => {
       formData.expiracion_soporte = formatDate(formData.expiracion_soporte);
 
       const isEditing = !!formData.id;
-      console.log(formData);
-      console.log(isEditing);
       const url = isEditing ? `${BASE_API_URL}/licenciamientos/${formData.id}` : `${BASE_API_URL}/licenciamientos`;
 
       const method = isEditing ? axios.put : axios.post;
