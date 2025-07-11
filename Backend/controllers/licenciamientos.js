@@ -23,12 +23,21 @@ class LicenciamientosService {
           element.dataValues.status = "Up";
         }
       });
+      const dataPlain = data.map(item => item.get({ plain: true }));
+      const total = dataPlain.length;
+      const licenciamientosDown = dataPlain.filter(e => e.status === "Down").length;
+      const kpiUp = Number((((total - licenciamientosDown) / total) * 100).toFixed(2));
+      
       return {
         statusCode: 200,
         message: "Información de los licenciamientos obtenida exitosamente",
-        data: data,
+        data: {
+          kpi: kpiUp,
+          data
+        },
       };
     } catch (error) {
+      console.error(error)
       throw new Error("Error al obtener la información de los licenciamientos");
     }
   }

@@ -32,7 +32,7 @@ class FimService {
           // base_ip,
         },
       });
-      console.log("#####################",datesResets);
+
 
       const data = {
         datesResets,

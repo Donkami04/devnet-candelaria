@@ -5,6 +5,7 @@ import PuffLoader from "react-spinners/PuffLoader";
 import "./InfraGeneralDash.css";
 import { Link } from "react-router-dom";
 import { FaNetworkWired } from "react-icons/fa";
+import { getKpiInfGen } from "../../../utils/Api-candelaria/api"
 import { FaEye } from "react-icons/fa";
 
 export function InfraGeneralDash() {
@@ -13,11 +14,13 @@ export function InfraGeneralDash() {
   const [spinnerInfra, setSpinnerInfra] = useState(true);
   const [tempSensUp, setTempSensUp] = useState([]);
   const [tempSensDown, setTempSensDown] = useState([]);
+  const [kpi, setKpi] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const result = await useDataInfGen();
+        const kpiData = await getKpiInfGen();
         const elementsTempUp = [];
         const elementsTempDown = [];
         result.upElements.forEach((element) => {
@@ -35,6 +38,7 @@ export function InfraGeneralDash() {
         setIinfGenDashUp(result.upElements.length);
         setIinfGenDashDown(result.downElements.length);
         setSpinnerInfra(false);
+        setKpi(kpiData.data.data)
       } catch (error) {
         console.error("Error InfraGeneralDash:", error);
       }
@@ -53,6 +57,10 @@ export function InfraGeneralDash() {
 
   return (
     <>
+    <div style={{display:"flex", justifyContent: "center", gap: "10px"}}>
+      <span style={{fontWeight: "bold"}}>KPI:</span>
+      <span>{kpi}%</span>
+    </div>
       <table className="infra-dash-table">
         <thead>
           <tr>

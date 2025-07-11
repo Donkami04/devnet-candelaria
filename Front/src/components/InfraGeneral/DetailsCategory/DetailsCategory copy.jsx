@@ -3,7 +3,6 @@ import { useLocation } from "react-router-dom";
 import {
   getDataPrtgGroupsUpDown,
   getDataInfGen,
-  getKpiInfGenDevices
 } from "../../../utils/Api-candelaria/api";
 import { Navbar } from "../../Navbar/Navbar";
 import { useDataInfGen } from "../../../hooks/useDataInfGen";
@@ -23,61 +22,62 @@ export function DetailsCategory() {
   const [loading, setLoading] = useState(true);
   const [namePrtgGroup, setNamePrtgGroup] = useState("");
   const [showTablePrtgGroup, setShowTablePrtgGroup] = useState(false);
-  const [kpiDevices, setKpiDevices] = useState(null)
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const kpi = await getKpiInfGenDevices()
-        setKpiDevices(kpi.data.data);
+
+        // Esta llamada ahora retorna también percentUp por switch
         const response = await getDataInfGen();
-        let dataInfraGeneral = response.data;
+        const kpiDevices = response.data.infraestructura_general;
+
+        const percentMap = new Map();
+        kpiDevices.forEach((sw) => {
+          percentMap.set(sw.name, sw.percentUp);
+        });
+
         const dataStatusInfGen = await useDataInfGen();
         const dataPrtgGroups = await getDataPrtgGroupsUpDown();
         setGroupPrtg(dataPrtgGroups.data);
 
-        function sameNameSwitch(sw) {
-          sw.downElem = [];
-          sw.upElem = [];
-          dataStatusInfGen.downElements.forEach((e) => {
-            if (e.name_switch === sw.name_switch) {
-              sw.downElem.push(e);
-            }
-          });
-          dataStatusInfGen.upElements.forEach((e) => {
-            if (e.name_switch === sw.name_switch) {
-              sw.upElem.push(e);
-            }
-          });
-          const match = dataStatusInfGen.downElements.some(
-            (e) => e.name_switch === sw.name_switch
-          );
-          if (match) {
-            sw.swStatus = "FAIL";
-          } else {
-            sw.swStatus = "OK";
-          }
-        }
+        let dataInfraGeneral = kpiDevices
+          .filter((e) => e.name !== "WLC 9800 NEGOCIO")
+          .map((sw) => {
+            const upElem = [];
+            const downElem = [];
 
-        dataInfraGeneral = dataInfraGeneral.filter(
-          (e) => e.name_switch !== "WLC 9800 NEGOCIO"
-        );
-        dataInfraGeneral.forEach((sw) => {
-          sameNameSwitch(sw);
+            dataStatusInfGen.downElements.forEach((e) => {
+              if (e.name_switch === sw.name) {
+                downElem.push(e);
+              }
+            });
+            dataStatusInfGen.upElements.forEach((e) => {
+              if (e.name_switch === sw.name) {
+                upElem.push(e);
+              }
+            });
+
+            const swStatus = downElem.length > 0 ? "FAIL" : "OK";
+            return {
+              name_switch: sw.name,
+              rol: sw.rol,
+              ip: sw.ip,
+              swStatus,
+              upElem,
+              downElem,
+              percentUp: percentMap.get(sw.name) || 0,
+              id: sw.id,
+            };
+          });
+
+        // Ordenar: FAIL primero
+        dataInfraGeneral.sort((a, b) => {
+          if (a.swStatus === "FAIL" && b.swStatus === "OK") return -1;
+          if (a.swStatus === "OK" && b.swStatus === "FAIL") return 1;
+          return 0;
         });
 
-        function sortByFailFirst(a, b) {
-          if (a.swStatus === "FAIL" && b.swStatus === "OK") {
-            return -1;
-          }
-          if (a.swStatus === "OK" && b.swStatus === "FAIL") {
-            return 1;
-          }
-          return 0;
-        }
-
-        dataInfraGeneral.sort(sortByFailFirst);
         setInfraGeneral(dataInfraGeneral);
         setSearchTerm(getCategoriaQueryParam(location.search));
         setLoading(false);
@@ -91,30 +91,21 @@ export function DetailsCategory() {
   }, [location.search]);
 
   const filteredInfraGeneral = infraGeneral.filter((obj) => {
-    // Iterar sobre las claves de cada objeto
-    return Object.keys(obj).some((key) => {
-      // Convertir el valor del atributo a cadena y buscar el término
-      return String(obj[key]).toLowerCase().includes(searchTerm.toLowerCase());
-    });
+    return Object.keys(obj).some((key) =>
+      String(obj[key]).toLowerCase().includes(searchTerm.toLowerCase())
+    );
   });
 
   const filteredPrtgGroups = groupPrtg.filter((obj) => {
-    // Iterar sobre las claves de cada objeto
-    return Object.keys(obj).some((key) => {
-      // Convertir el valor del atributo a cadena y buscar el término
-      return String(obj[key]).toLowerCase().includes(searchTerm.toLowerCase());
-    });
+    return Object.keys(obj).some((key) =>
+      String(obj[key]).toLowerCase().includes(searchTerm.toLowerCase())
+    );
   });
-
 
   const handleClickPrtgGroup = (name) => {
     setNamePrtgGroup(name);
     setShowTablePrtgGroup(true);
   };
-
-  function findByName(array, name) {
-  return array.find(item => item.name === name);
-}
 
   return (
     <div>
@@ -125,7 +116,7 @@ export function DetailsCategory() {
       ) : (
         <div className="table-topology-ig-container">
           <div className="search-container-ig">
-            <label htmlFor="">Buscar por palabra clave:</label>
+            <label>Buscar por palabra clave:</label>
             <input
               type="text"
               placeholder="Buscar..."
@@ -139,7 +130,6 @@ export function DetailsCategory() {
                 <tr>
                   <th>Nombre</th>
                   <th>Estado</th>
-                  <th>Kpi</th>
                   <th>Rol Equipo</th>
                   <th>Ip</th>
                 </tr>
@@ -153,9 +143,6 @@ export function DetailsCategory() {
                 ) : (
                   filteredInfraGeneral.map(
                     (e) =>
-                      // Utilizamos una condición para filtrar los elementos
-                      // que cumplen con la condición name.switch === "WLC - MESH"
-                      // y no renderizarlos
                       e.name_switch !== "WLC - MESH" && (
                         <tr key={e.id}>
                           <td className="td-category-ig">
@@ -171,10 +158,9 @@ export function DetailsCategory() {
                               e.swStatus === "FAIL" ? "kpi-red" : "kpi-green"
                             }`}
                           >
-                            {e.upElem.length - e.downElem.length} /{" "}
-                            {e.upElem.length}
+                            {e.percentUp}% ({e.upElem.length - e.downElem.length} /{" "}
+                            {e.upElem.length})
                           </td>
-                          <td>{findByName(kpiDevices.infraestructura_general, e.name_switch)?.percentUp ?? 0}%</td>
                           <td>{e.rol}</td>
                           <td>{e.ip}</td>
                         </tr>
@@ -192,7 +178,6 @@ export function DetailsCategory() {
                     <td className={e.down >= 1 ? "kpi-red" : "kpi-green"}>
                       {e.up} / {e.down + e.up}
                     </td>
-                    <td>{findByName(kpiDevices.grupos_prtg, e.device)?.percentUp ?? 0}%</td>
                     <td>{e.group.toUpperCase()}</td>
                     <td>N/A</td>
                   </tr>

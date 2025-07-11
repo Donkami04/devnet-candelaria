@@ -250,7 +250,43 @@ export const getDataInfGen = async () => {
     .get(`${BASE_API_URL}/infra_general`)
     .then((response) => response.data)
     .catch((error) => {
-      throw new Error("DATA INF GEN: Error del API REST Candealaria : ", error);
+      throw new Error("LA VIEJA ", error);
+    });
+};
+
+export const getKpiInfGenDevices = async () => {
+  return axios
+    .get(`${BASE_API_URL}/infra_general/kpi/devices`)
+    .then((response) => response)
+    .catch((error) => {
+      throw new Error("Error obteniendo kpi de i.g. por equipo: ", error);
+    });
+};
+
+export const getKpiInfGenByCategory = async () => {
+  return axios
+    .get(`${BASE_API_URL}/infra_general/kpi/categories`)
+    .then((response) => response)
+    .catch((error) => {
+      throw new Error("Error obteniendo kpi de i.g. por categoria: ", error);
+    });
+};
+
+export const getKpiInfGen = async () => {
+  return axios
+    .get(`${BASE_API_URL}/infra_general/kpi`)
+    .then((response) => response)
+    .catch((error) => {
+      throw new Error("Error obteniendo kpi general de i.g.: ", error);
+    });
+};
+
+export const getKpiCertificados = async () => {
+  return axios
+    .get(`${BASE_API_URL}/group-prtg/certificados`)
+    .then((response) => response)
+    .catch((error) => {
+      throw new Error("Error obteniendo kpi de certificados de i.g.: ", error);
     });
 };
 

@@ -17,6 +17,20 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+// Obtener todos los certificados candelaria
+router.get("/certificados", async (req, res, next) => {
+  try {
+    const response = await GroupPrtg.getCertificadosGroupPrtg();
+    res.status(response.statusCode).json({
+      message: response.message,
+      data: response.data,
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
+
 // Obtener todos las GroupPrtgService Up y Down
 router.get("/updown", async (req, res, next) => {
   try {

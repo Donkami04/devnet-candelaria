@@ -47,7 +47,8 @@ def get_users_data(host):
         output = net_connect.send_command("execute vpn sslvpn list tunnel")
         net_connect.disconnect()
         output = output.split("\n", 2)[2]
-        
+        print(output)
+        print("######")
         return output
     
     except Exception as e:
@@ -58,4 +59,4 @@ def get_users_data(host):
         logging.error(e)
         return None
     
-# get_users_data("10.224.126.89")
+get_users_data("10.224.126.89")

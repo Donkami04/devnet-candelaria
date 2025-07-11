@@ -232,7 +232,7 @@ export async function useDataInfGen() {
   upOrDownSysHealth(allData);
   upOrDownRouteDefault(allData);
   upOrDownDockers(allData);
-  licenciamientosUpOrDown(licenciamientos.data);
+  licenciamientosUpOrDown(licenciamientos.data.data);
 
   const data = {
     upElements: upElements,

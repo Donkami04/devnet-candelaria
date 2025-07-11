@@ -6,6 +6,8 @@ const cors = require("cors");
 const { allRoutes } = require("./routes/index.routes");
 // require("./jobs/index");
 // require("./routes/email.routescopy2")
+const { extractInfraestructuraData } = require("./controllers/dashboards/InfraGeneralKpi.js/kpi")
+// extractInfraestructuraData()
 const {
   logErrors,
   errorHandler,

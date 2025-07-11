@@ -64,7 +64,7 @@ def get_prtg_data(ip, prtg_id):
         response_prtg_data = requests.get(URL_PRTG_GET_DATA, verify=False).json()
         try:
             sensor = response_prtg_data["sensors"][0]
-            prtg_data["prtg_id"] = prtg_id
+            prtg_data["prtg_id"] = sensor_id
             prtg_data["prtg_name_device"] = sensor.get("name", "Not Found")
             prtg_data["prtg_sensorname"] = sensor.get("device", "Not Found")
             prtg_data["prtg_status"] = sensor.get("status", "Not Found")

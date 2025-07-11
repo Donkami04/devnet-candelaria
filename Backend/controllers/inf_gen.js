@@ -3,12 +3,8 @@ const { Ap } = require("../models/ap");
 const { DataAp } = require("../models/data_ap");
 const axios = require("axios");
 const https = require("https");
+const { extractInfraestructuraData } = require("./dashboards/InfraGeneralKpi.js/kpi");
 require("dotenv").config();
-
-async function getInfGenData() {
-  const data = await DataInfGen.findAll();
-  return data;
-}
 
 class DataInfGenService {
   async getInfGenData() {
@@ -26,149 +22,227 @@ class DataInfGenService {
       );
     }
   }
+
+  getPercentUpDevices = async () => {
+    try {
+      const data = await extractInfraestructuraData();
+      // console.log(data.grupos_prtg);
+      const respData = {
+        infraestructura_general: [],
+        grupos_prtg: []
+      };
+
+      data.infraestructura_general.forEach((element) => {
+        const upElem = element.upElem.length;
+        const downElem = element.downElem.length;
+        const total = upElem + downElem;
+
+        let percentUp = total > 0 ? (upElem / total) * 100 : 100;
+
+        // Validar por si acaso
+        if (isNaN(percentUp)) {
+          percentUp = 100;
+        }
+
+        // Redondear a 2 decimales
+        percentUp = Number(percentUp.toFixed(2));
+
+        respData.infraestructura_general.push({
+          name: element.name_switch,
+          percentUp
+        });
+      });
+      
+
+
+      data.grupos_prtg.data.forEach((element) => {
+        const upElem = element.up;
+        const downElem = element.down;
+        const total = upElem + downElem;
+
+        let percentUp = total > 0 ? (upElem / total) * 100 : 100; // Evita división por 0
+
+        // Validar si es NaN (por seguridad)
+        if (isNaN(percentUp)) {
+          percentUp = 100;
+        }
+
+        // Redondear a 2 decimales
+        percentUp = Number(percentUp.toFixed(2));
+
+        respData.grupos_prtg.push({
+          name: element.device,
+          group: element.group,
+          percentUp
+        });
+      });
+      
+
+      return {
+        statusCode: 200,
+        message: "Calculo del KPI por Equipo de I. General obtenido exitosamente.",
+        data: respData
+      }
+
+    } catch (error) {
+      console.error(error);
+      return {
+        statusCode: 500,
+        message: "Error en el Calculo del KPI por Equipo de I. General.",
+        data: null
+      }
+    }
+
+  };
+
+
+  getPercentUpByCategory = async () => {
+    try {
+      const infGenData = await this.getPercentUpDevices();
+      const items = infGenData.data.infraestructura_general;
+      const itemsPrtg = infGenData.data.grupos_prtg;
+
+      const counters = {
+        core: { sum: 0, count: 0 },
+        dist: { sum: 0, count: 0 },
+        vpnSite: { sum: 0, count: 0 },
+        seguridad: { sum: 0, count: 0 },
+        telefonia: { sum: 0, count: 0 },
+        servidoresIsePrime: { sum: 0, count: 0 },
+        controladoras: { sum: 0, count: 0 },
+        lte: { sum: 0, count: 0 },
+        cctv: { sum: 0, count: 0 },
+        fwit: { sum: 0, count: 0 },
+        fwot: { sum: 0, count: 0 },
+      };
+
+      items.forEach((elem) => {
+        const name = elem.name.toLowerCase();
+
+        if (name.includes("core")) {
+          counters.core.sum += elem.percentUp;
+          counters.core.count++;
+        }
+
+        if (name.includes("dist")) {
+          counters.dist.sum += elem.percentUp;
+          counters.dist.count++;
+        }
+
+        if (name.includes("fortigate")) {
+          counters.vpnSite.sum += elem.percentUp;
+          counters.vpnSite.count++;
+        }
+
+        if (name.includes("fac")) {
+          counters.seguridad.sum += elem.percentUp;
+          counters.seguridad.count++;
+        }
+      });
+
+      itemsPrtg.forEach((elem) => {
+        const group = elem.group.toLowerCase();
+        if (group.includes("telefonia ip")) {
+          counters.telefonia.sum += elem.percentUp;
+          counters.telefonia.count++;
+        }
+
+        if (group.includes("servidores ise y prime")) {
+          counters.servidoresIsePrime.sum += elem.percentUp;
+          counters.servidoresIsePrime.count++;
+        }
+
+        if (group.includes("controladoras inalambricas")) {
+          counters.controladoras.sum += elem.percentUp;
+          counters.controladoras.count++;
+        }
+
+        if (group.includes("lte")) {
+          counters.lte.sum += elem.percentUp;
+          counters.lte.count++;
+        }
+
+        if (group.includes("cctv")) {
+          counters.cctv.sum += elem.percentUp;
+          counters.cctv.count++;
+        }
+
+        if (group.includes("fw it")) {
+          if (typeof elem.percentUp === "number" && !isNaN(elem.percentUp)) {
+            counters.fwit.sum += elem.percentUp;
+            counters.fwit.count++;
+          }
+        }
+
+        if (group.includes("fw ot")) {
+          counters.fwot.sum += elem.percentUp;
+          counters.fwot.count++;
+        }
+      });
+
+      const format = ({ sum, count }) =>
+        count === 0 ? 0 : Number((sum / count).toFixed(2));
+
+      return {
+        statusCode: 200,
+        message: "Kpi por categorias OK",
+        data: {
+          core: format(counters.core),
+          dist: format(counters.dist),
+          vpnSite: format(counters.vpnSite),
+          telefonia: format(counters.telefonia),
+          servidoresIsePrime: format(counters.servidoresIsePrime),
+          controladoras: format(counters.controladoras),
+          lte: format(counters.lte),
+          cctv: format(counters.cctv),
+          fwit: format(counters.fwit),
+          fwot: format(counters.fwot),
+          seguridad: format(counters.seguridad),
+        }
+
+
+      };
+    } catch (error) {
+      console.error(error);
+      console.error("[DataInfGenService]-[getPercentUpByCategory] Error");
+    }
+  };
+
+
+  getPercentUpGeneral = async () => {
+    try {
+      const {data} = await this.getPercentUpByCategory();
+      
+      let sum = 0;
+      let count = 0;
+
+      for (const value of Object.values(data)) {
+        sum += value;
+        count++;
+      }
+
+      let kpi = count > 0 ? sum / count : 0;
+      kpi = Number((sum / count).toFixed(2))
+      
+      return {
+        statusCode: 200,
+        message: "Calculo del KPI General de I.G. obtenido exitosamente.",
+        data: kpi
+      }
+
+    } catch (error) {
+      console.error(error);
+      return {
+        statusCode: 500,
+        message: "Error en el Calculo del KPI de I. General.",
+        data: null
+      }
+    }
+
+  };
+
 }
 
-// async function getApRegistered() {
-//   const data = await Ap.findAll();
-//   return data;
-// }
-
-// async function getNumberApRegistered() {
-//   try {
-//     const agent = new https.Agent({ rejectUnauthorized: false });
-//     const idPrtgUrl = process.env.URL_PRTG_GET_ID;
-//     const numberApUrl = process.env.URL_PRTG_AP_REGISTERED;
-//     const apRegisteredInDb = await DataAp.findAll();
-//     const response = await axios.get(idPrtgUrl, {
-//       httpsAgent: agent,
-//     });
-
-//     if (response.status === 200) {
-//       const idControllerPrtg = response.data.devices[0].objid;
-//       const fullNumberApUrl = numberApUrl.replace(
-//         "${ID_SWITCH}",
-//         idControllerPrtg
-//       );
-//       const responseNumberAp = await axios.get(fullNumberApUrl, {
-//         httpsAgent: agent,
-//       });
-
-//       if (responseNumberAp.status === 200) {
-//         const numTotalApPrtg = responseNumberAp.data.sensors[0].lastvalue_raw;
-//         return {
-//           numTotalApPrtg: numTotalApPrtg,
-//           numTotalApDb: apRegisteredInDb.length,
-//         };
-//       }
-//     }
-//   } catch (error) {
-//     console.error(
-//       "Error al obtener el numero de AP registrados desde PRTG:",
-//       error
-//     );
-//     throw error;
-//   }
-// }
-
-// async function registerAp(data) {
-//   try {
-//     const apDoesExist = await DataAp.findOne({
-//       where: { ip: data.ip },
-//     });
-//     if (!apDoesExist) {
-//       const newAp = await DataAp.create({
-//         name: data.name,
-//         model: data.model,
-//         ip: data.ip,
-//         state: data.state,
-//         location: data.location,
-//       });
-//       return {
-//         status: 201,
-//         message:
-//           "El Ap ha sido registrado exitosamente, espere unos minutos para que el sistema actualice los datos.",
-//         data: newAp,
-//       };
-//     }
-//     return {
-//       status: 409,
-//       message: "El AP ya existe en la base de datos.",
-//     };
-//   } catch (error) {
-//     console.error(error);
-//     throw error;
-//   }
-// }
-
-// async function getOneAp(ip) {
-//   const ap = await DataAp.findOne({ where: { ip: ip } });
-//   if (ap) {
-//     return {
-//       status: 200,
-//       data: ap,
-//     };
-//   }
-//   return {
-//     status: 404,
-//     message: "El AP no existe en la base de datos.",
-//   };
-// }
-
-// async function editOneAp(id, changes) {
-//   try {
-//     const ap = await DataAp.findByPk(id);
-//     if (ap) {
-//       await DataAp.update(
-//         {
-//           name: changes.name,
-//           model: changes.model,
-//           ip: changes.ip,
-//           state: changes.state,
-//           location: changes.location,
-//         },
-//         { where: { id: id } }
-//       );
-//       const apUpdated = await DataAp.findByPk(id);
-//       return {
-//         status: 200,
-//         message: "El AP ha sido modificado exitosamente.",
-//         data: apUpdated,
-//       };
-//     }
-//     return {
-//       status: 404,
-//       message: "El AP no existe en la base de datos.",
-//     };
-//   } catch (error) {
-//     console.error(error);
-//     throw error;
-//   }
-// }
-
-// async function deleteAp(ip) {
-//   try {
-//     const ap = await DataAp.findOne({ where: { ip: ip } });
-//     if (ap) {
-//       await DataAp.destroy({ where: { id: ap.id } });
-//       const checkApIsDeleted = await DataAp.findByPk(ap.id);
-//       if (!checkApIsDeleted) {
-//         return {
-//           status: 200,
-//           message: "El AP ha sido eliminado exitosamente",
-//         };
-//       } else {
-//         throw error;
-//       }
-//     }
-//     return {
-//       status: 404,
-//       message: "El AP no existe en la base de datos",
-//     };
-//   } catch (error) {
-//     console.error(error);
-//     throw error;
-//   }
-// }
 
 module.exports = {
   DataInfGenService,
