@@ -100,7 +100,7 @@ async function extractInfraestructuraData() {
     });
 
     // Licencias
-    licencias.data?.forEach((e) => {
+    licencias.data?.data?.forEach((e) => {
         if (e.status === "Up" || e.status === "Warning") addToUpOrDown(e, true);
         else if (e.status === "Down") addToUpOrDown(e, false);
     });
