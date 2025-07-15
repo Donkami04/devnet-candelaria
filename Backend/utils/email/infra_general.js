@@ -5,7 +5,6 @@ const { use } = require("react");
 const fetchDataInfraGen = async () => {
   try {
     const data = await useDataInfGen();
-
     const elementsTempUp = data.upElements.filter((element) => element.name && element.name.includes("Temperatures"));
     const elementsTempDown = data.downElements.filter(
       (element) => element.name && element.name.includes("Temperatures")

@@ -20,7 +20,7 @@ async function useDataInfGen() {
     ...routeDefault.data,
     ...groupPrtg.data,
     ...dockers.dataContainers,
-    ...licenciamientos.data,
+    ...licenciamientos.data.data,
   ];
 
   const upElements = [];
@@ -224,7 +224,7 @@ async function useDataInfGen() {
   upOrDownSysHealth(allData);
   upOrDownRouteDefault(allData);
   upOrDownDockers(allData);
-  licenciamientosUpOrDown(licenciamientos.data);
+  licenciamientosUpOrDown(licenciamientos.data.data);
 
   const data = {
     upElements: upElements,

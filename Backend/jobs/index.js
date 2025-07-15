@@ -1,5 +1,7 @@
 const cron = require("node-cron");
-const { sendEmailReport } = require("./email_report"); // ajusta el path si es necesario
+const { sendEmailReport } = require("./email_report");
+
+console.log("Envio de correo importado correctamente");
 
 // Ejecutar todos los días a las 7:00 AM
 cron.schedule("0 7 * * *", async () => {

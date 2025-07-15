@@ -18,6 +18,7 @@ const transporter = nodemailer.createTransport({
 });
 
 const sendEmailReport = async () => {
+  console.log("Iniciando envio de Email");
   try {
     const dashDevices = await fetchDataDevices();
     const dashDcs = await fetchDataDcs();
