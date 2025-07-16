@@ -36,7 +36,7 @@ const sendEmailReport = async () => {
         <p style="text-align: center; color: #ddd; font-size: 10px;">Los datos recopilados en este correo fueron tomados el dia de hoy a las 7:00 AM</p>
       </div>
     `;
-
+    console.log("Fetchdata para email ready");
     // Enviar el correo
     const result = await transporter.sendMail({
       from: "Devnet <devnet@lundinmining.com>",
