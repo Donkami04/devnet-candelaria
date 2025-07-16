@@ -78,19 +78,10 @@ export const Anillo = () => {
     );
 
     // Verifica si se encontró la interfaz y si su estado incluye "Up" o "Down"
-    if (interfaceData && interfaceData.status) {
-      if (interfaceData.status.includes("Up")) {
-        return interfaceData.status;
+    if (interfaceData && interfaceData.status) { {
+        return `Device: ${interfaceData.device} - Sensor: ${interfaceData.sensor} - ${interfaceData.status || "Not Found"}`;
       }
-      if (interfaceData.status.includes("Down")) {
-        return interfaceData.status;
-      }
-      if (interfaceData.status.includes("Unusual")) {
-        return interfaceData.status;
-      }
-      if (interfaceData.status.includes("Paused")) {
-        return interfaceData.status;
-      }
+
     }
 
     // En caso de no encontrar datos o que el estado no incluya "Up" o "Down"
@@ -114,7 +105,7 @@ export const Anillo = () => {
           <img src="/anillo_opit.webp" alt="anillo" />
 
           <div className=".main-lights-anillo-container">
-            <div className="status-light-anillo-container">
+            <div className="status-light-anillo-opit-container">
               <p // 10.224.114.86
                 title={statusTitle(15596)}
                 className={`status-light-anillo id15596 ${statusLight(15596)}`}
@@ -128,8 +119,22 @@ export const Anillo = () => {
                 </a>
               </p>
             </div>
+            <div className="status-light-anillo-opit-container">
+              <p // 10.224.114.86
+                title={statusTitle(20594)}
+                className={`status-light-anillo id20594 ${statusLight(20594)}`}
+              >
+                <a
+                  style={{ color: "black" }}
+                  href={`${PRTG_URL}7918&tabid=1`}
+                  target="_blank"
+                >
+                  Fa1/4
+                </a>
+              </p>
+            </div>
 
-            <div className="status-light-anillo-container">
+            <div className="status-light-anillo-opit-container">
               <p // 10.224.114.83
                 title={statusTitle(15609)}
                 className={`status-light-anillo id15609 ${statusLight(15609)}`}
@@ -143,7 +148,7 @@ export const Anillo = () => {
                 </a>
               </p>
             </div>
-            <div className="status-light-anillo-container">
+            <div className="status-light-anillo-opit-container">
               <p // 10.224.114.83
                 title={statusTitle(17572)}
                 className={`status-light-anillo id17572 ${statusLight(17572)}`}
@@ -157,7 +162,7 @@ export const Anillo = () => {
                 </a>
               </p>
             </div>
-            <div className="status-light-anillo-container">
+            <div className="status-light-anillo-opit-container">
               <p // 10.224.114.83
                 title={statusTitle(15608)}
                 className={`status-light-anillo id15608 ${statusLight(15608)}`}
@@ -171,7 +176,7 @@ export const Anillo = () => {
                 </a>
               </p>
             </div>
-            <div className="status-light-anillo-container">
+            <div className="status-light-anillo-opit-container">
               <p // 10.224.114.103
                 title={statusTitle(15685)}
                 className={`status-light-anillo id15685 ${statusLight(15685)}`}
@@ -185,7 +190,7 @@ export const Anillo = () => {
                 </a>
               </p>
             </div>
-            <div className="status-light-anillo-container">
+            <div className="status-light-anillo-opit-container">
               <p // 10.224.114.103
                 title={statusTitle(15684)}
                 className={`status-light-anillo id15684 ${statusLight(15684)}`}
@@ -199,7 +204,7 @@ export const Anillo = () => {
                 </a>
               </p>
             </div>
-            <div className="status-light-anillo-container">
+            <div className="status-light-anillo-opit-container">
               <p // 10.224.114.82
                 title={statusTitle(15607)}
                 className={`status-light-anillo id15607 ${statusLight(15607)}`}
@@ -213,7 +218,7 @@ export const Anillo = () => {
                 </a>
               </p>
             </div>
-            <div className="status-light-anillo-container">
+            <div className="status-light-anillo-opit-container">
               <p // 10.224.114.82
                 title={statusTitle(15606)}
                 className={`status-light-anillo id15606 ${statusLight(15606)}`}
@@ -227,7 +232,7 @@ export const Anillo = () => {
                 </a>
               </p>
             </div>
-            <div className="status-light-anillo-container">
+            <div className="status-light-anillo-opit-container">
               <p // 10.224.114.82
                 title={statusTitle(15605)}
                 className={`status-light-anillo id15605 ${statusLight(15605)}`}
@@ -241,7 +246,7 @@ export const Anillo = () => {
                 </a>
               </p>
             </div>
-            <div className="status-light-anillo-container">
+            <div className="status-light-anillo-opit-container">
               <p // 10.224.114.82
                 title={statusTitle(15604)}
                 className={`status-light-anillo id15604 ${statusLight(15604)}`}
@@ -255,7 +260,7 @@ export const Anillo = () => {
                 </a>
               </p>
             </div>
-            <div className="status-light-anillo-container">
+            <div className="status-light-anillo-opit-container">
               <p // 10.224.114.72
                 title={statusTitle(15583)}
                 className={`status-light-anillo id15583 ${statusLight(15583)}`}
@@ -269,7 +274,7 @@ export const Anillo = () => {
                 </a>
               </p>
             </div>
-            <div className="status-light-anillo-container">
+            <div className="status-light-anillo-opit-container">
               <p // 10.224.114.72
                 title={statusTitle(18452)}
                 className={`status-light-anillo id18452 ${statusLight(18452)}`}
@@ -283,7 +288,7 @@ export const Anillo = () => {
                 </a>
               </p>
             </div>
-            <div className="status-light-anillo-container">
+            <div className="status-light-anillo-opit-container">
               <p // 10.224.114.106
                 title={statusTitle(17408)}
                 className={`status-light-anillo id17408 ${statusLight(17408)}`}
@@ -297,7 +302,7 @@ export const Anillo = () => {
                 </a>
               </p>
             </div>
-            <div className="status-light-anillo-container">
+            <div className="status-light-anillo-opit-container">
               <p // 10.224.114.106
                 title={statusTitle(20016)}
                 className={`status-light-anillo id20016 ${statusLight(20016)}`}
@@ -311,7 +316,21 @@ export const Anillo = () => {
                 </a>
               </p>
             </div>
-            <div className="status-light-anillo-container">
+            <div className="status-light-anillo-opit-container">
+              <p // 10.224.114.106
+                title={statusTitle(20646)}
+                className={`status-light-anillo id20646 ${statusLight(20646)}`}
+              >
+                <a
+                  style={{ color: "black" }}
+                  href={`${PRTG_URL}17404&tabid=1`}
+                  target="_blank"
+                >
+                  Gi1/4
+                </a>
+              </p>
+            </div>
+            <div className="status-light-anillo-opit-container">
               <p // 10.224.114.113
                 title={statusTitle(19385)}
                 className={`status-light-anillo id19385 ${statusLight(19385)}`}
@@ -325,7 +344,7 @@ export const Anillo = () => {
                 </a>
               </p>
             </div>
-            <div className="status-light-anillo-container">
+            <div className="status-light-anillo-opit-container">
               <p // 10.224.114.87
                 title={statusTitle(15611)}
                 className={`status-light-anillo id15611 ${statusLight(15611)}`}
@@ -339,7 +358,7 @@ export const Anillo = () => {
                 </a>
               </p>
             </div>
-            <div className="status-light-anillo-container">
+            <div className="status-light-anillo-opit-container">
               <p // 10.224.114.71
                 title={statusTitle(15603)}
                 className={`status-light-anillo id15603 ${statusLight(15603)}`}
@@ -353,7 +372,7 @@ export const Anillo = () => {
                 </a>
               </p>
             </div>
-            <div className="status-light-anillo-container">
+            <div className="status-light-anillo-opit-container">
               <p // 10.224.114.71
                 title={statusTitle(15602)}
                 className={`status-light-anillo id15602 ${statusLight(15602)}`}
@@ -367,7 +386,7 @@ export const Anillo = () => {
                 </a>
               </p>
             </div>
-            <div className="status-light-anillo-container">
+            <div className="status-light-anillo-opit-container">
               <p // 10.224.114.91
                 title={statusTitle(15612)}
                 className={`status-light-anillo id15612 ${statusLight(15612)}`}
@@ -381,7 +400,7 @@ export const Anillo = () => {
                 </a>
               </p>
             </div>
-            <div className="status-light-anillo-container">
+            <div className="status-light-anillo-opit-container">
               <p // 10.224.114.91
                 title={statusTitle(15670)}
                 className={`status-light-anillo id15670 ${statusLight(15670)}`}
@@ -395,7 +414,7 @@ export const Anillo = () => {
                 </a>
               </p>
             </div>
-            <div className="status-light-anillo-container">
+            <div className="status-light-anillo-opit-container">
               <p // 10.224.114.91
                 title={statusTitle(15613)}
                 className={`status-light-anillo id15613 ${statusLight(15613)}`}
@@ -409,7 +428,7 @@ export const Anillo = () => {
                 </a>
               </p>
             </div>
-            <div className="status-light-anillo-container">
+            <div className="status-light-anillo-opit-container">
               <p // 10.224.114.92
                 title={statusTitle(15628)}
                 className={`status-light-anillo id15628 ${statusLight(15628)}`}
@@ -423,7 +442,7 @@ export const Anillo = () => {
                 </a>
               </p>
             </div>
-            <div className="status-light-anillo-container">
+            <div className="status-light-anillo-opit-container">
               <p // 10.224.114.73
                 title={statusTitle(15668)}
                 className={`status-light-anillo id15668 ${statusLight(15668)}`}
@@ -437,7 +456,7 @@ export const Anillo = () => {
                 </a>
               </p>
             </div>
-            <div className="status-light-anillo-container">
+            <div className="status-light-anillo-opit-container">
               <p // 10.224.114.73
                 title={statusTitle(15669)}
                 className={`status-light-anillo id15669 ${statusLight(15669)}`}
@@ -451,7 +470,21 @@ export const Anillo = () => {
                 </a>
               </p>
             </div>
-            <div className="status-light-anillo-container">
+            <div className="status-light-anillo-opit-container">
+              <p // 10.224.114.73
+                title={statusTitle(20591)}
+                className={`status-light-anillo id20591 ${statusLight(20591)}`}
+              >
+                <a
+                  style={{ color: "black" }}
+                  href={`${PRTG_URL}5446&tabid=1`}
+                  target="_blank"
+                >
+                  Gi1/4
+                </a>
+              </p>
+            </div>
+            <div className="status-light-anillo-opit-container">
               <p // 10.224.114.76
                 title={statusTitle(15614)}
                 className={`status-light-anillo id15614 ${statusLight(15614)}`}
@@ -465,7 +498,7 @@ export const Anillo = () => {
                 </a>
               </p>
             </div>
-            <div className="status-light-anillo-container">
+            <div className="status-light-anillo-opit-container">
               <p // 10.224.114.76
                 title={statusTitle(15615)}
                 className={`status-light-anillo id15615 ${statusLight(15615)}`}
@@ -479,7 +512,7 @@ export const Anillo = () => {
                 </a>
               </p>
             </div>
-            <div className="status-light-anillo-container">
+            <div className="status-light-anillo-opit-container">
               <p // 10.224.114.76
                 title={statusTitle(17753)}
                 className={`status-light-anillo id17753 ${statusLight(17753)}`}
@@ -493,21 +526,21 @@ export const Anillo = () => {
                 </a>
               </p>
             </div>
-            <div className="status-light-anillo-container">
+            <div className="status-light-anillo-opit-container">
               <p // 10.224.114.76
-                title={statusTitle(17754)}
-                className={`status-light-anillo id17754 ${statusLight(17754)}`}
+                title={statusTitle(20584)}
+                className={`status-light-anillo id20584 ${statusLight(20584)}`}
               >
                 <a
                   style={{ color: "black" }}
                   href={`${PRTG_URL}13451&tabid=1`}
                   target="_blank"
                 >
-                  Gi1/11
+                  Gi1/1
                 </a>
               </p>
             </div>
-            <div className="status-light-anillo-container">
+            {/* <div className="status-light-anillo-opit-container">
               <p // 10.224.114.84
                 title={statusTitle(15610)}
                 className={`status-light-anillo id15610 ${statusLight(15610)}`}
@@ -520,8 +553,8 @@ export const Anillo = () => {
                   Gi1/1
                 </a>
               </p>
-            </div>
-            <div className="status-light-anillo-container">
+            </div> */}
+            <div className="status-light-anillo-opit-container">
               <p // 10.224.114.95
                 title={statusTitle(15631)}
                 className={`status-light-anillo id15631 ${statusLight(15631)}`}
@@ -535,7 +568,7 @@ export const Anillo = () => {
                 </a>
               </p>
             </div>
-            <div className="status-light-anillo-container">
+            <div className="status-light-anillo-opit-container">
               <p // 10.224.114.95
                 title={statusTitle(15633)}
                 className={`status-light-anillo id15633 ${statusLight(15633)}`}
@@ -549,7 +582,7 @@ export const Anillo = () => {
                 </a>
               </p>
             </div>
-            <div className="status-light-anillo-container">
+            <div className="status-light-anillo-opit-container">
               <p // 10.224.114.95
                 title={statusTitle(15634)}
                 className={`status-light-anillo id15634 ${statusLight(15634)}`}
@@ -563,7 +596,7 @@ export const Anillo = () => {
                 </a>
               </p>
             </div>
-            <div className="status-light-anillo-container">
+            <div className="status-light-anillo-opit-container">
               <p // 10.224.114.95
                 title={statusTitle(15632)}
                 className={`status-light-anillo id15632 ${statusLight(15632)}`}
@@ -577,7 +610,7 @@ export const Anillo = () => {
                 </a>
               </p>
             </div>
-            <div className="status-light-anillo-container">
+            <div className="status-light-anillo-opit-container">
               <p // 10.224.114.93
                 title={statusTitle(15629)}
                 className={`status-light-anillo id15629 ${statusLight(15629)}`}
@@ -591,7 +624,7 @@ export const Anillo = () => {
                 </a>
               </p>
             </div>
-            <div className="status-light-anillo-container">
+            <div className="status-light-anillo-opit-container">
               <p // 10.224.114.94
                 title={statusTitle(15630)}
                 className={`status-light-anillo id15630 ${statusLight(15630)}`}
@@ -605,7 +638,7 @@ export const Anillo = () => {
                 </a>
               </p>
             </div>
-            <div className="status-light-anillo-container">
+            <div className="status-light-anillo-opit-container">
               <p // 10.224.114.101
                 title={statusTitle(15636)}
                 className={`status-light-anillo id15636 ${statusLight(15636)}`}
@@ -619,7 +652,7 @@ export const Anillo = () => {
                 </a>
               </p>
             </div>
-            <div className="status-light-anillo-container">
+            <div className="status-light-anillo-opit-container">
               <p // 10.224.114.77
                 title={statusTitle(15585)}
                 className={`status-light-anillo id15585 ${statusLight(15585)}`}
@@ -633,7 +666,7 @@ export const Anillo = () => {
                 </a>
               </p>
             </div>
-            <div className="status-light-anillo-container">
+            <div className="status-light-anillo-opit-container">
               <p // 10.224.114.77
                 title={statusTitle(15586)}
                 className={`status-light-anillo id15586 ${statusLight(15586)}`}
@@ -647,7 +680,7 @@ export const Anillo = () => {
                 </a>
               </p>
             </div>
-            <div className="status-light-anillo-container">
+            <div className="status-light-anillo-opit-container">
               <p // 10.224.114.78
                 title={statusTitle(15597)}
                 className={`status-light-anillo id15598 ${statusLight(15597)}`}
@@ -661,7 +694,7 @@ export const Anillo = () => {
                 </a>
               </p>
             </div>
-            <div className="status-light-anillo-container">
+            <div className="status-light-anillo-opit-container">
               <p // 10.224.114.78
                 title={statusTitle(15598)}
                 className={`status-light-anillo id15597 ${statusLight(15598)}`}
@@ -675,7 +708,7 @@ export const Anillo = () => {
                 </a>
               </p>
             </div>
-            <div className="status-light-anillo-container">
+            <div className="status-light-anillo-opit-container">
               <p // 10.224.114.78
                 title={statusTitle(15599)}
                 className={`status-light-anillo id15599 ${statusLight(15599)}`}
@@ -689,7 +722,21 @@ export const Anillo = () => {
                 </a>
               </p>
             </div>
-            <div className="status-light-anillo-container">
+            <div className="status-light-anillo-opit-container">
+              <p // 10.224.114.78
+                title={statusTitle(20596)}
+                className={`status-light-anillo id20596 ${statusLight(20596)}`}
+              >
+                <a
+                  style={{ color: "black" }}
+                  href={`${PRTG_URL}12482&tabid=1`}
+                  target="_blank"
+                >
+                  Gi1/5
+                </a>
+              </p>
+            </div>
+            <div className="status-light-anillo-opit-container">
               <p // 10.224.114.102
                 title={statusTitle(15638)}
                 className={`status-light-anillo id15638 ${statusLight(15638)}`}
@@ -703,7 +750,7 @@ export const Anillo = () => {
                 </a>
               </p>
             </div>
-            <div className="status-light-anillo-container">
+            <div className="status-light-anillo-opit-container">
               <p // 10.224.114.102
                 title={statusTitle(15637)}
                 className={`status-light-anillo id15637 ${statusLight(15637)}`}
@@ -717,7 +764,7 @@ export const Anillo = () => {
                 </a>
               </p>
             </div>
-            <div className="status-light-anillo-container">
+            <div className="status-light-anillo-opit-container">
               <p // 10.224.114.105
                 title={statusTitle(15639)}
                 className={`status-light-anillo id15639 ${statusLight(15639)}`}
@@ -731,7 +778,7 @@ export const Anillo = () => {
                 </a>
               </p>
             </div>
-            <div className="status-light-anillo-container">
+            <div className="status-light-anillo-opit-container">
               <p // 10.224.114.79
                 title={statusTitle(15587)}
                 className={`status-light-anillo id15587 ${statusLight(15587)}`}
@@ -745,7 +792,7 @@ export const Anillo = () => {
                 </a>
               </p>
             </div>
-            <div className="status-light-anillo-container">
+            <div className="status-light-anillo-opit-container">
               <p // 10.224.114.79
                 title={statusTitle(15588)}
                 className={`status-light-anillo id15588 ${statusLight(15588)}`}
@@ -759,7 +806,7 @@ export const Anillo = () => {
                 </a>
               </p>
             </div>
-            <div className="status-light-anillo-container">
+            <div className="status-light-anillo-opit-container">
               <p // 10.224.114.80
                 title={statusTitle(15593)}
                 className={`status-light-anillo id15593 ${statusLight(15593)}`}
@@ -773,7 +820,7 @@ export const Anillo = () => {
                 </a>
               </p>
             </div>
-            <div className="status-light-anillo-container">
+            <div className="status-light-anillo-opit-container">
               <p // 10.224.114.80
                 title={statusTitle(15595)}
                 className={`status-light-anillo id15595 ${statusLight(15595)}`}
@@ -787,7 +834,7 @@ export const Anillo = () => {
                 </a>
               </p>
             </div>
-            <div className="status-light-anillo-container">
+            <div className="status-light-anillo-opit-container">
               <p // 10.224.114.80
                 title={statusTitle(15594)}
                 className={`status-light-anillo id15594 ${statusLight(15594)}`}
@@ -801,7 +848,7 @@ export const Anillo = () => {
                 </a>
               </p>
             </div>
-            <div className="status-light-anillo-container">
+            <div className="status-light-anillo-opit-container">
               <p // 10.224.114.80
                 title={statusTitle(18599)}
                 className={`status-light-anillo id18599 ${statusLight(18599)}`}
@@ -815,7 +862,21 @@ export const Anillo = () => {
                 </a>
               </p>
             </div>
-            <div className="status-light-anillo-container">
+            <div className="status-light-anillo-opit-container">
+              <p // 10.224.114.80
+                title={statusTitle(20593)}
+                className={`status-light-anillo id20593 ${statusLight(20593)}`}
+              >
+                <a
+                  style={{ color: "black" }}
+                  href={`${PRTG_URL}5582&tabid=1`}
+                  target="_blank"
+                >
+                  Gi1/4
+                </a>
+              </p>
+            </div>
+            <div className="status-light-anillo-opit-container">
               <p // 10.224.114.89
                 title={statusTitle(15648)}
                 className={`status-light-anillo id15648 ${statusLight(15648)}`}
@@ -829,7 +890,7 @@ export const Anillo = () => {
                 </a>
               </p>
             </div>
-            <div className="status-light-anillo-container">
+            <div className="status-light-anillo-opit-container">
               <p // 10.224.114.81
                 title={statusTitle(15589)}
                 className={`status-light-anillo id15589 ${statusLight(15589)}`}
@@ -843,7 +904,21 @@ export const Anillo = () => {
                 </a>
               </p>
             </div>
-            <div className="status-light-anillo-container">
+            <div className="status-light-anillo-opit-container">
+              <p // 10.224.114.81
+                title={statusTitle(20590)}
+                className={`status-light-anillo id20590 ${statusLight(20590)}`}
+              >
+                <a
+                  style={{ color: "black" }}
+                  href={`${PRTG_URL}5513&tabid=1`}
+                  target="_blank"
+                >
+                  Gi1/4
+                </a>
+              </p>
+            </div>
+            <div className="status-light-anillo-opit-container">
               <p // 10.224.114.81
                 title={statusTitle(15590)}
                 className={`status-light-anillo id15590 ${statusLight(15590)}`}
@@ -857,7 +932,21 @@ export const Anillo = () => {
                 </a>
               </p>
             </div>
-            <div className="status-light-anillo-container">
+            <div className="status-light-anillo-opit-container">
+              <p // 10.224.114.81
+                title={statusTitle(20592)}
+                className={`status-light-anillo id20592 ${statusLight(20592)}`}
+              >
+                <a
+                  style={{ color: "black" }}
+                  href={`${PRTG_URL}5513&tabid=1`}
+                  target="_blank"
+                >
+                  Gi1/4
+                </a>
+              </p>
+            </div>
+            {/* <div className="status-light-anillo-opit-container">
               <p // 10.224.114.111
                 title={statusTitle(18598)}
                 className={`status-light-anillo id18598 ${statusLight(18598)}`}
@@ -870,8 +959,8 @@ export const Anillo = () => {
                   Gi1/1
                 </a>
               </p>
-            </div>
-            <div className="status-light-anillo-container">
+            </div> */}
+            <div className="status-light-anillo-opit-container">
               <p // 10.224.114.85
                 title={statusTitle(16562)}
                 className={`status-light-anillo id16562 ${statusLight(16562)}`}
@@ -885,7 +974,7 @@ export const Anillo = () => {
                 </a>
               </p>
             </div>
-            <div className="status-light-anillo-container">
+            <div className="status-light-anillo-opit-container">
               <p // 10.224.114.85
                 title={statusTitle(16561)}
                 className={`status-light-anillo id16561 ${statusLight(16561)}`}
@@ -899,7 +988,7 @@ export const Anillo = () => {
                 </a>
               </p>
             </div>
-            <div className="status-light-anillo-container">
+            <div className="status-light-anillo-opit-container">
               <p // 10.224.114.70
                 title={statusTitle(15600)}
                 className={`status-light-anillo id15600 ${statusLight(15600)}`}
@@ -913,7 +1002,7 @@ export const Anillo = () => {
                 </a>
               </p>
             </div>
-            <div className="status-light-anillo-container">
+            <div className="status-light-anillo-opit-container">
               <p // 10.224.114.70
                 title={statusTitle(15601)}
                 className={`status-light-anillo id15601 ${statusLight(15601)}`}
@@ -927,7 +1016,21 @@ export const Anillo = () => {
                 </a>
               </p>
             </div>
-            <div className="status-light-anillo-container">
+            <div className="status-light-anillo-opit-container">
+              <p // 10.224.114.70
+                title={statusTitle(20703)}
+                className={`status-light-anillo id20703 ${statusLight(20703)}`}
+              >
+                <a
+                  style={{ color: "black" }}
+                  href={`${PRTG_URL}12490&tabid=1`}
+                  target="_blank"
+                >
+                  Gi0/10
+                </a>
+              </p>
+            </div>
+            <div className="status-light-anillo-opit-container">
               <p // 10.224.125.220
                 title={statusTitle(17757)}
                 className={`status-light-anillo id17757 ${statusLight(17757)}`}
@@ -941,7 +1044,7 @@ export const Anillo = () => {
                 </a>
               </p>
             </div>
-            <div className="status-light-anillo-container">
+            <div className="status-light-anillo-opit-container">
               <p // 10.224.125.220
                 title={statusTitle(17758)}
                 className={`status-light-anillo id17758 ${statusLight(17758)}`}
@@ -955,7 +1058,21 @@ export const Anillo = () => {
                 </a>
               </p>
             </div>
-            <div className="status-light-anillo-container">
+            <div className="status-light-anillo-opit-container">
+              <p // 10.224.125.220
+                title={statusTitle(20630)}
+                className={`status-light-anillo id20630 ${statusLight(20630)}`}
+              >
+                <a
+                  style={{ color: "black" }}
+                  href={`${PRTG_URL}15692&tabid=1`}
+                  target="_blank"
+                >
+                  Gi2/0/7
+                </a>
+              </p>
+            </div>
+            <div className="status-light-anillo-opit-container">
               <p // 10.224.125.219
                 title={statusTitle(17759)}
                 className={`status-light-anillo id17759 ${statusLight(17759)}`}
@@ -969,7 +1086,7 @@ export const Anillo = () => {
                 </a>
               </p>
             </div>
-            <div className="status-light-anillo-container">
+            <div className="status-light-anillo-opit-container">
               <p // 10.224.125.219
                 title={statusTitle(17760)}
                 className={`status-light-anillo id17760 ${statusLight(17760)}`}
@@ -983,7 +1100,7 @@ export const Anillo = () => {
                 </a>
               </p>
             </div>
-            <div className="status-light-anillo-container">
+            <div className="status-light-anillo-opit-container">
               <p // 10.224.125.219
                 title={statusTitle(17761)}
                 className={`status-light-anillo id17761 ${statusLight(17761)}`}
@@ -997,7 +1114,21 @@ export const Anillo = () => {
                 </a>
               </p>
             </div>
-            <div className="status-light-anillo-container">
+            <div className="status-light-anillo-opit-container">
+              <p // 10.224.125.219
+                title={statusTitle(20689)}
+                className={`status-light-anillo id20689 ${statusLight(20689)}`}
+              >
+                <a
+                  style={{ color: "black" }}
+                  href={`${PRTG_URL}15690&tabid=1`}
+                  target="_blank"
+                >
+                  Gi1/0/12
+                </a>
+              </p>
+            </div>
+            <div className="status-light-anillo-opit-container">
               <p // 10.224.125.219
                 title={statusTitle(17762)}
                 className={`status-light-anillo id17762 ${statusLight(17762)}`}
