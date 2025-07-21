@@ -34,7 +34,7 @@ const sequelizeDB2 = new Sequelize(
 async function checkDatabaseConnections() {
   try {
     await sequelize.authenticate();
-    console.log("Conexión a la base de datos del entorno exitosa.");
+    console.log(`Conexión a la base de datos del entorno ${environment} exitosa.`);
     
     await sequelizeDB2.authenticate();
     console.log("Conexión a la base de datos historicos exitosa");
