@@ -15290,3 +15290,115 @@ AttributeError: 'dict' object has no attribute 'strip'
 
 2025-07-03 16:09:39,682 - ERROR - Error en la función `get_users_data` en el archivo `get_fw_data`
 2025-07-03 16:09:39,682 - ERROR - 'dict' object has no attribute 'strip'
+Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Anillo_Opit/main.py", line 25, in main
+    id_sensor_list = [item['id_sensor'] for item in db_devnet_data if '- Rajant' in item['device']]
+  File "/home/donkami/Sona/devnet-candelaria/Services/Anillo_Opit/main.py", line 25, in <listcomp>
+    id_sensor_list = [item['id_sensor'] for item in db_devnet_data if '- Rajant' in item['device']]
+KeyError: 'id_sensor'
+
+'id_sensor'
+Error en la funcion `main` del archivo `main`
+Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Anillo_Opit/main.py", line 28, in main
+    id_device_set = {item["id_device"] for item in id_interface_list}
+  File "/home/donkami/Sona/devnet-candelaria/Services/Anillo_Opit/main.py", line 28, in <setcomp>
+    id_device_set = {item["id_device"] for item in id_interface_list}
+TypeError: 'int' object is not subscriptable
+
+'int' object is not subscriptable
+Error en la funcion `main` del archivo `main`
+Datos no encontrados para el id 19523
+Datos no encontrados para el id 20645
+Datos no encontrados para el id 19532
+Datos no encontrados para el id 19510
+Datos no encontrados para el id 19518
+Datos no encontrados para el id 19520
+Datos no encontrados para el id 20683
+Datos no encontrados para el id 19530
+Datos no encontrados para el id 19522
+Datos no encontrados para el id 19528
+Datos no encontrados para el id 20702
+Datos no encontrados para el id 20688
+Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Anillo_Opit/main.py", line 39, in main
+    result = update_devnet_data(interface_status)
+  File "/home/donkami/Sona/devnet-candelaria/Services/Anillo_Opit/db_update.py", line 35, in update_devnet_data
+    data_tuple = [(interface["status"], interface["objid"]) for interface in data]
+  File "/home/donkami/Sona/devnet-candelaria/Services/Anillo_Opit/db_update.py", line 35, in <listcomp>
+    data_tuple = [(interface["status"], interface["objid"]) for interface in data]
+KeyError: 'objid'
+
+'objid'
+Error en la funcion `main` del archivo `main`
+Datos no encontrados para el id 19523
+Datos no encontrados para el id 20645
+Datos no encontrados para el id 19532
+Datos no encontrados para el id 19510
+Datos no encontrados para el id 19518
+Datos no encontrados para el id 19520
+Datos no encontrados para el id 20683
+Datos no encontrados para el id 19530
+Datos no encontrados para el id 19522
+Datos no encontrados para el id 19528
+Datos no encontrados para el id 20702
+Datos no encontrados para el id 20688
+Datos no encontrados para el id 19523
+Datos no encontrados para el id 20645
+Datos no encontrados para el id 19532
+Datos no encontrados para el id 19510
+Datos no encontrados para el id 19518
+Datos no encontrados para el id 19520
+Datos no encontrados para el id 20683
+Datos no encontrados para el id 19530
+Datos no encontrados para el id 19522
+Datos no encontrados para el id 19528
+Datos no encontrados para el id 20702
+Datos no encontrados para el id 20688
+Datos no encontrados para el interface 19523
+Datos no encontrados para el id 20645
+Datos no encontrados para el id 19532
+Datos no encontrados para el id 19510
+Datos no encontrados para el id 19518
+Datos no encontrados para el id 19520
+Datos no encontrados para el id 20683
+Datos no encontrados para el id 19530
+Datos no encontrados para el id 19522
+Datos no encontrados para el id 19528
+Datos no encontrados para el id 20702
+Datos no encontrados para el id 20688
+Datos no encontrados para el sensor con id 20645
+Datos no encontrados para el sensor con id 19532
+Datos no encontrados para el sensor con id 19524
+Datos no encontrados para el sensor con id 19510
+Datos no encontrados para el sensor con id 19518
+Datos no encontrados para el sensor con id 19520
+Datos no encontrados para el sensor con id 20683
+Datos no encontrados para el sensor con id 19530
+Datos no encontrados para el sensor con id 19522
+Datos no encontrados para el sensor con id 19528
+Datos no encontrados para el sensor con id 20702
+Datos no encontrados para el sensor con id 20688
+Datos no encontrados para el sensor con id 20645
+Datos no encontrados para el sensor con id 19532
+Datos no encontrados para el sensor con id 19524
+Datos no encontrados para el sensor con id 19510
+Datos no encontrados para el sensor con id 19518
+Datos no encontrados para el sensor con id 19520
+Datos no encontrados para el sensor con id 20683
+Datos no encontrados para el sensor con id 19530
+Datos no encontrados para el sensor con id 19522
+Datos no encontrados para el sensor con id 19528
+Datos no encontrados para el sensor con id 20702
+Datos no encontrados para el sensor con id 20688
+Traceback (most recent call last):
+  File "/home/donkami/Sona/devnet-candelaria/Services/Anillo_Opit/main.py", line 40, in main
+    result = update_devnet_data(dataToUpdate)
+  File "/home/donkami/Sona/devnet-candelaria/Services/Anillo_Opit/db_update.py", line 35, in update_devnet_data
+    data_tuple = [(interface["status"], interface["objid"]) for interface in data]
+  File "/home/donkami/Sona/devnet-candelaria/Services/Anillo_Opit/db_update.py", line 35, in <listcomp>
+    data_tuple = [(interface["status"], interface["objid"]) for interface in data]
+KeyError: 'objid'
+
+'objid'
+Error en la funcion `main` del archivo `main`
